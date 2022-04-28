@@ -340,13 +340,13 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER PASSENGERS</title>
+	<title>CUSTOMER PASSENGER</title>
 	<?php include('php/_head.php'); ?>
 </head>
 <body id='page-save' class='page_save page_customer_passengers_save'>
 
 	<section id='sub-menu'>
-		<div class='left-block'>customer passengers</div>
+		<div class='left-block'>customer passenger</div>
 		<div class='right-block'>
 
 		</div>

@@ -132,7 +132,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><?php if (isset($parent_record_label)) print $parent_record_label; ?></div>
 		<div class='right-block'>
-			&#9998;<a href='vehicles_maintenance_save.php?vehiclesid=<?php print $parent_id; ?>' target='overlay-iframe' onclick='overlayOpen();'> New</a> 
+			✢ <a href='vehicles_maintenance_save.php?vehiclesid=<?php print $parent_id; ?>' target='overlay-iframe' onclick='overlayOpen();'> New</a> 
 		</div>
 	</section>
 

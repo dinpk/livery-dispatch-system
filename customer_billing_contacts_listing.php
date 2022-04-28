@@ -131,7 +131,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_billing_contacts.png"> customer billing contacts</div>
 		<div class='right-block'>
-			&#9998;<a href='customer_billing_contacts_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='customer_billing_contacts_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Billing Contact</a>
 		</div>
 	</section>
 

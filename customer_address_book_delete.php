@@ -31,93 +31,96 @@ if (isset($_GET['customer_address_bookid'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>CUSTOMER ADDRESS BOOK</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER ADDRESS BOOK</title>
+    <?php include('php/_head.php'); ?>
 </head>
+
 <body id='page-delete' class='foreign'>
 
-	<?php if (isset($message)) print $message; ?>
+    <?php if (isset($message)) print $message; ?>
 
-	<?php if ($show_record) { ?>
-	
-	<main>
+    <?php if ($show_record) { ?>
 
-	<div class='center'>
-		<p class='red'><b>Do you really want to delete this record?</b></p>
-		<p>
-		<br>
-			<a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp 
-			<a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
-		</p>
-		<br><hr><br>
-	</div>
-	
-	
-	<table class='record-table'>
-		
-		<tr>
-			<td class='label-cell'>TITLE</td>
-			<td class='value-cell'><?php if (isset($title)) print $title; ?></td>
-		</tr>
+    <main>
 
-		
-		<tr>
-			<td class='label-cell'>CATEGORY</td>
-			<td class='value-cell'><?php if (isset($category)) print $category; ?></td>
-		</tr>
-
-		
-		<tr>
-			<td class='label-cell'>ADDRESS1</td>
-			<td class='value-cell'><?php if (isset($address1)) print $address1; ?></td>
-		</tr>
-
-		
-		<tr>
-			<td class='label-cell'>ADDRESS2</td>
-			<td class='value-cell'><?php if (isset($address2)) print $address2; ?></td>
-		</tr>
-
-		
-		<tr>
-			<td class='label-cell'>CITY</td>
-			<td class='value-cell'><?php if (isset($city)) print $city; ?></td>
-		</tr>
-
-		
-		<tr>
-			<td class='label-cell'>STATE</td>
-			<td class='value-cell'><?php if (isset($state)) print $state; ?></td>
-		</tr>
-
-		
-		<tr>
-			<td class='label-cell'>ZIP CODE</td>
-			<td class='value-cell'><?php if (isset($zip_code)) print $zip_code; ?></td>
-		</tr>
-
-		
-		<tr>
-			<td class='label-cell'>IMAGE URL</td>
-			<td class='image-cell'><?php if (isset($image_url)) print "<img src='$image_url'>"; ?></td>
-		</tr>
-		
-		<tr>
-			<td class='label-cell'>NOTES</td>
-			<td class='value-cell'><?php if (isset($notes)) print $notes; ?></td>
-		</tr>
-
-		
-	</table>
-	
-
-	</main>
-
-	<?php } // show_record ?>
+        <div class='center'>
+            <p class='red'><b>Do you really want to delete this record?</b></p>
+            <p>
+                <br>
+                <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp
+                <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
+            </p>
+            <br>
+            <hr><br>
+        </div>
 
 
-	<?php include('php/_footer.php'); ?>
+        <table class='record-table'>
+
+            <tr>
+                <td class='label-cell'>TITLE</td>
+                <td class='value-cell'><?php if (isset($title)) print $title; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>CATEGORY</td>
+                <td class='value-cell'><?php if (isset($category)) print $category; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>ADDRESS1</td>
+                <td class='value-cell'><?php if (isset($address1)) print $address1; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>ADDRESS2</td>
+                <td class='value-cell'><?php if (isset($address2)) print $address2; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>CITY</td>
+                <td class='value-cell'><?php if (isset($city)) print $city; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>STATE</td>
+                <td class='value-cell'><?php if (isset($state)) print $state; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>ZIP CODE</td>
+                <td class='value-cell'><?php if (isset($zip_code)) print $zip_code; ?></td>
+            </tr>
+
+
+            <tr>
+                <td class='label-cell'>IMAGE URL</td>
+                <td class='image-cell'><?php if (isset($image_url)) print "<img src='$image_url'>"; ?></td>
+            </tr>
+
+            <tr>
+                <td class='label-cell'>NOTES</td>
+                <td class='value-cell'><?php if (isset($notes)) print $notes; ?></td>
+            </tr>
+
+
+        </table>
+
+
+    </main>
+
+    <?php } // show_record ?>
+
+
+    <?php include('php/_footer.php'); ?>
 </body>
-</html>
 
+</html>

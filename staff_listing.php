@@ -125,7 +125,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_staff.png"> staff</div>
 		<div class='right-block'>
-			&#9998;<a href='staff_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='staff_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Staff Account</a>
 		</div>
 	</section>
 

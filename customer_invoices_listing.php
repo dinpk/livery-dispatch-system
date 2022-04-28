@@ -89,13 +89,13 @@ if ($results) {
 		$table_rows = $table_rows . "
 		<tr>
 		<td class='center'>" . $row['key_customer_invoices'] . "</td>
-		<td class='center'>" . $row['first_name'] . " " . $row['last_name'] . "</td>
+		<td class='center'><h3>" . $row['first_name'] . " " . $row['last_name'] . "</h3></td>
 		<td class='center'>" . date("F d, Y", strtotime($row['start_date'])) . "</td>
 		<td class='center'>" . date("F d, Y", strtotime($row['end_date'])) . "</td>
 		<td class='center'>" . date("F d, Y", strtotime($row['due_date'])) . "</td>
 		<td class='right'>" . $total_amount . "</td>
 		<td class='right'>" . $paid_amount . "</td> 
-		<td class='right'>" . $balance . "</td>
+		<td class='right'><h4>" . $balance . "</h4></td>
 		<td class='record-icons'>
 			<a href='customer_invoices_save.php?customer_invoicesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
 			<a href='customer_invoices_print.php?customer_invoicesid=$record_id' target='_blank'>☷</a> 
@@ -104,8 +104,8 @@ if ($results) {
 	}
 	$listing_html = "
 		<table class='listing-table'>
-		<tr>
-		<th><a href='$url" . $query_symbol . "sort_by=key_customer_invoices&sort_seq=$sql_order_by_seq'>#</a>" . (($sql_order_by == 'key_customer_invoices') ? $order_icon : '') . "</th>
+		<tr class='bg-steelblue'>
+		<th><a href='$url" . $query_symbol . "sort_by=key_customer_invoices&sort_seq=$sql_order_by_seq'>Invoice&nbsp;#</a>" . (($sql_order_by == 'key_customer_invoices') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>Passenger</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=start_date&sort_seq=$sql_order_by_seq'>Start&nbsp;Date</a>" . (($sql_order_by == 'start_date') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=end_date&sort_seq=$sql_order_by_seq'>End&nbsp;Date</a>" . (($sql_order_by == 'end_date') ? $order_icon : '') . "</th>
@@ -148,8 +148,9 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_bill.png"> customer invoices</div>
 		<div class='right-block'>
-			&#9998; <a href='customer_invoices_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create</a> 
-			? <a href='customer_invoices_print.php' target='_blank'>Print</a>
+			☢ <a href='customer_invoices_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Invoices</a> 
+			&nbsp;
+			☷ <a href='customer_invoices_print.php' target='_blank'>Print</a>
 		</div>
 	</section>
 

@@ -117,7 +117,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/set_countries.png"> settings - countries</div>
 		<div class='right-block'>
-			&#9998;<a href='settings_country_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='settings_country_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Country</a>
 		</div>
 	</section>
 

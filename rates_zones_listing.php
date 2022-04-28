@@ -135,7 +135,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_zone_rates.png"> zone rates</div>
 		<div class='right-block'>
-			&#9998;<a href='rates_zones_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='rates_zones_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Zone Rate</a>
 		</div>
 	</section>
 

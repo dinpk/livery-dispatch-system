@@ -78,18 +78,17 @@ if ($results) {
 		<td>" . $row['vehicle'] . "</td>
 		<td>" . $row['zone_from'] . "</td>
 		<td>" . $row['zone_to'] . "</td>
-		<td class='right'>" . $row['total_trip_amount'] . "</td>
+		<td class='right'><h4>" . $row['total_trip_amount'] . "</h4></td>
 		<td class='center'>" . (($row['concluded_checkbox'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-icons'>
 		<a href='trips_conclude_save.php?tripsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-		<a href='trips_conclude_view.php?tripsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</td>
 		</tr>
 		";
 	}
 	$listing_html = "
 		<table class='listing-table'>
-		<tr>
+		<tr class='bg-indigo'>
 		<th><a href='$url" . $query_symbol . "sort_by=key_trips&sort_seq=$sql_order_by_seq'>Trip #</a>" . (($sql_order_by == 'key_trips') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=trip_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'trip_status') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=passenger_name&sort_seq=$sql_order_by_seq'>Passenger</a>" . (($sql_order_by == 'passenger_name') ? $order_icon : '') . "</th>

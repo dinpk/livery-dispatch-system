@@ -127,7 +127,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_landmarks.png"> landmarks</div>
 		<div class='right-block'>
-			&#9998;<a href='landmarks_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='landmarks_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Landmark</a>
 		</div>
 	</section>
 

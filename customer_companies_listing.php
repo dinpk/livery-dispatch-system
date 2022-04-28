@@ -128,7 +128,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_companies.png"> customer companies</div>
 		<div class='right-block'>
-			&#9998;<a href='customer_companies_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='customer_companies_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Company</a>
 		</div>
 	</section>
 

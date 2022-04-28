@@ -83,14 +83,13 @@ if ($results) {
 		<td class='center'>" . (($row['invoiced_checkbox'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-icons'>
 		<a href='trips_payroll_settlement_save.php?tripsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-		<a href='trips_view.php?tripsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</td>
 		</tr>
 		";
 	}
 	$listing_html = "
 		<table class='listing-table'>
-		<tr>
+		<tr class='bg-saddlebrown'>
 		<th><a href='$url" . $query_symbol . "sort_by=key_trips&sort_seq=$sql_order_by_seq'>Trip #</a>" . (($sql_order_by == 'key_trips') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=passenger_name&sort_seq=$sql_order_by_seq'>Passenger</a>" . (($sql_order_by == 'passenger_name') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=pickup_datetime&sort_seq=$sql_order_by_seq'>Date</a>" . (($sql_order_by == 'pickup_datetime') ? $order_icon : '') . "</th>

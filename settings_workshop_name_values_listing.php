@@ -131,7 +131,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/set_workshops.png"> settings - workshops</div>
 		<div class='right-block'>
-			&#9998;<a href='settings_workshop_name_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='settings_workshop_name_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Workshop</a>
 		</div>
 	</section>
 

@@ -88,13 +88,13 @@ if ($results) {
 		$table_rows = $table_rows . "
 		<tr>
 		<td class='center'>" . $row['key_driver_payroll'] . "</td>
-		<td class='center'>" . $row['first_name'] . " " . $row['last_name'] . "</td>
+		<td class='center'><h3>" . $row['first_name'] . " " . $row['last_name'] . "</h3></td>
 		<td class='center'>" . date("F d, Y", strtotime($row['start_date'])) . "</td>
 		<td class='center'>" . date("F d, Y", strtotime($row['end_date'])) . "</td>
 		<td class='center'>" . date("F d, Y", strtotime($row['due_date'])) . "</td>
 		<td class='right'>" . $total_amount . "</td>
 		<td class='right'>" . $paid_amount . "</td>
-		<td class='right'>" . $balance . "</td>
+		<td class='right'><h4>" . $balance . "</h4></td>
 		<td class='record-icons'>
 			<a href='driver_payroll_save.php?driver_payrollid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
 			<a href='driver_payroll_print.php?driver_payrollid=$record_id' target='_blank'>☷</a> 
@@ -103,8 +103,8 @@ if ($results) {
 	}
 	$listing_html = "
 		<table class='listing-table'>
-		<tr>
-		<th><a href='$url" . $query_symbol . "sort_by=key_driver_payroll&sort_seq=$sql_order_by_seq'>#</a>" . (($sql_order_by == 'key_driver_payroll') ? $order_icon : '') . "</th>
+		<tr class='bg-black'>
+		<th><a href='$url" . $query_symbol . "sort_by=key_driver_payroll&sort_seq=$sql_order_by_seq'>Payroll&nbsp;#</a>" . (($sql_order_by == 'key_driver_payroll') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>Driver</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=start_date&sort_seq=$sql_order_by_seq'>Start&nbsp;Date</a>" . (($sql_order_by == 'start_date') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=end_date&sort_seq=$sql_order_by_seq'>End&nbsp;Date</a>" . (($sql_order_by == 'end_date') ? $order_icon : '') . "</th>
@@ -146,8 +146,9 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_drivers_payroll.png"> driver payroll</div>
 		<div class='right-block'>
-			&#9998; <a href='driver_payroll_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create</a> 
-			? <a href='driver_payroll_print.php' target='_blank'>Print</a>
+			☢ <a href='driver_payroll_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Payrolls</a> 
+			&nbsp;
+			☷ <a href='driver_payroll_print.php' target='_blank'>Print</a>
 		</div>
 	</section>
 

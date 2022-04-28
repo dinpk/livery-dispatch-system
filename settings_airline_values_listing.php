@@ -117,7 +117,7 @@ mysqli_close($dbcon);
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/set_airlines.png"> settings - airlines</div>
 		<div class='right-block'>
-			&#9998;<a href='settings_airline_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='settings_airline_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Airline</a>
 		</div>
 	</section>
 

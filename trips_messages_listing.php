@@ -111,7 +111,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'>trips messages</div>
 		<div class='right-block'>
-			&#9998;<a href='trips_messages_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='trips_messages_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Message</a>
 		</div>
 	</section>
 

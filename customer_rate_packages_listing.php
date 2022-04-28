@@ -124,7 +124,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_rate_packages.png"> customer rate packages</div>
 		<div class='right-block'>
-			&#9998;<a href='customer_rate_packages_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='customer_rate_packages_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Rate Package</a>
 		</div>
 	</section>
 

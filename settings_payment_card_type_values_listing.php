@@ -115,7 +115,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/set_payment_cards.png"> settings - payment card types</div>
 		<div class='right-block'>
-			&#9998;<a href='settings_payment_card_type_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='settings_payment_card_type_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Payment Card Type</a>
 		</div>
 	</section>
 

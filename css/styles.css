@@ -3,7 +3,7 @@ body {
 	font-size:13px;
 	margin:0;
 	padding-top:40px;
-	background-color:#EEE;
+	background-color:rgb(224, 224, 224);
 	transition: padding-right .5s;
 	-webkit-transition: padding-right .5s;
 }
@@ -186,6 +186,14 @@ nav a:hover {
 	padding-top:7px;
 }
 
+#sub-menu .right-block a {
+	font-weight:bold;
+}
+
+#sub-menu .right-block a:hover {
+	color:rgb(15, 148, 141);
+}
+
 main {
 	width:99%;
 	margin:40px auto 20px auto;
@@ -201,16 +209,10 @@ footer {
 	/*border-top:1px solid #CCC;*/
 }
 
-.left-block {
-	/*float:left;*/
-}
 
-.right-block {
-	/*
-	float:right;
-	padding-top:3px;
-	*/
-}
+/* CLASSES */
+
+
 
 .font-size-200 {
 	font-size:200%;
@@ -231,6 +233,7 @@ footer {
 .green {
 	color:green;
 }
+
 
 .focused {
 	border:1px solid red;
@@ -602,7 +605,6 @@ main ul {
 
 .listing-table {
 	margin:5px auto 50px auto;
-	width:98%;
     border-collapse: collapse; 
     border:10px solid #F5F5F5;
 }
@@ -611,8 +613,15 @@ main ul {
 	max-height:40px;
 }
 
+.listing-table h3,
+.listing-table h4,
+.listing-table h5 {
+	margin:0;
+	color:#444;
+}
+
 .listing-table th {
-	background-color:LightSeaGreen;
+	background-color: LightSeaGreen;
 	color:#FFF;
 	padding:10px;
 	border:1px solid #FFF;
@@ -630,7 +639,63 @@ main ul {
 .listing-table th a:hover {
 	color:cyan;
 }
+	
+.listing-table .bg-lightseagreen th {
+	background-color: LightSeaGreen;
+}
 
+.listing-table .bg-black th {
+	background-color: Black;
+}
+
+.listing-table .bg-olive th {
+	background-color: olive;
+}
+
+.listing-table .bg-crimson th {
+	background-color: Crimson;
+}
+
+.listing-table .bg-darkgreen th {
+	background-color: DarkGreen;
+}
+
+.listing-table .bg-darkmagenta th {
+	background-color: DarkMagenta;
+}
+					
+.listing-table .bg-darkslategrey th {
+	background-color: DarkSlateGrey;
+}
+					
+.listing-table .bg-indigo th {
+	background-color: Indigo;
+}
+
+.listing-table .bg-maroon th {
+	background-color: Maroon;
+}
+
+.listing-table .bg-mediumvioletred th {
+	background-color: MediumVioletRed;
+}
+					
+.listing-table .bg-midnightblue th {
+	background-color: MidnightBlue;
+}
+					
+.listing-table .bg-saddlebrown th {
+	background-color: SaddleBrown;
+}
+
+.listing-table .bg-steelblue th {
+	background-color: SteelBlue;
+}
+					
+					
+					
+					
+					
 .listing-table tr:nth-child(odd) {
 	background-color:#d2f0ee;
 }
@@ -738,7 +803,6 @@ main ul {
 	background-color:#F2F2F2;
 }	
 
-	
 #dates_form {
 	display:none !important;
 }

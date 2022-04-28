@@ -113,7 +113,7 @@ if ($results) {
 	}
 	$listing_html = "
 		<table class='listing-table'>
-			<tr>
+			<tr class='bg-steelblue'>
 				<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>First&nbsp;Name</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=last_name&sort_seq=$sql_order_by_seq'>Last&nbsp;Name</a>" . (($sql_order_by == 'last_name') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=address1&sort_seq=$sql_order_by_seq'>Address&nbsp;1</a>" . (($sql_order_by == 'address1') ? $order_icon : '') . "</th>
@@ -161,7 +161,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_passengers.png"> customer passengers</div>
 		<div class='right-block'>
-			&#9998;<a href='customer_passengers_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			👤 <a href='customer_passengers_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Passenger</a>
 		</div>
 	</section>
 

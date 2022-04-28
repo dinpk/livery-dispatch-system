@@ -115,7 +115,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/set_ad_source.png"> settings - ad sources</div>
 		<div class='right-block'>
-			&#9998;<a href='settings_ad_source_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='settings_ad_source_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Add Source</a>
 		</div>
 	</section>
 

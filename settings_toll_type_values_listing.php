@@ -115,7 +115,7 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/set_toll_types.png"> settings - toll types</div>
 		<div class='right-block'>
-			&#9998;<a href='settings_toll_type_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			✢ <a href='settings_toll_type_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Toll Type</a>
 		</div>
 	</section>
 

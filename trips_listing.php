@@ -228,9 +228,9 @@ if ($results) {
 	<section id='sub-menu'>
 		<div class='left-block'><img src="images/icons/nav_trips.png"> trips</div>
 		<div class='right-block'>
-			&#9998;<a href='trips_sheet.php' target='_blank'>Trip Sheet</a>
+			☷ <a href='trips_sheet.php' target='_blank'>Trip Sheet</a>
 			&nbsp;
-			&#9998;<a href='trips_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
+			❖ <a href='trips_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Trip</a>
 		</div>
 	</section>
 

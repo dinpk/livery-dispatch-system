@@ -132,6 +132,8 @@ if ($results) {
 		</div>
 	</section>
 
+	<div class='page-image' style='background-image:url(images/page-companies.jpg);'></div>
+
 	<?php if (isset($message)) print $message; ?>
 
 	<main>

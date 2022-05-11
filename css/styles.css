@@ -194,6 +194,20 @@ nav a:hover {
 	color:rgb(15, 148, 141);
 }
 
+.page-image {
+	position:fixed;
+	z-index:-100;
+	display:block;
+	width:150px;
+	height:200px;
+	top:40px;
+	left:0;
+	clip-path: polygon(0 0, 100% 0%, 100% 75%, 50% 100%, 0 75%);
+	background-size:cover;
+	background-position-x: center;
+	background-position-y: center;
+}
+
 main {
 	width:99%;
 	margin:40px auto 20px auto;
@@ -212,7 +226,9 @@ footer {
 
 /* CLASSES */
 
-
+.w98 {
+	width:98%;
+}
 
 .font-size-200 {
 	font-size:200%;
@@ -639,7 +655,8 @@ main ul {
 .listing-table th a:hover {
 	color:cyan;
 }
-	
+
+/*
 .listing-table .bg-lightseagreen th {
 	background-color: LightSeaGreen;
 }
@@ -692,7 +709,7 @@ main ul {
 	background-color: SteelBlue;
 }
 					
-					
+*/		
 					
 					
 					

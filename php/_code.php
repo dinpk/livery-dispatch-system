@@ -56,9 +56,8 @@ function send_email($email, $subject, $body) {
 	$header  = 'MIME-Version: 1.0' . "\r\n";
 	$header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$header .= "From: ". $sender_name . " <" . $sender_email . ">\r\n";
-	// $sent = mail($email, $subject, $body, $header);
-	$sent = true;
-	return $sent;
+	return mail($email, $subject, $body, $header);
+	//return true;
 }
 
 

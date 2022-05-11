@@ -181,7 +181,7 @@ if ($results) {
 			</tr>";
 		}
 		$listing_html = "
-		<table class='listing-table'>
+		<table class='listing-table w98'>
 			<tr>
 				<th><a href='$url" . $query_symbol . "sort_by=key_trips&sort_seq=$sql_order_by_seq'>Trip #</a>" . (($sql_order_by == 'key_trips') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=pickup_datetime&sort_seq=$sql_order_by_seq'>Date Time</a>" . (($sql_order_by == 'pickup_datetime') ? $order_icon : '') . "</th>

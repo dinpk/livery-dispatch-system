@@ -19,7 +19,7 @@ if (isset($_GET['settings_vehicle_type_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$vehicle_type = (isset($_POST['vehicle_type']) ? trim($_POST['vehicle_type']) : '');
+	$vehicle_type = trim($_POST['vehicle_type']);
 	if (strlen($vehicle_type) < 3 || strlen($vehicle_type) > 50) {
 		$msg_vehicle_type = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'vehicle_type';

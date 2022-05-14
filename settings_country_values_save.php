@@ -20,13 +20,13 @@ if (isset($_GET['settings_country_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$country_code = (isset($_POST['country_code']) ? trim($_POST['country_code']) : '');
-	if (strlen($country_code) < 0 || strlen($country_code) > 10) {
+	$country_code = trim($_POST['country_code']);
+	if (strlen($country_code) > 10) {
 		$msg_country_code = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'country_code';
 		$error = 1;
 	}
-	$country = (isset($_POST['country']) ? trim($_POST['country']) : '');
+	$country = trim($_POST['country']);
 	if (strlen($country) < 3 || strlen($country) > 50) {
 		$msg_country = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'country';

@@ -45,7 +45,7 @@ if (isset($parent_id) && isset($record_id)) {
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	// validation of input data
-	$warranty_expiration = (isset($_POST['warranty_expiration']) ? trim($_POST['warranty_expiration']) : '');
+	$warranty_expiration = trim($_POST['warranty_expiration']);
 	if (empty($warranty_expiration)) {
 		$warranty_expiration = '1970-01-01';
 	} else if (!is_date($warranty_expiration)) {
@@ -53,7 +53,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'warranty_expiration';
 		$error = 1;
 	}
-	$warranty_description = (isset($_POST['warranty_description']) ? trim($_POST['warranty_description']) : '');
+	$warranty_description = trim($_POST['warranty_description']);
 	if (strlen($warranty_description) > 1000) {
 		$msg_warranty_description = "<div class='message-error'>Provide a valid value up to length 1000</div>";
 		$focus_field = 'warranty_description';
@@ -71,19 +71,19 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'labor_cost';
 		$error = 1;
 	}
-	$workshop_name = (isset($_POST['workshop_name']) ? trim($_POST['workshop_name']) : '');
+	$workshop_name = trim($_POST['workshop_name']);
 	if (strlen($workshop_name) > 100) {
 		$msg_workshop_name = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'workshop_name';
 		$error = 1;
 	}
-	$repair_description = (isset($_POST['repair_description']) ? trim($_POST['repair_description']) : '');
+	$repair_description = trim($_POST['repair_description']);
 	if (strlen($repair_description) > 3000) {
 		$msg_repair_description = "<div class='message-error'>Provide a valid value up to length 3000</div>";
 		$focus_field = 'repair_description';
 		$error = 1;
 	}
-	$repair_date = (isset($_POST['repair_date']) ? trim($_POST['repair_date']) : '');
+	$repair_date = trim($_POST['repair_date']);
 	if (empty($repair_date)) {
 		$repair_date = '1970-01-01';
 	} else if (!is_date($repair_date)) {

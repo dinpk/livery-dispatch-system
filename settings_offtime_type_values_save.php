@@ -19,7 +19,7 @@ if (isset($_GET['settings_offtime_type_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$offtime_type = (isset($_POST['offtime_type']) ? trim($_POST['offtime_type']) : '');
+	$offtime_type = trim($_POST['offtime_type']);
 	if (strlen($offtime_type) < 3 || strlen($offtime_type) > 50) {
 		$msg_offtime_type = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'offtime_type';

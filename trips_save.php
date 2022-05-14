@@ -88,290 +88,290 @@ if (isset($_GET['tripsid'])) {
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$total_trip_amount = trim($_POST['total_trip_amount']);
-	if (strlen($total_trip_amount) < 0 || strlen($total_trip_amount) > 10 || !is_numeric($total_trip_amount)) {
+	if (strlen($total_trip_amount) > 10 || !is_numeric($total_trip_amount)) {
 		$msg_total_trip_amount = "<div class='message-error'>Invalid value of 'trip total amount'</div>";
 		$focus_field = 'total_trip_amount';
 		$error = 1;
 	}
 	$flat_amount = trim($_POST['flat_amount']);
-	if (strlen($flat_amount) < 0 || strlen($flat_amount) > 10 || !is_numeric($flat_amount)) {
+	if (strlen($flat_amount) > 10 || !is_numeric($flat_amount)) {
 		$msg_flat_amount = "<div class='message-error'>Invalid value of 'flat amount'</div>";
 		$focus_field = 'flat_amount';
 		$error = 1;
 	}
 	$trip_extra_charges = trim($_POST['trip_extra_charges']);
-	if (strlen($trip_extra_charges) < 0 || strlen($trip_extra_charges) > 10 || !is_numeric($trip_extra_charges)) {
+	if (strlen($trip_extra_charges) > 10 || !is_numeric($trip_extra_charges)) {
 		$msg_trip_extra_charges = "<div class='message-error'>Invalid value of 'trip extra charges'</div>";
 		$focus_field = 'trip_extra_charges';
 		$error = 1;
 	}
 	$tax_amount = trim($_POST['tax_amount']);
-	if (strlen($tax_amount) < 0 || strlen($tax_amount) > 10 || !is_numeric($tax_amount)) {
+	if (strlen($tax_amount) > 10 || !is_numeric($tax_amount)) {
 		$msg_tax_amount = "<div class='message-error'>Invalid value of 'tax amount'</div>";
 		$focus_field = 'tax_amount';
 		$error = 1;
 	}
 	$tax_percent = trim($_POST['tax_percent']);
-	if (strlen($tax_percent) < 0 || strlen($tax_percent) > 10 || !is_numeric($tax_percent)) {
+	if (strlen($tax_percent) > 10 || !is_numeric($tax_percent)) {
 		$msg_tax_percent = "<div class='message-error'>Invalid value of 'tax percent'</div>";
 		$focus_field = 'tax_percent';
 		$error = 1;
 	}
 	$discount_amount = trim($_POST['discount_amount']);
-	if (strlen($discount_amount) < 0 || strlen($discount_amount) > 10 || !is_numeric($discount_amount)) {
+	if (strlen($discount_amount) > 10 || !is_numeric($discount_amount)) {
 		$msg_discount_amount = "<div class='message-error'>Invalid value of 'discount amount'</div>";
 		$focus_field = 'discount_amount';
 		$error = 1;
 	}
 	$discount_percent = trim($_POST['discount_percent']);
-	if (strlen($discount_percent) < 0 || strlen($discount_percent) > 10 || !is_numeric($discount_percent)) {
+	if (strlen($discount_percent) > 10 || !is_numeric($discount_percent)) {
 		$msg_discount_percent = "<div class='message-error'>Invalid value of 'discount percent'</div>";
 		$focus_field = 'discount_percent';
 		$error = 1;
 	}
 	$admin_fee_amount = trim($_POST['admin_fee_amount']);
-	if (strlen($admin_fee_amount) < 0 || strlen($admin_fee_amount) > 10 || !is_numeric($admin_fee_amount)) {
+	if (strlen($admin_fee_amount) > 10 || !is_numeric($admin_fee_amount)) {
 		$msg_admin_fee_amount = "<div class='message-error'>Invalid value of 'admin fee amount'</div>";
 		$focus_field = 'admin_fee_amount';
 		$error = 1;
 	}
 	$admin_fee_percent = trim($_POST['admin_fee_percent']);
-	if (strlen($admin_fee_percent) < 0 || strlen($admin_fee_percent) > 10 || !is_numeric($admin_fee_percent)) {
+	if (strlen($admin_fee_percent) > 10 || !is_numeric($admin_fee_percent)) {
 		$msg_admin_fee_percent = "<div class='message-error'>Invalid value of 'admin fee percent'</div>";
 		$focus_field = 'admin_fee_percent';
 		$error = 1;
 	}
 	$gas_surcharge_amount = trim($_POST['gas_surcharge_amount']);
-	if (strlen($gas_surcharge_amount) < 0 || strlen($gas_surcharge_amount) > 10 || !is_numeric($gas_surcharge_amount)) {
+	if (strlen($gas_surcharge_amount) > 10 || !is_numeric($gas_surcharge_amount)) {
 		$msg_gas_surcharge_amount = "<div class='message-error'>Invalid value of 'gas surcharge amount'</div>";
 		$focus_field = 'gas_surcharge_amount';
 		$error = 1;
 	}
 	$gas_surcharge_percent = trim($_POST['gas_surcharge_percent']);
-	if (strlen($gas_surcharge_percent) < 0 || strlen($gas_surcharge_percent) > 10 || !is_numeric($gas_surcharge_percent)) {
+	if (strlen($gas_surcharge_percent) > 10 || !is_numeric($gas_surcharge_percent)) {
 		$msg_gas_surcharge_percent = "<div class='message-error'>Invalid value of 'gas surcharge percent'</div>";
 		$focus_field = 'gas_surcharge_percent';
 		$error = 1;
 	}
 	$gratuity_amount = trim($_POST['gratuity_amount']);
-	if (strlen($gratuity_amount) < 0 || strlen($gratuity_amount) > 10 || !is_numeric($gratuity_amount)) {
+	if (strlen($gratuity_amount) > 10 || !is_numeric($gratuity_amount)) {
 		$msg_gratuity_amount = "<div class='message-error'>Invalid value of 'gratuity amount'</div>";
 		$focus_field = 'gratuity_amount';
 		$error = 1;
 	}
 	$gratuity_percent = trim($_POST['gratuity_percent']);
-	if (strlen($gratuity_percent) < 0 || strlen($gratuity_percent) > 10 || !is_numeric($gratuity_percent)) {
+	if (strlen($gratuity_percent) > 10 || !is_numeric($gratuity_percent)) {
 		$msg_gratuity_percent = "<div class='message-error'>Invalid value of 'gratuity percent'</div>";
 		$focus_field = 'gratuity_percent';
 		$error = 1;
 	}
 	$parking_amount = trim($_POST['parking_amount']);
-	if (strlen($parking_amount) < 0 || strlen($parking_amount) > 10 || !is_numeric($parking_amount)) {
+	if (strlen($parking_amount) > 10 || !is_numeric($parking_amount)) {
 		$msg_parking_amount = "<div class='message-error'>Invalid value of 'parking amount'</div>";
 		$focus_field = 'parking_amount';
 		$error = 1;
 	}
 	$tolls_amount = trim($_POST['tolls_amount']);
-	if (strlen($tolls_amount) < 0 || strlen($tolls_amount) > 10 || !is_numeric($tolls_amount)) {
+	if (strlen($tolls_amount) > 10 || !is_numeric($tolls_amount)) {
 		$msg_tolls_amount = "<div class='message-error'>Invalid value of 'tolls amount'</div>";
 		$focus_field = 'tolls_amount';
 		$error = 1;
 	}
-	$toll_type = (isset($_POST['toll_type']) ? trim($_POST['toll_type']) : '');
-	if (strlen($toll_type) < 0 || strlen($toll_type) > 50) {
+	$toll_type = trim($_POST['toll_type']);
+	if (strlen($toll_type) > 50) {
 		$msg_toll_type = "<div class='message-error'>Invalid value of 'toll type'</div>";
 		$focus_field = 'toll_type';
 		$error = 1;
 	}
 	$extra_stops_amount = trim($_POST['extra_stops_amount']);
-	if (strlen($extra_stops_amount) < 0 || strlen($extra_stops_amount) > 10 || !is_numeric($extra_stops_amount)) {
+	if (strlen($extra_stops_amount) > 10 || !is_numeric($extra_stops_amount)) {
 		$msg_extra_stops_amount = "<div class='message-error'>Invalid value of 'extra stops amount'</div>";
 		$focus_field = 'extra_stops_amount';
 		$error = 1;
 	}
 	$extra_stops = trim($_POST['extra_stops']);
-	if (strlen($extra_stops) < 0 || strlen($extra_stops) > 5 || !is_numeric($extra_stops)) {
+	if (strlen($extra_stops) > 5 || !is_numeric($extra_stops)) {
 		$msg_extra_stops = "<div class='message-error'>Invalid value of 'extra stops'</div>";
 		$focus_field = 'extra_stops';
 		$error = 1;
 	}
 	$offtime_amount = trim($_POST['offtime_amount']);
-	if (strlen($offtime_amount) < 0 || strlen($offtime_amount) > 10 || !is_numeric($offtime_amount)) {
+	if (strlen($offtime_amount) > 10 || !is_numeric($offtime_amount)) {
 		$msg_offtime_amount = "<div class='message-error'>Invalid value of 'offtime amount'</div>";
 		$focus_field = 'offtime_amount';
 		$error = 1;
 	}
-	$offtime_type = (isset($_POST['offtime_type']) ? trim($_POST['offtime_type']) : '');
-	if (strlen($offtime_type) < 0 || strlen($offtime_type) > 50) {
+	$offtime_type = trim($_POST['offtime_type']);
+	if (strlen($offtime_type) > 50) {
 		$msg_offtime_type = "<div class='message-error'>Invalid value of 'offtime type'</div>";
 		$focus_field = 'offtime_type';
 		$error = 1;
 	}
 	$base_amount = trim($_POST['base_amount']);
-	if (strlen($base_amount) < 0 || strlen($base_amount) > 10 || !is_numeric($base_amount)) {
+	if (strlen($base_amount) > 10 || !is_numeric($base_amount)) {
 		$msg_base_amount = "<div class='message-error'>Invalid value of 'base amount'</div>";
 		$focus_field = 'base_amount';
 		$error = 1;
 	}
 	$zone_rate = trim($_POST['zone_rate']);
-	if (strlen($zone_rate) < 0 || strlen($zone_rate) > 10 || !is_numeric($zone_rate)) {
+	if (strlen($zone_rate) > 10 || !is_numeric($zone_rate)) {
 		$msg_zone_rate = "<div class='message-error'>Invalid value of 'zone rate'</div>";
 		$focus_field = 'zone_rate';
 		$error = 1;
 	}
 	$hourly_overtime_amount = trim($_POST['hourly_overtime_amount']);
-	if (strlen($hourly_overtime_amount) < 0 || strlen($hourly_overtime_amount) > 10 || !is_numeric($hourly_overtime_amount)) {
+	if (strlen($hourly_overtime_amount) > 10 || !is_numeric($hourly_overtime_amount)) {
 		$msg_hourly_overtime_amount = "<div class='message-error'>Invalid value of 'hourly overtime amount'</div>";
 		$focus_field = 'hourly_overtime_amount';
 		$error = 1;
 	}
 	$overtime_minutes = trim($_POST['overtime_minutes']);
-	if (strlen($overtime_minutes) < 0 || strlen($overtime_minutes) > 5 || !is_numeric($overtime_minutes)) {
+	if (strlen($overtime_minutes) > 5 || !is_numeric($overtime_minutes)) {
 		$msg_overtime_minutes = "<div class='message-error'>Invalid value of 'overtime minutes'</div>";
 		$focus_field = 'overtime_minutes';
 		$error = 1;
 	}
 	$overtime_hours = trim($_POST['overtime_hours']);
-	if (strlen($overtime_hours) < 0 || strlen($overtime_hours) > 5 || !is_numeric($overtime_hours)) {
+	if (strlen($overtime_hours) > 5 || !is_numeric($overtime_hours)) {
 		$msg_overtime_hours = "<div class='message-error'>Invalid value of 'overtime hours'</div>";
 		$focus_field = 'overtime_hours';
 		$error = 1;
 	}
 	$hourly_overtime_rate = trim($_POST['hourly_overtime_rate']);
-	if (strlen($hourly_overtime_rate) < 0 || strlen($hourly_overtime_rate) > 10 || !is_numeric($hourly_overtime_rate)) {
+	if (strlen($hourly_overtime_rate) > 10 || !is_numeric($hourly_overtime_rate)) {
 		$msg_hourly_overtime_rate = "<div class='message-error'>Invalid value of 'hourly overtime rate'</div>";
 		$focus_field = 'hourly_overtime_rate';
 		$error = 1;
 	}
 	$hourly_wait_amount = trim($_POST['hourly_wait_amount']);
-	if (strlen($hourly_wait_amount) < 0 || strlen($hourly_wait_amount) > 10 || !is_numeric($hourly_wait_amount)) {
+	if (strlen($hourly_wait_amount) > 10 || !is_numeric($hourly_wait_amount)) {
 		$msg_hourly_wait_amount = "<div class='message-error'>Invalid value of 'hourly wait amount'</div>";
 		$focus_field = 'hourly_wait_amount';
 		$error = 1;
 	}
 	$wait_minutes = trim($_POST['wait_minutes']);
-	if (strlen($wait_minutes) < 0 || strlen($wait_minutes) > 5 || !is_numeric($wait_minutes)) {
+	if (strlen($wait_minutes) > 5 || !is_numeric($wait_minutes)) {
 		$msg_wait_minutes = "<div class='message-error'>Invalid value of 'wait minutes'</div>";
 		$focus_field = 'wait_minutes';
 		$error = 1;
 	}
 	$wait_hours = trim($_POST['wait_hours']);
-	if (strlen($wait_hours) < 0 || strlen($wait_hours) > 5 || !is_numeric($wait_hours)) {
+	if (strlen($wait_hours) > 5 || !is_numeric($wait_hours)) {
 		$msg_wait_hours = "<div class='message-error'>Invalid value of 'wait hours'</div>";
 		$focus_field = 'wait_hours';
 		$error = 1;
 	}
 	$hourly_wait_rate = trim($_POST['hourly_wait_rate']);
-	if (strlen($hourly_wait_rate) < 0 || strlen($hourly_wait_rate) > 10 || !is_numeric($hourly_wait_rate)) {
+	if (strlen($hourly_wait_rate) > 10 || !is_numeric($hourly_wait_rate)) {
 		$msg_hourly_wait_rate = "<div class='message-error'>Invalid value of 'hourly wait rate'</div>";
 		$focus_field = 'hourly_wait_rate';
 		$error = 1;
 	}
 	
 	$hourly_regular_amount = trim($_POST['hourly_regular_amount']);
-	if (strlen($hourly_regular_amount) < 0 || strlen($hourly_regular_amount) > 10 || !is_numeric($hourly_regular_amount)) {
+	if (strlen($hourly_regular_amount) > 10 || !is_numeric($hourly_regular_amount)) {
 		$msg_hourly_regular_amount = "<div class='message-error'>Invalid value of 'hourly regular amount'</div>";
 		$focus_field = 'hourly_regular_amount';
 		$error = 1;
 	}
 	$regular_minutes = trim($_POST['regular_minutes']);
-	if (strlen($regular_minutes) < 0 || strlen($regular_minutes) > 5 || !is_numeric($regular_minutes)) {
+	if (strlen($regular_minutes) > 5 || !is_numeric($regular_minutes)) {
 		$msg_regular_minutes = "<div class='message-error'>Invalid value of 'regular minutes'</div>";
 		$focus_field = 'regular_minutes';
 		$error = 1;
 	}
 	$regular_hours = trim($_POST['regular_hours']);
-	if (strlen($regular_hours) < 0 || strlen($regular_hours) > 5 || !is_numeric($regular_hours)) {
+	if (strlen($regular_hours) > 5 || !is_numeric($regular_hours)) {
 		$msg_regular_hours = "<div class='message-error'>Invalid value of 'regular hours'</div>";
 		$focus_field = 'regular_hours';
 		$error = 1;
 	}
 	$hourly_regular_rate = trim($_POST['hourly_regular_rate']);
-	if (strlen($hourly_regular_rate) < 0 || strlen($hourly_regular_rate) > 10 || !is_numeric($hourly_regular_rate)) {
+	if (strlen($hourly_regular_rate) > 10 || !is_numeric($hourly_regular_rate)) {
 		$msg_hourly_regular_rate = "<div class='message-error'>Invalid value of 'hourly regular rate'</div>";
 		$focus_field = 'hourly_regular_rate';
 		$error = 1;
 	}
-	$rate_type = (isset($_POST['rate_type']) ? trim($_POST['rate_type']) : '');
-	if (strlen($rate_type) < 0 || strlen($rate_type) > 50) {
+	$rate_type = trim($_POST['rate_type']);
+	if (strlen($rate_type) > 50) {
 		$msg_rate_type = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'rate_type';
 		$error = 1;
 	}
-	$dispatcher_notes = (isset($_POST['dispatcher_notes']) ? trim($_POST['dispatcher_notes']) : '');
-	if (strlen($dispatcher_notes) < 0 || strlen($dispatcher_notes) > 2000) {
+	$dispatcher_notes = trim($_POST['dispatcher_notes']);
+	if (strlen($dispatcher_notes) > 2000) {
 		$msg_dispatcher_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'dispatcher_notes';
 		$error = 1;
 	}
 	
-	$routing_notes = (isset($_POST['routing_notes']) ? trim($_POST['routing_notes']) : '');
-	if (strlen($routing_notes) < 0 || strlen($routing_notes) > 2000) {
+	$routing_notes = trim($_POST['routing_notes']);
+	if (strlen($routing_notes) > 2000) {
 		$msg_routing_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'routing_notes';
 		$error = 1;
 	}
-	$routing_to = (isset($_POST['routing_to']) ? trim($_POST['routing_to']) : '');
+	$routing_to = trim($_POST['routing_to']);
 	if (strlen($routing_to) < 3 || strlen($routing_to) > 3000) {
 		$msg_routing_to = "<div class='message-error'>Provide a valid value of length 3-3000</div>";
 		$focus_field = 'routing_to';
 		$error = 1;
 	}
-	$routing_from = (isset($_POST['routing_from']) ? trim($_POST['routing_from']) : '');
+	$routing_from = trim($_POST['routing_from']);
 	if (strlen($routing_from) < 3 || strlen($routing_from) > 3000) {
 		$msg_routing_from = "<div class='message-error'>Provide a valid value of length 3-3000</div>";
 		$focus_field = 'routing_from';
 		$error = 1;
 	}
-	$zone_to = (isset($_POST['zone_to']) ? trim($_POST['zone_to']) : '');
-	if (strlen($zone_to) < 0 || strlen($zone_to) > 100) {
+	$zone_to = trim($_POST['zone_to']);
+	if (strlen($zone_to) > 100) {
 		$msg_zone_to = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'zone_to';
 		$error = 1;
 	}
-	$zone_from = (isset($_POST['zone_from']) ? trim($_POST['zone_from']) : '');
-	if (strlen($zone_from) < 0 || strlen($zone_from) > 100) {
+	$zone_from = trim($_POST['zone_from']);
+	if (strlen($zone_from) > 100) {
 		$msg_zone_from = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'zone_from';
 		$error = 1;
 	}
-	$flight_number = (isset($_POST['flight_number']) ? trim($_POST['flight_number']) : '');
-	if (strlen($flight_number) < 0 || strlen($flight_number) > 100) {
+	$flight_number = trim($_POST['flight_number']);
+	if (strlen($flight_number) > 100) {
 		$msg_flight_number = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'flight_number';
 		$error = 1;
 	}
-	$airline = (isset($_POST['airline']) ? trim($_POST['airline']) : '');
-	if (strlen($airline) < 0 || strlen($airline) > 100) {
+	$airline = trim($_POST['airline']);
+	if (strlen($airline) > 100) {
 		$msg_airline = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'airline';
 		$error = 1;
 	}
-	$vehicle = (isset($_POST['vehicle']) ? trim($_POST['vehicle']) : '');
-	if (strlen($vehicle) < 0 || strlen($vehicle) > 50) {
+	$vehicle = trim($_POST['vehicle']);
+	if (strlen($vehicle) > 50) {
 		$msg_vehicle = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'vehicle';
 		$error = 1;
 	}
-	$driver_name = (isset($_POST['driver_name']) ? trim($_POST['driver_name']) : '');
-	if (strlen($driver_name) < 0 || strlen($driver_name) > 100) {
+	$driver_name = trim($_POST['driver_name']);
+	if (strlen($driver_name) > 100) {
 		$msg_driver_name = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'driver_name';
 		$error = 1;
 	}
-	$trip_status = (isset($_POST['trip_status']) ? trim($_POST['trip_status']) : '');
-	if (strlen($trip_status) < 0 || strlen($trip_status) > 50) {
+	$trip_status = trim($_POST['trip_status']);
+	if (strlen($trip_status) > 50) {
 		$msg_trip_status = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'trip_status';
 		$error = 1;
 	}
-	$trip_type = (isset($_POST['trip_type']) ? trim($_POST['trip_type']) : '');
-	if (strlen($trip_type) < 0 || strlen($trip_type) > 50) {
+	$trip_type = trim($_POST['trip_type']);
+	if (strlen($trip_type) > 50) {
 		$msg_trip_type = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'trip_type';
 		$error = 1;
 	}
-	$dropoff_time = (isset($_POST['dropoff_time']) ? trim($_POST['dropoff_time']) : '');
+	$dropoff_time = trim($_POST['dropoff_time']);
 	if (empty($dropoff_time)) {
 		$dropoff_time = '01:00:00';
 	} else if (!is_time($dropoff_time)) {
@@ -379,7 +379,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'dropoff_time';
 		$error = 1;
 	}
-	$dropoff_date = (isset($_POST['dropoff_date']) ? trim($_POST['dropoff_date']) : '');
+	$dropoff_date = trim($_POST['dropoff_date']);
 	if (empty($dropoff_date)) {
 		$dropoff_date = date("Y-m'd");
 	} else if (!is_date($dropoff_date)) {
@@ -388,7 +388,7 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$dropoff_datetime = $dropoff_date . " " . $dropoff_time;
-	$pickup_time = (isset($_POST['pickup_time']) ? trim($_POST['pickup_time']) : '');
+	$pickup_time = trim($_POST['pickup_time']);
 	if (empty($pickup_time)) {
 		$pickup_time = '01:00:00';
 	} else if (!is_time($pickup_time)) {
@@ -396,7 +396,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'pickup_time';
 		$error = 1;
 	}
-	$pickup_date = (isset($_POST['pickup_date']) ? trim($_POST['pickup_date']) : '');
+	$pickup_date = trim($_POST['pickup_date']);
 	if (empty($pickup_date)) {
 		$pickup_date = date("Y-m'd");
 	} else if (!is_date($pickup_date)) {
@@ -405,62 +405,62 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$pickup_datetime = $pickup_date . " " . $pickup_time;
-	$reserved_by = (isset($_POST['reserved_by']) ? trim($_POST['reserved_by']) : '');
-	if (strlen($reserved_by) < 0 || strlen($reserved_by) > 100) {
+	$reserved_by = trim($_POST['reserved_by']);
+	if (strlen($reserved_by) > 100) {
 		$msg_reserved_by = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'reserved_by';
 		$error = 1;
 	}
 	$total_passengers = trim($_POST['total_passengers']);
-	if (strlen($total_passengers) < 0 || strlen($total_passengers) > 5 || !is_numeric($total_passengers)) {
+	if (strlen($total_passengers) > 5 || !is_numeric($total_passengers)) {
 		$msg_total_passengers = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'total_passengers';
 		$error = 1;
 	}
-	$passenger_name = (isset($_POST['passenger_name']) ? trim($_POST['passenger_name']) : '');
+	$passenger_name = trim($_POST['passenger_name']);
 	if (strlen($passenger_name) < 3 || strlen($passenger_name) > 100) {
 		$msg_passenger_name = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'passenger_name';
 		$error = 1;
 	}
-	$reference_number = (isset($_POST['reference_number']) ? trim($_POST['reference_number']) : '');
-	if (strlen($reference_number) < 0 || strlen($reference_number) > 50) {
+	$reference_number = trim($_POST['reference_number']);
+	if (strlen($reference_number) > 50) {
 		$msg_reference_number = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'reference_number';
 		$error = 1;
 	}
 	$key_rates_zones = trim($_POST['key_rates_zones']);
-	if (strlen($key_rates_zones) < 0 || strlen($key_rates_zones) > 100 || !is_numeric($key_rates_zones)) {
+	if (strlen($key_rates_zones) > 100 || !is_numeric($key_rates_zones)) {
 		$msg_key_rates_zones = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_rates_zones';
 		$error = 1;
 	}
 	$key_settings_airline_values = trim($_POST['key_settings_airline_values']);
-	if (strlen($key_settings_airline_values) < 0 || strlen($key_settings_airline_values) > 100 || !is_numeric($key_settings_airline_values)) {
+	if (strlen($key_settings_airline_values) > 100 || !is_numeric($key_settings_airline_values)) {
 		$msg_key_settings_airline_values = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_settings_airline_values';
 		$error = 1;
 	}
 	$key_vehicles = trim($_POST['key_vehicles']);
-	if (strlen($key_vehicles) < 0 || strlen($key_vehicles) > 100 || !is_numeric($key_vehicles)) {
+	if (strlen($key_vehicles) > 100 || !is_numeric($key_vehicles)) {
 		$msg_key_vehicles = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_vehicles';
 		$error = 1;
 	}
 	$key_drivers = trim($_POST['key_drivers']);
-	if (strlen($key_drivers) < 0 || strlen($key_drivers) > 100 || !is_numeric($key_drivers)) {
+	if (strlen($key_drivers) > 100 || !is_numeric($key_drivers)) {
 		$msg_key_drivers = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_drivers';
 		$error = 1;
 	}
 	$key_customer_contacts = trim($_POST['key_customer_contacts']);
-	if (strlen($key_customer_contacts) < 0 || strlen($key_customer_contacts) > 100 || !is_numeric($key_customer_contacts)) {
+	if (strlen($key_customer_contacts) > 100 || !is_numeric($key_customer_contacts)) {
 		$msg_key_customer_contacts = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_customer_contacts';
 		$error = 1;
 	}
 	$key_customer_passengers = trim($_POST['key_customer_passengers']);
-	if (strlen($key_customer_passengers) < 0 || strlen($key_customer_passengers) > 100 || !is_numeric($key_customer_passengers)) {
+	if (strlen($key_customer_passengers) > 100 || !is_numeric($key_customer_passengers)) {
 		$msg_key_customer_passengers = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_customer_passengers';
 		$error = 1;

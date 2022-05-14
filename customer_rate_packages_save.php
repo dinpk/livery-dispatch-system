@@ -24,30 +24,30 @@ if (isset($_GET['customer_rate_packagesid'])) {
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$discount_percent = trim($_POST['discount_percent']);
-	if (strlen($discount_percent) < 0 || strlen($discount_percent) > 5 || !is_numeric($discount_percent)) {
+	if (strlen($discount_percent) > 5 || !is_numeric($discount_percent)) {
 		$msg_discount_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'discount_percent';
 		$error = 1;
 	}
 	$admin_fee_percent = trim($_POST['admin_fee_percent']);
-	if (strlen($admin_fee_percent) < 0 || strlen($admin_fee_percent) > 5 || !is_numeric($admin_fee_percent)) {
+	if (strlen($admin_fee_percent) > 5 || !is_numeric($admin_fee_percent)) {
 		$msg_admin_fee_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'admin_fee_percent';
 		$error = 1;
 	}
 	$gas_surcharge_percent = trim($_POST['gas_surcharge_percent']);
-	if (strlen($gas_surcharge_percent) < 0 || strlen($gas_surcharge_percent) > 5 || !is_numeric($gas_surcharge_percent)) {
+	if (strlen($gas_surcharge_percent) > 5 || !is_numeric($gas_surcharge_percent)) {
 		$msg_gas_surcharge_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'gas_surcharge_percent';
 		$error = 1;
 	}
 	$gratuity_percent = trim($_POST['gratuity_percent']);
-	if (strlen($gratuity_percent) < 0 || strlen($gratuity_percent) > 5 || !is_numeric($gratuity_percent)) {
+	if (strlen($gratuity_percent) > 5 || !is_numeric($gratuity_percent)) {
 		$msg_gratuity_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'gratuity_percent';
 		$error = 1;
 	}
-	$package_name = (isset($_POST['package_name']) ? trim($_POST['package_name']) : '');
+	$package_name = trim($_POST['package_name']);
 	if (strlen($package_name) < 3 || strlen($package_name) > 50) {
 		$msg_package_name = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'package_name';

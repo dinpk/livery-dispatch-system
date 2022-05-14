@@ -60,139 +60,139 @@ if (isset($_GET['driversid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$active_status = (isset($_POST['active_status']) ? trim($_POST['active_status']) : '');
-	if (strlen($active_status) < 0 || strlen($active_status) > 10) {
+	$active_status = trim($_POST['active_status']);
+	if (strlen($active_status) > 10) {
 		$msg_active_status = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'active_status';
 		$error = 1;
 	}
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
-	if (strlen($notes) < 0 || strlen($notes) > 3000) {
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 3000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-3000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
 	$extra_charges_percent = trim($_POST['extra_charges_percent']);
-	if (strlen($extra_charges_percent) < 0 || strlen($extra_charges_percent) > 5 || !is_numeric($extra_charges_percent)) {
+	if (strlen($extra_charges_percent) > 5 || !is_numeric($extra_charges_percent)) {
 		$msg_extra_charges_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'extra_charges_percent';
 		$error = 1;
 	}
-	$pay_extra_charges_checkbox = (isset($_POST['pay_extra_charges_checkbox']) ? trim($_POST['pay_extra_charges_checkbox']) : '');
-	if (strlen($pay_extra_charges_checkbox) < 0 || strlen($pay_extra_charges_checkbox) > 10) {
+	$pay_extra_charges_checkbox = trim($_POST['pay_extra_charges_checkbox']);
+	if (strlen($pay_extra_charges_checkbox) > 10) {
 		$msg_pay_extra_charges_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_extra_charges_checkbox';
 		$error = 1;
 	}
 	$gas_surcharge_percent = trim($_POST['gas_surcharge_percent']);
-	if (strlen($gas_surcharge_percent) < 0 || strlen($gas_surcharge_percent) > 5 || !is_numeric($gas_surcharge_percent)) {
+	if (strlen($gas_surcharge_percent) > 5 || !is_numeric($gas_surcharge_percent)) {
 		$msg_gas_surcharge_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'gas_surcharge_percent';
 		$error = 1;
 	}
-	$pay_gas_surcharge_checkbox = (isset($_POST['pay_gas_surcharge_checkbox']) ? trim($_POST['pay_gas_surcharge_checkbox']) : '');
-	if (strlen($pay_gas_surcharge_checkbox) < 0 || strlen($pay_gas_surcharge_checkbox) > 100) {
+	$pay_gas_surcharge_checkbox = trim($_POST['pay_gas_surcharge_checkbox']);
+	if (strlen($pay_gas_surcharge_checkbox) > 100) {
 		$msg_pay_gas_surcharge_checkbox = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'pay_gas_surcharge_checkbox';
 		$error = 1;
 	}
 	$parking_percent = trim($_POST['parking_percent']);
-	if (strlen($parking_percent) < 0 || strlen($parking_percent) > 5 || !is_numeric($parking_percent)) {
+	if (strlen($parking_percent) > 5 || !is_numeric($parking_percent)) {
 		$msg_parking_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'parking_percent';
 		$error = 1;
 	}
-	$pay_parking_checkbox = (isset($_POST['pay_parking_checkbox']) ? trim($_POST['pay_parking_checkbox']) : '');
-	if (strlen($pay_parking_checkbox) < 0 || strlen($pay_parking_checkbox) > 10) {
+	$pay_parking_checkbox = trim($_POST['pay_parking_checkbox']);
+	if (strlen($pay_parking_checkbox) > 10) {
 		$msg_pay_parking_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_parking_checkbox';
 		$error = 1;
 	}
 	$tolls_percent = trim($_POST['tolls_percent']);
-	if (strlen($tolls_percent) < 0 || strlen($tolls_percent) > 5 || !is_numeric($tolls_percent)) {
+	if (strlen($tolls_percent) > 5 || !is_numeric($tolls_percent)) {
 		$msg_tolls_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'tolls_percent';
 		$error = 1;
 	}
-	$pay_tolls_checkbox = (isset($_POST['pay_tolls_checkbox']) ? trim($_POST['pay_tolls_checkbox']) : '');
-	if (strlen($pay_tolls_checkbox) < 0 || strlen($pay_tolls_checkbox) > 10) {
+	$pay_tolls_checkbox = trim($_POST['pay_tolls_checkbox']);
+	if (strlen($pay_tolls_checkbox) > 10) {
 		$msg_pay_tolls_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_tolls_checkbox';
 		$error = 1;
 	}
 	$offtime_percent = trim($_POST['offtime_percent']);
-	if (strlen($offtime_percent) < 0 || strlen($offtime_percent) > 5 || !is_numeric($offtime_percent)) {
+	if (strlen($offtime_percent) > 5 || !is_numeric($offtime_percent)) {
 		$msg_offtime_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'offtime_percent';
 		$error = 1;
 	}
-	$pay_offtime_checkbox = (isset($_POST['pay_offtime_checkbox']) ? trim($_POST['pay_offtime_checkbox']) : '');
-	if (strlen($pay_offtime_checkbox) < 0 || strlen($pay_offtime_checkbox) > 10) {
+	$pay_offtime_checkbox = trim($_POST['pay_offtime_checkbox']);
+	if (strlen($pay_offtime_checkbox) > 10) {
 		$msg_pay_offtime_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_offtime_checkbox';
 		$error = 1;
 	}
 	$extra_stops_percent = trim($_POST['extra_stops_percent']);
-	if (strlen($extra_stops_percent) < 0 || strlen($extra_stops_percent) > 5 || !is_numeric($extra_stops_percent)) {
+	if (strlen($extra_stops_percent) > 5 || !is_numeric($extra_stops_percent)) {
 		$msg_extra_stops_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'extra_stops_percent';
 		$error = 1;
 	}
-	$pay_extra_stops_checkbox = (isset($_POST['pay_extra_stops_checkbox']) ? trim($_POST['pay_extra_stops_checkbox']) : '');
-	if (strlen($pay_extra_stops_checkbox) < 0 || strlen($pay_extra_stops_checkbox) > 10) {
+	$pay_extra_stops_checkbox = trim($_POST['pay_extra_stops_checkbox']);
+	if (strlen($pay_extra_stops_checkbox) > 10) {
 		$msg_pay_extra_stops_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_extra_stops_checkbox';
 		$error = 1;
 	}
 	$commission_percent = trim($_POST['commission_percent']);
-	if (strlen($commission_percent) < 0 || strlen($commission_percent) > 5 || !is_numeric($commission_percent)) {
+	if (strlen($commission_percent) > 5 || !is_numeric($commission_percent)) {
 		$msg_commission_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'commission_percent';
 		$error = 1;
 	}
-	$pay_commission_checkbox = (isset($_POST['pay_commission_checkbox']) ? trim($_POST['pay_commission_checkbox']) : '');
-	if (strlen($pay_commission_checkbox) < 0 || strlen($pay_commission_checkbox) > 10) {
+	$pay_commission_checkbox = trim($_POST['pay_commission_checkbox']);
+	if (strlen($pay_commission_checkbox) > 10) {
 		$msg_pay_commission_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_commission_checkbox';
 		$error = 1;
 	}
 	$gratuity_percent = trim($_POST['gratuity_percent']);
-	if (strlen($gratuity_percent) < 0 || strlen($gratuity_percent) > 5 || !is_numeric($gratuity_percent)) {
+	if (strlen($gratuity_percent) > 5 || !is_numeric($gratuity_percent)) {
 		$msg_gratuity_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'gratuity_percent';
 		$error = 1;
 	}
-	$pay_gratuity_checkbox = (isset($_POST['pay_gratuity_checkbox']) ? trim($_POST['pay_gratuity_checkbox']) : '');
-	if (strlen($pay_gratuity_checkbox) < 0 || strlen($pay_gratuity_checkbox) > 10) {
+	$pay_gratuity_checkbox = trim($_POST['pay_gratuity_checkbox']);
+	if (strlen($pay_gratuity_checkbox) > 10) {
 		$msg_pay_gratuity_checkbox = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_gratuity_checkbox';
 		$error = 1;
 	}
 	$base_amount_percent = trim($_POST['base_amount_percent']);
-	if (strlen($base_amount_percent) < 0 || strlen($base_amount_percent) > 5 || !is_numeric($base_amount_percent)) {
+	if (strlen($base_amount_percent) > 5 || !is_numeric($base_amount_percent)) {
 		$msg_base_amount_percent = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'base_amount_percent';
 		$error = 1;
 	}
-	$payment_method = (isset($_POST['payment_method']) ? trim($_POST['payment_method']) : '');
-	if (strlen($payment_method) < 0 || strlen($payment_method) > 30) {
+	$payment_method = trim($_POST['payment_method']);
+	if (strlen($payment_method) > 30) {
 		$msg_payment_method = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'payment_method';
 		$error = 1;
 	}
 	$key_vehicles = trim($_POST['key_vehicles']);
-	if (strlen($key_vehicles) < 0 || strlen($key_vehicles) > 100 || !is_numeric($key_vehicles)) {
+	if (strlen($key_vehicles) > 100 || !is_numeric($key_vehicles)) {
 		$msg_key_vehicles = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_vehicles';
 		$error = 1;
 	}
-	$fleet_number = (isset($_POST['fleet_number']) ? trim($_POST['fleet_number']) : '');
-	if (strlen($fleet_number) < 0 || strlen($fleet_number) > 50) {
+	$fleet_number = trim($_POST['fleet_number']);
+	if (strlen($fleet_number) > 50) {
 		$msg_fleet_number = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'fleet_number';
 		$error = 1;
 	}
-	$hire_date = (isset($_POST['hire_date']) ? trim($_POST['hire_date']) : '');
+	$hire_date = trim($_POST['hire_date']);
 	if (empty($hire_date)) {
 		$hire_date = '1970-01-01';
 	} else if (!is_date($hire_date)) {
@@ -200,13 +200,13 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'hire_date';
 		$error = 1;
 	}
-	$social_security_number = (isset($_POST['social_security_number']) ? trim($_POST['social_security_number']) : '');
-	if (strlen($social_security_number) < 0 || strlen($social_security_number) > 100) {
+	$social_security_number = trim($_POST['social_security_number']);
+	if (strlen($social_security_number) > 100) {
 		$msg_social_security_number = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'social_security_number';
 		$error = 1;
 	}
-	$license_expiry_date = (isset($_POST['license_expiry_date']) ? trim($_POST['license_expiry_date']) : '');
+	$license_expiry_date = trim($_POST['license_expiry_date']);
 	if (empty($license_expiry_date)) {
 		$license_expiry_date = '1970-01-01';
 	} else if (!is_date($license_expiry_date)) {
@@ -214,13 +214,13 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'license_expiry_date';
 		$error = 1;
 	}
-	$license_number = (isset($_POST['license_number']) ? trim($_POST['license_number']) : '');
-	if (strlen($license_number) < 0 || strlen($license_number) > 100) {
+	$license_number = trim($_POST['license_number']);
+	if (strlen($license_number) > 100) {
 		$msg_license_number = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'license_number';
 		$error = 1;
 	}
-	$date_of_birth = (isset($_POST['date_of_birth']) ? trim($_POST['date_of_birth']) : '');
+	$date_of_birth = trim($_POST['date_of_birth']);
 	if (empty($date_of_birth)) {
 		$date_of_birth = '1970-01-01';
 	} else if (!is_date($date_of_birth)) {
@@ -228,92 +228,92 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'date_of_birth';
 		$error = 1;
 	}
-	$email = (isset($_POST['email']) ? trim($_POST['email']) : '');
-	if (strlen($email) < 0 || strlen($email) > 100) {
+	$email = trim($_POST['email']);
+	if (strlen($email) > 100) {
 		$msg_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'email';
 		$error = 1;
 	}
-	$mobile_phone = (isset($_POST['mobile_phone']) ? trim($_POST['mobile_phone']) : '');
-	if (strlen($mobile_phone) < 0 || strlen($mobile_phone) > 30) {
+	$mobile_phone = trim($_POST['mobile_phone']);
+	if (strlen($mobile_phone) > 30) {
 		$msg_mobile_phone = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'mobile_phone';
 		$error = 1;
 	}
-	$work_phone_extension = (isset($_POST['work_phone_extension']) ? trim($_POST['work_phone_extension']) : '');
-	if (strlen($work_phone_extension) < 0 || strlen($work_phone_extension) > 30) {
+	$work_phone_extension = trim($_POST['work_phone_extension']);
+	if (strlen($work_phone_extension) > 30) {
 		$msg_work_phone_extension = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'work_phone_extension';
 		$error = 1;
 	}
-	$work_phone = (isset($_POST['work_phone']) ? trim($_POST['work_phone']) : '');
-	if (strlen($work_phone) < 0 || strlen($work_phone) > 30) {
+	$work_phone = trim($_POST['work_phone']);
+	if (strlen($work_phone) > 30) {
 		$msg_work_phone = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'work_phone';
 		$error = 1;
 	}
-	$zip_code = (isset($_POST['zip_code']) ? trim($_POST['zip_code']) : '');
-	if (strlen($zip_code) < 0 || strlen($zip_code) > 50) {
+	$zip_code = trim($_POST['zip_code']);
+	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
-	if (strlen($state) < 0 || strlen($state) > 100) {
+	$state = trim($_POST['state']);
+	if (strlen($state) > 100) {
 		$msg_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
-	$city = (isset($_POST['city']) ? trim($_POST['city']) : '');
-	if (strlen($city) < 0 || strlen($city) > 100) {
+	$city = trim($_POST['city']);
+	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
-	$address2 = (isset($_POST['address2']) ? trim($_POST['address2']) : '');
-	if (strlen($address2) < 0 || strlen($address2) > 100) {
+	$address2 = trim($_POST['address2']);
+	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
-	$address1 = (isset($_POST['address1']) ? trim($_POST['address1']) : '');
-	if (strlen($address1) < 0 || strlen($address1) > 100) {
+	$address1 = trim($_POST['address1']);
+	if (strlen($address1) > 100) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
-	$contract_type = (isset($_POST['contract_type']) ? trim($_POST['contract_type']) : '');
-	if (strlen($contract_type) < 0 || strlen($contract_type) > 50) {
+	$contract_type = trim($_POST['contract_type']);
+	if (strlen($contract_type) > 50) {
 		$msg_contract_type = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'contract_type';
 		$error = 1;
 	}
-	$last_name = (isset($_POST['last_name']) ? trim($_POST['last_name']) : '');
-	if (strlen($last_name) < 0 || strlen($last_name) > 50) {
+	$last_name = trim($_POST['last_name']);
+	if (strlen($last_name) > 50) {
 		$msg_last_name = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'last_name';
 		$error = 1;
 	}
-	$first_name = (isset($_POST['first_name']) ? trim($_POST['first_name']) : '');
-	if (strlen($first_name) < 0 || strlen($first_name) > 50) {
+	$first_name = trim($_POST['first_name']);
+	if (strlen($first_name) > 50) {
 		$msg_first_name = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'first_name';
 		$error = 1;
 	}
-	$password = (isset($_POST['password']) ? trim($_POST['password']) : '');
+	$password = trim($_POST['password']);
 	if (strlen($password) < 5 || strlen($password) > 15) {
 		$msg_password = "<div class='message-error'>Provide a valid value of length 5-15</div>";
 		$focus_field = 'password';
 		$error = 1;
 	}
-	$username = (isset($_POST['username']) ? trim($_POST['username']) : '');
+	$username = trim($_POST['username']);
 	if (strlen($username) < 5 || strlen($username) > 15) {
 		$msg_username = "<div class='message-error'>Provide a valid value of length 5-15</div>";
 		$focus_field = 'username';
 		$error = 1;
 	}
-	$image_url = (isset($_POST['image_url']) ? trim($_POST['image_url']) : '');
-	if (strlen($image_url) < 0 || strlen($image_url) > 100) {
+	$image_url = trim($_POST['image_url']);
+	if (strlen($image_url) > 100) {
 		$msg_image_url = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'image_url';
 		$error = 1;

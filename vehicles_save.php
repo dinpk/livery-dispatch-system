@@ -36,50 +36,50 @@ if (isset($_GET['vehiclesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$active_status = (isset($_POST['active_status']) ? trim($_POST['active_status']) : '');
-	if (strlen($active_status) < 0 || strlen($active_status) > 5) {
+	$active_status = trim($_POST['active_status']);
+	if (strlen($active_status) > 5) {
 		$msg_active_status = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'active_status';
 		$error = 1;
 	}
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
-	if (strlen($notes) < 0 || strlen($notes) > 3000) {
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 3000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-3000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
 	$hourly_overtime_rate = trim($_POST['hourly_overtime_rate']);
-	if (strlen($hourly_overtime_rate) < 0 || strlen($hourly_overtime_rate) > 10 || !is_numeric($hourly_overtime_rate)) {
+	if (strlen($hourly_overtime_rate) > 10 || !is_numeric($hourly_overtime_rate)) {
 		$msg_hourly_overtime_rate = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'hourly_overtime_rate';
 		$error = 1;
 	}
 	$hourly_wait_rate = trim($_POST['hourly_wait_rate']);
-	if (strlen($hourly_wait_rate) < 0 || strlen($hourly_wait_rate) > 10 || !is_numeric($hourly_wait_rate)) {
+	if (strlen($hourly_wait_rate) > 10 || !is_numeric($hourly_wait_rate)) {
 		$msg_hourly_wait_rate = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'hourly_wait_rate';
 		$error = 1;
 	}
 	$hourly_regular_rate = trim($_POST['hourly_regular_rate']);
-	if (strlen($hourly_regular_rate) < 0 || strlen($hourly_regular_rate) > 10 || !is_numeric($hourly_regular_rate)) {
+	if (strlen($hourly_regular_rate) > 10 || !is_numeric($hourly_regular_rate)) {
 		$msg_hourly_regular_rate = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'hourly_regular_rate';
 		$error = 1;
 	}
 	$zone_rate_percent = trim($_POST['zone_rate_percent']);
-	if (strlen($zone_rate_percent) < 0 || strlen($zone_rate_percent) > 10 || !is_numeric($zone_rate_percent)) {
+	if (strlen($zone_rate_percent) > 10 || !is_numeric($zone_rate_percent)) {
 		$msg_zone_rate_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'zone_rate_percent';
 		$error = 1;
 	}
 	
-	$image_url = (isset($_POST['image_url']) ? trim($_POST['image_url']) : '');
-	if (strlen($image_url) < 0 || strlen($image_url) > 100) {
+	$image_url = trim($_POST['image_url']);
+	if (strlen($image_url) > 100) {
 		$msg_image_url = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'image_url';
 		$error = 1;
 	}
-	$insurance_expiry_date = (isset($_POST['insurance_expiry_date']) ? trim($_POST['insurance_expiry_date']) : '');
+	$insurance_expiry_date = trim($_POST['insurance_expiry_date']);
 	if (empty($insurance_expiry_date)) {
 		$insurance_expiry_date = '1970-01-01';
 	} else if (!is_date($insurance_expiry_date)) {
@@ -87,62 +87,62 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'insurance_expiry_date';
 		$error = 1;
 	}
-	$insurance_company = (isset($_POST['insurance_company']) ? trim($_POST['insurance_company']) : '');
-	if (strlen($insurance_company) < 0 || strlen($insurance_company) > 100) {
+	$insurance_company = trim($_POST['insurance_company']);
+	if (strlen($insurance_company) > 100) {
 		$msg_insurance_company = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'insurance_company';
 		$error = 1;
 	}
 	$key_settings_insurance_company_values = trim($_POST['key_settings_insurance_company_values']);
-	if (strlen($key_settings_insurance_company_values) < 0 || strlen($key_settings_insurance_company_values) > 100 || !is_numeric($key_settings_insurance_company_values)) {
+	if (strlen($key_settings_insurance_company_values) > 100 || !is_numeric($key_settings_insurance_company_values)) {
 		$msg_key_settings_insurance_company_values = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_settings_insurance_company_values';
 		$error = 1;
 	}
-	$color = (isset($_POST['color']) ? trim($_POST['color']) : '');
-	if (strlen($color) < 0 || strlen($color) > 100) {
+	$color = trim($_POST['color']);
+	if (strlen($color) > 100) {
 		$msg_color = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'color';
 		$error = 1;
 	}
 	$max_seats = trim($_POST['max_seats']);
-	if (strlen($max_seats) < 0 || strlen($max_seats) > 100 || !is_numeric($max_seats)) {
+	if (strlen($max_seats) > 100 || !is_numeric($max_seats)) {
 		$msg_max_seats = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'max_seats';
 		$error = 1;
 	}
-	$model = (isset($_POST['model']) ? trim($_POST['model']) : '');
-	if (strlen($model) < 0 || strlen($model) > 100) {
+	$model = trim($_POST['model']);
+	if (strlen($model) > 100) {
 		$msg_model = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'model';
 		$error = 1;
 	}
-	$year_made = (isset($_POST['year_made']) ? trim($_POST['year_made']) : '');
-	if (strlen($year_made) < 0 || strlen($year_made) > 100) {
+	$year_made = trim($_POST['year_made']);
+	if (strlen($year_made) > 100) {
 		$msg_year_made = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'year_made';
 		$error = 1;
 	}
-	$vin_number = (isset($_POST['vin_number']) ? trim($_POST['vin_number']) : '');
-	if (strlen($vin_number) < 0 || strlen($vin_number) > 100) {
+	$vin_number = trim($_POST['vin_number']);
+	if (strlen($vin_number) > 100) {
 		$msg_vin_number = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'vin_number';
 		$error = 1;
 	}
-	$tag = (isset($_POST['tag']) ? trim($_POST['tag']) : '');
-	if (strlen($tag) < 0 || strlen($tag) > 100) {
+	$tag = trim($_POST['tag']);
+	if (strlen($tag) > 100) {
 		$msg_tag = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'tag';
 		$error = 1;
 	}
-	$vehicle_type = (isset($_POST['vehicle_type']) ? trim($_POST['vehicle_type']) : '');
+	$vehicle_type = trim($_POST['vehicle_type']);
 	if (strlen($vehicle_type) < 3 || strlen($vehicle_type) > 100) {
 		$msg_vehicle_type = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'vehicle_type';
 		$error = 1;
 	}
-	$fleet_number = (isset($_POST['fleet_number']) ? trim($_POST['fleet_number']) : '');
-	if (strlen($fleet_number) < 0 || strlen($fleet_number) > 50) {
+	$fleet_number = trim($_POST['fleet_number']);
+	if (strlen($fleet_number) > 50) {
 		$msg_fleet_number = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'fleet_number';
 		$error = 1;

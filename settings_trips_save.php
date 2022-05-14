@@ -23,25 +23,25 @@ if (isset($_GET['settings_tripsid'])) {
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$tax_percent = trim($_POST['tax_percent']);
-	if (strlen($tax_percent) < 0 || strlen($tax_percent) > 10 || !is_numeric($tax_percent)) {
+	if (strlen($tax_percent) > 10 || !is_numeric($tax_percent)) {
 		$msg_tax_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'tax_percent';
 		$error = 1;
 	}
 	$admin_fee_percent = trim($_POST['admin_fee_percent']);
-	if (strlen($admin_fee_percent) < 0 || strlen($admin_fee_percent) > 10 || !is_numeric($admin_fee_percent)) {
+	if (strlen($admin_fee_percent) > 10 || !is_numeric($admin_fee_percent)) {
 		$msg_admin_fee_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'admin_fee_percent';
 		$error = 1;
 	}
 	$gas_surcharge_percent = trim($_POST['gas_surcharge_percent']);
-	if (strlen($gas_surcharge_percent) < 0 || strlen($gas_surcharge_percent) > 10 || !is_numeric($gas_surcharge_percent)) {
+	if (strlen($gas_surcharge_percent) > 10 || !is_numeric($gas_surcharge_percent)) {
 		$msg_gas_surcharge_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'gas_surcharge_percent';
 		$error = 1;
 	}
 	$gratuity_percent = trim($_POST['gratuity_percent']);
-	if (strlen($gratuity_percent) < 0 || strlen($gratuity_percent) > 10 || !is_numeric($gratuity_percent)) {
+	if (strlen($gratuity_percent) > 10 || !is_numeric($gratuity_percent)) {
 		$msg_gratuity_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'gratuity_percent';
 		$error = 1;

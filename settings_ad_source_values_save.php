@@ -19,7 +19,7 @@ if (isset($_GET['settings_ad_source_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$ad_source = (isset($_POST['ad_source']) ? trim($_POST['ad_source']) : '');
+	$ad_source = trim($_POST['ad_source']);
 	if (strlen($ad_source) < 3 || strlen($ad_source) > 50) {
 		$msg_ad_source = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'ad_source';

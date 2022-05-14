@@ -19,7 +19,7 @@ if (isset($_GET['settings_toll_type_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$toll_type = (isset($_POST['toll_type']) ? trim($_POST['toll_type']) : '');
+	$toll_type = trim($_POST['toll_type']);
 	if (strlen($toll_type) < 3 || strlen($toll_type) > 50) {
 		$msg_toll_type = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'toll_type';

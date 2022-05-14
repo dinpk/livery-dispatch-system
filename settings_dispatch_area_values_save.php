@@ -19,7 +19,7 @@ if (isset($_GET['settings_dispatch_area_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$dispatch_area = (isset($_POST['dispatch_area']) ? trim($_POST['dispatch_area']) : '');
+	$dispatch_area = trim($_POST['dispatch_area']);
 	if (strlen($dispatch_area) < 3 || strlen($dispatch_area) > 50) {
 		$msg_dispatch_area = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'dispatch_area';

@@ -19,7 +19,7 @@ if (isset($_GET['settings_payment_method_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$payment_method = (isset($_POST['payment_method']) ? trim($_POST['payment_method']) : '');
+	$payment_method = trim($_POST['payment_method']);
 	if (strlen($payment_method) < 3 || strlen($payment_method) > 50) {
 		$msg_payment_method = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'payment_method';

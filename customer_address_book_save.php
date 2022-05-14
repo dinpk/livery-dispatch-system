@@ -56,63 +56,63 @@ if (isset($_POST['save_submit'])) {
 	$error = 0;
 	
 	// validation of input data
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
+	$notes = trim($_POST['notes']);
 	if (strlen($notes) > 2000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value up to length 2000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
 	
-	$image_url = (isset($_POST['image_url']) ? trim($_POST['image_url']) : '');
+	$image_url = trim($_POST['image_url']);
 	if (strlen($image_url) > 100) {
 		$msg_image_url = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'image_url';
 		$error = 1;
 	}
 	
-	$zip_code = (isset($_POST['zip_code']) ? trim($_POST['zip_code']) : '');
+	$zip_code = trim($_POST['zip_code']);
 	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value up to length 50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
 	
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
+	$state = trim($_POST['state']);
 	if (strlen($state) > 100) {
 		$msg_state = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
 	
-	$city = (isset($_POST['city']) ? trim($_POST['city']) : '');
+	$city = trim($_POST['city']);
 	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
 	
-	$address2 = (isset($_POST['address2']) ? trim($_POST['address2']) : '');
+	$address2 = trim($_POST['address2']);
 	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
 	
-	$address1 = (isset($_POST['address1']) ? trim($_POST['address1']) : '');
+	$address1 = trim($_POST['address1']);
 	if (strlen($address1) > 100) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
 	
-	$category = (isset($_POST['category']) ? trim($_POST['category']) : '');
+	$category = trim($_POST['category']);
 	if (strlen($category) > 100) {
 		$msg_category = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'category';
 		$error = 1;
 	}
 	
-	$title = (isset($_POST['title']) ? trim($_POST['title']) : '');
+	$title = trim($_POST['title']);
 	if (strlen($title) > 100) {
 		$msg_title = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'title';

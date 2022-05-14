@@ -20,7 +20,7 @@ if (isset($_GET['settings_insurance_company_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$insurance_company = (isset($_POST['insurance_company']) ? trim($_POST['insurance_company']) : '');
+	$insurance_company = trim($_POST['insurance_company']);
 	if (strlen($insurance_company) < 3 || strlen($insurance_company) > 50) {
 		$msg_insurance_company = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'insurance_company';

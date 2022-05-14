@@ -20,14 +20,14 @@ if (isset($_GET['settings_state_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$state_code = (isset($_POST['state_code']) ? trim($_POST['state_code']) : '');
-	if (strlen($state_code) < 0 || strlen($state_code) > 10) {
+	$state_code = trim($_POST['state_code']);
+	if (strlen($state_code) > 10) {
 		$msg_state_code = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'state_code';
 		$error = 1;
 	}
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
-	if (strlen($state) < 0 || strlen($state) > 50) {
+	$state = trim($_POST['state']);
+	if (strlen($state) > 50) {
 		$msg_state = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'state';
 		$error = 1;

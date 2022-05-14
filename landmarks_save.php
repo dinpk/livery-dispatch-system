@@ -29,67 +29,67 @@ if (isset($_GET['landmarksid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$active_status = (isset($_POST['active_status']) ? trim($_POST['active_status']) : '');
-	if (strlen($active_status) < 0 || strlen($active_status) > 5) {
+	$active_status = trim($_POST['active_status']);
+	if (strlen($active_status) > 5) {
 		$msg_active_status = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'active_status';
 		$error = 1;
 	}
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
-	if (strlen($notes) < 0 || strlen($notes) > 1000) {
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 1000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-1000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
-	$zip_code = (isset($_POST['zip_code']) ? trim($_POST['zip_code']) : '');
-	if (strlen($zip_code) < 0 || strlen($zip_code) > 50) {
+	$zip_code = trim($_POST['zip_code']);
+	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
-	$country = (isset($_POST['country']) ? trim($_POST['country']) : '');
-	if (strlen($country) < 0 || strlen($country) > 100) {
+	$country = trim($_POST['country']);
+	if (strlen($country) > 100) {
 		$msg_country = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'country';
 		$error = 1;
 	}
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
-	if (strlen($state) < 0 || strlen($state) > 100) {
+	$state = trim($_POST['state']);
+	if (strlen($state) > 100) {
 		$msg_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
-	$city = (isset($_POST['city']) ? trim($_POST['city']) : '');
-	if (strlen($city) < 0 || strlen($city) > 100) {
+	$city = trim($_POST['city']);
+	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
-	$address2 = (isset($_POST['address2']) ? trim($_POST['address2']) : '');
-	if (strlen($address2) < 0 || strlen($address2) > 100) {
+	$address2 = trim($_POST['address2']);
+	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
-	$address1 = (isset($_POST['address1']) ? trim($_POST['address1']) : '');
-	if (strlen($address1) < 0 || strlen($address1) > 100) {
+	$address1 = trim($_POST['address1']);
+	if (strlen($address1) > 100) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
-	$image_url = (isset($_POST['image_url']) ? trim($_POST['image_url']) : '');
-	if (strlen($image_url) < 0 || strlen($image_url) > 100) {
+	$image_url = trim($_POST['image_url']);
+	if (strlen($image_url) > 100) {
 		$msg_image_url = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'image_url';
 		$error = 1;
 	}
-	$category = (isset($_POST['category']) ? trim($_POST['category']) : '');
-	if (strlen($category) < 0 || strlen($category) > 100) {
+	$category = trim($_POST['category']);
+	if (strlen($category) > 100) {
 		$msg_category = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'category';
 		$error = 1;
 	}
-	$title = (isset($_POST['title']) ? trim($_POST['title']) : '');
+	$title = trim($_POST['title']);
 	if (strlen($title) < 3 || strlen($title) > 100) {
 		$msg_title = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'title';

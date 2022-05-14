@@ -21,13 +21,13 @@ if (isset($_GET['logsid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$action_performed = (isset($_POST['action_performed']) ? trim($_POST['action_performed']) : '');
-	if (strlen($action_performed) < 0 || strlen($action_performed) > 100) {
+	$action_performed = trim($_POST['action_performed']);
+	if (strlen($action_performed) > 100) {
 		$msg_action_performed = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'action_performed';
 		$error = 1;
 	}
-	$log_datetime = (isset($_POST['log_datetime']) ? trim($_POST['log_datetime']) : '');
+	$log_datetime = trim($_POST['log_datetime']);
 	if (empty($log_datetime)) {
 		$log_datetime = '1970-01-01';
 	} else if (!is_date($log_datetime)) {
@@ -35,7 +35,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'log_datetime';
 		$error = 1;
 	}
-	$log_type = (isset($_POST['log_type']) ? trim($_POST['log_type']) : '');
+	$log_type = trim($_POST['log_type']);
 	if (strlen($log_type) < 3 || strlen($log_type) > 100) {
 		$msg_log_type = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'log_type';

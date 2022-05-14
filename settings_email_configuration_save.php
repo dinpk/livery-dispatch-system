@@ -23,32 +23,32 @@ if (isset($_GET['settings_email_configurationid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$smtp_address = (isset($_POST['smtp_address']) ? trim($_POST['smtp_address']) : '');
-	if (strlen($smtp_address) < 0 || strlen($smtp_address) > 100) {
+	$smtp_address = trim($_POST['smtp_address']);
+	if (strlen($smtp_address) > 100) {
 		$msg_smtp_address = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'smtp_address';
 		$error = 1;
 	}
-	$copy_to_email = (isset($_POST['copy_to_email']) ? trim($_POST['copy_to_email']) : '');
-	if (strlen($copy_to_email) < 0 || strlen($copy_to_email) > 100) {
+	$copy_to_email = trim($_POST['copy_to_email']);
+	if (strlen($copy_to_email) > 100) {
 		$msg_copy_to_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'copy_to_email';
 		$error = 1;
 	}
-	$reply_to_email = (isset($_POST['reply_to_email']) ? trim($_POST['reply_to_email']) : '');
-	if (strlen($reply_to_email) < 0 || strlen($reply_to_email) > 100) {
+	$reply_to_email = trim($_POST['reply_to_email']);
+	if (strlen($reply_to_email) > 100) {
 		$msg_reply_to_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'reply_to_email';
 		$error = 1;
 	}
-	$sender_password = (isset($_POST['sender_password']) ? trim($_POST['sender_password']) : '');
-	if (strlen($sender_password) < 0 || strlen($sender_password) > 100) {
+	$sender_password = trim($_POST['sender_password']);
+	if (strlen($sender_password) > 100) {
 		$msg_sender_password = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'sender_password';
 		$error = 1;
 	}
-	$sender_email = (isset($_POST['sender_email']) ? trim($_POST['sender_email']) : '');
-	if (strlen($sender_email) < 0 || strlen($sender_email) > 100) {
+	$sender_email = trim($_POST['sender_email']);
+	if (strlen($sender_email) > 100) {
 		$msg_sender_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'sender_email';
 		$error = 1;

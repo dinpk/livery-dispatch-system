@@ -28,61 +28,68 @@ if (isset($_GET['rates_zonesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$active_status = (isset($_POST['active_status']) ? trim($_POST['active_status']) : '');
-	if (strlen($active_status) < 0 || strlen($active_status) > 5) {
+
+	$reverse_record = trim($_POST['reverse_record']);
+	if (strlen($reverse_record) > 5) {
+		$msg_reverse_record = "<div class='message-error'>Provide a valid value of length 0-5</div>";
+		$focus_field = 'reverse_record';
+		$error = 1;
+	}
+	$active_status = trim($_POST['active_status']);
+	if (strlen($active_status) > 5) {
 		$msg_active_status = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'active_status';
 		$error = 1;
 	}
 	$miles = trim($_POST['miles']);
-	if (strlen($miles) < 0 || strlen($miles) > 10 || !is_numeric($miles)) {
+	if (strlen($miles) > 10 || !is_numeric($miles)) {
 		$msg_miles = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'miles';
 		$error = 1;
 	}
 	$tolls = trim($_POST['tolls']);
-	if (strlen($tolls) < 0 || strlen($tolls) > 10 || !is_numeric($tolls)) {
+	if (strlen($tolls) > 10 || !is_numeric($tolls)) {
 		$msg_tolls = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'tolls';
 		$error = 1;
 	}
 	$rate = trim($_POST['rate']);
-	if (strlen($rate) < 0 || strlen($rate) > 10 || !is_numeric($rate)) {
+	if (strlen($rate) > 10 || !is_numeric($rate)) {
 		$msg_rate = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'rate';
 		$error = 1;
 	}
-	$to_zip_code = (isset($_POST['to_zip_code']) ? trim($_POST['to_zip_code']) : '');
-	if (strlen($to_zip_code) < 0 || strlen($to_zip_code) > 50) {
+	$to_zip_code = trim($_POST['to_zip_code']);
+	if (strlen($to_zip_code) > 50) {
 		$msg_to_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'to_zip_code';
 		$error = 1;
 	}
-	$to_state = (isset($_POST['to_state']) ? trim($_POST['to_state']) : '');
-	if (strlen($to_state) < 0 || strlen($to_state) > 100) {
+	$to_state = trim($_POST['to_state']);
+	if (strlen($to_state) > 100) {
 		$msg_to_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'to_state';
 		$error = 1;
 	}
-	$to_city = (isset($_POST['to_city']) ? trim($_POST['to_city']) : '');
+	$to_city = trim($_POST['to_city']);
 	if (strlen($to_city) < 3 || strlen($to_city) > 100) {
 		$msg_to_city = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'to_city';
 		$error = 1;
 	}
-	$from_zip_code = (isset($_POST['from_zip_code']) ? trim($_POST['from_zip_code']) : '');
-	if (strlen($from_zip_code) < 0 || strlen($from_zip_code) > 50) {
+	$from_zip_code = trim($_POST['from_zip_code']);
+	if (strlen($from_zip_code) > 50) {
 		$msg_from_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'from_zip_code';
 		$error = 1;
 	}
-	$from_state = (isset($_POST['from_state']) ? trim($_POST['from_state']) : '');
-	if (strlen($from_state) < 0 || strlen($from_state) > 100) {
+	$from_state = trim($_POST['from_state']);
+	if (strlen($from_state) > 100) {
 		$msg_from_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'from_state';
 		$error = 1;
 	}
-	$from_city = (isset($_POST['from_city']) ? trim($_POST['from_city']) : '');
+	$from_city = trim($_POST['from_city']);
 	if (strlen($from_city) < 3 || strlen($from_city) > 100) {
 		$msg_from_city = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'from_city';
@@ -110,6 +117,7 @@ if (isset($_POST['save_submit'])) {
 				die('Unable to update, please contact your system administrator.');
 			}
 		} else if ($error != 1) { // insert
+
 			$results = mysqli_query($dbcon, "INSERT INTO rates_zones (
 			from_city,
 			from_state,
@@ -135,7 +143,35 @@ if (isset($_POST['save_submit'])) {
 			'" . sd($dbcon, $active_status) . "'
 			)");
 			if ($results) {
+
+				if ($reverse_record == "on") {
+					mysqli_query($dbcon, "INSERT INTO rates_zones (
+								from_city,
+								from_state,
+								from_zip_code,
+								to_city,
+								to_state,
+								to_zip_code,
+								rate,
+								tolls,
+								miles,
+								active_status
+								) 
+								VALUES (
+								'" . sd($dbcon, $to_city) . "',
+								'" . sd($dbcon, $to_state) . "',
+								'" . sd($dbcon, $to_zip_code) . "',
+								'" . sd($dbcon, $from_city) . "',
+								'" . sd($dbcon, $from_state) . "',
+								'" . sd($dbcon, $from_zip_code) . "',
+								'" . sd($dbcon, $rate) . "',
+								'" . sd($dbcon, $tolls) . "',
+								'" . sd($dbcon, $miles) . "',
+								'" . sd($dbcon, $active_status) . "'
+								)");					
+				}
 				$message = "<script>parent.location.reload(false);</script>";
+
 			} else {
 				if (strpos(mysqli_error($dbcon), "Duplicate") > -1) {
 					$message = "<div class='failure-result'>" . mysqli_error($dbcon) . "</div>";
@@ -173,7 +209,8 @@ if (isset($_POST['save_submit'])) {
 		<fieldset>
 
          <div>
-             <label for='from_city'>From city</label> <span class='red'> *</span>             <?php if(isset($msg_from_city)) print $msg_from_city; ?>
+             <label for='from_city'>From city</label> <span class='red'> *</span>             
+			 <?php if(isset($msg_from_city)) print $msg_from_city; ?>
              <input <?php if ($focus_field == 'from_city') print 'autofocus'; ?> id='from_city' name='from_city' type='text' value='<?php if (isset($from_city)) {print $from_city;} else { print '';} ?>' required><br>
          </div>
 
@@ -196,7 +233,8 @@ if (isset($_POST['save_submit'])) {
          </div>
 
          <div>
-             <label for='from_zip_code'>From zip code</label>             <?php if(isset($msg_from_zip_code)) print $msg_from_zip_code; ?>
+             <label for='from_zip_code'>From zip code</label>             
+			 <?php if(isset($msg_from_zip_code)) print $msg_from_zip_code; ?>
              <input <?php if ($focus_field == 'from_zip_code') print 'autofocus'; ?> id='from_zip_code' name='from_zip_code' type='text' value='<?php if (isset($from_zip_code)) {print $from_zip_code;} else { print '';} ?>'><br>
          </div>
 
@@ -204,7 +242,8 @@ if (isset($_POST['save_submit'])) {
 		<fieldset>
 
          <div>
-             <label for='to_city'>To city</label> <span class='red'> *</span>             <?php if(isset($msg_to_city)) print $msg_to_city; ?>
+             <label for='to_city'>To city</label> <span class='red'> *</span>             
+			 <?php if(isset($msg_to_city)) print $msg_to_city; ?>
              <input <?php if ($focus_field == 'to_city') print 'autofocus'; ?> id='to_city' name='to_city' type='text' value='<?php if (isset($to_city)) {print $to_city;} else { print '';} ?>' required><br>
          </div>
 
@@ -227,7 +266,8 @@ if (isset($_POST['save_submit'])) {
          </div>
 
          <div>
-             <label for='to_zip_code'>To zip code</label>             <?php if(isset($msg_to_zip_code)) print $msg_to_zip_code; ?>
+             <label for='to_zip_code'>To zip code</label>             
+			 <?php if(isset($msg_to_zip_code)) print $msg_to_zip_code; ?>
              <input <?php if ($focus_field == 'to_zip_code') print 'autofocus'; ?> id='to_zip_code' name='to_zip_code' type='text' value='<?php if (isset($to_zip_code)) {print $to_zip_code;} else { print '';} ?>'><br>
          </div>
 
@@ -235,17 +275,20 @@ if (isset($_POST['save_submit'])) {
 		<fieldset>
 		
          <div>
-             <label for='rate'>Rate</label>             <?php if(isset($msg_rate)) print $msg_rate; ?>
+             <label for='rate'>Rate</label>
+			 <?php if(isset($msg_rate)) print $msg_rate; ?>
              <input <?php if ($focus_field == 'rate') print 'autofocus'; ?> id='rate' name='rate' type='number' step='0.10' value='<?php if (isset($rate)) {print $rate;} else { print '0';} ?>'><br>
          </div>
 
          <div>
-             <label for='tolls'>Tolls</label>             <?php if(isset($msg_tolls)) print $msg_tolls; ?>
+             <label for='tolls'>Tolls</label>             
+			 <?php if(isset($msg_tolls)) print $msg_tolls; ?>
              <input <?php if ($focus_field == 'tolls') print 'autofocus'; ?> id='tolls' name='tolls' type='number' step='0.10' value='<?php if (isset($tolls)) {print $tolls;} else { print '0';} ?>'><br>
          </div>
 
          <div>
-             <label for='miles'>Miles</label>             <?php if(isset($msg_miles)) print $msg_miles; ?>
+             <label for='miles'>Miles</label>             
+			 <?php if(isset($msg_miles)) print $msg_miles; ?>
              <input <?php if ($focus_field == 'miles') print 'autofocus'; ?> id='miles' name='miles' type='number' step='0.10' value='<?php if (isset($miles)) {print $miles;} else { print '0';} ?>'><br>
          </div>
 
@@ -255,6 +298,15 @@ if (isset($_POST['save_submit'])) {
          </div>
 
 		</fieldset>
+
+		<?php if (!isset($record_id))  {?>
+		<fieldset>
+         <div>
+             <input <?php if (!isset($reverse_record) || $reverse_record=='on') {print "checked='checked'";} ?> type='checkbox' id='reverse_record' name='reverse_record'> <label for='reverse_record'>Create Reverse</label><br>
+         </div>
+		</fieldset>
+		<?php } ?>
+
 		<div class='clear-fix'>
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
 		</div>

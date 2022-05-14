@@ -23,13 +23,13 @@ if (isset($_GET['trips_messagesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$message = (isset($_POST['message']) ? trim($_POST['message']) : '');
-	if (strlen($message) < 0 || strlen($message) > 1000) {
+	$message = trim($_POST['message']);
+	if (strlen($message) > 1000) {
 		$msg_message = "<div class='message-error'>Provide a valid value of length 0-1000</div>";
 		$focus_field = 'message';
 		$error = 1;
 	}
-	$date_time = (isset($_POST['date_time']) ? trim($_POST['date_time']) : '');
+	$date_time = trim($_POST['date_time']);
 	if (empty($date_time)) {
 		$date_time = '1970-01-01';
 	} else if (!is_date($date_time)) {
@@ -38,19 +38,19 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$key_staff = trim($_POST['key_staff']);
-	if (strlen($key_staff) < 0 || strlen($key_staff) > 100 || !is_numeric($key_staff)) {
+	if (strlen($key_staff) > 100 || !is_numeric($key_staff)) {
 		$msg_key_staff = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_staff';
 		$error = 1;
 	}
 	$key_drivers = trim($_POST['key_drivers']);
-	if (strlen($key_drivers) < 0 || strlen($key_drivers) > 100 || !is_numeric($key_drivers)) {
+	if (strlen($key_drivers) > 100 || !is_numeric($key_drivers)) {
 		$msg_key_drivers = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_drivers';
 		$error = 1;
 	}
 	$key_trips = trim($_POST['key_trips']);
-	if (strlen($key_trips) < 0 || strlen($key_trips) > 100 || !is_numeric($key_trips)) {
+	if (strlen($key_trips) > 100 || !is_numeric($key_trips)) {
 		$msg_key_trips = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_trips';
 		$error = 1;

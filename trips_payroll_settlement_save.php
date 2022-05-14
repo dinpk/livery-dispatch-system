@@ -97,123 +97,122 @@ if (isset($_GET['tripsid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$settled_checkbox = (isset($_POST['settled_checkbox']) ? trim($_POST['settled_checkbox']) : '');
-	if (strlen($settled_checkbox) < 0 || strlen($settled_checkbox) > 5) {
+	$settled_checkbox = trim($_POST['settled_checkbox']);
+	if (strlen($settled_checkbox) > 5) {
 		$msg_settled_checkbox = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'settled_checkbox';
 		$error = 1;
 	}
-	
-	if (strlen($pay_notes) < 0 || strlen($pay_notes) > 2000) {
+	trim($_POST['pay_notes']);
+	if (strlen($pay_notes) > 2000) {
 		$msg_pay_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'pay_notes';
 		$error = 1;
 	}
 	$pay_total_driver_amount = trim($_POST['pay_total_driver_amount']);
-	if (strlen($pay_total_driver_amount) < 0 || strlen($pay_total_driver_amount) > 10 || !is_numeric($pay_total_driver_amount)) {
+	if (strlen($pay_total_driver_amount) > 10 || !is_numeric($pay_total_driver_amount)) {
 		$msg_pay_total_driver_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_total_driver_amount';
 		$error = 1;
 	}
 	$pay_flat_amount = trim($_POST['pay_flat_amount']);
-	if (strlen($pay_flat_amount) < 0 || strlen($pay_flat_amount) > 10 || !is_numeric($pay_flat_amount)) {
+	if (strlen($pay_flat_amount) > 10 || !is_numeric($pay_flat_amount)) {
 		$msg_pay_flat_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_flat_amount';
 		$error = 1;
 	}
-	
 	$pay_commission_amount = trim($_POST['pay_commission_amount']);
-	if (strlen($pay_commission_amount) < 0 || strlen($pay_commission_amount) > 10 || !is_numeric($pay_commission_amount)) {
+	if (strlen($pay_commission_amount) > 10 || !is_numeric($pay_commission_amount)) {
 		$msg_pay_commission_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_commission_amount';
 		$error = 1;
 	}
 	$pay_commission_percent = trim($_POST['pay_commission_percent']);
-	if (strlen($pay_commission_percent) < 0 || strlen($pay_commission_percent) > 10 || !is_numeric($pay_commission_percent)) {
+	if (strlen($pay_commission_percent) > 10 || !is_numeric($pay_commission_percent)) {
 		$msg_pay_commission_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_commission_percent';
 		$error = 1;
 	}
 	$pay_gas_surcharge_amount = trim($_POST['pay_gas_surcharge_amount']);
-	if (strlen($pay_gas_surcharge_amount) < 0 || strlen($pay_gas_surcharge_amount) > 10 || !is_numeric($pay_gas_surcharge_amount)) {
+	if (strlen($pay_gas_surcharge_amount) > 10 || !is_numeric($pay_gas_surcharge_amount)) {
 		$msg_pay_gas_surcharge_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_gas_surcharge_amount';
 		$error = 1;
 	}
 	$pay_gas_surcharge_percent = trim($_POST['pay_gas_surcharge_percent']);
-	if (strlen($pay_gas_surcharge_percent) < 0 || strlen($pay_gas_surcharge_percent) > 10 || !is_numeric($pay_gas_surcharge_percent)) {
+	if (strlen($pay_gas_surcharge_percent) > 10 || !is_numeric($pay_gas_surcharge_percent)) {
 		$msg_pay_gas_surcharge_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_gas_surcharge_percent';
 		$error = 1;
 	}
 	$pay_gratuity_amount = trim($_POST['pay_gratuity_amount']);
-	if (strlen($pay_gratuity_amount) < 0 || strlen($pay_gratuity_amount) > 10 || !is_numeric($pay_gratuity_amount)) {
+	if (strlen($pay_gratuity_amount) > 10 || !is_numeric($pay_gratuity_amount)) {
 		$msg_pay_gratuity_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_gratuity_amount';
 		$error = 1;
 	}
 	$pay_gratuity_percent = trim($_POST['pay_gratuity_percent']);
-	if (strlen($pay_gratuity_percent) < 0 || strlen($pay_gratuity_percent) > 10 || !is_numeric($pay_gratuity_percent)) {
+	if (strlen($pay_gratuity_percent) > 10 || !is_numeric($pay_gratuity_percent)) {
 		$msg_pay_gratuity_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_gratuity_percent';
 		$error = 1;
 	}
 	$pay_parking_amount = trim($_POST['pay_parking_amount']);
-	if (strlen($pay_parking_amount) < 0 || strlen($pay_parking_amount) > 10 || !is_numeric($pay_parking_amount)) {
+	if (strlen($pay_parking_amount) > 10 || !is_numeric($pay_parking_amount)) {
 		$msg_pay_parking_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_parking_amount';
 		$error = 1;
 	}
 	$pay_parking_percent = trim($_POST['pay_parking_percent']);
-	if (strlen($pay_parking_percent) < 0 || strlen($pay_parking_percent) > 10 || !is_numeric($pay_parking_percent)) {
+	if (strlen($pay_parking_percent) > 10 || !is_numeric($pay_parking_percent)) {
 		$msg_pay_parking_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_parking_percent';
 		$error = 1;
 	}
 	$pay_tolls_amount = trim($_POST['pay_tolls_amount']);
-	if (strlen($pay_tolls_amount) < 0 || strlen($pay_tolls_amount) > 10 || !is_numeric($pay_tolls_amount)) {
+	if (strlen($pay_tolls_amount) > 10 || !is_numeric($pay_tolls_amount)) {
 		$msg_pay_tolls_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_tolls_amount';
 		$error = 1;
 	}
 	$pay_tolls_percent = trim($_POST['pay_tolls_percent']);
-	if (strlen($pay_tolls_percent) < 0 || strlen($pay_tolls_percent) > 10 || !is_numeric($pay_tolls_percent)) {
+	if (strlen($pay_tolls_percent) > 10 || !is_numeric($pay_tolls_percent)) {
 		$msg_pay_tolls_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_tolls_percent';
 		$error = 1;
 	}
 	$pay_extra_stops_amount = trim($_POST['pay_extra_stops_amount']);
-	if (strlen($pay_extra_stops_amount) < 0 || strlen($pay_extra_stops_amount) > 10 || !is_numeric($pay_extra_stops_amount)) {
+	if (strlen($pay_extra_stops_amount) > 10 || !is_numeric($pay_extra_stops_amount)) {
 		$msg_pay_extra_stops_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_extra_stops_amount';
 		$error = 1;
 	}
 	$pay_extra_stops_percent = trim($_POST['pay_extra_stops_percent']);
-	if (strlen($pay_extra_stops_percent) < 0 || strlen($pay_extra_stops_percent) > 10 || !is_numeric($pay_extra_stops_percent)) {
+	if (strlen($pay_extra_stops_percent) > 10 || !is_numeric($pay_extra_stops_percent)) {
 		$msg_pay_extra_stops_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_extra_stops_percent';
 		$error = 1;
 	}
 	$pay_offtime_amount = trim($_POST['pay_offtime_amount']);
-	if (strlen($pay_offtime_amount) < 0 || strlen($pay_offtime_amount) > 10 || !is_numeric($pay_offtime_amount)) {
+	if (strlen($pay_offtime_amount) > 10 || !is_numeric($pay_offtime_amount)) {
 		$msg_pay_offtime_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_offtime_amount';
 		$error = 1;
 	}
 	$pay_offtime_percent = trim($_POST['pay_offtime_percent']);
-	if (strlen($pay_offtime_percent) < 0 || strlen($pay_offtime_percent) > 10 || !is_numeric($pay_offtime_percent)) {
+	if (strlen($pay_offtime_percent) > 10 || !is_numeric($pay_offtime_percent)) {
 		$msg_pay_offtime_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_offtime_percent';
 		$error = 1;
 	}
 	$pay_driver_base_amount = trim($_POST['pay_driver_base_amount']);
-	if (strlen($pay_driver_base_amount) < 0 || strlen($pay_driver_base_amount) > 10 || !is_numeric($pay_driver_base_amount)) {
+	if (strlen($pay_driver_base_amount) > 10 || !is_numeric($pay_driver_base_amount)) {
 		$msg_pay_driver_base_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_driver_base_amount';
 		$error = 1;
 	}
 	$pay_base_amount_percent = trim($_POST['pay_base_amount_percent']);
-	if (strlen($pay_base_amount_percent) < 0 || strlen($pay_base_amount_percent) > 10 || !is_numeric($pay_base_amount_percent)) {
+	if (strlen($pay_base_amount_percent) > 10 || !is_numeric($pay_base_amount_percent)) {
 		$msg_pay_base_amount_percent = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'pay_base_amount_percent';
 		$error = 1;

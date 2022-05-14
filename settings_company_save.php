@@ -41,139 +41,139 @@ if (isset($_GET['settings_companyid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$image_url2 = (isset($_POST['image_url2']) ? trim($_POST['image_url2']) : '');
-	if (strlen($image_url2) < 0 || strlen($image_url2) > 100) {
+	$image_url2 = trim($_POST['image_url2']);
+	if (strlen($image_url2) > 100) {
 		$msg_image_url2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'image_url2';
 		$error = 1;
 	}
-	$image_url1 = (isset($_POST['image_url1']) ? trim($_POST['image_url1']) : '');
-	if (strlen($image_url1) < 0 || strlen($image_url1) > 100) {
+	$image_url1 = trim($_POST['image_url1']);
+	if (strlen($image_url1) > 100) {
 		$msg_image_url1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'image_url1';
 		$error = 1;
 	}
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
-	if (strlen($notes) < 0 || strlen($notes) > 2000) {
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 2000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
-	$social_media_url5 = (isset($_POST['social_media_url5']) ? trim($_POST['social_media_url5']) : '');
-	if (strlen($social_media_url5) < 0 || strlen($social_media_url5) > 200) {
+	$social_media_url5 = trim($_POST['social_media_url5']);
+	if (strlen($social_media_url5) > 200) {
 		$msg_social_media_url5 = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'social_media_url5';
 		$error = 1;
 	}
-	$social_media_url4 = (isset($_POST['social_media_url4']) ? trim($_POST['social_media_url4']) : '');
-	if (strlen($social_media_url4) < 0 || strlen($social_media_url4) > 200) {
+	$social_media_url4 = trim($_POST['social_media_url4']);
+	if (strlen($social_media_url4) > 200) {
 		$msg_social_media_url4 = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'social_media_url4';
 		$error = 1;
 	}
-	$social_media_url3 = (isset($_POST['social_media_url3']) ? trim($_POST['social_media_url3']) : '');
-	if (strlen($social_media_url3) < 0 || strlen($social_media_url3) > 200) {
+	$social_media_url3 = trim($_POST['social_media_url3']);
+	if (strlen($social_media_url3) > 200) {
 		$msg_social_media_url3 = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'social_media_url3';
 		$error = 1;
 	}
-	$social_media_url2 = (isset($_POST['social_media_url2']) ? trim($_POST['social_media_url2']) : '');
-	if (strlen($social_media_url2) < 0 || strlen($social_media_url2) > 200) {
+	$social_media_url2 = trim($_POST['social_media_url2']);
+	if (strlen($social_media_url2) > 200) {
 		$msg_social_media_url2 = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'social_media_url2';
 		$error = 1;
 	}
-	$social_media_url1 = (isset($_POST['social_media_url1']) ? trim($_POST['social_media_url1']) : '');
-	if (strlen($social_media_url1) < 0 || strlen($social_media_url1) > 200) {
+	$social_media_url1 = trim($_POST['social_media_url1']);
+	if (strlen($social_media_url1) > 200) {
 		$msg_social_media_url1 = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'social_media_url1';
 		$error = 1;
 	}
-	$website2 = (isset($_POST['website2']) ? trim($_POST['website2']) : '');
-	if (strlen($website2) < 0 || strlen($website2) > 100) {
+	$website2 = trim($_POST['website2']);
+	if (strlen($website2) > 100) {
 		$msg_website2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'website2';
 		$error = 1;
 	}
-	$website1 = (isset($_POST['website1']) ? trim($_POST['website1']) : '');
-	if (strlen($website1) < 0 || strlen($website1) > 100) {
+	$website1 = trim($_POST['website1']);
+	if (strlen($website1) > 100) {
 		$msg_website1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'website1';
 		$error = 1;
 	}
-	$email2 = (isset($_POST['email2']) ? trim($_POST['email2']) : '');
-	if (strlen($email2) < 0 || strlen($email2) > 100) {
+	$email2 = trim($_POST['email2']);
+	if (strlen($email2) > 100) {
 		$msg_email2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'email2';
 		$error = 1;
 	}
-	$email1 = (isset($_POST['email1']) ? trim($_POST['email1']) : '');
-	if (strlen($email1) < 0 || strlen($email1) > 100) {
+	$email1 = trim($_POST['email1']);
+	if (strlen($email1) > 100) {
 		$msg_email1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'email1';
 		$error = 1;
 	}
-	$phone2 = (isset($_POST['phone2']) ? trim($_POST['phone2']) : '');
-	if (strlen($phone2) < 0 || strlen($phone2) > 50) {
+	$phone2 = trim($_POST['phone2']);
+	if (strlen($phone2) > 50) {
 		$msg_phone2 = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'phone2';
 		$error = 1;
 	}
-	$phone1 = (isset($_POST['phone1']) ? trim($_POST['phone1']) : '');
-	if (strlen($phone1) < 0 || strlen($phone1) > 50) {
+	$phone1 = trim($_POST['phone1']);
+	if (strlen($phone1) > 50) {
 		$msg_phone1 = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'phone1';
 		$error = 1;
 	}
-	$country = (isset($_POST['country']) ? trim($_POST['country']) : '');
-	if (strlen($country) < 0 || strlen($country) > 100) {
+	$country = trim($_POST['country']);
+	if (strlen($country) > 100) {
 		$msg_country = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'country';
 		$error = 1;
 	}
-	$zip_code = (isset($_POST['zip_code']) ? trim($_POST['zip_code']) : '');
-	if (strlen($zip_code) < 0 || strlen($zip_code) > 50) {
+	$zip_code = trim($_POST['zip_code']);
+	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
-	if (strlen($state) < 0 || strlen($state) > 100) {
+	$state = trim($_POST['state']);
+	if (strlen($state) > 100) {
 		$msg_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
-	$city = (isset($_POST['city']) ? trim($_POST['city']) : '');
-	if (strlen($city) < 0 || strlen($city) > 100) {
+	$city = trim($_POST['city']);
+	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
-	$address2 = (isset($_POST['address2']) ? trim($_POST['address2']) : '');
-	if (strlen($address2) < 0 || strlen($address2) > 100) {
+	$address2 = trim($_POST['address2']);
+	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
-	$address1 = (isset($_POST['address1']) ? trim($_POST['address1']) : '');
-	if (strlen($address1) < 0 || strlen($address1) > 200) {
+	$address1 = trim($_POST['address1']);
+	if (strlen($address1) > 200) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
-	$slogan = (isset($_POST['slogan']) ? trim($_POST['slogan']) : '');
-	if (strlen($slogan) < 0 || strlen($slogan) > 200) {
+	$slogan = trim($_POST['slogan']);
+	if (strlen($slogan) > 200) {
 		$msg_slogan = "<div class='message-error'>Provide a valid value of length 0-200</div>";
 		$focus_field = 'slogan';
 		$error = 1;
 	}
-	$company_label = (isset($_POST['company_label']) ? trim($_POST['company_label']) : '');
+	$company_label = trim($_POST['company_label']);
 	if (strlen($company_label) < 3 || strlen($company_label) > 100) {
 		$msg_company_label = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'company_label';
 		$error = 1;
 	}
-	$company_name = (isset($_POST['company_name']) ? trim($_POST['company_name']) : '');
+	$company_name = trim($_POST['company_name']);
 	if (strlen($company_name) < 3 || strlen($company_name) > 100) {
 		$msg_company_name = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'company_name';

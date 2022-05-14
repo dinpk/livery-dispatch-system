@@ -27,55 +27,55 @@ if (isset($_GET['settings_workshop_name_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$zip_code = (isset($_POST['zip_code']) ? trim($_POST['zip_code']) : '');
-	if (strlen($zip_code) < 0 || strlen($zip_code) > 50) {
+	$zip_code = trim($_POST['zip_code']);
+	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
-	if (strlen($state) < 0 || strlen($state) > 50) {
+	$state = trim($_POST['state']);
+	if (strlen($state) > 50) {
 		$msg_state = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
-	$city = (isset($_POST['city']) ? trim($_POST['city']) : '');
-	if (strlen($city) < 0 || strlen($city) > 100) {
+	$city = trim($_POST['city']);
+	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
-	$email = (isset($_POST['email']) ? trim($_POST['email']) : '');
-	if (strlen($email) < 0 || strlen($email) > 100) {
+	$email = trim($_POST['email']);
+	if (strlen($email) > 100) {
 		$msg_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'email';
 		$error = 1;
 	}
-	$phone = (isset($_POST['phone']) ? trim($_POST['phone']) : '');
-	if (strlen($phone) < 0 || strlen($phone) > 100) {
+	$phone = trim($_POST['phone']);
+	if (strlen($phone) > 100) {
 		$msg_phone = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'phone';
 		$error = 1;
 	}
-	$address2 = (isset($_POST['address2']) ? trim($_POST['address2']) : '');
-	if (strlen($address2) < 0 || strlen($address2) > 100) {
+	$address2 = trim($_POST['address2']);
+	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
-	$address1 = (isset($_POST['address1']) ? trim($_POST['address1']) : '');
-	if (strlen($address1) < 0 || strlen($address1) > 100) {
+	$address1 = trim($_POST['address1']);
+	if (strlen($address1) > 100) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
-	$contact_name = (isset($_POST['contact_name']) ? trim($_POST['contact_name']) : '');
-	if (strlen($contact_name) < 0 || strlen($contact_name) > 100) {
+	$contact_name = trim($_POST['contact_name']);
+	if (strlen($contact_name) > 100) {
 		$msg_contact_name = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'contact_name';
 		$error = 1;
 	}
-	$workshop_name = (isset($_POST['workshop_name']) ? trim($_POST['workshop_name']) : '');
+	$workshop_name = trim($_POST['workshop_name']);
 	if (strlen($workshop_name) < 3 || strlen($workshop_name) > 100) {
 		$msg_workshop_name = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'workshop_name';

@@ -19,7 +19,7 @@ if (isset($_GET['settings_extra_charges_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$category = (isset($_POST['category']) ? trim($_POST['category']) : '');
+	$category = trim($_POST['category']);
 	if (strlen($category) < 3 || strlen($category) > 50) {
 		$msg_category = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'category';

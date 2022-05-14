@@ -27,13 +27,13 @@ if (isset($_GET['customer_invoicesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
-	if (strlen($notes) < 0 || strlen($notes) > 2000) {
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 2000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
-	$issue_date = (isset($_POST['issue_date']) ? trim($_POST['issue_date']) : '');
+	$issue_date = trim($_POST['issue_date']);
 	if (empty($issue_date)) {
 		$issue_date = '1970-01-01';
 	} else if (!is_date($issue_date)) {
@@ -41,7 +41,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'issue_date';
 		$error = 1;
 	}
-	$due_date = (isset($_POST['due_date']) ? trim($_POST['due_date']) : '');
+	$due_date = trim($_POST['due_date']);
 	if (empty($due_date)) {
 		$due_date = '1970-01-01';
 	} else if (!is_date($due_date)) {
@@ -49,25 +49,25 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'due_date';
 		$error = 1;
 	}
-	$payment_method = (isset($_POST['payment_method']) ? trim($_POST['payment_method']) : '');
-	if (strlen($payment_method) < 0 || strlen($payment_method) > 50) {
+	$payment_method = trim($_POST['payment_method']);
+	if (strlen($payment_method) > 50) {
 		$msg_payment_method = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'payment_method';
 		$error = 1;
 	}
 	$amount_paid = trim($_POST['amount_paid']);
-	if (strlen($amount_paid) < 0 || strlen($amount_paid) > 10 || !is_numeric($amount_paid)) {
+	if (strlen($amount_paid) > 10 || !is_numeric($amount_paid)) {
 		$msg_amount_paid = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'amount_paid';
 		$error = 1;
 	}
 	$amount = trim($_POST['amount']);
-	if (strlen($amount) < 0 || strlen($amount) > 10 || !is_numeric($amount)) {
+	if (strlen($amount) > 10 || !is_numeric($amount)) {
 		$msg_amount = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'amount';
 		$error = 1;
 	}
-	$end_date = (isset($_POST['end_date']) ? trim($_POST['end_date']) : '');
+	$end_date = trim($_POST['end_date']);
 	if (empty($end_date)) {
 		$end_date = '1970-01-01';
 	} else if (!is_date($end_date)) {
@@ -75,7 +75,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'end_date';
 		$error = 1;
 	}
-	$start_date = (isset($_POST['start_date']) ? trim($_POST['start_date']) : '');
+	$start_date = trim($_POST['start_date']);
 	if (empty($start_date)) {
 		$start_date = '1970-01-01';
 	} else if (!is_date($start_date)) {
@@ -84,7 +84,7 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$key_customer_passengers = trim($_POST['key_customer_passengers']);
-	if (strlen($key_customer_passengers) < 0 || strlen($key_customer_passengers) > 100 || !is_numeric($key_customer_passengers)) {
+	if (strlen($key_customer_passengers) > 100 || !is_numeric($key_customer_passengers)) {
 		$msg_key_customer_passengers = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_customer_passengers';
 		$error = 1;

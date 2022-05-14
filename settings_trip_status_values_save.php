@@ -23,31 +23,31 @@ if (isset($_GET['settings_trip_status_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$active_status = (isset($_POST['active_status']) ? trim($_POST['active_status']) : '');
-	if (strlen($active_status) < 0 || strlen($active_status) > 10) {
+	$active_status = trim($_POST['active_status']);
+	if (strlen($active_status) > 10) {
 		$msg_active_status = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'active_status';
 		$error = 1;
 	}
 	$sort = trim($_POST['sort']);
-	if (strlen($sort) < 0 || strlen($sort) > 10 || !is_numeric($sort)) {
+	if (strlen($sort) > 10 || !is_numeric($sort)) {
 		$msg_sort = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'sort';
 		$error = 1;
 	}
-	$back_color = (isset($_POST['back_color']) ? trim($_POST['back_color']) : '');
-	if (strlen($back_color) < 0 || strlen($back_color) > 20) {
+	$back_color = trim($_POST['back_color']);
+	if (strlen($back_color) > 20) {
 		$msg_back_color = "<div class='message-error'>Provide a valid value of length 0-20</div>";
 		$focus_field = 'back_color';
 		$error = 1;
 	}
-	$text_color = (isset($_POST['text_color']) ? trim($_POST['text_color']) : '');
-	if (strlen($text_color) < 0 || strlen($text_color) > 20) {
+	$text_color = trim($_POST['text_color']);
+	if (strlen($text_color) > 20) {
 		$msg_text_color = "<div class='message-error'>Provide a valid value of length 0-20</div>";
 		$focus_field = 'text_color';
 		$error = 1;
 	}
-	$trip_status = (isset($_POST['trip_status']) ? trim($_POST['trip_status']) : '');
+	$trip_status = trim($_POST['trip_status']);
 	if (strlen($trip_status) < 3 || strlen($trip_status) > 50) {
 		$msg_trip_status = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'trip_status';

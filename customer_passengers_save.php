@@ -46,169 +46,169 @@ if (isset($_GET['customer_passengersid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$active_status = (isset($_POST['active_status']) ? trim($_POST['active_status']) : '');
-	if (strlen($active_status) < 0 || strlen($active_status) > 5) {
+	$active_status = trim($_POST['active_status']);
+	if (strlen($active_status) > 5) {
 		$msg_active_status = "<div class='message-error'>Provide a valid value of length 0-5</div>";
 		$focus_field = 'active_status';
 		$error = 1;
 	}
-	$ad_source = (isset($_POST['ad_source']) ? trim($_POST['ad_source']) : '');
-	if (strlen($ad_source) < 0 || strlen($ad_source) > 100) {
+	$ad_source = trim($_POST['ad_source']);
+	if (strlen($ad_source) > 100) {
 		$msg_ad_source = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'ad_source';
 		$error = 1;
 	}
-	$trip_ticket_notes = (isset($_POST['trip_ticket_notes']) ? trim($_POST['trip_ticket_notes']) : '');
-	if (strlen($trip_ticket_notes) < 0 || strlen($trip_ticket_notes) > 2000) {
+	$trip_ticket_notes = trim($_POST['trip_ticket_notes']);
+	if (strlen($trip_ticket_notes) > 2000) {
 		$msg_trip_ticket_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'trip_ticket_notes';
 		$error = 1;
 	}
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
-	if (strlen($notes) < 0 || strlen($notes) > 2000) {
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 2000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
 		$focus_field = 'notes';
 		$error = 1;
 	}
-	$confirm_to_billing_contact = (isset($_POST['confirm_to_billing_contact']) ? trim($_POST['confirm_to_billing_contact']) : '');
-	if (strlen($confirm_to_billing_contact) < 0 || strlen($confirm_to_billing_contact) > 10) {
+	$confirm_to_billing_contact = trim($_POST['confirm_to_billing_contact']);
+	if (strlen($confirm_to_billing_contact) > 10) {
 		$msg_confirm_to_billing_contact = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'confirm_to_billing_contact';
 		$error = 1;
 	}
-	$confirm_to_contact = (isset($_POST['confirm_to_contact']) ? trim($_POST['confirm_to_contact']) : '');
-	if (strlen($confirm_to_contact) < 0 || strlen($confirm_to_contact) > 10) {
+	$confirm_to_contact = trim($_POST['confirm_to_contact']);
+	if (strlen($confirm_to_contact) > 10) {
 		$msg_confirm_to_contact = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'confirm_to_contact';
 		$error = 1;
 	}
-	$confirm_to_passenger = (isset($_POST['confirm_to_passenger']) ? trim($_POST['confirm_to_passenger']) : '');
-	if (strlen($confirm_to_passenger) < 0 || strlen($confirm_to_passenger) > 10) {
+	$confirm_to_passenger = trim($_POST['confirm_to_passenger']);
+	if (strlen($confirm_to_passenger) > 10) {
 		$msg_confirm_to_passenger = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'confirm_to_passenger';
 		$error = 1;
 	}
-	$payment_method = (isset($_POST['payment_method']) ? trim($_POST['payment_method']) : '');
-	if (strlen($payment_method) < 0 || strlen($payment_method) > 100) {
+	$payment_method = trim($_POST['payment_method']);
+	if (strlen($payment_method) > 100) {
 		$msg_payment_method = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'payment_method';
 		$error = 1;
 	}
 	$key_customer_billing_contacts = trim($_POST['key_customer_billing_contacts']);
-	if (strlen($key_customer_billing_contacts) < 0 || strlen($key_customer_billing_contacts) > 100 || !is_numeric($key_customer_billing_contacts)) {
+	if (strlen($key_customer_billing_contacts) > 100 || !is_numeric($key_customer_billing_contacts)) {
 		$msg_key_customer_billing_contacts = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_customer_billing_contacts';
 		$error = 1;
 	}
-	$billing_contact_name = (isset($_POST['billing_contact_name']) ? trim($_POST['billing_contact_name']) : '');
-	if (strlen($billing_contact_name) < 0 || strlen($billing_contact_name) > 100) {
+	$billing_contact_name = trim($_POST['billing_contact_name']);
+	if (strlen($billing_contact_name) > 100) {
 		$msg_billing_contact_name = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'billing_contact_name';
 		$error = 1;
 	}
 	$key_customer_rate_packages = trim($_POST['key_customer_rate_packages']);
-	if (strlen($key_customer_rate_packages) < 0 || strlen($key_customer_rate_packages) > 100 || !is_numeric($key_customer_rate_packages)) {
+	if (strlen($key_customer_rate_packages) > 100 || !is_numeric($key_customer_rate_packages)) {
 		$msg_key_customer_rate_packages = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_customer_rate_packages';
 		$error = 1;
 	}
-	$package_name = (isset($_POST['package_name']) ? trim($_POST['package_name']) : '');
-	if (strlen($package_name) < 0 || strlen($package_name) > 50) {
+	$package_name = trim($_POST['package_name']);
+	if (strlen($package_name) > 50) {
 		$msg_package_name = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'package_name';
 		$error = 1;
 	}
 	$key_customer_companies = trim($_POST['key_customer_companies']);
-	if (strlen($key_customer_companies) < 0 || strlen($key_customer_companies) > 100 || !is_numeric($key_customer_companies)) {
+	if (strlen($key_customer_companies) > 100 || !is_numeric($key_customer_companies)) {
 		$msg_key_customer_companies = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'key_customer_companies';
 		$error = 1;
 	}
-	$company_name = (isset($_POST['company_name']) ? trim($_POST['company_name']) : '');
-	if (strlen($company_name) < 0 || strlen($company_name) > 100) {
+	$company_name = trim($_POST['company_name']);
+	if (strlen($company_name) > 100) {
 		$msg_company_name = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'company_name';
 		$error = 1;
 	}
-	$image_url = (isset($_POST['image_url']) ? trim($_POST['image_url']) : '');
-	if (strlen($image_url) < 0 || strlen($image_url) > 100) {
+	$image_url = trim($_POST['image_url']);
+	if (strlen($image_url) > 100) {
 		$msg_image_url = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'image_url';
 		$error = 1;
 	}
-	$website = (isset($_POST['website']) ? trim($_POST['website']) : '');
-	if (strlen($website) < 0 || strlen($website) > 100) {
+	$website = trim($_POST['website']);
+	if (strlen($website) > 100) {
 		$msg_website = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'website';
 		$error = 1;
 	}
-	$email = (isset($_POST['email']) ? trim($_POST['email']) : '');
-	if (strlen($email) < 0 || strlen($email) > 100) {
+	$email = trim($_POST['email']);
+	if (strlen($email) > 100) {
 		$msg_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'email';
 		$error = 1;
 	}
-	$mobile_phone = (isset($_POST['mobile_phone']) ? trim($_POST['mobile_phone']) : '');
-	if (strlen($mobile_phone) < 0 || strlen($mobile_phone) > 30) {
+	$mobile_phone = trim($_POST['mobile_phone']);
+	if (strlen($mobile_phone) > 30) {
 		$msg_mobile_phone = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'mobile_phone';
 		$error = 1;
 	}
 	$work_phone_extension = trim($_POST['work_phone_extension']);
-	if (strlen($work_phone_extension) < 0 || strlen($work_phone_extension) > 10 || !is_numeric($work_phone_extension)) {
+	if (strlen($work_phone_extension) > 10 || !is_numeric($work_phone_extension)) {
 		$msg_work_phone_extension = "<div class='message-error'>Provide a valid value of length 0-10</div>";
 		$focus_field = 'work_phone_extension';
 		$error = 1;
 	}
-	$work_phone = (isset($_POST['work_phone']) ? trim($_POST['work_phone']) : '');
-	if (strlen($work_phone) < 0 || strlen($work_phone) > 30) {
+	$work_phone = trim($_POST['work_phone']);
+	if (strlen($work_phone) > 30) {
 		$msg_work_phone = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'work_phone';
 		$error = 1;
 	}
-	$zip_code = (isset($_POST['zip_code']) ? trim($_POST['zip_code']) : '');
-	if (strlen($zip_code) < 0 || strlen($zip_code) > 50) {
+	$zip_code = trim($_POST['zip_code']);
+	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
-	$country = (isset($_POST['country']) ? trim($_POST['country']) : '');
-	if (strlen($country) < 0 || strlen($country) > 100) {
+	$country = trim($_POST['country']);
+	if (strlen($country) > 100) {
 		$msg_country = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'country';
 		$error = 1;
 	}
-	$state = (isset($_POST['state']) ? trim($_POST['state']) : '');
-	if (strlen($state) < 0 || strlen($state) > 100) {
+	$state = trim($_POST['state']);
+	if (strlen($state) > 100) {
 		$msg_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
-	$city = (isset($_POST['city']) ? trim($_POST['city']) : '');
-	if (strlen($city) < 0 || strlen($city) > 100) {
+	$city = trim($_POST['city']);
+	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
-	$address2 = (isset($_POST['address2']) ? trim($_POST['address2']) : '');
-	if (strlen($address2) < 0 || strlen($address2) > 100) {
+	$address2 = trim($_POST['address2']);
+	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
-	$address1 = (isset($_POST['address1']) ? trim($_POST['address1']) : '');
-	if (strlen($address1) < 0 || strlen($address1) > 100) {
+	$address1 = trim($_POST['address1']);
+	if (strlen($address1) > 100) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
-	$last_name = (isset($_POST['last_name']) ? trim($_POST['last_name']) : '');
+	$last_name = trim($_POST['last_name']);
 	if (strlen($last_name) < 3 || strlen($last_name) > 100) {
 		$msg_last_name = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'last_name';
 		$error = 1;
 	}
-	$first_name = (isset($_POST['first_name']) ? trim($_POST['first_name']) : '');
+	$first_name = trim($_POST['first_name']);
 	if (strlen($first_name) < 3 || strlen($first_name) > 100) {
 		$msg_first_name = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'first_name';

@@ -1,4 +1,4 @@
-<?php 
+?php 
 include('php/_code.php');
 $show_form = true;
 $focus_field = 'trip_type';
@@ -19,7 +19,7 @@ if (isset($_GET['settings_trip_type_valuesid'])) {
 // 'Save' button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
-	$trip_type = (isset($_POST['trip_type']) ? trim($_POST['trip_type']) : '');
+	$trip_type = trim($_POST['trip_type']);
 	if (strlen($trip_type) < 3 || strlen($trip_type) > 50) {
 		$msg_trip_type = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'trip_type';

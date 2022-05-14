@@ -24,7 +24,7 @@ if (isset($_GET['settings_airline_valuesid'])) {
 if (isset($_POST['save_submit'])) {
 	
 	$error = 0;
-	$airline = (isset($_POST['airline']) ? trim($_POST['airline']) : '');
+	$airline = trim($_POST['airline']);
 	if (strlen($airline) < 3 || strlen($airline) > 50) {
 		$msg_airline = "<div class='message-error'>Provide a valid value of length 3-50</div>";
 		$focus_field = 'airline';

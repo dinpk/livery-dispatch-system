@@ -36,7 +36,7 @@ if (isset($_GET['trip_extra_chargesid'])) {
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	// validation of input data
-	$notes = (isset($_POST['notes']) ? trim($_POST['notes']) : '');
+	$notes = trim($_POST['notes']);
 	if (strlen($notes) > 1000) {
 		$msg_notes = "<div class='message-error'>Provide a valid value up to length 1000</div>";
 		$focus_field = 'notes';
@@ -48,7 +48,7 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'amount';
 		$error = 1;
 	}
-	$category = (isset($_POST['category']) ? trim($_POST['category']) : '');
+	$category = trim($_POST['category']);
 	if (strlen($category) > 50) {
 		$msg_category = "<div class='message-error'>Provide a valid value up to length 50</div>";
 		$focus_field = 'category';

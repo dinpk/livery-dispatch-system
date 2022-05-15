@@ -95,93 +95,113 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'from_city';
 		$error = 1;
 	}
+
 	// no validation error
 	if ($error == 0) {
-		if (isset($record_id) && $error != 1) { // update
-			$results = mysqli_query($dbcon, "UPDATE rates_zones SET 
-			from_city = '" . sd($dbcon, $from_city) . "',
-			from_state = '" . sd($dbcon, $from_state) . "',
-			from_zip_code = '" . sd($dbcon, $from_zip_code) . "',
-			to_city = '" . sd($dbcon, $to_city) . "',
-			to_state = '" . sd($dbcon, $to_state) . "',
-			to_zip_code = '" . sd($dbcon, $to_zip_code) . "',
-			rate = '" . sd($dbcon, $rate) . "',
-			tolls = '" . sd($dbcon, $tolls) . "',
-			miles = '" . sd($dbcon, $miles) . "',
-			active_status = '" . sd($dbcon, $active_status) . "'
-			WHERE key_rates_zones = $record_id");
-			if ($results) {
-				$message = "<script>parent.location.reload(false);</script>";
+		if (isset($record_id)) { // update
+			$duplicate_result = mysqli_query($dbcon, "SELECT key_rates_zones 
+				FROM rates_zones 
+				WHERE from_city = '$from_city' AND from_state = '$from_state' AND to_city = '$to_city' AND to_state = '$to_state' 
+				AND key_rates_zones != $record_id");
+			if ($row = mysqli_fetch_assoc($duplicate_result)) {
+				$message .= "<div class='failure-result'>Zone <b>$from_city, $from_state</b> to <b>$to_city, $to_state</b> already exists.</div>";
+				$error = 1;
 			} else {
-				//print mysqli_error($dbcon);
-				die('Unable to update, please contact your system administrator.');
-			}
-		} else if ($error != 1) { // insert
-
-			$results = mysqli_query($dbcon, "INSERT INTO rates_zones (
-			from_city,
-			from_state,
-			from_zip_code,
-			to_city,
-			to_state,
-			to_zip_code,
-			rate,
-			tolls,
-			miles,
-			active_status
-			) 
-			VALUES (
-			'" . sd($dbcon, $from_city) . "',
-			'" . sd($dbcon, $from_state) . "',
-			'" . sd($dbcon, $from_zip_code) . "',
-			'" . sd($dbcon, $to_city) . "',
-			'" . sd($dbcon, $to_state) . "',
-			'" . sd($dbcon, $to_zip_code) . "',
-			'" . sd($dbcon, $rate) . "',
-			'" . sd($dbcon, $tolls) . "',
-			'" . sd($dbcon, $miles) . "',
-			'" . sd($dbcon, $active_status) . "'
-			)");
-			if ($results) {
-
-				if ($reverse_record == "on") {
-					mysqli_query($dbcon, "INSERT INTO rates_zones (
-								from_city,
-								from_state,
-								from_zip_code,
-								to_city,
-								to_state,
-								to_zip_code,
-								rate,
-								tolls,
-								miles,
-								active_status
-								) 
-								VALUES (
-								'" . sd($dbcon, $to_city) . "',
-								'" . sd($dbcon, $to_state) . "',
-								'" . sd($dbcon, $to_zip_code) . "',
-								'" . sd($dbcon, $from_city) . "',
-								'" . sd($dbcon, $from_state) . "',
-								'" . sd($dbcon, $from_zip_code) . "',
-								'" . sd($dbcon, $rate) . "',
-								'" . sd($dbcon, $tolls) . "',
-								'" . sd($dbcon, $miles) . "',
-								'" . sd($dbcon, $active_status) . "'
-								)");					
-				}
-				$message = "<script>parent.location.reload(false);</script>";
-
-			} else {
-				if (strpos(mysqli_error($dbcon), "Duplicate") > -1) {
-					$message = "<div class='failure-result'>" . mysqli_error($dbcon) . "</div>";
-					$error = 1;
+				$results = mysqli_query($dbcon, "UPDATE rates_zones SET 
+				from_city = '" . sd($dbcon, $from_city) . "',
+				from_state = '" . sd($dbcon, $from_state) . "',
+				from_zip_code = '" . sd($dbcon, $from_zip_code) . "',
+				to_city = '" . sd($dbcon, $to_city) . "',
+				to_state = '" . sd($dbcon, $to_state) . "',
+				to_zip_code = '" . sd($dbcon, $to_zip_code) . "',
+				rate = '" . sd($dbcon, $rate) . "',
+				tolls = '" . sd($dbcon, $tolls) . "',
+				miles = '" . sd($dbcon, $miles) . "',
+				active_status = '" . sd($dbcon, $active_status) . "'
+				WHERE key_rates_zones = $record_id");
+				if ($results) {
+					$message = "<script>parent.location.reload(false);</script>";
 				} else {
+					//print mysqli_error($dbcon);
+					die('Unable to update, please contact your system administrator.');
+				}
+			}
+
+		} else { // insert
+
+			$duplicate_result = mysqli_query($dbcon, "SELECT key_rates_zones 
+				FROM rates_zones 
+				WHERE from_city = '$from_city' AND from_state = '$from_state' AND to_city = '$to_city' AND to_state = '$to_state'
+				");
+			if ($row = mysqli_fetch_assoc($duplicate_result)) {
+				$message .= "<div class='failure-result'>Zone <b>$from_city, $from_state</b> to <b>$to_city, $to_state</b> already exists.</div>";
+				$error = 1;
+			} else {
+				$results = mysqli_query($dbcon, "INSERT INTO rates_zones (
+				from_city,
+				from_state,
+				from_zip_code,
+				to_city,
+				to_state,
+				to_zip_code,
+				rate,
+				tolls,
+				miles,
+				active_status
+				) 
+				VALUES (
+				'" . sd($dbcon, $from_city) . "',
+				'" . sd($dbcon, $from_state) . "',
+				'" . sd($dbcon, $from_zip_code) . "',
+				'" . sd($dbcon, $to_city) . "',
+				'" . sd($dbcon, $to_state) . "',
+				'" . sd($dbcon, $to_zip_code) . "',
+				'" . sd($dbcon, $rate) . "',
+				'" . sd($dbcon, $tolls) . "',
+				'" . sd($dbcon, $miles) . "',
+				'" . sd($dbcon, $active_status) . "'
+				)");
+
+				if ($results) {
+
+					if ($reverse_record == "on") {
+						mysqli_query($dbcon, "INSERT INTO rates_zones (
+									from_city,
+									from_state,
+									from_zip_code,
+									to_city,
+									to_state,
+									to_zip_code,
+									rate,
+									tolls,
+									miles,
+									active_status
+									) 
+									VALUES (
+									'" . sd($dbcon, $to_city) . "',
+									'" . sd($dbcon, $to_state) . "',
+									'" . sd($dbcon, $to_zip_code) . "',
+									'" . sd($dbcon, $from_city) . "',
+									'" . sd($dbcon, $from_state) . "',
+									'" . sd($dbcon, $from_zip_code) . "',
+									'" . sd($dbcon, $rate) . "',
+									'" . sd($dbcon, $tolls) . "',
+									'" . sd($dbcon, $miles) . "',
+									'" . sd($dbcon, $active_status) . "'
+									)");					
+					}
+					$message = "<script>parent.location.reload(false);</script>";
+
+				} else {
+					//print mysqli_error($dbcon);
 					die('Unable to add, please contact your system administrator.');
 				}
-			}
-		}	
-	}
+			
+			} // duplicate
+		
+		} // insert
+	
+	} // no error
 	if ($error == 0) $show_form = false;
 }
 ?>

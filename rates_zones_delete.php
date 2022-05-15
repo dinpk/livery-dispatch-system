@@ -7,8 +7,7 @@ if (isset($_GET['rates_zonesid'])) {
 	if (isset($_GET['delete'])) {
 		$results = mysqli_query($dbcon, "DELETE FROM rates_zones WHERE key_rates_zones = $record_id");
 		if ($results) {
-			$message = "<div class='success-result'>Deleted successfully</div>
-			<div class='center'><br><br><input type='button' value='Close' onclick='parent.location.reload(false);'></div>";
+			$message = "<script>parent.location.reload(false);</script>";
 			$show_record = false;
 		} else {
 			$message = "<div class='failure-result'>Could not delete record</div>";

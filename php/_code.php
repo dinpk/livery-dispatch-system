@@ -6,7 +6,7 @@ $time_zone = "America/New_York";
 $print_errors = false;
 $email_errors = false;
 $db_host = "localhost";
-$db_name = "limopath";
+$db_name = "liverydispatchsystem";
 $db_user = "root";
 $db_password = "asdf";
 

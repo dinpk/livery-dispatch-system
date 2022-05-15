@@ -602,14 +602,14 @@ main ul {
 	margin-right:20px;
 }
 
-#page-listing #listing-forms input {
+#page-listing #listing-forms input[type='text'] {
 	width:130px;
 	font-size:11px;
-	padding:0;
+	padding: 2px;
 }
 
-#page-listing #listing-forms input[type='text'] {
-	padding:2px;
+#page-listing #listing-forms input[type='checkbox'] {
+	transform: scale(1.5);
 }
 
 #page-listing #listing-forms input[type='submit'],

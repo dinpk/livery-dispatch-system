@@ -9,7 +9,7 @@ if (strpos($url, '?page')) $url = substr($url, 0, strpos($url, '?page'));
 if (strpos($url, '&page')) $url = substr($url, 0, strpos($url, '&page'));
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq']) && (sizeof($_GET) == 2)) {
 	$query_symbol = '?';
-} else if (sizeof($_GET) > 0) {
+} else if (sizeof($_GET) > 1) {
 	$query_symbol = '&';
 } else {
 	$query_symbol = '?';

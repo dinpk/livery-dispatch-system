@@ -136,6 +136,7 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$vehicle_type = trim($_POST['vehicle_type']);
+	// if (empty($vehicle_type)) print "vehicle_type is empty";
 	if (strlen($vehicle_type) < 3 || strlen($vehicle_type) > 100) {
 		$msg_vehicle_type = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'vehicle_type';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 12, 2022 at 06:46 PM
+-- Generation Time: May 15, 2022 at 02:32 PM
 -- Server version: 5.7.38-0ubuntu0.18.04.1
 -- PHP Version: 7.2.24-0ubuntu0.18.04.11
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `limopath`
+-- Database: `liverydispatchsystem`
 --
 
 -- --------------------------------------------------------
@@ -1139,52 +1139,52 @@ ALTER TABLE `vehicles_maintenance` ADD FULLTEXT KEY `vehicles_maintenance_fullte
 -- AUTO_INCREMENT for table `customer_address_book`
 --
 ALTER TABLE `customer_address_book`
-  MODIFY `key_customer_address_book` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_customer_address_book` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `customer_billing_contacts`
 --
 ALTER TABLE `customer_billing_contacts`
-  MODIFY `key_customer_billing_contacts` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `key_customer_billing_contacts` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9001;
 --
 -- AUTO_INCREMENT for table `customer_companies`
 --
 ALTER TABLE `customer_companies`
-  MODIFY `key_customer_companies` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_customer_companies` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7001;
 --
 -- AUTO_INCREMENT for table `customer_contacts`
 --
 ALTER TABLE `customer_contacts`
-  MODIFY `key_customer_contacts` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `key_customer_contacts` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8001;
 --
 -- AUTO_INCREMENT for table `customer_invoices`
 --
 ALTER TABLE `customer_invoices`
-  MODIFY `key_customer_invoices` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
+  MODIFY `key_customer_invoices` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12001;
 --
 -- AUTO_INCREMENT for table `customer_passengers`
 --
 ALTER TABLE `customer_passengers`
-  MODIFY `key_customer_passengers` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `key_customer_passengers` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6001;
 --
 -- AUTO_INCREMENT for table `customer_rate_packages`
 --
 ALTER TABLE `customer_rate_packages`
-  MODIFY `key_customer_rate_packages` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_customer_rate_packages` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `key_drivers` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_drivers` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3001;
 --
 -- AUTO_INCREMENT for table `driver_payroll`
 --
 ALTER TABLE `driver_payroll`
-  MODIFY `key_driver_payroll` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `key_driver_payroll` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13001;
 --
 -- AUTO_INCREMENT for table `landmarks`
 --
 ALTER TABLE `landmarks`
-  MODIFY `key_landmarks` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `key_landmarks` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `logs`
 --
@@ -1194,7 +1194,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `rates_zones`
 --
 ALTER TABLE `rates_zones`
-  MODIFY `key_rates_zones` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_rates_zones` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_ad_source_values`
 --
@@ -1204,37 +1204,37 @@ ALTER TABLE `settings_ad_source_values`
 -- AUTO_INCREMENT for table `settings_airline_values`
 --
 ALTER TABLE `settings_airline_values`
-  MODIFY `key_settings_airline_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `key_settings_airline_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_company`
 --
 ALTER TABLE `settings_company`
-  MODIFY `key_settings_company` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_company` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_country_values`
 --
 ALTER TABLE `settings_country_values`
-  MODIFY `key_settings_country_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_country_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_dispatch_area_values`
 --
 ALTER TABLE `settings_dispatch_area_values`
-  MODIFY `key_settings_dispatch_area_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `key_settings_dispatch_area_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_email_configuration`
 --
 ALTER TABLE `settings_email_configuration`
-  MODIFY `key_settings_email_configuration` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_email_configuration` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_extra_charges_values`
 --
 ALTER TABLE `settings_extra_charges_values`
-  MODIFY `key_settings_extra_charges_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `key_settings_extra_charges_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_insurance_company_values`
 --
 ALTER TABLE `settings_insurance_company_values`
-  MODIFY `key_settings_insurance_company_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_insurance_company_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_landmark_values`
 --
@@ -1244,42 +1244,42 @@ ALTER TABLE `settings_landmark_values`
 -- AUTO_INCREMENT for table `settings_offtime_type_values`
 --
 ALTER TABLE `settings_offtime_type_values`
-  MODIFY `key_settings_offtime_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_settings_offtime_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_payment_card_type_values`
 --
 ALTER TABLE `settings_payment_card_type_values`
-  MODIFY `key_settings_payment_card_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_settings_payment_card_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_payment_method_values`
 --
 ALTER TABLE `settings_payment_method_values`
-  MODIFY `key_settings_payment_method_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_settings_payment_method_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_state_values`
 --
 ALTER TABLE `settings_state_values`
-  MODIFY `key_settings_state_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_settings_state_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_toll_type_values`
 --
 ALTER TABLE `settings_toll_type_values`
-  MODIFY `key_settings_toll_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_toll_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_trips`
 --
 ALTER TABLE `settings_trips`
-  MODIFY `key_settings_trips` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_trips` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_trip_status_values`
 --
 ALTER TABLE `settings_trip_status_values`
-  MODIFY `key_settings_trip_status_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `key_settings_trip_status_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_trip_type_values`
 --
 ALTER TABLE `settings_trip_type_values`
-  MODIFY `key_settings_trip_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_settings_trip_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_vehicle_model_values`
 --
@@ -1289,32 +1289,32 @@ ALTER TABLE `settings_vehicle_model_values`
 -- AUTO_INCREMENT for table `settings_vehicle_type_values`
 --
 ALTER TABLE `settings_vehicle_type_values`
-  MODIFY `key_settings_vehicle_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_settings_vehicle_type_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings_workshop_name_values`
 --
 ALTER TABLE `settings_workshop_name_values`
-  MODIFY `key_settings_workshop_name_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_settings_workshop_name_values` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `key_trips` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1012;
+  MODIFY `key_trips` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20001;
 --
 -- AUTO_INCREMENT for table `trip_extra_charges`
 --
 ALTER TABLE `trip_extra_charges`
-  MODIFY `key_trip_extra_charges` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `key_trip_extra_charges` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `key_vehicles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `key_vehicles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 --
 -- AUTO_INCREMENT for table `vehicles_maintenance`
 --
 ALTER TABLE `vehicles_maintenance`
-  MODIFY `key_vehicles_maintenance` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `key_vehicles_maintenance` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3001;
 --
 -- Constraints for dumped tables
 --

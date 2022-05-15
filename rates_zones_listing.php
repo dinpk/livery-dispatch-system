@@ -9,7 +9,7 @@ if (strpos($url, '?page')) $url = substr($url, 0, strpos($url, '?page'));
 if (strpos($url, '&page')) $url = substr($url, 0, strpos($url, '&page'));
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq']) && (sizeof($_GET) == 2)) {
 	$query_symbol = '?';
-} else if (sizeof($_GET) > 0) {
+} else if (sizeof($_GET) > 1) {
 	$query_symbol = '&';
 } else {
 	$query_symbol = '?';
@@ -42,11 +42,23 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 	}
 }
 if (isset($_GET['search'])) {
-	$search = trim($_GET['search']);
-	if (empty($search)) {
-		$message = "<div class='failure-result'>Provide a search term</div>";
-	} else {
-		$sql_where = "WHERE MATCH(from_city, to_city) AGAINST('" . cd($dbcon, $search) . "')";
+	$search_from = trim($_GET['search_from']);
+	$search_to = trim($_GET['search_to']);
+	$from_sql = '';
+	$to_sql = '';
+	$reverse_sql = '';
+	if (!empty($search_from)) {
+		$from_sql = "from_city = '" . cd($dbcon, $search_from) . "'";
+	}
+	if (!empty($search_to)) {
+		$to_sql = " AND to_city = '" . cd($dbcon, $search_to) . "'";
+	}
+	if (isset($_GET['search_reverse']) && !empty($search_from) && !empty($search_to)) {
+		$reverse_sql = " OR to_city = '" . cd($dbcon, $search_from) . "' AND from_city = '" . cd($dbcon, $search_to) . "'";
+	}
+	
+	if (!empty($search_from)) {
+		$sql_where = "WHERE $from_sql $to_sql $reverse_sql";
 	}
 }
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
@@ -83,6 +95,7 @@ if ($results) {
 		<ul id='menu$record_id'>
 		<li><a href='rates_zones_save.php?rates_zonesid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Edit</a></li>
 		<li><a href='rates_zones_view.php?rates_zonesid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>View</a></li>
+		<li><a href='rates_zones_delete.php?rates_zonesid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Delete</a></li>
 		<li><a href='trips_listing.php?rates_zonesid=$record_id' target='_blank' onclick='hide_record_menus();'>Trips</a></li>
 		</ul>
 		</td>
@@ -110,9 +123,9 @@ if ($results) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
 		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ⯇ </a></td>";
+		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> < </a></td>";
 		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ⯈ </a></td>";
+		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> > </a></td>";
 		$pager = "<table id='pager'><tr>$pager</tr></table>";
 		$listing_html .= $pager;
 	}
@@ -120,7 +133,7 @@ if ($results) {
 		$message = "<div class='failure-result'>No record found</div>";
 	}
 } else {
-	//print mysqli_error($dbcon);
+	// print mysqli_error($dbcon);
 	die('Unable to get records, please contact your system administrator.');
 }
 ?>
@@ -151,8 +164,10 @@ if ($results) {
 					<input type='submit' value='Get'>
 			</form>
 			<form id='search_form' method='get'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
+					<input name='search_from' type='text' <?php if (isset($search_from)) print "value='$search_from' autofocus"; ?> placeholder='From' required> 
+					<input name='search_to' type='text' <?php if (isset($search_to)) print "value='$search_to' "; ?> placeholder='To'> 
+					<input type='checkbox' name='search_reverse' title='Show reverse' <?php if (isset($_GET['search_reverse'])) print "checked"; ?> > 
+					<input type='submit' name='search' value='Search'>
 			</form>
 			<form id='items_per_page_form' method='post'>
 				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>

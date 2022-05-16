@@ -14,6 +14,7 @@ if (isset($_GET['vehiclesid'])) {
 			$tag = $row['tag'];
 			$vin_number = $row['vin_number'];
 			$year_made = $row['year_made'];
+			$make = $row['make'];
 			$model = $row['model'];
 			$max_seats = $row['max_seats'];
 			$color = $row['color'];
@@ -112,9 +113,15 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$model = trim($_POST['model']);
-	if (strlen($model) > 100) {
-		$msg_model = "<div class='message-error'>Provide a valid value of length 0-100</div>";
+	if (strlen($model) > 50) {
+		$msg_model = "<div class='message-error'>Provide a valid value of length 0-50</div>";
 		$focus_field = 'model';
+		$error = 1;
+	}
+	$make = trim($_POST['make']);
+	if (strlen($make) > 50) {
+		$msg_make = "<div class='message-error'>Provide a valid value of length 0-50</div>";
+		$focus_field = 'make';
 		$error = 1;
 	}
 	$year_made = trim($_POST['year_made']);
@@ -157,6 +164,7 @@ if (isset($_POST['save_submit'])) {
 			tag = '" . sd($dbcon, $tag) . "',
 			vin_number = '" . sd($dbcon, $vin_number) . "',
 			year_made = '" . sd($dbcon, $year_made) . "',
+			make = '" . sd($dbcon, $make) . "',
 			model = '" . sd($dbcon, $model) . "',
 			max_seats = '" . sd($dbcon, $max_seats) . "',
 			color = '" . sd($dbcon, $color) . "',
@@ -184,6 +192,7 @@ if (isset($_POST['save_submit'])) {
 			tag,
 			vin_number,
 			year_made,
+			make,
 			model,
 			max_seats,
 			color,
@@ -204,6 +213,7 @@ if (isset($_POST['save_submit'])) {
 			'" . sd($dbcon, $tag) . "',
 			'" . sd($dbcon, $vin_number) . "',
 			'" . sd($dbcon, $year_made) . "',
+			'" . sd($dbcon, $make) . "',
 			'" . sd($dbcon, $model) . "',
 			'" . sd($dbcon, $max_seats) . "',
 			'" . sd($dbcon, $color) . "',
@@ -237,6 +247,27 @@ if (isset($_POST['save_submit'])) {
 <head>
 	<title>VEHICLE</title>
 	<?php include('php/_head.php'); ?>
+	<style>
+		#loader {display:none;}
+	</style>
+	<script>
+		function models_of_vehicle(make) {
+			
+			document.getElementById("model").innerHTML = "";
+			if (make.length != 0) {
+				document.getElementById("loader").style.display = "block";
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("model").innerHTML = this.responseText;
+						document.getElementById("loader").style.display = "none";
+					}
+				};
+				xmlhttp.open("GET", "vehicles_select_options_make_model.php?make=" + make, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
 </head>
 <body id='page-save' class='page_save page_vehicles_save'>
 
@@ -297,16 +328,36 @@ if (isset($_POST['save_submit'])) {
          </div>
 
          <div>
+             <label for='make'>Make</label><br>
+             <?php if(isset($msg_make)) print $msg_make; ?>
+             <select id='make' name='make' onchange='models_of_vehicle(this.value);'>
+				 <option></option>
+                 <?php 
+                 $options = '';
+                 $results = mysqli_query($dbcon, 'SELECT vehicle_make FROM settings_vehicle_make_values');
+                 while ($row = mysqli_fetch_assoc($results)) {
+                     $selection = '';
+                     if ($row['vehicle_make'] == $make) $selection = "selected='selected'";
+                         $options .= "<option $selection>" . $row['vehicle_make'] . "</option>";
+                 }
+                 print $options; 
+                 ?>
+             </select>
+         </div>
+
+
+         <div>
              <label for='model'>Model</label><br>
              <?php if(isset($msg_model)) print $msg_model; ?>
+			 <progress id="loader"></progress>
              <select id='model' name='model'>
                  <?php 
                  $options = '';
-                 $results = mysqli_query($dbcon, 'SELECT model FROM settings_vehicle_model_values');
+                 $results = mysqli_query($dbcon, "SELECT vehicle_model FROM settings_vehicle_model_values WHERE vehicle_make = '$make'");
                  while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['model'] == $model) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['model'] . "</option>";
+					$selection = '';
+					if ($row['vehicle_model'] == $model) $selection = "selected='selected'";
+					$options .= "<option $selection>" . $row['vehicle_model'] . "</option>";
                  }
                  print $options; 
                  ?>

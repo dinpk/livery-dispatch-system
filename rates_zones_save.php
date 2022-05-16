@@ -11,10 +11,8 @@ if (isset($_GET['rates_zonesid'])) {
 		if ($row = mysqli_fetch_assoc($results)) {
 			$from_city = $row['from_city'];
 			$from_state = $row['from_state'];
-			$from_zip_code = $row['from_zip_code'];
 			$to_city = $row['to_city'];
 			$to_state = $row['to_state'];
-			$to_zip_code = $row['to_zip_code'];
 			$rate = $row['rate'];
 			$tolls = $row['tolls'];
 			$miles = $row['miles'];
@@ -59,12 +57,6 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'rate';
 		$error = 1;
 	}
-	$to_zip_code = trim($_POST['to_zip_code']);
-	if (strlen($to_zip_code) > 50) {
-		$msg_to_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
-		$focus_field = 'to_zip_code';
-		$error = 1;
-	}
 	$to_state = trim($_POST['to_state']);
 	if (strlen($to_state) > 100) {
 		$msg_to_state = "<div class='message-error'>Provide a valid value of length 0-100</div>";
@@ -75,12 +67,6 @@ if (isset($_POST['save_submit'])) {
 	if (strlen($to_city) < 3 || strlen($to_city) > 100) {
 		$msg_to_city = "<div class='message-error'>Provide a valid value of length 3-100</div>";
 		$focus_field = 'to_city';
-		$error = 1;
-	}
-	$from_zip_code = trim($_POST['from_zip_code']);
-	if (strlen($from_zip_code) > 50) {
-		$msg_from_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
-		$focus_field = 'from_zip_code';
 		$error = 1;
 	}
 	$from_state = trim($_POST['from_state']);
@@ -110,10 +96,8 @@ if (isset($_POST['save_submit'])) {
 				$results = mysqli_query($dbcon, "UPDATE rates_zones SET 
 				from_city = '" . sd($dbcon, $from_city) . "',
 				from_state = '" . sd($dbcon, $from_state) . "',
-				from_zip_code = '" . sd($dbcon, $from_zip_code) . "',
 				to_city = '" . sd($dbcon, $to_city) . "',
 				to_state = '" . sd($dbcon, $to_state) . "',
-				to_zip_code = '" . sd($dbcon, $to_zip_code) . "',
 				rate = '" . sd($dbcon, $rate) . "',
 				tolls = '" . sd($dbcon, $tolls) . "',
 				miles = '" . sd($dbcon, $miles) . "',
@@ -140,10 +124,8 @@ if (isset($_POST['save_submit'])) {
 				$results = mysqli_query($dbcon, "INSERT INTO rates_zones (
 				from_city,
 				from_state,
-				from_zip_code,
 				to_city,
 				to_state,
-				to_zip_code,
 				rate,
 				tolls,
 				miles,
@@ -152,10 +134,8 @@ if (isset($_POST['save_submit'])) {
 				VALUES (
 				'" . sd($dbcon, $from_city) . "',
 				'" . sd($dbcon, $from_state) . "',
-				'" . sd($dbcon, $from_zip_code) . "',
 				'" . sd($dbcon, $to_city) . "',
 				'" . sd($dbcon, $to_state) . "',
-				'" . sd($dbcon, $to_zip_code) . "',
 				'" . sd($dbcon, $rate) . "',
 				'" . sd($dbcon, $tolls) . "',
 				'" . sd($dbcon, $miles) . "',
@@ -168,10 +148,8 @@ if (isset($_POST['save_submit'])) {
 						mysqli_query($dbcon, "INSERT INTO rates_zones (
 									from_city,
 									from_state,
-									from_zip_code,
 									to_city,
 									to_state,
-									to_zip_code,
 									rate,
 									tolls,
 									miles,
@@ -180,10 +158,8 @@ if (isset($_POST['save_submit'])) {
 									VALUES (
 									'" . sd($dbcon, $to_city) . "',
 									'" . sd($dbcon, $to_state) . "',
-									'" . sd($dbcon, $to_zip_code) . "',
 									'" . sd($dbcon, $from_city) . "',
 									'" . sd($dbcon, $from_state) . "',
-									'" . sd($dbcon, $from_zip_code) . "',
 									'" . sd($dbcon, $rate) . "',
 									'" . sd($dbcon, $tolls) . "',
 									'" . sd($dbcon, $miles) . "',
@@ -252,12 +228,6 @@ if (isset($_POST['save_submit'])) {
              </select>
          </div>
 
-         <div>
-             <label for='from_zip_code'>From zip code</label>             
-			 <?php if(isset($msg_from_zip_code)) print $msg_from_zip_code; ?>
-             <input <?php if ($focus_field == 'from_zip_code') print 'autofocus'; ?> id='from_zip_code' name='from_zip_code' type='text' value='<?php if (isset($from_zip_code)) {print $from_zip_code;} else { print '';} ?>'><br>
-         </div>
-
 		</fieldset>
 		<fieldset>
 
@@ -283,12 +253,6 @@ if (isset($_POST['save_submit'])) {
                  print $options; 
                  ?>
              </select>
-         </div>
-
-         <div>
-             <label for='to_zip_code'>To zip code</label>             
-			 <?php if(isset($msg_to_zip_code)) print $msg_to_zip_code; ?>
-             <input <?php if ($focus_field == 'to_zip_code') print 'autofocus'; ?> id='to_zip_code' name='to_zip_code' type='text' value='<?php if (isset($to_zip_code)) {print $to_zip_code;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>

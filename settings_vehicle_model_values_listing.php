@@ -62,13 +62,14 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM settings_vehicle_model_values $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_settings_vehicle_model_values, vehicle_model FROM settings_vehicle_model_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_settings_vehicle_model_values, vehicle_model, vehicle_make FROM settings_vehicle_model_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_settings_vehicle_model_values'];
 		$table_rows .= "
 		<tr>
+		<td>" . $row['vehicle_make'] . "</td>
 		<td>" . $row['vehicle_model'] . "</td>
 		<td class='record-icons'>
 		<a href='settings_vehicle_model_values_save.php?settings_vehicle_model_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
@@ -80,6 +81,7 @@ if ($results) {
 	$listing_html = "
 		<table class='listing-table'>
 		<tr>
+		<th><a href='$url" . $query_symbol . "sort_by=vehicle_make&sort_seq=$sql_order_by_seq'>Make</a>" . (($sql_order_by == 'vehicle_make') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=vehicle_model&sort_seq=$sql_order_by_seq'>Model</a>" . (($sql_order_by == 'vehicle_model') ? $order_icon : '') . "</th>
 		<th class='icon-cell'></th>
 		</tr>

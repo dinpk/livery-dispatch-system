@@ -17,10 +17,8 @@ if (isset($_GET['rates_zonesid'])) {
 		if ($row = mysqli_fetch_assoc($results)) {
 			$from_city = $row['from_city'];
 			$from_state = $row['from_state'];
-			$from_zip_code = $row['from_zip_code'];
 			$to_city = $row['to_city'];
 			$to_state = $row['to_state'];
-			$to_zip_code = $row['to_zip_code'];
 			$rate = $row['rate'];
 			$tolls = $row['tolls'];
 			$miles = $row['miles'];
@@ -67,11 +65,6 @@ if (isset($_GET['rates_zonesid'])) {
          </tr>
 
          <tr>
-         <td class='label-cell'>From zip code</td>
-         <td class='value-cell'><?php if (isset($from_zip_code)) print $from_zip_code; ?></td>
-         </tr>
-
-         <tr>
          <td class='label-cell'>To city</td>
          <td class='value-cell'><?php if (isset($to_city)) print $to_city; ?></td>
          </tr>
@@ -79,11 +72,6 @@ if (isset($_GET['rates_zonesid'])) {
          <tr>
          <td class='label-cell'>To state</td>
          <td class='value-cell'><?php if (isset($to_state)) print $to_state; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>To zip code</td>
-         <td class='value-cell'><?php if (isset($to_zip_code)) print $to_zip_code; ?></td>
          </tr>
 
          <tr>

@@ -79,13 +79,6 @@ include('php/_code.php');
 			</a>
 		</section>
 		<section>
-			<a href='settings_vehicle_type_values_listing.php'>
-				<div><img src="images/icons/set_vehicle_types.png"></div>
-				<h3>Vehicle Types</h3>
-				<p>Categories of the fleet of vehicles that the company has to offer. For example, sedan, stretch-limo, van, bus etc.</p>
-			</a>
-		</section>
-		<section>
 			<a href='settings_state_values_listing.php'>
 				<div><img src="images/icons/set_states.png"></div>
 				<h3>States/Provinces</h3>
@@ -128,10 +121,24 @@ include('php/_code.php');
 			</a>
 		</section>
 		<section>
+			<a href='settings_vehicle_make_values_listing.php'>
+				<div><img src="images/icons/set_vehicle_makes.png"></div>
+				<h3>Vehicle Makes</h3>
+				<p>List of vehicle manufacturers used in the industry. Values are used in vehicle profiles.</p>
+			</a>
+		</section>
+		<section>
 			<a href='settings_vehicle_model_values_listing.php'>
 				<div><img src="images/icons/set_vehicle_models.png"></div>
 				<h3>Vehicle Models</h3>
 				<p>Different models of vehicles representing their categories or classes. Values are used in vehicle profiles.</p>
+			</a>
+		</section>
+		<section>
+			<a href='settings_vehicle_type_values_listing.php'>
+				<div><img src="images/icons/set_vehicle_types.png"></div>
+				<h3>Vehicle Types</h3>
+				<p>Categories of the fleet of vehicles that the company has to offer. For example, sedan, stretch-limo, van, bus etc.</p>
 			</a>
 		</section>
 		<section>

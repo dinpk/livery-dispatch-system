@@ -74,7 +74,7 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM rates_zones $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_rates_zones, from_city, from_state, from_zip_code, to_city, to_state, to_zip_code, rate, tolls, active_status FROM rates_zones $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_rates_zones, from_city, from_state, to_city, to_state, rate, tolls, active_status FROM rates_zones $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
@@ -83,10 +83,8 @@ if ($results) {
 		<tr>
 		<td>" . $row['from_city'] . "</td>
 		<td>" . $row['from_state'] . "</td>
-		<td>" . $row['from_zip_code'] . "</td>
 		<td>" . $row['to_city'] . "</td>
 		<td>" . $row['to_state'] . "</td>
-		<td>" . $row['to_zip_code'] . "</td>
 		<td class='right'>" . $row['rate'] . "</td>
 		<td class='right'>" . $row['tolls'] . "</td>
 		<td class='center'>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
@@ -107,10 +105,8 @@ if ($results) {
 		<tr>
 		<th><a href='$url" . $query_symbol . "sort_by=from_city&sort_seq=$sql_order_by_seq'>From&nbsp;City</a>" . (($sql_order_by == 'from_city') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=from_state&sort_seq=$sql_order_by_seq'>From&nbsp;State</a>" . (($sql_order_by == 'from_state') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=from_zip_code&sort_seq=$sql_order_by_seq'>From&nbsp;Zip&nbsp;Code</a>" . (($sql_order_by == 'from_zip_code') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=to_city&sort_seq=$sql_order_by_seq'>To&nbsp;City</a>" . (($sql_order_by == 'to_city') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=to_state&sort_seq=$sql_order_by_seq'>To&nbsp;State</a>" . (($sql_order_by == 'to_state') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=to_zip_code&sort_seq=$sql_order_by_seq'>To&nbsp;Zip&nbsp;Code</a>" . (($sql_order_by == 'to_zip_code') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=rate&sort_seq=$sql_order_by_seq'>Rate</a>" . (($sql_order_by == 'rate') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=tolls&sort_seq=$sql_order_by_seq'>Tolls</a>" . (($sql_order_by == 'tolls') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=active_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'active_status') ? $order_icon : '') . "</th>

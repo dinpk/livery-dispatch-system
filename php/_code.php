@@ -51,13 +51,12 @@ function is_email($email) {
 
 function send_email($email, $subject, $body) {
 	if (!is_email($email)) return false;
-	$sender_name = "LimoPath.com";
-	$sender_email = "sender@limopath.com";
+	$sender_name = "Livery Dispatch System";
+	$sender_email = "sender@gmail.com";
 	$header  = 'MIME-Version: 1.0' . "\r\n";
 	$header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$header .= "From: ". $sender_name . " <" . $sender_email . ">\r\n";
 	return mail($email, $subject, $body, $header);
-	//return true;
 }
 
 

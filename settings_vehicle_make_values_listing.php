@@ -1,6 +1,6 @@
 <?php 
 include('php/_code.php'); 
-$base_file_name = 'vehicles_listing';
+$base_file_name = 'settings_vehicle_make_values_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -46,7 +46,7 @@ if (isset($_GET['search'])) {
 	if (empty($search)) {
 		$message = "<div class='failure-result'>Provide a search term</div>";
 	} else {
-		$sql_where = "WHERE MATCH(fleet_number, vehicle_type, tag, vin_number, year_made, model, color, notes) AGAINST('" . cd($dbcon, $search) . "')";
+		$sql_where = "WHERE MATCH() AGAINST('" . cd($dbcon, $search) . "')";
 	}
 }
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
@@ -59,53 +59,33 @@ if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
 	$sql_order_by_seq = $_COOKIE[$base_file_name . '_sort_seq'];
 }
 $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
-$count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM vehicles $sql_where ");
+$count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM settings_vehicle_make_values $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_vehicles, fleet_number, vehicle_type, tag, year_made, make, model, max_seats, image_url, active_status FROM vehicles $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_settings_vehicle_make_values, vehicle_make FROM settings_vehicle_make_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
-		$record_id = $row['key_vehicles'];
-		$table_rows = $table_rows . "
+		$record_id = $row['key_settings_vehicle_make_values'];
+		$table_rows .= "
 		<tr>
-		<td>" . $row['make'] . "</td>
-		<td>" . $row['model'] . "</td>
-		<td class='center'>" . $row['fleet_number'] . "</td>
-		<td>" . $row['vehicle_type'] . "</td>
-		<td class='center'>" . $row['tag'] . "</td>
-		<td class='center'>" . $row['year_made'] . "</td>
-		<td class='center'>" . $row['max_seats'] . "</td>
-		<td class='center'><a href='" . $row['image_url'] . "'><img src='" . $row['image_url'] . "'></a></td>
-		<td class='center'>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
-		<td class='record-menus'>
-			<a href='#' class='toggle' onclick='record_menu(\"menu$record_id\", this);return false;'>ooo</a>
-			<ul id='menu$record_id'>
-			<li><a href='vehicles_save.php?vehiclesid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Edit</a></li>
-			<li><a href='vehicles_view.php?vehiclesid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>View</a></li>
-			<li><a href='vehicles_maintenance_listing.php?vehiclesid=$record_id' target='_blank' onclick='hide_record_menus();'>Maintenance</a></li>
-			<li><a href='trips_listing.php?vehiclesid=$record_id' target='_blank' onclick='hide_record_menus();'>Trips</a></li>
-			</ul>
+		<td>" . $row['vehicle_make'] . "</td>
+		<td class='record-icons'>
+		<a href='settings_vehicle_make_values_save.php?settings_vehicle_make_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+		<a href='settings_vehicle_make_values_view.php?settings_vehicle_make_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</td>
 		</tr>
-			";
+		";
 	}
 	$listing_html = "
 		<table class='listing-table'>
 		<tr>
-		<th><a href='$url" . $query_symbol . "sort_by=make&sort_seq=$sql_order_by_seq'>Make</a>" . (($sql_order_by == 'make') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=model&sort_seq=$sql_order_by_seq'>Model</a>" . (($sql_order_by == 'model') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=fleet_number&sort_seq=$sql_order_by_seq'>Fleet&nbsp;#</a>" . (($sql_order_by == 'fleet_number') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=vehicle_type&sort_seq=$sql_order_by_seq'>Vehicle&nbsp;Type</a>" . (($sql_order_by == 'vehicle_type') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=tag&sort_seq=$sql_order_by_seq'>Tag</a>" . (($sql_order_by == 'tag') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=year_made&sort_seq=$sql_order_by_seq'>Year</a>" . (($sql_order_by == 'year_made') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=max_seats&sort_seq=$sql_order_by_seq'>Max&nbsp;Seats</a>" . (($sql_order_by == 'max_seats') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=image_url&sort_seq=$sql_order_by_seq'>Image</a>" . (($sql_order_by == 'image_url') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=active_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'active_status') ? $order_icon : '') . "</th>
+		<th><a href='$url" . $query_symbol . "sort_by=vehicle_make&sort_seq=$sql_order_by_seq'>make</a>" . (($sql_order_by == 'vehicle_make') ? $order_icon : '') . "</th>
 		<th class='icon-cell'></th>
 		</tr>
 		$table_rows
-		</table>";
+		</table>
+		";
 	if ($total_items > $page_offset) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
@@ -127,19 +107,17 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VEHICLES</title>
+	<title>SETTINGS - VEHICLE MAKE VALUES</title>
 	<?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_vehicles_listing'>
+<body id='page-listing' class='page_listing page_settings_vehicle_make_values_listing'>
 	<?php include('php/_header.php'); ?>
 	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_vehicles.png"> vehicles</div>
+		<div class='left-block'><img src="images/icons/set_vehicle_makes.png"> settings - vehicle makes</div>
 		<div class='right-block'>
-			✢ <a href='vehicles_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Vehicle</a>
+			✢ <a href='settings_vehicle_make_values_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Vehicle Make</a>
 		</div>
 	</section>
-
-	<!-- <div class='page-image' style='background-image:url(images/page-vehicles.jpg);'></div> -->
 
 	<?php if (isset($message)) print $message; ?>
 
@@ -150,7 +128,7 @@ if ($results) {
 					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
 					<input type='submit' value='Get'>
 			</form>
-			<form id='search_form' method='get'>
+			<form id='search_form' method='get' style='display:none;'>
 					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
 					<input type='submit' value='Search'>
 			</form>
@@ -172,8 +150,9 @@ if ($results) {
 			</form>
 		</section>
 		<?php 
-			if (isset($listing_html)) print $listing_html;
+		if (isset($listing_html)) print $listing_html;
 		?>
+		
 	</main>
 	<?php include('php/_footer.php'); ?>
 </body>

@@ -2,15 +2,27 @@
 include('php/_code.php'); 
 $run_query = false;
 $sql_where = '';
+
 if (isset($_GET['search'])) {
-	$search = trim($_GET['search']);
-	if (empty($search)) {
-		$message = "<div class='failure-result'>Provide a search term</div>";
-	} else {
-		$sql_where = "WHERE MATCH(from_city,to_city) AGAINST('" . cd($dbcon, $search) . "')";
+	
+	$search_from = trim($_GET['search_from']);
+	$search_to = trim($_GET['search_to']);
+	$from_sql = '';
+	$to_sql = '';
+
+	if (!empty($search_from)) {
+		$from_sql = "from_city = '" . cd($dbcon, $search_from) . "'";
+	}
+	if (!empty($search_to)) {
+		$to_sql = " AND to_city = '" . cd($dbcon, $search_to) . "'";
+	}
+
+	if (!empty($search_from)) {
+		$sql_where = "WHERE $from_sql $to_sql";
 		$run_query = true;
 	}
 }
+
 if ($run_query) {
 	$results = mysqli_query($dbcon, "SELECT key_rates_zones, from_city, from_state, to_city, to_state, tolls, rate FROM rates_zones $sql_where");
 	if ($results) {
@@ -53,7 +65,7 @@ if ($run_query) {
 	<title>ZONE RATES</title>
 	<?php include('php/_head.php'); ?>
 </head>
-<body id='page-select' onload="document.getElementById('search').focus();">
+<body id='page-select' onload="document.getElementById('search_from').focus();">
 	
 	<section id='sub-menu'>
 		<h3>ZONE RATES</h3>
@@ -64,8 +76,9 @@ if ($run_query) {
 	<main>
 		<section id='search-forms'>
 			<form method='get'>
-					<input id='search' name='search' type='text' autofocus required> 
-					<input type='submit' value='Search'> &nbsp; <a href='rates_zones_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
+				<input id='search_from' name='search_from' type='text' value='<?php if (isset($search_from)) print $search_from; ?>' autofocus required> 
+				<input name='search_to' type='text' value='<?php if (isset($search_to)) print $search_to; ?>' > 
+				<input type='submit' name='search' value='Search'> &nbsp; <a href='rates_zones_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
 			</form>
 		</section>
 		<?php 

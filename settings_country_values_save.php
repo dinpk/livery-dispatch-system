@@ -91,7 +91,8 @@ if (isset($_POST['save_submit'])) {
              <input <?php if ($focus_field == 'country') print 'autofocus'; ?> id='country' name='country' type='text' value='<?php if (isset($country)) {print $country;} else { print '';} ?>' required><br>
          </div>
          <div>
-             <label for='country_code'>Country code</label>             <?php if(isset($msg_country_code)) print $msg_country_code; ?>
+             <label for='country_code'>Country code</label>
+			 <?php if(isset($msg_country_code)) print $msg_country_code; ?>
              <input <?php if ($focus_field == 'country_code') print 'autofocus'; ?> id='country_code' name='country_code' type='text' value='<?php if (isset($country_code)) {print $country_code;} else { print '';} ?>'><br>
          </div>
 		</fieldset>

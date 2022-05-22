@@ -91,12 +91,14 @@ if (isset($_POST['save_submit'])) {
 		<fieldset>
 
          <div>
-             <label for='state'>State</label>             <?php if(isset($msg_state)) print $msg_state; ?>
+             <label for='state'>State</label>
+			 <?php if(isset($msg_state)) print $msg_state; ?>
              <input <?php if ($focus_field == 'state') print 'autofocus'; ?> id='state' name='state' type='text' value='<?php if (isset($state)) {print $state;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='state_code'>State code</label>             <?php if(isset($msg_state_code)) print $msg_state_code; ?>
+             <label for='state_code'>State code</label>
+			 <?php if(isset($msg_state_code)) print $msg_state_code; ?>
              <input <?php if ($focus_field == 'state_code') print 'autofocus'; ?> id='state_code' name='state_code' type='text' value='<?php if (isset($state_code)) {print $state_code;} else { print '';} ?>'><br>
          </div>
 

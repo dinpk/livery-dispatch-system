@@ -718,7 +718,8 @@ if (isset($_POST['save_submit'])) {
 			 <input id='key_rates_zones' name='key_rates_zones' type='hidden' value='<?php if (isset($key_rates_zones)) {print $key_rates_zones;} else {print '0';} ?>'>
 
 			 <div>
-				 <label for='reference_number'>Reference #</label>             <?php if(isset($msg_reference_number)) print $msg_reference_number; ?>
+				 <label for='reference_number'>Reference #</label>
+			 <?php if(isset($msg_reference_number)) print $msg_reference_number; ?>
 				 <input <?php if ($focus_field == 'reference_number') print 'autofocus'; ?> id='reference_number' name='reference_number' type='text' value='<?php if (isset($reference_number)) {print $reference_number;} else { print '';} ?>'><br>
 			 </div>
 
@@ -733,7 +734,8 @@ if (isset($_POST['save_submit'])) {
 			 </div>
 
 			 <div>
-				 <label for='total_passengers'>Total passengers</label>             <?php if(isset($msg_total_passengers)) print $msg_total_passengers; ?>
+				 <label for='total_passengers'>Total passengers</label>
+			 <?php if(isset($msg_total_passengers)) print $msg_total_passengers; ?>
 				 <input <?php if ($focus_field == 'total_passengers') print 'autofocus'; ?> id='total_passengers' name='total_passengers' type='number' value='<?php if (isset($total_passengers)) {print $total_passengers;} else { print '1';} ?>'><br>
 			 </div>
 
@@ -839,7 +841,8 @@ if (isset($_POST['save_submit'])) {
 			 </div>
 
 			 <div>
-				 <label for='flight_number'>Flight #</label>             <?php if(isset($msg_flight_number)) print $msg_flight_number; ?>
+				 <label for='flight_number'>Flight #</label>
+			 <?php if(isset($msg_flight_number)) print $msg_flight_number; ?>
 				 <input <?php if ($focus_field == 'flight_number') print 'autofocus'; ?> id='flight_number' name='flight_number' type='text' value='<?php if (isset($flight_number)) {print $flight_number;} else { print '';} ?>'><br>
 			 </div>
 
@@ -883,12 +886,14 @@ if (isset($_POST['save_submit'])) {
 			 </div>
 
 			 <div>
-				 <label for='routing_notes'>Routing notes</label>             <?php if(isset($msg_routing_notes)) print $msg_routing_notes; ?>
+				 <label for='routing_notes'>Routing notes</label>
+			 <?php if(isset($msg_routing_notes)) print $msg_routing_notes; ?>
 				 <textarea <?php if ($focus_field == 'routing_notes') print 'autofocus'; ?> id='routing_notes' name='routing_notes'><?php if (isset($routing_notes)) print $routing_notes; ?></textarea><br>
 			 </div>
 
 			 <div>
-				 <label for='dispatcher_notes'>Dispatcher notes</label>             <?php if(isset($msg_dispatcher_notes)) print $msg_dispatcher_notes; ?>
+				 <label for='dispatcher_notes'>Dispatcher notes</label>
+			 <?php if(isset($msg_dispatcher_notes)) print $msg_dispatcher_notes; ?>
 				 <textarea <?php if ($focus_field == 'dispatcher_notes') print 'autofocus'; ?> id='dispatcher_notes' name='dispatcher_notes'><?php if (isset($dispatcher_notes)) print $dispatcher_notes; ?></textarea><br>
 			 </div>
 

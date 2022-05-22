@@ -354,10 +354,11 @@ main ul {
 }
 
 #page-save form {
-	display:flex;
-	flex-wrap:wrap;
-	align-items:flex-start;
-	justify-content:center;
+	height: 80vh;
+	flex-direction: column;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
 }
 
 #page-save form div {
@@ -369,6 +370,7 @@ main ul {
 	background-color:#FFF;
 	margin:0 1% 1% 0;
 	padding:20px;
+	max-width:23%;
 }
 
 #page-save legend {
@@ -1158,7 +1160,14 @@ main ul {
 		display:block;
 	}
 	
+	#page-save form {
+		height:auto;
+		align-items:flex-start;
+		justify-content:center;
+	}
+
 	#page-save fieldset {
+		max-width:96%;
 		width:96% !important;
 		margin:0 auto 20px auto !important;
 	}

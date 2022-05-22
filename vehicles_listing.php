@@ -46,7 +46,7 @@ if (isset($_GET['search'])) {
 	if (empty($search)) {
 		$message = "<div class='failure-result'>Provide a search term</div>";
 	} else {
-		$sql_where = "WHERE MATCH(fleet_number, vehicle_type, tag, vin_number, year_made, model, color, notes) AGAINST('" . cd($dbcon, $search) . "')";
+		$sql_where = "WHERE MATCH(fleet_number, vehicle_type, tag, vin_number, year_made, make, model, color, notes) AGAINST('" . cd($dbcon, $search) . "')";
 	}
 }
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
@@ -67,16 +67,22 @@ if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_vehicles'];
+		$image_url = $row['image_url'];
+		if (!empty($image_url)) {
+			$image_url = "<a href='$image_url' target='_blank'><img src='$image_url' valign='middle'></a>";
+		} else {
+			$image_url = "<img src='images/icons/lis_vehicles.png' valign='middle'>";
+		}
 		$table_rows = $table_rows . "
 		<tr>
 		<td>" . $row['make'] . "</td>
 		<td>" . $row['model'] . "</td>
 		<td class='center'>" . $row['fleet_number'] . "</td>
 		<td>" . $row['vehicle_type'] . "</td>
+		<td class='center'>$image_url</td>
 		<td class='center'>" . $row['tag'] . "</td>
 		<td class='center'>" . $row['year_made'] . "</td>
 		<td class='center'>" . $row['max_seats'] . "</td>
-		<td class='center'><a href='" . $row['image_url'] . "'><img src='" . $row['image_url'] . "'></a></td>
 		<td class='center'>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-menus'>
 			<a href='#' class='toggle' onclick='record_menu(\"menu$record_id\", this);return false;'>ooo</a>
@@ -97,10 +103,10 @@ if ($results) {
 		<th><a href='$url" . $query_symbol . "sort_by=model&sort_seq=$sql_order_by_seq'>Model</a>" . (($sql_order_by == 'model') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=fleet_number&sort_seq=$sql_order_by_seq'>Fleet&nbsp;#</a>" . (($sql_order_by == 'fleet_number') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=vehicle_type&sort_seq=$sql_order_by_seq'>Vehicle&nbsp;Type</a>" . (($sql_order_by == 'vehicle_type') ? $order_icon : '') . "</th>
+		<th><a href='$url" . $query_symbol . "sort_by=image_url&sort_seq=$sql_order_by_seq'>Image</a>" . (($sql_order_by == 'image_url') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=tag&sort_seq=$sql_order_by_seq'>Tag</a>" . (($sql_order_by == 'tag') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=year_made&sort_seq=$sql_order_by_seq'>Year</a>" . (($sql_order_by == 'year_made') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=max_seats&sort_seq=$sql_order_by_seq'>Max&nbsp;Seats</a>" . (($sql_order_by == 'max_seats') ? $order_icon : '') . "</th>
-		<th><a href='$url" . $query_symbol . "sort_by=image_url&sort_seq=$sql_order_by_seq'>Image</a>" . (($sql_order_by == 'image_url') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=active_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'active_status') ? $order_icon : '') . "</th>
 		<th class='icon-cell'></th>
 		</tr>
@@ -110,9 +116,9 @@ if ($results) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
 		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ⯇ </a></td>";
+		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ◄ </a></td></td>";
 		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ⯈ </a></td>";
+		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ► </a></td>";
 		$pager = "<table id='pager'><tr>$pager</tr></table>";
 		$listing_html .= $pager;
 	}

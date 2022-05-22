@@ -1,4 +1,4 @@
-?php 
+<?php 
 include('php/_code.php');
 $show_form = true;
 $focus_field = 'trip_type';

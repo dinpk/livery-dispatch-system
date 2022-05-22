@@ -122,27 +122,32 @@ if (isset($_POST['save_submit'])) {
 
 
          <div>
-             <label for='sender_email'>Sender email</label>             <?php if(isset($msg_sender_email)) print $msg_sender_email; ?>
+             <label for='sender_email'>Sender email</label>
+			 <?php if(isset($msg_sender_email)) print $msg_sender_email; ?>
              <input <?php if ($focus_field == 'sender_email') print 'autofocus'; ?> id='sender_email' name='sender_email' type='email' value='<?php if (isset($sender_email)) {print $sender_email;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='sender_password'>Sender password</label>             <?php if(isset($msg_sender_password)) print $msg_sender_password; ?>
+             <label for='sender_password'>Sender password</label>
+			 <?php if(isset($msg_sender_password)) print $msg_sender_password; ?>
              <input <?php if ($focus_field == 'sender_password') print 'autofocus'; ?> id='sender_password' name='sender_password' type='password' value='<?php if (isset($sender_password)) {print $sender_password;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='reply_to_email'>Reply to email</label>             <?php if(isset($msg_reply_to_email)) print $msg_reply_to_email; ?>
+             <label for='reply_to_email'>Reply to email</label>
+			 <?php if(isset($msg_reply_to_email)) print $msg_reply_to_email; ?>
              <input <?php if ($focus_field == 'reply_to_email') print 'autofocus'; ?> id='reply_to_email' name='reply_to_email' type='email' value='<?php if (isset($reply_to_email)) {print $reply_to_email;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='copy_to_email'>Copy to email</label>             <?php if(isset($msg_copy_to_email)) print $msg_copy_to_email; ?>
+             <label for='copy_to_email'>Copy to email</label>
+			 <?php if(isset($msg_copy_to_email)) print $msg_copy_to_email; ?>
              <input <?php if ($focus_field == 'copy_to_email') print 'autofocus'; ?> id='copy_to_email' name='copy_to_email' type='email' value='<?php if (isset($copy_to_email)) {print $copy_to_email;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='smtp_address'>Smtp</label>             <?php if(isset($msg_smtp_address)) print $msg_smtp_address; ?>
+             <label for='smtp_address'>Smtp</label>
+			 <?php if(isset($msg_smtp_address)) print $msg_smtp_address; ?>
              <input <?php if ($focus_field == 'smtp_address') print 'autofocus'; ?> id='smtp_address' name='smtp_address' type='text' value='<?php if (isset($smtp_address)) {print $smtp_address;} else { print '';} ?>'><br>
          </div>
 

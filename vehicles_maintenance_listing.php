@@ -107,9 +107,9 @@ if ($results) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
 		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ⯇ </a></td>";
+		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ◄ </a></td></td>";
 		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ⯈ </a></td>";
+		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ► </a></td>";
 		$pager = "<table id='pager'><tr>$pager</tr></table>";
 		$listing_html .= $pager;
 	}

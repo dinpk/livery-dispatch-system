@@ -62,16 +62,23 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM staff $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_staff, designation, first_name, last_name, mobile_phone, email, active_status FROM staff $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_staff, designation, first_name, last_name, mobile_phone, email, image_url, active_status FROM staff $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_staff'];
+		$image_url = $row['image_url'];
+		if (!empty($image_url)) {
+			$image_url = "<a href='$image_url' target='_blank'><img src='$image_url' valign='middle'></a>";
+		} else {
+			$image_url = "<img src='images/icons/lis_staff.png' valign='middle'>";
+		}
 		$table_rows .= "
 		<tr>
 		<td>" . $row['designation'] . "</td>
 		<td>" . $row['first_name'] . "</td>
 		<td>" . $row['last_name'] . "</td>
+		<td class='center'>$image_url</td>
 		<td>" . $row['mobile_phone'] . "</td>
 		<td>" . $row['email'] . "</td>
 		<td>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
@@ -88,6 +95,7 @@ if ($results) {
 		<th><a href='$url" . $query_symbol . "sort_by=designation&sort_seq=$sql_order_by_seq'>Designation</a>" . (($sql_order_by == 'designation') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>First&nbsp;Name</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=last_name&sort_seq=$sql_order_by_seq'>Last&nbsp;Name</a>" . (($sql_order_by == 'last_name') ? $order_icon : '') . "</th>
+		<th></th>
 		<th><a href='$url" . $query_symbol . "sort_by=mobile_phone&sort_seq=$sql_order_by_seq'>Mobile #</a>" . (($sql_order_by == 'mobile_phone') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=email&sort_seq=$sql_order_by_seq'>Email</a>" . (($sql_order_by == 'email') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=active_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'active_status') ? $order_icon : '') . "</th>
@@ -100,9 +108,9 @@ if ($results) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
 		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ⯇ </a></td>";
+		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ◄ </a></td></td>";
 		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ⯈ </a></td>";
+		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ► </a></td>";
 		$pager = "<table id='pager'><tr>$pager</tr></table>";
 		$listing_html .= $pager;
 	}
@@ -110,7 +118,7 @@ if ($results) {
 		$message = "<div class='failure-result'>No record found</div>";
 	}
 } else {
-	//print mysqli_error($dbcon);
+	print mysqli_error($dbcon);
 	die('Unable to get records, please contact your system administrator.');
 }
 ?>
@@ -129,7 +137,7 @@ if ($results) {
 		</div>
 	</section>
 
-	<div class='page-image' style='background-image:url(images/page-staff.jpg);'></div>
+	<!-- <div class='page-image' style='background-image:url(images/page-staff.jpg);'></div> -->
 
 	<?php if (isset($message)) print $message; ?>
 

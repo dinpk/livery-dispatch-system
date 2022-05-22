@@ -169,22 +169,26 @@ if (isset($_POST['save_submit'])) {
          </div>
 
          <div>
-             <label for='image_url'>Image url</label>             <?php if(isset($msg_image_url)) print $msg_image_url; ?>
+             <label for='image_url'>Image url</label>
+			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
              <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='address1'>Address 1</label>             <?php if(isset($msg_address1)) print $msg_address1; ?>
+             <label for='address1'>Address 1</label>
+			 <?php if(isset($msg_address1)) print $msg_address1; ?>
              <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='address2'>Address 2</label>             <?php if(isset($msg_address2)) print $msg_address2; ?>
+             <label for='address2'>Address 2</label>
+			 <?php if(isset($msg_address2)) print $msg_address2; ?>
              <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
          </div>
 
          <div>
-             <label for='city'>City</label>             <?php if(isset($msg_city)) print $msg_city; ?>
+             <label for='city'>City</label>
+			 <?php if(isset($msg_city)) print $msg_city; ?>
              <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
          </div>
 
@@ -206,7 +210,8 @@ if (isset($_POST['save_submit'])) {
          </div>
 
          <div>
-             <label for='zip_code'>Zip code</label>             <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
+             <label for='zip_code'>Zip code</label>
+			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
              <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
          </div>
 

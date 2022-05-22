@@ -149,6 +149,13 @@ include('php/_code.php');
 			</a>
 		</section>
 		<section>
+			<a href='settings_staff_designation_values_listing.php'>
+				<div><img src="images/icons/set_workshops.png"></div>
+				<h3>Designations</h3>
+				<p>Designations of staff such as management, dispatch, billing, tech support, etc.</p>
+			</a>
+		</section>
+		<section>
 			<a href='settings_company_save.php?settings_companyid=1' target='overlay-iframe' onclick='overlayOpen();'>
 				<div><img src="images/icons/set_company.png"></div>
 				<h3>Company</h3>

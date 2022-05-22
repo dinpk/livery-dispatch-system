@@ -7,7 +7,7 @@ if (isset($_GET['search'])) {
 	if (empty($search)) {
 		$message = "<div class='failure-result'>Provide a search term</div>";
 	} else {
-		$sql_where = "WHERE MATCH(tag,vin_number,year_made,model,color,notes,vehicle_type,fleet_number) AGAINST('" . cd($dbcon, $search) . "')";
+		$sql_where = "WHERE MATCH(tag,vin_number,year_made,make,model,color,notes,vehicle_type,fleet_number) AGAINST('" . cd($dbcon, $search) . "')";
 		$run_query = true;
 	}
 }

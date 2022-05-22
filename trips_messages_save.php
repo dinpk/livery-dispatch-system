@@ -140,7 +140,8 @@ if (isset($_POST['save_submit'])) {
          </div>
 
          <div>
-             <label for='message'>Message</label>             <?php if(isset($msg_message)) print $msg_message; ?>
+             <label for='message'>Message</label>
+			 <?php if(isset($msg_message)) print $msg_message; ?>
              <textarea <?php if ($focus_field == 'message') print 'autofocus'; ?> id='message' name='message'><?php if (isset($message)) print $message; ?></textarea><br>
          </div>
 

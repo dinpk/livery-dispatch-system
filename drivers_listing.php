@@ -62,11 +62,17 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM drivers $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_drivers, first_name, last_name, contract_type, city, state, active_status FROM drivers $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_drivers, first_name, last_name, contract_type, city, state, fleet_number, image_url, active_status FROM drivers $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_drivers'];
+		$image_url = $row['image_url'];
+		if (!empty($image_url)) {
+			$image_url = "<a href='$image_url' target='_blank'><img src='$image_url' valign='middle'></a>";
+		} else {
+			$image_url = "<img src='images/icons/lis_drivers.png' valign='middle'>";
+		}
 		$table_rows .= "
 		<tr>
 		<td>" . $row['first_name'] . "</td>
@@ -74,6 +80,8 @@ if ($results) {
 		<td>" . $row['contract_type'] . "</td>
 		<td>" . $row['city'] . "</td>
 		<td>" . $row['state'] . "</td>
+		<td>" . $row['fleet_number'] . "</td>
+		<td class='center'>$image_url</td>
 		<td class='center'>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-menus'>
 		<a href='#' class='toggle' onclick='record_menu(\"menu$record_id\", this);return false;'>ooo</a>
@@ -95,6 +103,8 @@ if ($results) {
 		<th><a href='$url" . $query_symbol . "sort_by=contract_type&sort_seq=$sql_order_by_seq'>Contract&nbsp;Type</a>" . (($sql_order_by == 'contract_type') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=city&sort_seq=$sql_order_by_seq'>City</a>" . (($sql_order_by == 'city') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=state&sort_seq=$sql_order_by_seq'>State</a>" . (($sql_order_by == 'state') ? $order_icon : '') . "</th>
+		<th><a href='$url" . $query_symbol . "sort_by=fleet_number&sort_seq=$sql_order_by_seq'>Fleet&nbsp;#</a>" . (($sql_order_by == 'fleet_number') ? $order_icon : '') . "</th>
+		<th>Image</th>
 		<th><a href='$url" . $query_symbol . "sort_by=active_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'active_status') ? $order_icon : '') . "</th>
 		<th class='icon-cell'></th>
 		</tr>
@@ -104,9 +114,9 @@ if ($results) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
 		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ⯇ </a></td>";
+		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ◄ </a></td></td>";
 		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ⯈ </a></td>";
+		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ► </a></td>";
 		$pager = "<table id='pager'><tr>$pager</tr></table>";
 		$listing_html .= $pager;
 	}
@@ -133,7 +143,7 @@ if ($results) {
 		</div>
 	</section>
 
-	<div class='page-image' style='background-image:url(images/page-drivers.jpg);'></div>
+	<!-- <div class='page-image' style='background-image:url(images/page-drivers.jpg);'></div> -->
 
 	<?php if (isset($message)) print $message; ?>
 

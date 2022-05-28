@@ -124,38 +124,43 @@ if ($results) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>STAFF</title>
-	<?php include('php/_head.php'); ?>
+    <title>STAFF</title>
+    <?php include('php/_head.php'); ?>
 </head>
+
 <body id='page-listing' class='page_listing page_staff_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_staff.png"> staff</div>
-		<div class='right-block'>
-			✢ <a href='staff_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Staff Account</a>
-		</div>
-	</section>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_staff.png"> staff</div>
+        <div class='right-block'>
+            ✢ <a href='staff_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Staff Account</a>
+        </div>
+    </section>
 
-	<!-- <div class='page-image' style='background-image:url(images/page-staff.jpg);'></div> -->
+    <div class='page-image' style='background-image:url(images/page-staff.jpg);'></div>
 
-	<?php if (isset($message)) print $message; ?>
+    <?php if (isset($message)) print $message; ?>
 
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -165,15 +170,16 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
+
 </html>

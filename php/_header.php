@@ -7,15 +7,18 @@
 		<a href='trips_conclude_listing.php' title='Conclude'><img src="images/icons/hed_conclude.png"></a>
 		<a href='trips_payroll_settlement_listing.php' title='Settle'><img src="images/icons/hed_settle.png"></a>
 		<a href='customer_invoices_listing.php' title='Invoices'><img src="images/icons/hed_bill.png"></a>
+		<a href='drivers_listing.php' title='Drivers'><img src="images/icons/hed_drivers.png"></a>
+		<a href='vehicles_listing.php' title='Vehicles'><img src="images/icons/hed_vehicles.png"></a>
+		<a href='rates_zones_listing.php' title='Zone Rates'><img src="images/icons/hed_rates_zones.png"></a>
 	</header>
 
 	<nav>
 		<ul>
 			<li><a href='trips_listing.php'><img src="images/icons/nav_trips.png"> Trips</a></li>
-			<li><a href='customer_passengers_listing.php'><img src="images/icons/nav_passengers.png"> Passengers</a></li>
-			<li><a href='customer_contacts_listing.php'><img src="images/icons/nav_contacts.png"> Contacts</a></li>
-			<li><a href='customer_billing_contacts_listing.php'><img src="images/icons/nav_billing_contacts.png"> Billing Contacts</a></li>
-			<li><a href='customer_companies_listing.php'><img src="images/icons/nav_companies.png"> Companies</a></li>
+			<li><a href='customer_passengers_listing.php'><img src="images/icons/nav_passengers.png"> Customer Passengers</a></li>
+			<li><a href='customer_contacts_listing.php'><img src="images/icons/nav_contacts.png"> Customer Contacts</a></li>
+			<li><a href='customer_billing_contacts_listing.php'><img src="images/icons/nav_billing_contacts.png"> Customer Billing Contacts</a></li>
+			<li><a href='customer_companies_listing.php'><img src="images/icons/nav_companies.png"> Customer Companies</a></li>
 			<li><a href='customer_rate_packages_listing.php'><img src="images/icons/nav_rate_packages.png"> Rate Packages</a></li>
 			<li><a href='trips_conclude_listing.php'><img src="images/icons/nav_conclude.png"> Conclude</a></li>
 			<li><a href='trips_payroll_settlement_listing.php'><img src="images/icons/nav_settle.png"> Settle</a></li>

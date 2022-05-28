@@ -17,7 +17,12 @@ if (isset($_GET['customer_companiesid'])) {
 			$city = $row['city'];
 			$state = $row['state'];
 			$zip_code = $row['zip_code'];
+			$phone1 = $row['phone1'];
+			$phone2 = $row['phone2'];
+			$email = $row['email'];
+			$website = $row['website'];
 			$country = $row['country'];
+			$notes = $row['notes'];
 			$active_status = $row['active_status'];
 		} else {
 			$message = "<div class='failure-result'>Record not found</div>";
@@ -34,12 +39,42 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'active_status';
 		$error = 1;
 	}
+	$notes = trim($_POST['notes']);
+	if (strlen($notes) > 2000) {
+		$msg_notes = "<div class='message-error'>Provide a valid value of length 0-2000</div>";
+		$focus_field = 'notes';
+		$error = 1;
+	}
 	$country = trim($_POST['country']);
 	if (strlen($country) > 100) {
 		$msg_country = "<div class='message-error'>Provide a valid value of length 0-100</div>";
 		$focus_field = 'country';
 		$error = 1;
 	}
+	$website = trim($_POST['website']);
+	if (strlen($website) > 100) {
+		$msg_website = "<div class='message-error'>Provide a valid value of length 0-100</div>";
+		$focus_field = 'website';
+		$error = 1;
+	}
+	$email = trim($_POST['email']);
+	if (strlen($email) > 100) {
+		$msg_email = "<div class='message-error'>Provide a valid value of length 0-100</div>";
+		$focus_field = 'email';
+		$error = 1;
+	}
+	$phone2 = trim($_POST['phone2']);
+	if (strlen($phone2) > 30) {
+		$msg_phone2 = "<div class='message-error'>Provide a valid value of length 0-30</div>";
+		$focus_field = 'phone2';
+		$error = 1;
+	}	
+	$phone1 = trim($_POST['phone1']);
+	if (strlen($phone1) > 30) {
+		$msg_phone1 = "<div class='message-error'>Provide a valid value of length 0-30</div>";
+		$focus_field = 'phone1';
+		$error = 1;
+	}	
 	$zip_code = trim($_POST['zip_code']);
 	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-50</div>";
@@ -93,7 +128,12 @@ if (isset($_POST['save_submit'])) {
 			city = '" . sd($dbcon, $city) . "',
 			state = '" . sd($dbcon, $state) . "',
 			zip_code = '" . sd($dbcon, $zip_code) . "',
+			phone1 = '" . sd($dbcon, $phone1) . "',
+			phone2 = '" . sd($dbcon, $phone2) . "',
+			email = '" . sd($dbcon, $email) . "',
+			website = '" . sd($dbcon, $website) . "',
 			country = '" . sd($dbcon, $country) . "',
+			notes = '" . sd($dbcon, $notes) . "',
 			active_status = '" . sd($dbcon, $active_status) . "'
 				WHERE key_customer_companies = $record_id");
 			if ($results) {
@@ -111,7 +151,12 @@ if (isset($_POST['save_submit'])) {
 			city,
 			state,
 			zip_code,
+			phone1,
+			phone2,
+			email,
+			website,
 			country,
+			notes,
 			active_status
 			) 
 			VALUES (
@@ -122,7 +167,12 @@ if (isset($_POST['save_submit'])) {
 			'" . sd($dbcon, $city) . "',
 			'" . sd($dbcon, $state) . "',
 			'" . sd($dbcon, $zip_code) . "',
+			'" . sd($dbcon, $phone1) . "',
+			'" . sd($dbcon, $phone2) . "',
+			'" . sd($dbcon, $email) . "',
+			'" . sd($dbcon, $website) . "',
 			'" . sd($dbcon, $country) . "',
+			'" . sd($dbcon, $notes) . "',
 			'" . sd($dbcon, $active_status) . "'
 			)");
 			if ($results) {
@@ -142,62 +192,66 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>CUSTOMER COMPANY</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER COMPANY</title>
+    <?php include('php/_head.php'); ?>
 </head>
+
 <body id='page-save' class='page_save page_customer_companies_save'>
 
-	<section id='sub-menu'>
-		<div class='left-block'>customer company</div>
-		<div class='right-block'>
+    <section id='sub-menu'>
+        <div class='left-block'>customer company</div>
+        <div class='right-block'>
 
-		</div>
-	</section>
+        </div>
+    </section>
 
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
+    <?php if (isset($message)) print $message; ?>
 
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
+    <main>
 
-         <div>
-             <label for='company_name'>Company name</label> <span class='red'> *</span>             <?php if(isset($msg_company_name)) print $msg_company_name; ?>
-             <input <?php if ($focus_field == 'company_name') print 'autofocus'; ?> id='company_name' name='company_name' type='text' value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>' required><br>
-         </div>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
 
-         <div>
-             <label for='image_url'>Image url</label>
-			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='company_name'>Company name</label> <span class='red'> *</span>
+                    <?php if(isset($msg_company_name)) print $msg_company_name; ?>
+                    <input <?php if ($focus_field == 'company_name') print 'autofocus'; ?> id='company_name'
+                        name='company_name' type='text'
+                        value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>'
+                        required><br>
+                </div>
 
-         <div>
-             <label for='address1'>Address 1</label>
-			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='address1'>Address 1</label>
+                    <?php if(isset($msg_address1)) print $msg_address1; ?>
+                    <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1'
+                        type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='address2'>Address 2</label>
-			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='address2'>Address 2</label>
+                    <?php if(isset($msg_address2)) print $msg_address2; ?>
+                    <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2'
+                        type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='city'>City</label>
-			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='city'>City</label>
+                    <?php if(isset($msg_city)) print $msg_city; ?>
+                    <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text'
+                        value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='state'>State</label><br>
-             <?php if(isset($msg_state)) print $msg_state; ?>
-             <input id='state' name='state' list='list_state' value='<?php if (isset($state)) {print $state;} ?>'><br>
-             <datalist id='list_state'>
-             <?php 
+                <div>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <input id='state' name='state' list='list_state'
+                        value='<?php if (isset($state)) {print $state;} ?>'><br>
+                    <datalist id='list_state'>
+                        <?php 
                  $options = '';
                  
                  $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
@@ -206,48 +260,96 @@ if (isset($_POST['save_submit'])) {
                  }
                  print $options; 
                  ?>
-             </datalist>
-         </div>
+                    </datalist>
+                </div>
 
-         <div>
-             <label for='zip_code'>Zip code</label>
-			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='zip_code'>Zip code</label>
+                    <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
+                    <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code'
+                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                </div>
 
-		 <div>
-			 <label for='country'>Country</label><br>
-			 <?php if(isset($msg_country)) print $msg_country; ?>
-			 <select id='country' name='country'>
-				 <?php 
-				 $options = '';
-				 
-				 $results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
-				 while ($row = mysqli_fetch_assoc($results)) {
-					 $selection = '';
-					 if ($row['country'] == $country) $selection = "selected='selected'";
-						 $options .= "<option $selection>" . $row['country'] . "</option>";
-				 }
-				 print $options; 
-				 ?>
-			 </select>
-		 </div>
+                <div>
+                    <label for='country'>Country</label><br>
+                    <?php if(isset($msg_country)) print $msg_country; ?>
+                    <select id='country' name='country'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['country'] == $country) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['country'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset>
 
-         <div>
-             <?php if(isset($msg_active_status)) print $msg_active_status; ?>
-             <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?> type='checkbox' id='active_status' name='active_status'> <label for='active_status'>Status</label><br>
-         </div>
+                <div>
+                    <label for='phone1'>Phone 1</label>
+                    <?php if(isset($msg_phone1)) print $msg_phone1; ?>
+                    <input <?php if ($focus_field == 'phone1') print 'autofocus'; ?> id='phone1' name='phone1'
+                        type='tel' value='<?php if (isset($phone1)) {print $phone1;} else { print '';} ?>'><br>
+                </div>
 
-		</fieldset>
-		<div class='clear-fix'>
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
-		
-	</form>
-	<?php } ?>
+                <div>
+                    <label for='phone2'>Phone 2</label>
+                    <?php if(isset($msg_phone2)) print $msg_phone2; ?>
+                    <input <?php if ($focus_field == 'phone2') print 'autofocus'; ?> id='phone2' name='phone2'
+                        type='tel' value='<?php if (isset($phone2)) {print $phone2;} else { print '';} ?>'><br>
+                </div>
 
-	</main>
-	<?php include('php/_footer.php'); ?>
+                <div>
+                    <label for='email'>Email</label>
+                    <?php if(isset($msg_email)) print $msg_email; ?>
+                    <input <?php if ($focus_field == 'email') print 'autofocus'; ?> id='email' name='email' type='email'
+                        value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
+                </div>
+
+                <div>
+                    <label for='website'>Website</label>
+                    <?php if(isset($msg_website)) print $msg_website; ?>
+                    <input <?php if ($focus_field == 'website') print 'autofocus'; ?> id='website' name='website'
+                        type='url' value='<?php if (isset($website)) {print $website;} else { print '';} ?>'><br>
+                </div>
+
+                <div>
+                    <label for='image_url'>Image url</label>
+                    <?php if(isset($msg_image_url)) print $msg_image_url; ?>
+                    <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url'
+                        type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+                </div>
+
+                <div>
+                    <label for='notes'>Notes</label>
+                    <?php if(isset($msg_notes)) print $msg_notes; ?>
+                    <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes'
+                        name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                </div>
+
+                <div>
+                    <?php if(isset($msg_active_status)) print $msg_active_status; ?>
+                    <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='active_status' name='active_status'> <label
+                        for='active_status'>Status</label><br>
+                </div>
+
+            </fieldset>
+            <div class='clear-fix'>
+                <input id='save_submit' name='save_submit' type='submit' value='Save'>
+            </div>
+
+        </form>
+        <?php } ?>
+
+    </main>
+    <?php include('php/_footer.php'); ?>
 
 </body>
+
 </html>

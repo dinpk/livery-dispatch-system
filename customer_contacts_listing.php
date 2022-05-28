@@ -70,7 +70,7 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM customer_contacts $sql_where $sql_where_alt ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_customer_contacts, company_name, first_name, last_name, city, state, zip_code, country, email, active_status 
+$results = mysqli_query($dbcon, "SELECT key_customer_contacts, company_name, first_name, last_name, city, state, work_phone, work_phone_extension, email, active_status 
 				FROM customer_contacts 
 				$sql_where $sql_where_alt 
 				ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
@@ -78,6 +78,8 @@ if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_customer_contacts'];
+		$work_phone_extension = $row['work_phone_extension'];
+		if (!empty($work_phone_extension)) $work_phone_extension = "($work_phone_extension)";
 		$table_rows = $table_rows . "
 		<tr>
 		<td>" . $row['company_name'] . "</td>
@@ -85,8 +87,7 @@ if ($results) {
 		<td>" . $row['last_name'] . "</td>
 		<td>" . $row['city'] . "</td>
 		<td>" . $row['state'] . "</td>
-		<td>" . $row['zip_code'] . "</td>
-		<td>" . $row['country'] . "</td>
+		<td>" . $row['work_phone'] . " $work_phone_extension</td>
 		<td>" . $row['email'] . "</td>
 		<td class='center'>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-menus'>
@@ -107,8 +108,7 @@ if ($results) {
 				<th><a href='$url" . $query_symbol . "sort_by=last_name&sort_seq=$sql_order_by_seq'>Last&nbsp;Name</a>" . (($sql_order_by == 'last_name') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=city&sort_seq=$sql_order_by_seq'>City</a>" . (($sql_order_by == 'city') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=state&sort_seq=$sql_order_by_seq'>State</a>" . (($sql_order_by == 'state') ? $order_icon : '') . "</th>
-				<th><a href='$url" . $query_symbol . "sort_by=zip_code&sort_seq=$sql_order_by_seq'>Zip&nbsp;Code</a>" . (($sql_order_by == 'zip_code') ? $order_icon : '') . "</th>
-				<th><a href='$url" . $query_symbol . "sort_by=country&sort_seq=$sql_order_by_seq'>Country</a>" . (($sql_order_by == 'country') ? $order_icon : '') . "</th>
+				<th><a href='$url" . $query_symbol . "sort_by=work_phone&sort_seq=$sql_order_by_seq'>Phone</a>" . (($sql_order_by == 'work_phone') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=email&sort_seq=$sql_order_by_seq'>Email</a>" . (($sql_order_by == 'email') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=active_status&sort_seq=$sql_order_by_seq'>Status</a>" . (($sql_order_by == 'active_status') ? $order_icon : '') . "</th>
 				<th class='icon-cell'></th>

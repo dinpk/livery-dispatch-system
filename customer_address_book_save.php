@@ -172,115 +172,125 @@ if (isset($_POST['save_submit'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>CUSTOMER ADDRESS BOOK</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER ADDRESS BOOK</title>
+    <?php include('php/_head.php'); ?>
 </head>
+
 <body id='page-save' class='foreign'>
 
-	<?php if (isset($parent_record_label)) print '<h2>' . $parent_record_label . '</h2>'; ?>
+    <?php if (isset($parent_record_label)) print '<h2>' . $parent_record_label . '</h2>'; ?>
 
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
+    <?php if (isset($message)) print $message; ?>
 
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post' action='customer_address_book_save.php<?php print $form_url_parameter; ?>'>
+    <main>
 
-		<fieldset>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post' action='customer_address_book_save.php<?php print $form_url_parameter; ?>'>
 
-		<div>
-		<label for='title'>Title</label><br>
-		<?php if(isset($msg_title)) print $msg_title; ?>
-		<input <?php if ($focus_field == 'title') print 'autofocus'; ?> id='title' name='title' type='text' value='<?php if (isset($title)) {print $title;}  ?>'><br>
-		</div>
-		
-		<div>
-		<label for='category'>Category</label><br>
-		<?php if(isset($msg_category)) print $msg_category; ?>
-		<select id='category' name='category'>
-		<?php 
-		$options = '';
-		
-		$results = mysqli_query($dbcon, 'SELECT category FROM settings_landmark_values');
-		while ($row = mysqli_fetch_assoc($results)) {
-			$selection = '';
-			if ($row['category'] == $category) $selection = "selected='selected'";
-			$options .= "<option $selection>" . $row['category'] . "</option>";
-		}
-		print $options; 
-		?>
-		</select>
-		</div>
-		
-		<div>
-		<label for='address1'>Address 1</label><br>
-		<?php if(isset($msg_address1)) print $msg_address1; ?>
-		<input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;}  ?>'><br>
-		</div>
-		
-		<div>
-		<label for='address2'>Address 2</label><br>
-		<?php if(isset($msg_address2)) print $msg_address2; ?>
-		<input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;}  ?>'><br>
-		</div>
-		
-		<div>
-		<label for='city'>City</label><br>
-		<?php if(isset($msg_city)) print $msg_city; ?>
-		<input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;}  ?>'><br>
-		</div>
-		
-		<div>
-		<label for='state'>State</label><br>
-		<?php if(isset($msg_state)) print $msg_state; ?>
-		<input id='state' name='state' list='list_state' value='<?php if (isset($state)) {print $state;} ?>'><br>
-		<datalist id='list_state'>
-		<?php 
-		$options = '';
-		
-		$results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-		while ($row = mysqli_fetch_assoc($results)) {
-			$options .= "<option value='" . $row['state'] . "'>";
-		}
-		print $options; 
-		?>
-		</datalist>
-		</div>
-		
-		<div>
-		<label for='zip_code'>Zip code</label><br>
-		<?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-		<input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;}  ?>'><br>
-		</div>
-		
-		</fieldset>
-		<fieldset>
-		
-		<div>
-		<label for='image_url'>Image URL</label><br>
-		<?php if(isset($msg_image_url)) print $msg_image_url; ?>
-		<input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='image url' value='<?php if (isset($image_url)) {print $image_url;}  ?>'><br>
-		</div>
-		
-		<div>
-		<label for='notes'>Notes</label><br>
-		<?php if(isset($msg_notes)) print $msg_notes; ?>
-		<textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
-		</div>
-		
-		</fieldset>
-		
-		<div class='clear-fix'>
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
-		
-	</form>
-	<?php } ?>
+            <fieldset>
 
-	</main>
-	<?php include('php/_footer.php'); ?>
+                <div>
+                    <label for='title'>Title</label><br>
+                    <?php if(isset($msg_title)) print $msg_title; ?>
+                    <input id='title' name='title' type='text'
+                        value='<?php if (isset($title)) {print $title;}  ?>'><br>
+                </div>
+
+                <div>
+                    <label for='category'>Category</label><br>
+                    <?php if(isset($msg_category)) print $msg_category; ?>
+                    <select id='category' name='category'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT category FROM settings_landmark_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['category'] == $category) $selection = "selected='selected'";
+							$options .= "<option $selection>" . $row['category'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+
+                <div>
+                    <label for='address1'>Address 1</label><br>
+                    <?php if(isset($msg_address1)) print $msg_address1; ?>
+                    <input id='address1' name='address1'
+                        type='text' value='<?php if (isset($address1)) {print $address1;}  ?>'><br>
+                </div>
+
+                <div>
+                    <label for='address2'>Address 2</label><br>
+                    <?php if(isset($msg_address2)) print $msg_address2; ?>
+                    <input id='address2' name='address2'
+                        type='text' value='<?php if (isset($address2)) {print $address2;}  ?>'><br>
+                </div>
+
+                <div>
+                    <label for='city'>City</label><br>
+                    <?php if(isset($msg_city)) print $msg_city; ?>
+                    <input id='city' name='city' type='text'
+                        value='<?php if (isset($city)) {print $city;}  ?>'><br>
+                </div>
+
+                <div>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <input id='state' name='state' list='list_state'
+                        value='<?php if (isset($state)) {print $state;} ?>'><br>
+                    <datalist id='list_state'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$options .= "<option value='" . $row['state'] . "'>";
+						}
+						print $options; 
+						?>
+                    </datalist>
+                </div>
+
+                <div>
+                    <label for='zip_code'>Zip code</label><br>
+                    <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
+                    <input id='zip_code' name='zip_code'
+                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;}  ?>'><br>
+                </div>
+
+            </fieldset>
+            <fieldset>
+
+                <div>
+                    <label for='image_url'>Image URL</label><br>
+                    <?php if(isset($msg_image_url)) print $msg_image_url; ?>
+                    <input id='image_url' name='image_url' type='image url'
+                        value='<?php if (isset($image_url)) {print $image_url;}  ?>'><br>
+                </div>
+
+                <div>
+                    <label for='notes'>Notes</label><br>
+                    <?php if(isset($msg_notes)) print $msg_notes; ?>
+                    <textarea id='notes'
+                        name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                </div>
+
+            </fieldset>
+
+            
+                <input id='save_submit' name='save_submit' type='submit' value='Save'>
+            
+
+        </form>
+        <?php } ?>
+
+    </main>
+    <?php include('php/_footer.php'); ?>
 
 </body>
-</html>
 
+</html>

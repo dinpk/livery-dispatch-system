@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'reference_number';
+$focus_field = 'zone_rate';
 // id passed for update
 if (isset($_GET['tripsid'])) {
 	$record_id = trim($_GET['tripsid']);
@@ -467,7 +467,7 @@ if (isset($_POST['save_submit'])) {
 
 			 <div>
 				 <label for='zone_rate'>Zone rate</label> <?php if(isset($msg_zone_rate)) print $msg_zone_rate; ?>
-				 <input class='input_number_small' <?php if ($focus_field == 'zone_rate') print 'autofocus'; ?> id='zone_rate' name='zone_rate' type='number' step='any' onchange='calc();' value='<?php if (isset($zone_rate)) {print $zone_rate;} else { print '0';} ?>' readonly><br>
+				 <input class='input_number_small' id='zone_rate' name='zone_rate' type='number' step='any' onchange='calc();' value='<?php if (isset($zone_rate)) {print $zone_rate;} else { print '0';} ?>' readonly><br>
 			 </div>
 
 			 <div>
@@ -475,10 +475,10 @@ if (isset($_POST['save_submit'])) {
 				 <?php if(isset($msg_regular_hours)) print $msg_regular_hours; ?>
 				 <?php if(isset($msg_regular_minutes)) print $msg_regular_minutes; ?>
 				 <?php if(isset($msg_hourly_regular_amount)) print $msg_hourly_regular_amount; ?>
-				 <input class='input_number_small' <?php if ($focus_field == 'hourly_regular_rate') print 'autofocus'; ?> id='hourly_regular_rate' name='hourly_regular_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'regular_hours') print 'autofocus'; ?> id='regular_hours' name='regular_hours' type='number' onchange='calc();' value='<?php if (isset($regular_hours)) {print $regular_hours;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'regular_minutes') print 'autofocus'; ?> id='regular_minutes' name='regular_minutes' type='number' onchange='calc();' value='<?php if (isset($regular_minutes)) {print $regular_minutes;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'hourly_regular_amount') print 'autofocus'; ?> id='hourly_regular_amount' name='hourly_regular_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_regular_amount)) {print $hourly_regular_amount;} else { print '0';} ?>' readonly>
+				 <input class='input_number_small' id='hourly_regular_rate' name='hourly_regular_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='regular_hours' name='regular_hours' type='number' onchange='calc();' value='<?php if (isset($regular_hours)) {print $regular_hours;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='regular_minutes' name='regular_minutes' type='number' onchange='calc();' value='<?php if (isset($regular_minutes)) {print $regular_minutes;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='hourly_regular_amount' name='hourly_regular_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_regular_amount)) {print $hourly_regular_amount;} else { print '0';} ?>' readonly>
 			 </div>
 
 			 <div>
@@ -486,10 +486,10 @@ if (isset($_POST['save_submit'])) {
 				 <?php if(isset($msg_wait_hours)) print $msg_wait_hours; ?>
 				 <?php if(isset($msg_wait_minutes)) print $msg_wait_minutes; ?>
 				 <?php if(isset($msg_hourly_wait_amount)) print $msg_hourly_wait_amount; ?>
-				 <input class='input_number_small' <?php if ($focus_field == 'hourly_wait_rate') print 'autofocus'; ?> id='hourly_wait_rate' name='hourly_wait_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'wait_hours') print 'autofocus'; ?> id='wait_hours' name='wait_hours' type='number' onchange='calc();' value='<?php if (isset($wait_hours)) {print $wait_hours;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'wait_minutes') print 'autofocus'; ?> id='wait_minutes' name='wait_minutes' type='number' onchange='calc();' value='<?php if (isset($wait_minutes)) {print $wait_minutes;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'hourly_wait_amount') print 'autofocus'; ?> id='hourly_wait_amount' name='hourly_wait_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_wait_amount)) {print $hourly_wait_amount;} else { print '0';} ?>' readonly> 
+				 <input class='input_number_small' id='hourly_wait_rate' name='hourly_wait_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='wait_hours' name='wait_hours' type='number' onchange='calc();' value='<?php if (isset($wait_hours)) {print $wait_hours;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='wait_minutes' name='wait_minutes' type='number' onchange='calc();' value='<?php if (isset($wait_minutes)) {print $wait_minutes;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='hourly_wait_amount' name='hourly_wait_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_wait_amount)) {print $hourly_wait_amount;} else { print '0';} ?>' readonly> 
 			 </div>
 
 			 <div>
@@ -497,16 +497,16 @@ if (isset($_POST['save_submit'])) {
 				 <?php if(isset($msg_overtime_hours)) print $msg_overtime_hours; ?>
 				 <?php if(isset($msg_overtime_minutes)) print $msg_overtime_minutes; ?>
 				 <?php if(isset($msg_hourly_overtime_amount)) print $msg_hourly_overtime_amount; ?>
-				 <input class='input_number_small' <?php if ($focus_field == 'hourly_overtime_rate') print 'autofocus'; ?> id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'overtime_hours') print 'autofocus'; ?> id='overtime_hours' name='overtime_hours' type='number' onchange='calc();' value='<?php if (isset($overtime_hours)) {print $overtime_hours;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'overtime_minutes') print 'autofocus'; ?> id='overtime_minutes' name='overtime_minutes' type='number' onchange='calc();' value='<?php if (isset($overtime_minutes)) {print $overtime_minutes;} else { print '0';} ?>'> 
-				 <input class='input_number_small' <?php if ($focus_field == 'hourly_overtime_amount') print 'autofocus'; ?> id='hourly_overtime_amount' name='hourly_overtime_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_overtime_amount)) {print $hourly_overtime_amount;} else { print '0';} ?>' readonly> 
+				 <input class='input_number_small' id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='overtime_hours' name='overtime_hours' type='number' onchange='calc();' value='<?php if (isset($overtime_hours)) {print $overtime_hours;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='overtime_minutes' name='overtime_minutes' type='number' onchange='calc();' value='<?php if (isset($overtime_minutes)) {print $overtime_minutes;} else { print '0';} ?>'> 
+				 <input class='input_number_small' id='hourly_overtime_amount' name='hourly_overtime_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_overtime_amount)) {print $hourly_overtime_amount;} else { print '0';} ?>' readonly> 
 			 </div>
 
 			 <div>
 				 <div><label for='base_amount'>Base amount</label></div>
 				 <?php if(isset($msg_base_amount)) print $msg_base_amount; ?>
-				 <input <?php if ($focus_field == 'base_amount') print 'autofocus'; ?> id='base_amount' name='base_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($base_amount)) {print $base_amount;} else { print '0';} ?>' readonly><br>
+				 <input id='base_amount' name='base_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($base_amount)) {print $base_amount;} else { print '0';} ?>' readonly><br>
 			 </div>
 
 
@@ -546,14 +546,14 @@ if (isset($_POST['save_submit'])) {
 						 print $options; 
 						 ?>
 					 </select> 
-					<input class='input_number_small' <?php if ($focus_field == 'offtime_amount') print 'autofocus'; ?> id='offtime_amount' name='offtime_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($offtime_amount)) {print $offtime_amount;} else { print '0';} ?>'><br>
+					<input class='input_number_small' id='offtime_amount' name='offtime_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($offtime_amount)) {print $offtime_amount;} else { print '0';} ?>'><br>
 				</td>
 			</tr>
 			<tr>
 				<td><label for='extra_stops'>Extra stops &nbsp; </label></td>
 				<td>
-					 #<input class='input_number_small' <?php if ($focus_field == 'extra_stops') print 'autofocus'; ?> id='extra_stops' name='extra_stops' type='number' onchange='calc();' value='<?php if (isset($extra_stops)) {print $extra_stops;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' <?php if ($focus_field == 'extra_stops_amount') print 'autofocus'; ?> id='extra_stops_amount' name='extra_stops_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($extra_stops_amount)) {print $extra_stops_amount;} else { print '0';} ?>'>
+					 #<input class='input_number_small' id='extra_stops' name='extra_stops' type='number' onchange='calc();' value='<?php if (isset($extra_stops)) {print $extra_stops;} else { print '0';} ?>'> 
+					 $<input class='input_number_small' id='extra_stops_amount' name='extra_stops_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($extra_stops_amount)) {print $extra_stops_amount;} else { print '0';} ?>'>
 				</td>
 			</tr>
 			<tr>
@@ -571,48 +571,48 @@ if (isset($_POST['save_submit'])) {
 						 print $options; 
 						 ?>
 					 </select> 
-					 <input class='input_number_small' <?php if ($focus_field == 'tolls_amount') print 'autofocus'; ?> id='tolls_amount' name='tolls_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($tolls_amount)) {print $tolls_amount;} else { print '0';} ?>'><br>
+					 <input class='input_number_small' id='tolls_amount' name='tolls_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($tolls_amount)) {print $tolls_amount;} else { print '0';} ?>'><br>
 				</td>
 			</tr>
 			<tr>
 				<td><label for='parking_amount'>Parking</label></td>
 				<td>
-					&nbsp;&nbsp;&nbsp;<input class='input_number_small' <?php if ($focus_field == 'parking_amount') print 'autofocus'; ?> id='parking_amount' name='parking_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($parking_amount)) {print $parking_amount;} else { print '0';} ?>'><br>
+					&nbsp;&nbsp;&nbsp;<input class='input_number_small' id='parking_amount' name='parking_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($parking_amount)) {print $parking_amount;} else { print '0';} ?>'><br>
 				</td>
 			</tr>
 			<tr>
 				<td><label for='gratuity_percent'>Gratuity &nbsp;</label></td>
 				<td>
-					 %<input class='input_number_small' <?php if ($focus_field == 'gratuity_percent') print 'autofocus'; ?> id='gratuity_percent' name='gratuity_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' <?php if ($focus_field == 'gratuity_amount') print 'autofocus'; ?> id='gratuity_amount' name='gratuity_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($gratuity_amount)) {print $gratuity_amount;} else { print '0';} ?>'> 
+					 %<input class='input_number_small' id='gratuity_percent' name='gratuity_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'> 
+					 $<input class='input_number_small' id='gratuity_amount' name='gratuity_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($gratuity_amount)) {print $gratuity_amount;} else { print '0';} ?>'> 
 				</td>
 			</tr>
 			<tr>
 				<td><label for='gas_surcharge_percent'>Gas surcharge &nbsp;</label></td>
 				<td>
-					 %<input class='input_number_small' <?php if ($focus_field == 'gas_surcharge_percent') print 'autofocus'; ?> id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' <?php if ($focus_field == 'gas_surcharge_amount') print 'autofocus'; ?> id='gas_surcharge_amount' name='gas_surcharge_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($gas_surcharge_amount)) {print $gas_surcharge_amount;} else { print '0';} ?>'>
+					 %<input class='input_number_small' id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'> 
+					 $<input class='input_number_small' id='gas_surcharge_amount' name='gas_surcharge_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($gas_surcharge_amount)) {print $gas_surcharge_amount;} else { print '0';} ?>'>
 				</td>
 			</tr>
 			<tr>
 				<td><label for='admin_fee_percent'>Admin fee &nbsp;</label></td>
 				<td>
-					 %<input class='input_number_small' <?php if ($focus_field == 'admin_fee_percent') print 'autofocus'; ?> id='admin_fee_percent' name='admin_fee_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' <?php if ($focus_field == 'admin_fee_amount') print 'autofocus'; ?> id='admin_fee_amount' name='admin_fee_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($admin_fee_amount)) {print $admin_fee_amount;} else { print '0';} ?>'> 
+					 %<input class='input_number_small' id='admin_fee_percent' name='admin_fee_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'> 
+					 $<input class='input_number_small' id='admin_fee_amount' name='admin_fee_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($admin_fee_amount)) {print $admin_fee_amount;} else { print '0';} ?>'> 
 				</td>
 			</tr>
 			<tr>
 				<td><label for='discount_percent'>Discount</label></td>
 				<td>
-					 %<input class='input_number_small' <?php if ($focus_field == 'discount_percent') print 'autofocus'; ?> id='discount_percent' name='discount_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' <?php if ($focus_field == 'discount_amount') print 'autofocus'; ?> id='discount_amount' name='discount_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($discount_amount)) {print $discount_amount;} else { print '0';} ?>'>
+					 %<input class='input_number_small' id='discount_percent' name='discount_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'> 
+					 $<input class='input_number_small' id='discount_amount' name='discount_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($discount_amount)) {print $discount_amount;} else { print '0';} ?>'>
 				</td>
 			</tr>
 			<tr>
 				<td><label for='tax_percent'>Tax</label></td>
 				<td>
-					 %<input class='input_number_small' <?php if ($focus_field == 'tax_percent') print 'autofocus'; ?> id='tax_percent' name='tax_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' <?php if ($focus_field == 'tax_amount') print 'autofocus'; ?> id='tax_amount' name='tax_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($tax_amount)) {print $tax_amount;} else { print '0';} ?>'> 
+					 %<input class='input_number_small' id='tax_percent' name='tax_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'> 
+					 $<input class='input_number_small' id='tax_amount' name='tax_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($tax_amount)) {print $tax_amount;} else { print '0';} ?>'> 
 				</td>
 			</tr>
 			</table>
@@ -625,13 +625,13 @@ if (isset($_POST['save_submit'])) {
 			 <div>
 				 <div><label for='flat_amount'>Flat amount</label></div>
 				 <?php if(isset($msg_flat_amount)) print $msg_flat_amount; ?>
-				 <input <?php if ($focus_field == 'flat_amount') print 'autofocus'; ?> id='flat_amount' name='flat_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($flat_amount)) {print $flat_amount;} else { print '0';} ?>'><br>
+				 <input id='flat_amount' name='flat_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($flat_amount)) {print $flat_amount;} else { print '0';} ?>'><br>
 			 </div>
 
 			 <div>
 				 <div><label for='total_trip_amount'>Total trip amount</label></div>
 				 <?php if(isset($msg_total_trip_amount)) print $msg_total_trip_amount; ?>
-				 <input <?php if ($focus_field == 'total_trip_amount') print 'autofocus'; ?> id='total_trip_amount' name='total_trip_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($total_trip_amount)) {print $total_trip_amount;} else { print '0';} ?>' readonly><br>
+				 <input id='total_trip_amount' name='total_trip_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($total_trip_amount)) {print $total_trip_amount;} else { print '0';} ?>' readonly><br>
 			 </div>
 
 		</fieldset>
@@ -643,9 +643,9 @@ if (isset($_POST['save_submit'])) {
 			 </div>
 		</fieldset>
 
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		</form>
 
 

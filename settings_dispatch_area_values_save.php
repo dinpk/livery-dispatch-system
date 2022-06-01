@@ -79,13 +79,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='dispatch_area'>Dispatch area</label> <span class='red'> *</span>             <?php if(isset($msg_dispatch_area)) print $msg_dispatch_area; ?>
-             <input <?php if ($focus_field == 'dispatch_area') print 'autofocus'; ?> id='dispatch_area' name='dispatch_area' type='text' value='<?php if (isset($dispatch_area)) {print $dispatch_area;} else { print '';} ?>' required><br>
+             <input id='dispatch_area' name='dispatch_area' type='text' value='<?php if (isset($dispatch_area)) {print $dispatch_area;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

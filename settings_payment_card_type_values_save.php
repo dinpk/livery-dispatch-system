@@ -77,13 +77,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='payment_card_type'>Payment card type</label> <span class='red'> *</span>             <?php if(isset($msg_payment_card_type)) print $msg_payment_card_type; ?>
-             <input <?php if ($focus_field == 'payment_card_type') print 'autofocus'; ?> id='payment_card_type' name='payment_card_type' type='text' value='<?php if (isset($payment_card_type)) {print $payment_card_type;} else { print '';} ?>' required><br>
+             <input id='payment_card_type' name='payment_card_type' type='text' value='<?php if (isset($payment_card_type)) {print $payment_card_type;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

@@ -162,43 +162,43 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='workshop_name'>Workshop name</label> <span class='red'> *</span>             <?php if(isset($msg_workshop_name)) print $msg_workshop_name; ?>
-             <input <?php if ($focus_field == 'workshop_name') print 'autofocus'; ?> id='workshop_name' name='workshop_name' type='text' value='<?php if (isset($workshop_name)) {print $workshop_name;} else { print '';} ?>' required><br>
+             <input id='workshop_name' name='workshop_name' type='text' value='<?php if (isset($workshop_name)) {print $workshop_name;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='contact_name'>Contact person</label>
 			 <?php if(isset($msg_contact_name)) print $msg_contact_name; ?>
-             <input <?php if ($focus_field == 'contact_name') print 'autofocus'; ?> id='contact_name' name='contact_name' type='text' value='<?php if (isset($contact_name)) {print $contact_name;} else { print '';} ?>'><br>
+             <input id='contact_name' name='contact_name' type='text' value='<?php if (isset($contact_name)) {print $contact_name;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address1'>Address 1</label>
 			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+             <input id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address2'>Address 2</label>
 			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+             <input id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='phone'>Phone</label>
 			 <?php if(isset($msg_phone)) print $msg_phone; ?>
-             <input <?php if ($focus_field == 'phone') print 'autofocus'; ?> id='phone' name='phone' type='tel' value='<?php if (isset($phone)) {print $phone;} else { print '';} ?>'><br>
+             <input id='phone' name='phone' type='tel' value='<?php if (isset($phone)) {print $phone;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='email'>Email</label>
 			 <?php if(isset($msg_email)) print $msg_email; ?>
-             <input <?php if ($focus_field == 'email') print 'autofocus'; ?> id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
+             <input id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='city'>City</label>
 			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+             <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -222,13 +222,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='zip_code'>Zip code</label>
 			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+             <input id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

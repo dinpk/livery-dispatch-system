@@ -306,37 +306,37 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='company_name'>Company name</label> <span class='red'> *</span>             
 			 <?php if(isset($msg_company_name)) print $msg_company_name; ?>
-             <input <?php if ($focus_field == 'company_name') print 'autofocus'; ?> id='company_name' name='company_name' type='text' value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>' required><br>
+             <input id='company_name' name='company_name' type='text' value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='company_label'>Company label</label> <span class='red'> *</span>             
 			 <?php if(isset($msg_company_label)) print $msg_company_label; ?>
-             <input <?php if ($focus_field == 'company_label') print 'autofocus'; ?> id='company_label' name='company_label' type='text' value='<?php if (isset($company_label)) {print $company_label;} else { print '';} ?>' required><br>
+             <input id='company_label' name='company_label' type='text' value='<?php if (isset($company_label)) {print $company_label;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='slogan'>Slogan</label>             
 			 <?php if(isset($msg_slogan)) print $msg_slogan; ?>
-             <input <?php if ($focus_field == 'slogan') print 'autofocus'; ?> id='slogan' name='slogan' type='text' value='<?php if (isset($slogan)) {print $slogan;} else { print '';} ?>'><br>
+             <input id='slogan' name='slogan' type='text' value='<?php if (isset($slogan)) {print $slogan;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address1'>Address 1</label>             
 			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+             <input id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address2'>Address 2</label>             
 			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+             <input id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='city'>City</label>             
 			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+             <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -360,7 +360,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='zip_code'>Zip code</label>             
 			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+             <input id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -381,67 +381,67 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='phone1'>Phone 1</label>             
 			 <?php if(isset($msg_phone1)) print $msg_phone1; ?>
-             <input <?php if ($focus_field == 'phone1') print 'autofocus'; ?> id='phone1' name='phone1' type='tel' value='<?php if (isset($phone1)) {print $phone1;} else { print '';} ?>'><br>
+             <input id='phone1' name='phone1' type='tel' value='<?php if (isset($phone1)) {print $phone1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='phone2'>Phone 2</label>             
 			 <?php if(isset($msg_phone2)) print $msg_phone2; ?>
-             <input <?php if ($focus_field == 'phone2') print 'autofocus'; ?> id='phone2' name='phone2' type='tel' value='<?php if (isset($phone2)) {print $phone2;} else { print '';} ?>'><br>
+             <input id='phone2' name='phone2' type='tel' value='<?php if (isset($phone2)) {print $phone2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='email1'>Email 1</label>             
 			 <?php if(isset($msg_email1)) print $msg_email1; ?>
-             <input <?php if ($focus_field == 'email1') print 'autofocus'; ?> id='email1' name='email1' type='email' value='<?php if (isset($email1)) {print $email1;} else { print '';} ?>'><br>
+             <input id='email1' name='email1' type='email' value='<?php if (isset($email1)) {print $email1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='email2'>Email 2</label>             
 			 <?php if(isset($msg_email2)) print $msg_email2; ?>
-             <input <?php if ($focus_field == 'email2') print 'autofocus'; ?> id='email2' name='email2' type='email' value='<?php if (isset($email2)) {print $email2;} else { print '';} ?>'><br>
+             <input id='email2' name='email2' type='email' value='<?php if (isset($email2)) {print $email2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='website1'>Website 1</label>            
 			 <?php if(isset($msg_website1)) print $msg_website1; ?>
-             <input <?php if ($focus_field == 'website1') print 'autofocus'; ?> id='website1' name='website1' type='url' value='<?php if (isset($website1)) {print $website1;} else { print '';} ?>'><br>
+             <input id='website1' name='website1' type='url' value='<?php if (isset($website1)) {print $website1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='website2'>Website 2</label>             
 			 <?php if(isset($msg_website2)) print $msg_website2; ?>
-             <input <?php if ($focus_field == 'website2') print 'autofocus'; ?> id='website2' name='website2' type='url' value='<?php if (isset($website2)) {print $website2;} else { print '';} ?>'><br>
+             <input id='website2' name='website2' type='url' value='<?php if (isset($website2)) {print $website2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='social_media_url1'>Social media url 1</label>             
 			 <?php if(isset($msg_social_media_url1)) print $msg_social_media_url1; ?>
-             <input <?php if ($focus_field == 'social_media_url1') print 'autofocus'; ?> id='social_media_url1' name='social_media_url1' type='url' value='<?php if (isset($social_media_url1)) {print $social_media_url1;} else { print '';} ?>'><br>
+             <input id='social_media_url1' name='social_media_url1' type='url' value='<?php if (isset($social_media_url1)) {print $social_media_url1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='social_media_url2'>Social media url 2</label>            
 			 <?php if(isset($msg_social_media_url2)) print $msg_social_media_url2; ?>
-             <input <?php if ($focus_field == 'social_media_url2') print 'autofocus'; ?> id='social_media_url2' name='social_media_url2' type='url' value='<?php if (isset($social_media_url2)) {print $social_media_url2;} else { print '';} ?>'><br>
+             <input id='social_media_url2' name='social_media_url2' type='url' value='<?php if (isset($social_media_url2)) {print $social_media_url2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='social_media_url3'>Social media url 3</label>             
 			 <?php if(isset($msg_social_media_url3)) print $msg_social_media_url3; ?>
-             <input <?php if ($focus_field == 'social_media_url3') print 'autofocus'; ?> id='social_media_url3' name='social_media_url3' type='url' value='<?php if (isset($social_media_url3)) {print $social_media_url3;} else { print '';} ?>'><br>
+             <input id='social_media_url3' name='social_media_url3' type='url' value='<?php if (isset($social_media_url3)) {print $social_media_url3;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='social_media_url4'>Social media url 4</label>             
 			 <?php if(isset($msg_social_media_url4)) print $msg_social_media_url4; ?>
-             <input <?php if ($focus_field == 'social_media_url4') print 'autofocus'; ?> id='social_media_url4' name='social_media_url4' type='url' value='<?php if (isset($social_media_url4)) {print $social_media_url4;} else { print '';} ?>'><br>
+             <input id='social_media_url4' name='social_media_url4' type='url' value='<?php if (isset($social_media_url4)) {print $social_media_url4;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='social_media_url5'>Social media url 5</label>             
 			 <?php if(isset($msg_social_media_url5)) print $msg_social_media_url5; ?>
-             <input <?php if ($focus_field == 'social_media_url5') print 'autofocus'; ?> id='social_media_url5' name='social_media_url5' type='url' value='<?php if (isset($social_media_url5)) {print $social_media_url5;} else { print '';} ?>'><br>
+             <input id='social_media_url5' name='social_media_url5' type='url' value='<?php if (isset($social_media_url5)) {print $social_media_url5;} else { print '';} ?>'><br>
          </div>
 		</fieldset>
 		<fieldset>
@@ -449,25 +449,25 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='notes'>Notes</label>             
 			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
          </div>
 
          <div>
              <label for='image_url1'>Image url 1</label>             
 			 <?php if(isset($msg_image_url1)) print $msg_image_url1; ?>
-             <input <?php if ($focus_field == 'image_url1') print 'autofocus'; ?> id='image_url1' name='image_url1' type='text' value='<?php if (isset($image_url1)) {print $image_url1;} else { print '';} ?>'><br>
+             <input id='image_url1' name='image_url1' type='text' value='<?php if (isset($image_url1)) {print $image_url1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='image_url2'>Image url 2</label>             
 			 <?php if(isset($msg_image_url2)) print $msg_image_url2; ?>
-             <input <?php if ($focus_field == 'image_url2') print 'autofocus'; ?> id='image_url2' name='image_url2' type='text' value='<?php if (isset($image_url2)) {print $image_url2;} else { print '';} ?>'><br>
+             <input id='image_url2' name='image_url2' type='text' value='<?php if (isset($image_url2)) {print $image_url2;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

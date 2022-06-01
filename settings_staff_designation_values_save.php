@@ -120,13 +120,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='designation'>Designation</label> <span class='red'> *</span>
              <?php if(isset($msg_designation)) print $msg_designation; ?>
-             <input <?php if ($focus_field == 'designation') print 'autofocus'; ?> id='designation' name='designation' type='text' value='<?php if (isset($designation)) {print $designation;} else { print '';} ?>' required><br>
+             <input id='designation' name='designation' type='text' value='<?php if (isset($designation)) {print $designation;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

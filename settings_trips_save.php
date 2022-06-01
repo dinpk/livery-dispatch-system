@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'gas_surcharge_percent';
+$focus_field = 'gratuity_percent';
 // id passed for update
 if (isset($_GET['settings_tripsid'])) {
 	$record_id = trim($_GET['settings_tripsid']);
@@ -115,31 +115,31 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='gratuity_percent'>Gratuity %</label>
              <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
-             <input <?php if ($focus_field == 'gratuity_percent') print 'autofocus'; ?> id='gratuity_percent' name='gratuity_percent' type='number' step='0.10' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
+             <input id='gratuity_percent' name='gratuity_percent' type='number' step='0.10' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='gas_surcharge_percent'>Gas surcharge %</label>
              <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
-             <input <?php if ($focus_field == 'gas_surcharge_percent') print 'autofocus'; ?> id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
+             <input id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='admin_fee_percent'>Admin fee %</label>
              <?php if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; ?>
-             <input <?php if ($focus_field == 'admin_fee_percent') print 'autofocus'; ?> id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
+             <input id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='tax_percent'>Tax %</label>
              <?php if(isset($msg_tax_percent)) print $msg_tax_percent; ?>
-             <input <?php if ($focus_field == 'tax_percent') print 'autofocus'; ?> id='tax_percent' name='tax_percent' type='number' step='0.10' value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'><br>
+             <input id='tax_percent' name='tax_percent' type='number' step='0.10' value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

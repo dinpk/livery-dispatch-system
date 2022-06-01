@@ -77,13 +77,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='toll_type'>Toll type</label> <span class='red'> *</span>             <?php if(isset($msg_toll_type)) print $msg_toll_type; ?>
-             <input <?php if ($focus_field == 'toll_type') print 'autofocus'; ?> id='toll_type' name='toll_type' type='text' value='<?php if (isset($toll_type)) {print $toll_type;} else { print '';} ?>' required><br>
+             <input id='toll_type' name='toll_type' type='text' value='<?php if (isset($toll_type)) {print $toll_type;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

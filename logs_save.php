@@ -108,7 +108,7 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='log_type'>Log type</label> <span class='red'> *</span>             <?php if(isset($msg_log_type)) print $msg_log_type; ?>
-             <input <?php if ($focus_field == 'log_type') print 'autofocus'; ?> id='log_type' name='log_type' type='text' value='<?php if (isset($log_type)) {print $log_type;} else { print '';} ?>' required><br>
+             <input id='log_type' name='log_type' type='text' value='<?php if (isset($log_type)) {print $log_type;} else { print '';} ?>' required><br>
          </div>
 
          <div>
@@ -132,9 +132,9 @@ if (isset($_POST['save_submit'])) {
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

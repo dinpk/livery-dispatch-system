@@ -79,13 +79,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='vehicle_type'>Vehicle type</label> <span class='red'> *</span>             <?php if(isset($msg_vehicle_type)) print $msg_vehicle_type; ?>
-             <input <?php if ($focus_field == 'vehicle_type') print 'autofocus'; ?> id='vehicle_type' name='vehicle_type' type='text' value='<?php if (isset($vehicle_type)) {print $vehicle_type;} else { print '';} ?>' required><br>
+             <input id='vehicle_type' name='vehicle_type' type='text' value='<?php if (isset($vehicle_type)) {print $vehicle_type;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

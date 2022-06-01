@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'key_trips';
+$focus_field = 'message';
 // id passed for update
 if (isset($_GET['trips_messagesid'])) {
 	$record_id = trim($_GET['trips_messagesid']);
@@ -142,13 +142,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='message'>Message</label>
 			 <?php if(isset($msg_message)) print $msg_message; ?>
-             <textarea <?php if ($focus_field == 'message') print 'autofocus'; ?> id='message' name='message'><?php if (isset($message)) print $message; ?></textarea><br>
+             <textarea id='message' name='message'><?php if (isset($message)) print $message; ?></textarea><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

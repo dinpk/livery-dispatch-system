@@ -41,7 +41,7 @@
 	}
 
 
-	// ----------------------------- OVERLAY 1
+	// ----------------------------- OVERLAY
 	function overlayOpen() {
 		document.getElementById("overlay").style.display="block";
 	}
@@ -51,7 +51,6 @@
 		document.getElementById('overlay-iframe').src='';
 	}
 
-	// ----------------------------- OVERLAY 2
 	function overlayOpen2() {
 		document.getElementById("overlay2").style.display="block";
 	}
@@ -66,7 +65,6 @@
 		}
 	}
 
-	// ----------------------------- OVERLAY 3
 	function overlayOpen3() {
 		document.getElementById("overlay3").style.display="block";
 	}
@@ -87,8 +85,6 @@ function unselectKeyValue(key_element, value_element) {
 	document.getElementById(key_element).value = '0';
 	document.getElementById(value_element).value = '';
 }
-
-
 
 
 function calc() {

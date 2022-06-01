@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'key_drivers';
+$focus_field = 'start_date';
 // id passed for update
 if (isset($_GET['driver_payrollid'])) {
 	$record_id = trim($_GET['driver_payrollid']);
@@ -189,13 +189,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='amount'>Amount</label>
              <?php if(isset($msg_amount)) print $msg_amount; ?>
-             <input <?php if ($focus_field == 'amount') print 'autofocus'; ?> id='amount' name='amount' type='number' step='0.10' value='<?php if (isset($amount)) {print $amount;} else { print '0';} ?>' readonly><br>
+             <input id='amount' name='amount' type='number' step='0.10' value='<?php if (isset($amount)) {print $amount;} else { print '0';} ?>' readonly><br>
          </div>
 
          <div>
              <label for='amount_paid'>Amount paid</label>
              <?php if(isset($msg_amount_paid)) print $msg_amount_paid; ?>
-             <input <?php if ($focus_field == 'amount_paid') print 'autofocus'; ?> id='amount_paid' name='amount_paid' type='number' step='0.10' value='<?php if (isset($amount_paid)) {print $amount_paid;} else { print '0';} ?>' required><br>
+             <input id='amount_paid' name='amount_paid' type='number' step='0.10' value='<?php if (isset($amount_paid)) {print $amount_paid;} else { print '0';} ?>' required><br>
          </div>
 
          <div>
@@ -230,13 +230,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='notes'>Notes</label>
              <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

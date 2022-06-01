@@ -78,13 +78,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='insurance_company'>Insurance company</label> <span class='red'> *</span>             <?php if(isset($msg_insurance_company)) print $msg_insurance_company; ?>
-             <input <?php if ($focus_field == 'insurance_company') print 'autofocus'; ?> id='insurance_company' name='insurance_company' type='text' value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>' required><br>
+             <input id='insurance_company' name='insurance_company' type='text' value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

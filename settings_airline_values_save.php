@@ -85,13 +85,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='airline'>Airline</label> <span class='red'> *</span>             <?php if(isset($msg_airline)) print $msg_airline; ?>
-             <input <?php if ($focus_field == 'airline') print 'autofocus'; ?> id='airline' name='airline' type='text' value='<?php if (isset($airline)) {print $airline;} else { print '';} ?>' required><br>
+             <input id='airline' name='airline' type='text' value='<?php if (isset($airline)) {print $airline;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

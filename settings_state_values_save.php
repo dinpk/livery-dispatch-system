@@ -93,19 +93,19 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='state'>State</label>
 			 <?php if(isset($msg_state)) print $msg_state; ?>
-             <input <?php if ($focus_field == 'state') print 'autofocus'; ?> id='state' name='state' type='text' value='<?php if (isset($state)) {print $state;} else { print '';} ?>'><br>
+             <input id='state' name='state' type='text' value='<?php if (isset($state)) {print $state;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='state_code'>State code</label>
 			 <?php if(isset($msg_state_code)) print $msg_state_code; ?>
-             <input <?php if ($focus_field == 'state_code') print 'autofocus'; ?> id='state_code' name='state_code' type='text' value='<?php if (isset($state_code)) {print $state_code;} else { print '';} ?>'><br>
+             <input id='state_code' name='state_code' type='text' value='<?php if (isset($state_code)) {print $state_code;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

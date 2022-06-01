@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'company_name';
+$focus_field = 'first_name';
 // id passed for update
 if (isset($_GET['customer_contactsid'])) {
 	$record_id = trim($_GET['customer_contactsid']);
@@ -235,30 +235,30 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='first_name'>First name</label> <span class='red'> *</span>             <?php if(isset($msg_first_name)) print $msg_first_name; ?>
-             <input <?php if ($focus_field == 'first_name') print 'autofocus'; ?> id='first_name' name='first_name' type='text' value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>' required><br>
+             <input id='first_name' name='first_name' type='text' value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='last_name'>Last name</label> <span class='red'> *</span>             <?php if(isset($msg_last_name)) print $msg_last_name; ?>
-             <input <?php if ($focus_field == 'last_name') print 'autofocus'; ?> id='last_name' name='last_name' type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>' required><br>
+             <input id='last_name' name='last_name' type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='address1'>Address 1</label>
 			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+             <input id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address2'>Address 2</label>
 			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+             <input id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='city'>City</label>
 			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+             <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -281,7 +281,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='zip_code'>Zip code</label>
 			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+             <input id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
          </div>
 
 		 <div>
@@ -308,25 +308,25 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='work_phone'>Work phone</label>
 			 <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
-             <input <?php if ($focus_field == 'work_phone') print 'autofocus'; ?> id='work_phone' name='work_phone' type='tel' value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
+             <input id='work_phone' name='work_phone' type='tel' value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='work_phone_extension'>Work phone ext.</label>
 			 <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
-             <input <?php if ($focus_field == 'work_phone_extension') print 'autofocus'; ?> id='work_phone_extension' name='work_phone_extension' type='number' value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '0';} ?>'><br>
+             <input id='work_phone_extension' name='work_phone_extension' type='number' value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='mobile_phone'>Mobile phone</label>
 			 <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
-             <input <?php if ($focus_field == 'mobile_phone') print 'autofocus'; ?> id='mobile_phone' name='mobile_phone' type='tel' value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
+             <input id='mobile_phone' name='mobile_phone' type='tel' value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='email'>Email</label>
 			 <?php if(isset($msg_email)) print $msg_email; ?>
-             <input <?php if ($focus_field == 'email') print 'autofocus'; ?> id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
+             <input id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>
@@ -339,7 +339,7 @@ if (isset($_POST['save_submit'])) {
 					 <a href='#' onclick='unselectKeyValue("key_customer_companies","company_name");return false;'>?</a>
              </small><br>
              <?php if(isset($msg_company_name)) print $msg_company_name; ?>
-             <input <?php if ($focus_field == 'company_name') print 'autofocus'; ?> id='company_name' name='company_name' type='text' value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>' readonly><br>
+             <input id='company_name' name='company_name' type='text' value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>' readonly><br>
          </div>
 
          <input id='key_customer_companies' name='key_customer_companies' type='hidden' value='<?php if (isset($key_customer_companies)) {print $key_customer_companies;} else {print '0';} ?>'>
@@ -348,7 +348,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='image_url'>Image url</label>
 			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+             <input id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
          </div>
 		 
 		 <br><br>
@@ -360,9 +360,9 @@ if (isset($_POST['save_submit'])) {
 
 		</fieldset>
 		
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

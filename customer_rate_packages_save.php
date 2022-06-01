@@ -125,37 +125,37 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='package_name'>Package name</label> <span class='red'> *</span>             <?php if(isset($msg_package_name)) print $msg_package_name; ?>
-             <input <?php if ($focus_field == 'package_name') print 'autofocus'; ?> id='package_name' name='package_name' type='text' value='<?php if (isset($package_name)) {print $package_name;} else { print '';} ?>' required><br>
+             <input id='package_name' name='package_name' type='text' value='<?php if (isset($package_name)) {print $package_name;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='gratuity_percent'>Gratuity %</label>
 			 <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
-             <input <?php if ($focus_field == 'gratuity_percent') print 'autofocus'; ?> id='gratuity_percent' name='gratuity_percent' type='number' step='0.10' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
+             <input id='gratuity_percent' name='gratuity_percent' type='number' step='0.10' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='gas_surcharge_percent'>Gas surcharge %</label>
 			 <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
-             <input <?php if ($focus_field == 'gas_surcharge_percent') print 'autofocus'; ?> id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
+             <input id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='admin_fee_percent'>Admin fee %</label>
 			 <?php if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; ?>
-             <input <?php if ($focus_field == 'admin_fee_percent') print 'autofocus'; ?> id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
+             <input id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='discount_percent'>Discount %</label>
 			 <?php if(isset($msg_discount_percent)) print $msg_discount_percent; ?>
-             <input <?php if ($focus_field == 'discount_percent') print 'autofocus'; ?> id='discount_percent' name='discount_percent' type='number' step='0.10' value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'><br>
+             <input id='discount_percent' name='discount_percent' type='number' step='0.10' value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

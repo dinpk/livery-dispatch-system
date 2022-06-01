@@ -207,7 +207,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='from_city'>From city</label> <span class='red'> *</span>             
 			 <?php if(isset($msg_from_city)) print $msg_from_city; ?>
-             <input <?php if ($focus_field == 'from_city') print 'autofocus'; ?> id='from_city' name='from_city' type='text' value='<?php if (isset($from_city)) {print $from_city;} else { print '';} ?>' required><br>
+             <input id='from_city' name='from_city' type='text' value='<?php if (isset($from_city)) {print $from_city;} else { print '';} ?>' required><br>
          </div>
 
          <div>
@@ -234,7 +234,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='to_city'>To city</label> <span class='red'> *</span>             
 			 <?php if(isset($msg_to_city)) print $msg_to_city; ?>
-             <input <?php if ($focus_field == 'to_city') print 'autofocus'; ?> id='to_city' name='to_city' type='text' value='<?php if (isset($to_city)) {print $to_city;} else { print '';} ?>' required><br>
+             <input id='to_city' name='to_city' type='text' value='<?php if (isset($to_city)) {print $to_city;} else { print '';} ?>' required><br>
          </div>
 
          <div>
@@ -261,19 +261,19 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='rate'>Rate</label>
 			 <?php if(isset($msg_rate)) print $msg_rate; ?>
-             <input <?php if ($focus_field == 'rate') print 'autofocus'; ?> id='rate' name='rate' type='number' step='0.10' value='<?php if (isset($rate)) {print $rate;} else { print '0';} ?>'><br>
+             <input id='rate' name='rate' type='number' step='0.10' value='<?php if (isset($rate)) {print $rate;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='tolls'>Tolls</label>             
 			 <?php if(isset($msg_tolls)) print $msg_tolls; ?>
-             <input <?php if ($focus_field == 'tolls') print 'autofocus'; ?> id='tolls' name='tolls' type='number' step='0.10' value='<?php if (isset($tolls)) {print $tolls;} else { print '0';} ?>'><br>
+             <input id='tolls' name='tolls' type='number' step='0.10' value='<?php if (isset($tolls)) {print $tolls;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='miles'>Miles</label>             
 			 <?php if(isset($msg_miles)) print $msg_miles; ?>
-             <input <?php if ($focus_field == 'miles') print 'autofocus'; ?> id='miles' name='miles' type='number' step='0.10' value='<?php if (isset($miles)) {print $miles;} else { print '0';} ?>'><br>
+             <input id='miles' name='miles' type='number' step='0.10' value='<?php if (isset($miles)) {print $miles;} else { print '0';} ?>'><br>
          </div>
 
          <div>
@@ -291,9 +291,9 @@ if (isset($_POST['save_submit'])) {
 		</fieldset>
 		<?php } ?>
 
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'image_url';
+$focus_field = 'first_name';
 // id passed for update
 if (isset($_GET['driversid'])) {
 	$record_id = trim($_GET['driversid']);
@@ -501,13 +501,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='first_name'>First name</label>
 			 <?php if(isset($msg_first_name)) print $msg_first_name; ?>
-             <input <?php if ($focus_field == 'first_name') print 'autofocus'; ?> id='first_name' name='first_name' type='text' value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>'><br>
+             <input id='first_name' name='first_name' type='text' value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='last_name'>Last name</label>
 			 <?php if(isset($msg_last_name)) print $msg_last_name; ?>
-             <input <?php if ($focus_field == 'last_name') print 'autofocus'; ?> id='last_name' name='last_name' type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'><br>
+             <input id='last_name' name='last_name' type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -528,19 +528,19 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='address1'>Address 1</label>
 			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+             <input id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address2'>Address 2</label>
 			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+             <input id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='city'>City</label>
 			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+             <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -564,31 +564,31 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='zip_code'>Zip code</label>
 			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+             <input id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='work_phone'>Work phone</label>
 			 <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
-             <input <?php if ($focus_field == 'work_phone') print 'autofocus'; ?> id='work_phone' name='work_phone' type='tel' value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
+             <input id='work_phone' name='work_phone' type='tel' value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='work_phone_extension'>Work phone ext.</label>
 			 <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
-             <input <?php if ($focus_field == 'work_phone_extension') print 'autofocus'; ?> id='work_phone_extension' name='work_phone_extension' type='tel' value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '';} ?>'><br>
+             <input id='work_phone_extension' name='work_phone_extension' type='tel' value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='mobile_phone'>Mobile phone</label>
 			 <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
-             <input <?php if ($focus_field == 'mobile_phone') print 'autofocus'; ?> id='mobile_phone' name='mobile_phone' type='tel' value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
+             <input id='mobile_phone' name='mobile_phone' type='tel' value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='email'>Email</label>
 			 <?php if(isset($msg_email)) print $msg_email; ?>
-             <input <?php if ($focus_field == 'email') print 'autofocus'; ?> id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
+             <input id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>
@@ -603,7 +603,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='license_number'>License #</label>
 			 <?php if(isset($msg_license_number)) print $msg_license_number; ?>
-             <input <?php if ($focus_field == 'license_number') print 'autofocus'; ?> id='license_number' name='license_number' type='text' value='<?php if (isset($license_number)) {print $license_number;} else { print '';} ?>'><br>
+             <input id='license_number' name='license_number' type='text' value='<?php if (isset($license_number)) {print $license_number;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -615,7 +615,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='social_security_number'>Ssn</label>
 			 <?php if(isset($msg_social_security_number)) print $msg_social_security_number; ?>
-             <input <?php if ($focus_field == 'social_security_number') print 'autofocus'; ?> id='social_security_number' name='social_security_number' type='text' value='<?php if (isset($social_security_number)) {print $social_security_number;} else { print '';} ?>'><br>
+             <input id='social_security_number' name='social_security_number' type='text' value='<?php if (isset($social_security_number)) {print $social_security_number;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -631,7 +631,7 @@ if (isset($_POST['save_submit'])) {
 					 <a href='#' onclick='unselectKeyValue("key_vehicles","fleet_number");return false;'>?</a>
              </small><br>
              <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
-             <input <?php if ($focus_field == 'fleet_number') print 'autofocus'; ?> id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>' readonly><br>
+             <input id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>' readonly><br>
          </div>
 
          <input id='key_vehicles' name='key_vehicles' type='hidden' value='<?php if (isset($key_vehicles)) {print $key_vehicles;} else {print '0';} ?>'>
@@ -640,7 +640,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='notes'>Notes</label>
 			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
          </div>
 
 		</fieldset>
@@ -649,18 +649,18 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='username'>User name</label> <span class='red'> *</span>             <?php if(isset($msg_username)) print $msg_username; ?>
-             <input <?php if ($focus_field == 'username') print 'autofocus'; ?> id='username' name='username' type='text' value='<?php if (isset($username)) {print $username;} else { print '';} ?>' required><br>
+             <input id='username' name='username' type='text' value='<?php if (isset($username)) {print $username;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='password'>Password</label> <span class='red'> *</span>             <?php if(isset($msg_password)) print $msg_password; ?>
-             <input <?php if ($focus_field == 'password') print 'autofocus'; ?> id='password' name='password' type='password' value='<?php if (isset($password)) {print $password;} else { print '';} ?>' required><br>
+             <input id='password' name='password' type='password' value='<?php if (isset($password)) {print $password;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='image_url'>Image url</label>
 			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+             <input id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
          </div>
 		</fieldset>
 		<fieldset>
@@ -686,62 +686,62 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <?php if(isset($msg_base_amount_percent)) print $msg_base_amount_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'base_amount_percent') print 'autofocus'; ?> id='base_amount_percent' name='base_amount_percent' type='number' step='0.5' value='<?php if (isset($base_amount_percent)) {print $base_amount_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='base_amount_percent' name='base_amount_percent' type='number' step='0.5' value='<?php if (isset($base_amount_percent)) {print $base_amount_percent;} else { print '100';} ?>'>% 
              <label for='base_amount_percent'>Base amount</label>
          </div>
 
         <div>
              <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'gratuity_percent') print 'autofocus'; ?> id='gratuity_percent' name='gratuity_percent' type='number' step='0.5' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='gratuity_percent' name='gratuity_percent' type='number' step='0.5' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_gratuity_checkbox) || $pay_gratuity_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_gratuity_checkbox' name='pay_gratuity_checkbox'> 
 			 <label for='gratuity_percent'>Gratuity </label>
          </div>
 
          <div>
              <?php if(isset($msg_commission_percent)) print $msg_commission_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'commission_percent') print 'autofocus'; ?> id='commission_percent' name='commission_percent' type='number' step='0.5' value='<?php if (isset($commission_percent)) {print $commission_percent;} else { print '0';} ?>'>% 
+             <input class="input_number_small" id='commission_percent' name='commission_percent' type='number' step='0.5' value='<?php if (isset($commission_percent)) {print $commission_percent;} else { print '0';} ?>'>% 
              <input <?php if (!isset($pay_commission_checkbox) || $pay_commission_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_commission_checkbox' name='pay_commission_checkbox'> 
 			 <label for='commission_percent'>Commission</label>
          </div>
 
          <div>
              <?php if(isset($msg_extra_stops_percent)) print $msg_extra_stops_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'extra_stops_percent') print 'autofocus'; ?> id='extra_stops_percent' name='extra_stops_percent' type='number' step='0.5' value='<?php if (isset($extra_stops_percent)) {print $extra_stops_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='extra_stops_percent' name='extra_stops_percent' type='number' step='0.5' value='<?php if (isset($extra_stops_percent)) {print $extra_stops_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_extra_stops_checkbox) || $pay_extra_stops_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_extra_stops_checkbox' name='pay_extra_stops_checkbox'> 
 			 <label for='extra_stops_percent'>Extra stops</label>
          </div>
 
          <div>
              <?php if(isset($msg_offtime_percent)) print $msg_offtime_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'offtime_percent') print 'autofocus'; ?> id='offtime_percent' name='offtime_percent' type='number' step='0.5' value='<?php if (isset($offtime_percent)) {print $offtime_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='offtime_percent' name='offtime_percent' type='number' step='0.5' value='<?php if (isset($offtime_percent)) {print $offtime_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_offtime_checkbox) || $pay_offtime_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_offtime_checkbox' name='pay_offtime_checkbox'> 
 			 <label for='offtime_percent'>Off-time</label>
          </div>
 
          <div>
              <?php if(isset($msg_tolls_percent)) print $msg_tolls_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'tolls_percent') print 'autofocus'; ?> id='tolls_percent' name='tolls_percent' type='number' step='0.5' value='<?php if (isset($tolls_percent)) {print $tolls_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='tolls_percent' name='tolls_percent' type='number' step='0.5' value='<?php if (isset($tolls_percent)) {print $tolls_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_tolls_checkbox) || $pay_tolls_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_tolls_checkbox' name='pay_tolls_checkbox'> 
              <label for='tolls_percent'>Tolls</label>
          </div>
 
          <div>
              <?php if(isset($msg_parking_percent)) print $msg_parking_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'parking_percent') print 'autofocus'; ?> id='parking_percent' name='parking_percent' type='number' step='0.5' value='<?php if (isset($parking_percent)) {print $parking_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='parking_percent' name='parking_percent' type='number' step='0.5' value='<?php if (isset($parking_percent)) {print $parking_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_parking_checkbox) || $pay_parking_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_parking_checkbox' name='pay_parking_checkbox'> 
              <label for='parking_percent'>Parking</label>
          </div>
 
          <div>
              <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'gas_surcharge_percent') print 'autofocus'; ?> id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.5' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.5' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_gas_surcharge_checkbox) || $pay_gas_surcharge_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_gas_surcharge_checkbox' name='pay_gas_surcharge_checkbox'> 
              <label for='gas_surcharge_percent'>Gas surcharge</label>
          </div>
 
          <div>
              <?php if(isset($msg_extra_charges_percent)) print $msg_extra_charges_percent; ?>
-             <input class="input_number_small" <?php if ($focus_field == 'extra_charges_percent') print 'autofocus'; ?> id='extra_charges_percent' name='extra_charges_percent' type='number' step='0.5' value='<?php if (isset($extra_charges_percent)) {print $extra_charges_percent;} else { print '100';} ?>'>% 
+             <input class="input_number_small" id='extra_charges_percent' name='extra_charges_percent' type='number' step='0.5' value='<?php if (isset($extra_charges_percent)) {print $extra_charges_percent;} else { print '100';} ?>'>% 
              <input <?php if (!isset($pay_extra_charges_checkbox) || $pay_extra_charges_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_extra_charges_checkbox' name='pay_extra_charges_checkbox'> 
              <label for='extra_charges_percent'>Extra charges</label>
          </div>
@@ -754,9 +754,9 @@ if (isset($_POST['save_submit'])) {
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

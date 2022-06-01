@@ -77,13 +77,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='offtime_type'>Off-time type</label> <span class='red'> *</span>             <?php if(isset($msg_offtime_type)) print $msg_offtime_type; ?>
-             <input <?php if ($focus_field == 'offtime_type') print 'autofocus'; ?> id='offtime_type' name='offtime_type' type='text' value='<?php if (isset($offtime_type)) {print $offtime_type;} else { print '';} ?>' required><br>
+             <input id='offtime_type' name='offtime_type' type='text' value='<?php if (isset($offtime_type)) {print $offtime_type;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

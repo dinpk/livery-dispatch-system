@@ -124,25 +124,25 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='trip_status'>Trip status</label> <span class='red'> *</span>
              <?php if(isset($msg_trip_status)) print $msg_trip_status; ?>
-             <input <?php if ($focus_field == 'trip_status') print 'autofocus'; ?> id='trip_status' name='trip_status' type='text' value='<?php if (isset($trip_status)) {print $trip_status;} else { print '';} ?>' required><br>
+             <input id='trip_status' name='trip_status' type='text' value='<?php if (isset($trip_status)) {print $trip_status;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='text_color'>Text color</label>
              <?php if(isset($msg_text_color)) print $msg_text_color; ?>
-             <input <?php if ($focus_field == 'text_color') print 'autofocus'; ?> id='text_color' name='text_color' type='color' value='<?php if (isset($text_color)) {print $text_color;} else { print '';} ?>'><br>
+             <input id='text_color' name='text_color' type='color' value='<?php if (isset($text_color)) {print $text_color;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='back_color'>Back color</label>
              <?php if(isset($msg_back_color)) print $msg_back_color; ?>
-             <input <?php if ($focus_field == 'back_color') print 'autofocus'; ?> id='back_color' name='back_color' type='color' value='<?php if (isset($back_color)) {print $back_color;} else { print '';} ?>'><br>
+             <input id='back_color' name='back_color' type='color' value='<?php if (isset($back_color)) {print $back_color;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='sort'>Sort</label>
              <?php if(isset($msg_sort)) print $msg_sort; ?>
-             <input <?php if ($focus_field == 'sort') print 'autofocus'; ?> id='sort' name='sort' type='number' step='0.10' value='<?php if (isset($sort)) {print $sort;} else { print '0';} ?>'><br>
+             <input id='sort' name='sort' type='number' step='0.10' value='<?php if (isset($sort)) {print $sort;} else { print '0';} ?>'><br>
          </div>
 
          <div>
@@ -151,9 +151,9 @@ if (isset($_POST['save_submit'])) {
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

@@ -78,13 +78,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='category'>Category</label> <span class='red'> *</span>             <?php if(isset($msg_category)) print $msg_category; ?>
-             <input <?php if ($focus_field == 'category') print 'autofocus'; ?> id='category' name='category' type='text' value='<?php if (isset($category)) {print $category;} else { print '';} ?>' required><br>
+             <input id='category' name='category' type='text' value='<?php if (isset($category)) {print $category;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

@@ -163,7 +163,7 @@ if (isset($_POST['save_submit'])) {
 		<div>
 		<label for='repair_description'>Repair description</label><br>
 		<?php if(isset($msg_repair_description)) print $msg_repair_description; ?>
-		<textarea <?php if ($focus_field == 'repair_description') print 'autofocus'; ?> id='repair_description' name='repair_description'><?php if (isset($repair_description)) print $repair_description; ?></textarea><br>
+		<textarea id='repair_description' name='repair_description'><?php if (isset($repair_description)) print $repair_description; ?></textarea><br>
 		</div>
 		
 		</fieldset>
@@ -190,19 +190,19 @@ if (isset($_POST['save_submit'])) {
 		<div>
 		<label for='labor_cost'>Labor cost</label> <span class='red'> *</span><br>
 		<?php if(isset($msg_labor_cost)) print $msg_labor_cost; ?>
-		<input <?php if ($focus_field == 'labor_cost') print 'autofocus'; ?> id='labor_cost' name='labor_cost' type='number' step='0.10' value='<?php if (isset($labor_cost)) {print $labor_cost;} else {print '0';} ?>'><br>
+		<input id='labor_cost' name='labor_cost' type='number' step='0.10' value='<?php if (isset($labor_cost)) {print $labor_cost;} else {print '0';} ?>'><br>
 		</div>
 		
 		<div>
 		<label for='parts_cost'>Parts cost</label> <span class='red'> *</span><br>
 		<?php if(isset($msg_parts_cost)) print $msg_parts_cost; ?>
-		<input <?php if ($focus_field == 'parts_cost') print 'autofocus'; ?> id='parts_cost' name='parts_cost' type='number' step='0.10' value='<?php if (isset($parts_cost)) {print $parts_cost;} else {print '0';} ?>'><br>
+		<input id='parts_cost' name='parts_cost' type='number' step='0.10' value='<?php if (isset($parts_cost)) {print $parts_cost;} else {print '0';} ?>'><br>
 		</div>
 		
 		<div>
 		<label for='warranty_description'>Warranty description</label><br>
 		<?php if(isset($msg_warranty_description)) print $msg_warranty_description; ?>
-		<textarea <?php if ($focus_field == 'warranty_description') print 'autofocus'; ?> id='warranty_description' name='warranty_description'><?php if (isset($warranty_description)) print $warranty_description; ?></textarea><br>
+		<textarea id='warranty_description' name='warranty_description'><?php if (isset($warranty_description)) print $warranty_description; ?></textarea><br>
 		</div>
 		
 		<div>
@@ -212,9 +212,9 @@ if (isset($_POST['save_submit'])) {
 		</div>
 		
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

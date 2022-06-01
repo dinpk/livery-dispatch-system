@@ -77,13 +77,13 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='ad_source'>Ad source</label> <span class='red'> *</span>             <?php if(isset($msg_ad_source)) print $msg_ad_source; ?>
-             <input <?php if ($focus_field == 'ad_source') print 'autofocus'; ?> id='ad_source' name='ad_source' type='text' value='<?php if (isset($ad_source)) {print $ad_source;} else { print '';} ?>' required><br>
+             <input id='ad_source' name='ad_source' type='text' value='<?php if (isset($ad_source)) {print $ad_source;} else { print '';} ?>' required><br>
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

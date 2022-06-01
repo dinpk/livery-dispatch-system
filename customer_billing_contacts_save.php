@@ -201,152 +201,173 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>CUSTOMER BILLING CONTACTS</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER BILLING CONTACTS</title>
+    <?php include('php/_head.php'); ?>
 </head>
+
 <body id='page-save' class='page_save page_customer_billing_contacts_save'>
 
-	<section id='sub-menu'>
-		<div class='left-block'>customer billing contacts</div>
-		<div class='right-block'>
+    <section id='sub-menu'>
+        <div class='left-block'>customer billing contacts</div>
+        <div class='right-block'>
 
-		</div>
-	</section>
+        </div>
+    </section>
 
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
+    <?php if (isset($message)) print $message; ?>
 
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
+    <main>
+
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
 
 
-         <div>
-             <label for='contact_name'>Contact name</label> <span class='red'> *</span>             <?php if(isset($msg_contact_name)) print $msg_contact_name; ?>
-             <input <?php if ($focus_field == 'contact_name') print 'autofocus'; ?> id='contact_name' name='contact_name' type='text' value='<?php if (isset($contact_name)) {print $contact_name;} else { print '';} ?>' required><br>
-         </div>
+                <div>
+                    <label for='contact_name'>Contact name</label> <span class='red'> *</span>
+                    <?php if(isset($msg_contact_name)) print $msg_contact_name; ?>
+                    <input id='contact_name' name='contact_name' type='text'
+                        value='<?php if (isset($contact_name)) {print $contact_name;} else { print '';} ?>'
+                        required><br>
+                </div>
 
-         <div>
-             <label for='card_type'>Card type</label> <span class='red'> *</span><br>
-             <?php if(isset($msg_card_type)) print $msg_card_type; ?>
-             <select id='card_type' name='card_type' required>
-                 <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT payment_card_type FROM settings_payment_card_type_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['payment_card_type'] == $card_type) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['payment_card_type'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
+                <div>
+                    <label for='card_type'>Card type</label> <span class='red'> *</span><br>
+                    <?php if(isset($msg_card_type)) print $msg_card_type; ?>
+                    <select id='card_type' name='card_type' required>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT payment_card_type FROM settings_payment_card_type_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['payment_card_type'] == $card_type) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['payment_card_type'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
 
-         <div>
-             <label for='card_number'>Card #</label>
-			 <?php if(isset($msg_card_number)) print $msg_card_number; ?>
-             <input <?php if ($focus_field == 'card_number') print 'autofocus'; ?> id='card_number' name='card_number' type='text' value='<?php if (isset($card_number)) {print $card_number;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='card_number'>Card #</label> <span class='red'> *</span>
+                    <?php if(isset($msg_card_number)) print $msg_card_number; ?>
+                    <input id='card_number' name='card_number' type='text'
+                        value='<?php if (isset($card_number)) {print $card_number;} else { print '';} ?>' required><br>
+                </div>
 
-         <div>
-             <label for='card_expiration'>Expiration</label>
-			 <?php if(isset($msg_card_expiration)) print $msg_card_expiration; ?>
-             <input <?php if ($focus_field == 'card_expiration') print 'autofocus'; ?> id='card_expiration' name='card_expiration' type='text' value='<?php if (isset($card_expiration)) {print $card_expiration;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='card_expiration'>Expiration</label>
+                    <?php if(isset($msg_card_expiration)) print $msg_card_expiration; ?>
+                    <input id='card_expiration' name='card_expiration' type='text'
+                        value='<?php if (isset($card_expiration)) {print $card_expiration;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='card_security_code'>Security code</label>
-			 <?php if(isset($msg_card_security_code)) print $msg_card_security_code; ?>
-             <input <?php if ($focus_field == 'card_security_code') print 'autofocus'; ?> id='card_security_code' name='card_security_code' type='text' value='<?php if (isset($card_security_code)) {print $card_security_code;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='card_security_code'>Security code</label>
+                    <?php if(isset($msg_card_security_code)) print $msg_card_security_code; ?>
+                    <input id='card_security_code' name='card_security_code' type='text'
+                        value='<?php if (isset($card_security_code)) {print $card_security_code;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='name_on_card'>Name on card</label> <span class='red'> *</span>             <?php if(isset($msg_name_on_card)) print $msg_name_on_card; ?>
-             <input <?php if ($focus_field == 'name_on_card') print 'autofocus'; ?> id='name_on_card' name='name_on_card' type='text' value='<?php if (isset($name_on_card)) {print $name_on_card;} else { print '';} ?>' required><br>
-         </div>
-	
-		</fieldset>
-		
-		<fieldset>
+                <div>
+                    <label for='name_on_card'>Name on card</label> <span class='red'> *</span>
+                    <?php if(isset($msg_name_on_card)) print $msg_name_on_card; ?>
+                    <input id='name_on_card' name='name_on_card' type='text'
+                        value='<?php if (isset($name_on_card)) {print $name_on_card;} else { print '';} ?>'
+                        required><br>
+                </div>
 
-         <div>
-             <label for='confirmation_email'>Confirmation email</label>
-			 <?php if(isset($msg_confirmation_email)) print $msg_confirmation_email; ?>
-             <input <?php if ($focus_field == 'confirmation_email') print 'autofocus'; ?> id='confirmation_email' name='confirmation_email' type='email' value='<?php if (isset($confirmation_email)) {print $confirmation_email;} else { print '';} ?>'><br>
-         </div>
+            </fieldset>
 
-         <div>
-             <label for='phone'>Phone</label>
-			 <?php if(isset($msg_phone)) print $msg_phone; ?>
-             <input <?php if ($focus_field == 'phone') print 'autofocus'; ?> id='phone' name='phone' type='tel' value='<?php if (isset($phone)) {print $phone;} else { print '';} ?>'><br>
-         </div>
+            <fieldset>
 
-         <div>
-             <label for='address1'>Address 1</label>
-			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='confirmation_email'>Confirmation email</label>
+                    <?php if(isset($msg_confirmation_email)) print $msg_confirmation_email; ?>
+                    <input id='confirmation_email' name='confirmation_email' type='email'
+                        value='<?php if (isset($confirmation_email)) {print $confirmation_email;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='address2'>Address 2</label>
-			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='phone'>Phone</label>
+                    <?php if(isset($msg_phone)) print $msg_phone; ?>
+                    <input id='phone' name='phone' type='tel'
+                        value='<?php if (isset($phone)) {print $phone;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='city'>City</label>
-			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='address1'>Address 1</label>
+                    <?php if(isset($msg_address1)) print $msg_address1; ?>
+                    <input id='address1' name='address1' type='text'
+                        value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='state'>State</label><br>
-             <?php if(isset($msg_state)) print $msg_state; ?>
-             <input id='state' name='state' list='list_state' value='<?php if (isset($state)) {print $state;} ?>'><br>
-             <datalist id='list_state'>
-             <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT state FROM values_state');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $options .= "<option value='" . $row['state'] . "'>";
-                 }
-                 print $options; 
-                 ?>
-             </datalist>
-         </div>
+                <div>
+                    <label for='address2'>Address 2</label>
+                    <?php if(isset($msg_address2)) print $msg_address2; ?>
+                    <input id='address2' name='address2' type='text'
+                        value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='zip_code'>Zip code</label>
-			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='city'>City</label>
+                    <?php if(isset($msg_city)) print $msg_city; ?>
+                    <input id='city' name='city' type='text'
+                        value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='notes'>Notes</label>
-			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
-         </div>
+                <div>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <input id='state' name='state' list='list_state'
+                        value='<?php if (isset($state)) {print $state;} ?>'><br>
+                    <datalist id='list_state'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT state FROM values_state');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$options .= "<option value='" . $row['state'] . "'>";
+						}
+						print $options; 
+						?>
+                    </datalist>
+                </div>
 
-         <div>
-             <?php if(isset($msg_active_status)) print $msg_active_status; ?>
-             <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?> type='checkbox' id='active_status' name='active_status'> <label for='active_status'>Status</label><br>
-         </div>
+                <div>
+                    <label for='zip_code'>Zip code</label>
+                    <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
+                    <input id='zip_code' name='zip_code' type='text'
+                        value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                </div>
 
-		</fieldset>
-		<div class='clear-fix'>
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
-		
-	</form>
-	<?php } ?>
+                <div>
+                    <label for='notes'>Notes</label>
+                    <?php if(isset($msg_notes)) print $msg_notes; ?>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                </div>
 
-	</main>
-	<?php include('php/_footer.php'); ?>
+                <div>
+                    <?php if(isset($msg_active_status)) print $msg_active_status; ?>
+                    <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='active_status' name='active_status'> <label
+                        for='active_status'>Status</label><br>
+                </div>
+
+            </fieldset>
+
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
+
+
+        </form>
+        <?php } ?>
+
+    </main>
+    <?php include('php/_footer.php'); ?>
 
 </body>
+
 </html>

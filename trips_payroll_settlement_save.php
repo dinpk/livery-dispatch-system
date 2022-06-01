@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
 $show_form = true;
-$focus_field = 'rate_type';
+$focus_field = 'zone_rate';
 // id passed for update
 if (isset($_GET['tripsid'])) {
 	$record_id = trim($_GET['tripsid']);
@@ -582,7 +582,7 @@ if (isset($_POST['save_submit'])) {
 			<br>
 			<label for='pay_notes'>Notes</label>
 			<?php if(isset($msg_pay_notes)) print $msg_pay_notes; ?>
-			<textarea <?php if ($focus_field == 'pay_notes') print 'autofocus'; ?> id='pay_notes' name='pay_notes'><?php if (isset($pay_notes)) print $pay_notes; ?></textarea><br>
+			<textarea id='pay_notes' name='pay_notes'><?php if (isset($pay_notes)) print $pay_notes; ?></textarea><br>
 
 		</fieldset>
 		
@@ -594,9 +594,9 @@ if (isset($_POST['save_submit'])) {
 			 </div>
 		</fieldset>
 		
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		</form>
 
 

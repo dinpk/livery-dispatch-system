@@ -18,3 +18,8 @@
 		</div>
 	</div>
 
+	<?php
+		if (isset($focus_field) && !empty($focus_field)) {
+			print "<script>document.getElementById('$focus_field').focus();</script>";
+		}
+	?>

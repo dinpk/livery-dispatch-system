@@ -289,7 +289,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='fleet_number'>Fleet #</label>             
 			 <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
-             <input <?php if ($focus_field == 'fleet_number') print 'autofocus'; ?> id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>'><br>
+             <input id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -312,19 +312,19 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='tag'>Tag <span class='red'> *</span></label>
 			 <?php if(isset($msg_tag)) print $msg_tag; ?>
-             <input <?php if ($focus_field == 'tag') print 'autofocus'; ?> id='tag' name='tag' type='text' value='<?php if (isset($tag)) {print $tag;} else { print '';} ?>' required><br>
+             <input id='tag' name='tag' type='text' value='<?php if (isset($tag)) {print $tag;} else { print '';} ?>' required><br>
          </div>
 
          <div>
              <label for='vin_number'>Vin #</label>             
 			 <?php if(isset($msg_vin_number)) print $msg_vin_number; ?>
-             <input <?php if ($focus_field == 'vin_number') print 'autofocus'; ?> id='vin_number' name='vin_number' type='text' value='<?php if (isset($vin_number)) {print $vin_number;} else { print '';} ?>'><br>
+             <input id='vin_number' name='vin_number' type='text' value='<?php if (isset($vin_number)) {print $vin_number;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='year_made'>Year</label>             
 			 <?php if(isset($msg_year_made)) print $msg_year_made; ?>
-             <input <?php if ($focus_field == 'year_made') print 'autofocus'; ?> id='year_made' name='year_made' type='text' value='<?php if (isset($year_made)) {print $year_made;} else { print '';} ?>'><br>
+             <input id='year_made' name='year_made' type='text' value='<?php if (isset($year_made)) {print $year_made;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -367,7 +367,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='max_seats'>Max seats</label>             
 			 <?php if(isset($msg_max_seats)) print $msg_max_seats; ?>
-             <input <?php if ($focus_field == 'max_seats') print 'autofocus'; ?> id='max_seats' name='max_seats' type='number' value='<?php if (isset($max_seats)) {print $max_seats;} else { print '0';} ?>'><br>
+             <input id='max_seats' name='max_seats' type='number' value='<?php if (isset($max_seats)) {print $max_seats;} else { print '0';} ?>'><br>
          </div>
 
          <div>
@@ -398,7 +398,7 @@ if (isset($_POST['save_submit'])) {
 					 <a href='#' onclick='unselectKeyValue("key_settings_insurance_company_values","insurance_company");return false;'>?</a>
 			 </small><br>
 			 <?php if(isset($msg_insurance_company)) print $msg_insurance_company; ?>
-			 <input <?php if ($focus_field == 'insurance_company') print 'autofocus'; ?> id='insurance_company' name='insurance_company' type='text' value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>' readonly><br>
+			 <input id='insurance_company' name='insurance_company' type='text' value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>' readonly><br>
 		 </div>
 
          <div>
@@ -410,13 +410,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='notes'>Notes</label>             
 			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
          </div>
 		 
          <div>
              <label for='image_url'>Image url</label>             
 			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+             <input id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
          </div>
 
 		 </fieldset>
@@ -425,25 +425,25 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='zone_rate_percent'>Zone rate %</label>
              <?php if(isset($msg_zone_rate_percent)) print $msg_zone_rate_percent; ?>
-             <input <?php if ($focus_field == 'zone_rate_percent') print 'autofocus'; ?> id='zone_rate_percent' name='zone_rate_percent' type='number' step='any' value='<?php if (isset($zone_rate_percent)) {print $zone_rate_percent;} else { print '100';} ?>' required><br>
+             <input id='zone_rate_percent' name='zone_rate_percent' type='number' step='any' value='<?php if (isset($zone_rate_percent)) {print $zone_rate_percent;} else { print '100';} ?>' required><br>
          </div>
 		 
          <div>
              <label for='hourly_regular_rate'>Hourly regular rate</label>
              <?php if(isset($msg_hourly_regular_rate)) print $msg_hourly_regular_rate; ?>
-             <input <?php if ($focus_field == 'hourly_regular_rate') print 'autofocus'; ?> id='hourly_regular_rate' name='hourly_regular_rate' type='number' step='0.10' value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'><br>
+             <input id='hourly_regular_rate' name='hourly_regular_rate' type='number' step='0.10' value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='hourly_wait_rate'>Hourly wait rate</label>
              <?php if(isset($msg_hourly_wait_rate)) print $msg_hourly_wait_rate; ?>
-             <input <?php if ($focus_field == 'hourly_wait_rate') print 'autofocus'; ?> id='hourly_wait_rate' name='hourly_wait_rate' type='number' step='0.10' value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'><br>
+             <input id='hourly_wait_rate' name='hourly_wait_rate' type='number' step='0.10' value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'><br>
          </div>
 
          <div>
              <label for='hourly_overtime_rate'>Hourly overtime rate</label>
              <?php if(isset($msg_hourly_overtime_rate)) print $msg_hourly_overtime_rate; ?>
-             <input <?php if ($focus_field == 'hourly_overtime_rate') print 'autofocus'; ?> id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' step='0.10' value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'><br>
+             <input id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' step='0.10' value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'><br>
          </div>
 
 		<br><br>
@@ -454,9 +454,9 @@ if (isset($_POST['save_submit'])) {
          </div>
 
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

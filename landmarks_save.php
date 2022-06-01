@@ -184,7 +184,7 @@ if (isset($_POST['save_submit'])) {
 
          <div>
              <label for='title'>Title</label> <span class='red'> *</span>             <?php if(isset($msg_title)) print $msg_title; ?>
-             <input <?php if ($focus_field == 'title') print 'autofocus'; ?> id='title' name='title' type='text' value='<?php if (isset($title)) {print $title;} else { print '';} ?>' required><br>
+             <input id='title' name='title' type='text' value='<?php if (isset($title)) {print $title;} else { print '';} ?>' required><br>
          </div>
 
          <div>
@@ -207,19 +207,19 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='address1'>Address 1</label>
 			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input <?php if ($focus_field == 'address1') print 'autofocus'; ?> id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+             <input id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='address2'>Address 2</label>
 			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input <?php if ($focus_field == 'address2') print 'autofocus'; ?> id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+             <input id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='city'>City</label>
 			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input <?php if ($focus_field == 'city') print 'autofocus'; ?> id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+             <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
          </div>
 
          <div>
@@ -259,7 +259,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='zip_code'>Zip code</label>
 			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input <?php if ($focus_field == 'zip_code') print 'autofocus'; ?> id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+             <input id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
          </div>
 
 		</fieldset>
@@ -268,13 +268,13 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='image_url'>Image url</label>
 			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input <?php if ($focus_field == 'image_url') print 'autofocus'; ?> id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+             <input id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
          </div>
 
          <div>
              <label for='notes'>Notes</label>
 			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea <?php if ($focus_field == 'notes') print 'autofocus'; ?> id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
          </div>
 
 		<br><br>
@@ -286,9 +286,9 @@ if (isset($_POST['save_submit'])) {
 
 		</fieldset>
 		
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 		
 	</form>
 	<?php } ?>

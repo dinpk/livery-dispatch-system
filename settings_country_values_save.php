@@ -88,17 +88,17 @@ if (isset($_POST['save_submit'])) {
 		<fieldset>
          <div>
              <label for='country'>Country</label> <span class='red'> *</span>             <?php if(isset($msg_country)) print $msg_country; ?>
-             <input <?php if ($focus_field == 'country') print 'autofocus'; ?> id='country' name='country' type='text' value='<?php if (isset($country)) {print $country;} else { print '';} ?>' required><br>
+             <input id='country' name='country' type='text' value='<?php if (isset($country)) {print $country;} else { print '';} ?>' required><br>
          </div>
          <div>
              <label for='country_code'>Country code</label>
 			 <?php if(isset($msg_country_code)) print $msg_country_code; ?>
-             <input <?php if ($focus_field == 'country_code') print 'autofocus'; ?> id='country_code' name='country_code' type='text' value='<?php if (isset($country_code)) {print $country_code;} else { print '';} ?>'><br>
+             <input id='country_code' name='country_code' type='text' value='<?php if (isset($country_code)) {print $country_code;} else { print '';} ?>'><br>
          </div>
 		</fieldset>
-		<div class='clear-fix'>
+		
 		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		</div>
+		
 	</form>
 	<?php } ?>
 	</main>

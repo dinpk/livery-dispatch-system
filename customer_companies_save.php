@@ -245,35 +245,12 @@ if (isset($_POST['save_submit'])) {
                         value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
                 </div>
 
-                <div>
-                    <label for='state'>State</label><br>
-                    <?php if(isset($msg_state)) print $msg_state; ?>
-                    <input id='state' name='state' list='list_state'
-                        value='<?php if (isset($state)) {print $state;} ?>'><br>
-                    <datalist id='list_state'>
-                        <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $options .= "<option value='" . $row['state'] . "'>";
-                 }
-                 print $options; 
-                 ?>
-                    </datalist>
-                </div>
-
-                <div>
-                    <label for='zip_code'>Zip code</label>
-                    <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-                    <input id='zip_code' name='zip_code'
-                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
-                </div>
 
                 <div>
                     <label for='country'>Country</label><br>
                     <?php if(isset($msg_country)) print $msg_country; ?>
-                    <select id='country' name='country'>
+                    <select id='country' name='country' onchange='populateStatesOfCountry(this.value);'>
+					<option></option>
                         <?php 
 						$options = '';
 						
@@ -287,6 +264,33 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
+
+                <div>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <progress id='loader'></progress>
+                    <select id='state' name='state'>
+                        <?php 
+						$options = '';
+						$results = mysqli_query($dbcon, "SELECT state FROM settings_state_values WHERE country = '$country'");
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $state) $selection = "selected='selected'";
+							$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
+					?>
+                    </select>
+                </div>
+
+                <div>
+                    <label for='zip_code'>Zip code</label>
+                    <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
+                    <input id='zip_code' name='zip_code'
+                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                </div>
+
+
             </fieldset>
             <fieldset>
 

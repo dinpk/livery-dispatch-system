@@ -343,6 +343,21 @@ if (isset($_POST['save_submit'])) {
 <head>
     <title>CUSTOMER PASSENGER</title>
     <?php include('php/_head.php'); ?>
+    <script>
+    function storeBillingContact() {
+        const contact = new Object();
+        contact.name = document.getElementById("first_name").value + " " + document.getElementById("last_name").value;
+        contact.address1 = document.getElementById("address1").value;
+        contact.address2 = document.getElementById("address2").value;
+        contact.city = document.getElementById("city").value;
+        contact.state = document.getElementById("state").value;
+        contact.country = document.getElementById("country").value;
+        contact.zip_code = document.getElementById("zip_code").value;
+        contact.phone = document.getElementById("work_phone").value;
+        contact.email = document.getElementById("email").value;
+        localStorage.setItem("billing_contact", JSON.stringify(contact));
+    }
+    </script>
 </head>
 
 <body id='page-save' class='page_save page_customer_passengers_save'>
@@ -366,31 +381,29 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='first_name'>First name</label> <span class='red'> *</span>
                     <?php if(isset($msg_first_name)) print $msg_first_name; ?>
-                    <input id='first_name'
-                        name='first_name' type='text'
+                    <input id='first_name' name='first_name' type='text'
                         value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>' required><br>
                 </div>
 
                 <div>
                     <label for='last_name'>Last name</label> <span class='red'> *</span>
                     <?php if(isset($msg_last_name)) print $msg_last_name; ?>
-                    <input id='last_name' name='last_name'
-                        type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'
-                        required><br>
+                    <input id='last_name' name='last_name' type='text'
+                        value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>' required><br>
                 </div>
 
                 <div>
                     <label for='address1'>Address 1</label>
                     <?php if(isset($msg_address1)) print $msg_address1; ?>
-                    <input id='address1' name='address1'
-                        type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+                    <input id='address1' name='address1' type='text'
+                        value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
                 </div>
 
                 <div>
                     <label for='address2'>Address 2</label>
                     <?php if(isset($msg_address2)) print $msg_address2; ?>
-                    <input id='address2' name='address2'
-                        type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+                    <input id='address2' name='address2' type='text'
+                        value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
                 </div>
 
                 <div>
@@ -401,46 +414,47 @@ if (isset($_POST['save_submit'])) {
                 </div>
 
                 <div>
-                    <label for='state'>State</label><br>
-                    <?php if(isset($msg_state)) print $msg_state; ?>
-                    <input id='state' name='state' list='list_state'
-                        value='<?php if (isset($state)) {print $state;} ?>'><br>
-                    <datalist id='list_state'>
+                    <label for='country'>Country</label><br>
+                    <?php if(isset($msg_country)) print $msg_country; ?>
+                    <select id='country' name='country' onchange='populateStatesOfCountry(this.value);'>
+					<option></option>
                         <?php 
-					 $options = '';
-					 
-					 $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-					 while ($row = mysqli_fetch_assoc($results)) {
-						 $options .= "<option value='" . $row['state'] . "'>";
-					 }
-					 print $options; 
-					 ?>
-                    </datalist>
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['country'] == $country) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['country'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
                 </div>
 
                 <div>
-                    <label for='country'>Country</label><br>
-                    <?php if(isset($msg_country)) print $msg_country; ?>
-                    <select id='country' name='country'>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <progress id='loader'></progress>
+                    <select id='state' name='state'>
                         <?php 
-					 $options = '';
-					 
-					 $results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
-					 while ($row = mysqli_fetch_assoc($results)) {
-						 $selection = '';
-						 if ($row['country'] == $country) $selection = "selected='selected'";
-							 $options .= "<option $selection>" . $row['country'] . "</option>";
-					 }
-					 print $options; 
-					 ?>
+						$options = '';
+						$results = mysqli_query($dbcon, "SELECT state FROM settings_state_values WHERE country = '$country'");
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $state) $selection = "selected='selected'";
+							$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
+					?>
                     </select>
                 </div>
 
                 <div>
                     <label for='zip_code'>Zip code</label>
                     <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-                    <input id='zip_code' name='zip_code'
-                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                    <input id='zip_code' name='zip_code' type='text'
+                        value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
                 </div>
 
             </fieldset>
@@ -449,24 +463,21 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='work_phone'>Work phone</label>
                     <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
-                    <input id='work_phone'
-                        name='work_phone' type='tel'
+                    <input id='work_phone' name='work_phone' type='tel'
                         value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
                 </div>
 
                 <div>
                     <label for='work_phone_extension'>Work phone ext.</label>
                     <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
-                    <input 
-                        id='work_phone_extension' name='work_phone_extension' type='number'
+                    <input id='work_phone_extension' name='work_phone_extension' type='number'
                         value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '0';} ?>'><br>
                 </div>
 
                 <div>
                     <label for='mobile_phone'>Mobile phone</label>
                     <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
-                    <input id='mobile_phone'
-                        name='mobile_phone' type='tel'
+                    <input id='mobile_phone' name='mobile_phone' type='tel'
                         value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
                 </div>
 
@@ -480,15 +491,15 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='website'>Website</label>
                     <?php if(isset($msg_website)) print $msg_website; ?>
-                    <input id='website' name='website'
-                        type='url' value='<?php if (isset($website)) {print $website;} else { print '';} ?>'><br>
+                    <input id='website' name='website' type='url'
+                        value='<?php if (isset($website)) {print $website;} else { print '';} ?>'><br>
                 </div>
 
                 <div>
                     <label for='image_url'>Image url</label>
                     <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-                    <input id='image_url' name='image_url'
-                        type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+                    <input id='image_url' name='image_url' type='text'
+                        value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
                 </div>
 
             </fieldset>
@@ -500,11 +511,10 @@ if (isset($_POST['save_submit'])) {
                         <a href='customer_passengers_select_customer_companies.php' target='overlay-iframe2'
                             onclick='overlayOpen2();'>Select</a> &nbsp;
                         <a href='#'
-                            onclick='unselectKeyValue("key_customer_companies","company_name");return false;'>?</a>
+                            onclick='unselectKeyValue("key_customer_companies","company_name");return false;'>x</a>
                     </small><br>
                     <?php if(isset($msg_company_name)) print $msg_company_name; ?>
-                    <input id='company_name'
-                        name='company_name' type='text'
+                    <input id='company_name' name='company_name' type='text'
                         value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>'
                         readonly><br>
                 </div>
@@ -519,11 +529,10 @@ if (isset($_POST['save_submit'])) {
                         <a href='customer_passengers_select_customer_rate_packages.php' target='overlay-iframe2'
                             onclick='overlayOpen2();'>Select</a> &nbsp;
                         <a href='#'
-                            onclick='unselectKeyValue("key_customer_rate_packages","package_name");return false;'>?</a>
+                            onclick='unselectKeyValue("key_customer_rate_packages","package_name");return false;'>x</a>
                     </small><br>
                     <?php if(isset($msg_package_name)) print $msg_package_name; ?>
-                    <input id='package_name'
-                        name='package_name' type='text'
+                    <input id='package_name' name='package_name' type='text'
                         value='<?php if (isset($package_name)) {print $package_name;} else { print '';} ?>'
                         readonly><br>
                 </div>
@@ -533,16 +542,17 @@ if (isset($_POST['save_submit'])) {
 
 
                 <div>
-                    <label for='billing_contact_name'>Billing contact name</label>
+                    <label for='billing_contact_name'>Billing contact</label>
                     <small>
                         <a href='customer_passengers_select_customer_billing_contacts.php' target='overlay-iframe2'
                             onclick='overlayOpen2();'>Select</a> &nbsp;
+                        <a href='customer_billing_contacts_save.php' target='overlay-iframe2'
+                            onclick='storeBillingContact();overlayOpen2();'>Create</a> &nbsp;
                         <a href='#'
-                            onclick='unselectKeyValue("key_customer_billing_contacts","billing_contact_name");return false;'>?</a>
+                            onclick='unselectKeyValue("key_customer_billing_contacts","billing_contact_name");return false;'>x</a>
                     </small><br>
                     <?php if(isset($msg_billing_contact_name)) print $msg_billing_contact_name; ?>
-                    <input 
-                        id='billing_contact_name' name='billing_contact_name' type='text'
+                    <input id='billing_contact_name' name='billing_contact_name' type='text'
                         value='<?php if (isset($billing_contact_name)) {print $billing_contact_name;} else { print '';} ?>'
                         readonly><br>
                 </div>
@@ -574,7 +584,7 @@ if (isset($_POST['save_submit'])) {
                     <input
                         <?php if (!isset($confirm_to_passenger) || $confirm_to_passenger=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='confirm_to_passenger' name='confirm_to_passenger'> <label
-                        for='confirm_to_passenger'>Confirm to passenger</label><br>
+                        for='confirm_to_passenger'>Email to passenger</label><br>
                 </div>
 
                 <div>
@@ -582,7 +592,7 @@ if (isset($_POST['save_submit'])) {
                     <input
                         <?php if (!isset($confirm_to_contact) || $confirm_to_contact=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='confirm_to_contact' name='confirm_to_contact'> <label
-                        for='confirm_to_contact'>Confirm to contact</label><br>
+                        for='confirm_to_contact'>Email to contact</label><br>
                 </div>
 
                 <div>
@@ -590,7 +600,7 @@ if (isset($_POST['save_submit'])) {
                     <input
                         <?php if (!isset($confirm_to_billing_contact) || $confirm_to_billing_contact=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='confirm_to_billing_contact' name='confirm_to_billing_contact'> <label
-                        for='confirm_to_billing_contact'>Confirm to billing contact</label><br>
+                        for='confirm_to_billing_contact'>Email to billing contact</label><br>
                 </div>
 
             </fieldset>
@@ -599,15 +609,13 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='notes'>Notes</label>
                     <?php if(isset($msg_notes)) print $msg_notes; ?>
-                    <textarea id='notes'
-                        name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
                 </div>
 
                 <div>
                     <label for='trip_ticket_notes'>Trip ticket notes</label>
                     <?php if(isset($msg_trip_ticket_notes)) print $msg_trip_ticket_notes; ?>
-                    <textarea 
-                        id='trip_ticket_notes'
+                    <textarea id='trip_ticket_notes'
                         name='trip_ticket_notes'><?php if (isset($trip_ticket_notes)) print $trip_ticket_notes; ?></textarea><br>
                 </div>
 
@@ -639,9 +647,9 @@ if (isset($_POST['save_submit'])) {
 
             </fieldset>
 
-            
-                <input id='save_submit' name='save_submit' type='submit' value='Save'>
-            
+
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
+
 
         </form>
         <?php } ?>

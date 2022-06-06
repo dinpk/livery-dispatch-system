@@ -45,13 +45,13 @@ if ($run_query) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VEHICLES</title>
+	<title>AIRLINE</title>
 	<?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
 	
 	<section id='sub-menu'>
-		<h3>VEHICLE</h3>
+		<h3>AIRLINE</h3>
 	</section>
 
 	<?php if (isset($message)) print $message; ?>

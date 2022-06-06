@@ -628,7 +628,7 @@ if (isset($_POST['save_submit'])) {
              <label for='fleet_number'>Fleet #</label>
              <small>
 					 <a href='drivers_select_vehicles.php' target='overlay-iframe2' onclick='overlayOpen2();'>Select</a> &nbsp;
-					 <a href='#' onclick='unselectKeyValue("key_vehicles","fleet_number");return false;'>?</a>
+					 <a href='#' onclick='unselectKeyValue("key_vehicles","fleet_number");return false;'>x</a>
              </small><br>
              <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
              <input id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>' readonly><br>

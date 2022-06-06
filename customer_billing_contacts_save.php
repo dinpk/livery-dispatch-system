@@ -19,6 +19,7 @@ if (isset($_GET['customer_billing_contactsid'])) {
 			$address2 = $row['address2'];
 			$city = $row['city'];
 			$state = $row['state'];
+			$country = $row['country'];
 			$zip_code = $row['zip_code'];
 			$confirmation_email = $row['confirmation_email'];
 			$phone = $row['phone'];
@@ -61,6 +62,12 @@ if (isset($_POST['save_submit'])) {
 	if (strlen($zip_code) > 30) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value of length 0-30</div>";
 		$focus_field = 'zip_code';
+		$error = 1;
+	}
+	$country = trim($_POST['country']);
+	if (strlen($country) > 100) {
+		$msg_country = "<div class='message-error'>Provide a valid value of length 0-100</div>";
+		$focus_field = 'country';
 		$error = 1;
 	}
 	$state = trim($_POST['state']);
@@ -137,6 +144,7 @@ if (isset($_POST['save_submit'])) {
 			address2 = '" . sd($dbcon, $address2) . "',
 			city = '" . sd($dbcon, $city) . "',
 			state = '" . sd($dbcon, $state) . "',
+			country = '" . sd($dbcon, $country) . "',
 			zip_code = '" . sd($dbcon, $zip_code) . "',
 			confirmation_email = '" . sd($dbcon, $confirmation_email) . "',
 			phone = '" . sd($dbcon, $phone) . "',
@@ -161,6 +169,7 @@ if (isset($_POST['save_submit'])) {
 			address2,
 			city,
 			state,
+			country,
 			zip_code,
 			confirmation_email,
 			phone,
@@ -178,6 +187,7 @@ if (isset($_POST['save_submit'])) {
 			'" . sd($dbcon, $address2) . "',
 			'" . sd($dbcon, $city) . "',
 			'" . sd($dbcon, $state) . "',
+			'" . sd($dbcon, $country) . "',
 			'" . sd($dbcon, $zip_code) . "',
 			'" . sd($dbcon, $confirmation_email) . "',
 			'" . sd($dbcon, $phone) . "',
@@ -185,7 +195,19 @@ if (isset($_POST['save_submit'])) {
 			'" . sd($dbcon, $active_status) . "'
 			)");
 			if ($results) {
-				$message = "<script>parent.location.reload(false);</script>";
+				$key_billing_contacts = mysqli_insert_id($dbcon);
+				$message = "
+				<script>
+					if ('billing_contact' in localStorage) {
+						parent.document.getElementById('billing_contact_name').value = '$contact_name';
+						parent.document.getElementById('key_customer_billing_contacts').value = '$key_billing_contacts';
+						localStorage.removeItem('billing_contact');
+						closeOverlay2('fromiframe');
+					} else {
+						parent.location.reload(false);
+					}
+				</script>
+				";
 			} else {
 				if (strpos(mysqli_error($dbcon), "Duplicate") > -1) {
 					$message = "<div class='failure-result'>" . mysqli_error($dbcon) . "</div>";
@@ -205,9 +227,30 @@ if (isset($_POST['save_submit'])) {
 <head>
     <title>CUSTOMER BILLING CONTACTS</title>
     <?php include('php/_head.php'); ?>
+
+	<script>
+		async function pullBillingContact() {
+			if ("billing_contact" in localStorage) {
+				let contact = JSON.parse(localStorage.getItem("billing_contact"));
+				document.getElementById("contact_name").value = contact.name;
+				document.getElementById("name_on_card").value = contact.name;
+				document.getElementById("address1").value = contact.address1;
+				document.getElementById("address2").value =contact.address2;
+				document.getElementById("city").value = contact.city;
+				document.getElementById("country").value = contact.country;
+				document.getElementById("zip_code").value = contact.zip_code;
+				document.getElementById("phone").value = contact.phone;
+				document.getElementById("confirmation_email").value = contact.email;
+
+				document.getElementById("country").onchange();
+				await delay(1000);
+				document.getElementById("state").value = contact.state;
+			}
+		}
+	</script>
 </head>
 
-<body id='page-save' class='page_save page_customer_billing_contacts_save'>
+<body id='page-save' class='page_save page_customer_billing_contacts_save' onload='pullBillingContact();'>
 
     <section id='sub-menu'>
         <div class='left-block'>customer billing contacts</div>
@@ -319,22 +362,42 @@ if (isset($_POST['save_submit'])) {
                         value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
                 </div>
 
+
                 <div>
-                    <label for='state'>State</label><br>
-                    <?php if(isset($msg_state)) print $msg_state; ?>
-                    <input id='state' name='state' list='list_state'
-                        value='<?php if (isset($state)) {print $state;} ?>'><br>
-                    <datalist id='list_state'>
+                    <label for='country'>Country</label><br>
+                    <?php if(isset($msg_country)) print $msg_country; ?>
+                    <select id='country' name='country' onchange='populateStatesOfCountry(this.value);'>
+					<option></option>
                         <?php 
 						$options = '';
 						
-						$results = mysqli_query($dbcon, 'SELECT state FROM values_state');
+						$results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
 						while ($row = mysqli_fetch_assoc($results)) {
-							$options .= "<option value='" . $row['state'] . "'>";
+							$selection = '';
+							if ($row['country'] == $country) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['country'] . "</option>";
 						}
 						print $options; 
 						?>
-                    </datalist>
+                    </select>
+                </div>
+
+                <div>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <progress id='loader'></progress>
+                    <select id='state' name='state'>
+                        <?php 
+						$options = '';
+						$results = mysqli_query($dbcon, "SELECT state FROM settings_state_values WHERE country = '$country'");
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $state) $selection = "selected='selected'";
+							$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
+					?>
+                    </select>
                 </div>
 
                 <div>

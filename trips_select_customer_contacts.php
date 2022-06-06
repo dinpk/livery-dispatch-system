@@ -12,7 +12,7 @@ if (isset($_GET['search'])) {
 	}
 }
 if ($run_query) {
-	$results = mysqli_query($dbcon, "SELECT key_customer_contacts, first_name, last_name FROM customer_contacts $sql_where");
+	$results = mysqli_query($dbcon, "SELECT key_customer_contacts, first_name, last_name, company_name FROM customer_contacts $sql_where");
 	if ($results) {
 		$table_rows = '';
 		while ($row = mysqli_fetch_assoc($results)) {
@@ -20,6 +20,7 @@ if ($run_query) {
 			<tr>
 			<td>" . $row['first_name'] . "</td>
 			<td>" . $row['last_name'] . "</td>
+			<td>" . $row['company_name'] . "</td>
 			<td class='record-icons'>
 			<a href='#' onclick='
 				parent.document.getElementById(\"reserved_by\").value = \"" . $row['first_name'] . " " . $row['last_name'] . "\";
@@ -32,6 +33,11 @@ if ($run_query) {
 		}
 		$listing_html = "
 		<table>
+			<tr>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Company</th>
+			</tr>
 			$table_rows
 		</table>
 		";

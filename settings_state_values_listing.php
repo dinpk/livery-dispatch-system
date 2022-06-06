@@ -46,7 +46,7 @@ if (isset($_GET['search'])) {
 	if (empty($search)) {
 		$message = "<div class='failure-result'>Provide a search term</div>";
 	} else {
-		$sql_where = "WHERE MATCH(state, state_code) AGAINST('" . cd($dbcon, $search) . "')";
+		$sql_where = "WHERE MATCH(state, state_code, country) AGAINST('" . cd($dbcon, $search) . "')";
 	}
 }
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
@@ -62,7 +62,7 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM settings_state_values $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_settings_state_values, state, state_code FROM settings_state_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_settings_state_values, state, state_code, country FROM settings_state_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
@@ -71,6 +71,7 @@ if ($results) {
 		<tr>
 		<td>" . $row['state'] . "</td>
 		<td>" . $row['state_code'] . "</td>
+		<td>" . $row['country'] . "</td>
 		<td class='record-icons'>
 		<a href='settings_state_values_save.php?settings_state_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
 		<a href='settings_state_values_view.php?settings_state_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
@@ -83,6 +84,7 @@ if ($results) {
 		<tr>
 		<th><a href='$url" . $query_symbol . "sort_by=state&sort_seq=$sql_order_by_seq'>State</a>" . (($sql_order_by == 'state') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=state_code&sort_seq=$sql_order_by_seq'>State&nbsp;Code</a>" . (($sql_order_by == 'state_code') ? $order_icon : '') . "</th>
+		<th><a href='$url" . $query_symbol . "sort_by=country&sort_seq=$sql_order_by_seq'>Country</a>" . (($sql_order_by == 'country') ? $order_icon : '') . "</th>
 		<th class='icon-cell'></th>
 		</tr>
 		$table_rows

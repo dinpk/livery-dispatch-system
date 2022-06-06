@@ -20,6 +20,12 @@
 
 	<?php
 		if (isset($focus_field) && !empty($focus_field)) {
-			print "<script>document.getElementById('$focus_field').focus();</script>";
+			print "
+			<script>
+				let element = document.getElementById('$focus_field');
+				if (element) {
+					element.focus()
+				}
+			</script>";
 		}
 	?>

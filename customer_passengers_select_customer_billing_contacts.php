@@ -12,13 +12,15 @@ if (isset($_GET['search'])) {
 	}
 }
 if ($run_query) {
-	$results = mysqli_query($dbcon, "SELECT key_customer_billing_contacts, contact_name FROM customer_billing_contacts $sql_where");
+	$results = mysqli_query($dbcon, "SELECT key_customer_billing_contacts, contact_name, card_type, card_expiration FROM customer_billing_contacts $sql_where");
 	if ($results) {
 		$table_rows = '';
 		while ($row = mysqli_fetch_assoc($results)) {
 			$table_rows .= "
 			<tr>
 			<td>" . $row['contact_name'] . "</td>
+			<td>" . $row['card_type'] . "</td>
+			<td>" . $row['card_expiration'] . "</td>
 			<td class='record-icons'>
 			<a href='#' onclick='
 			parent.document.getElementById(\"billing_contact_name\").value = \"" . $row['contact_name']  . "\";
@@ -47,13 +49,13 @@ if ($run_query) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER_BILLING_CONTACTS</title>
+	<title>CUSTOMER BILLING CONTACT</title>
 	<?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
 	
 	<section id='sub-menu'>
-		<h3>CUSTOMER_BILLING_CONTACTS</h3>
+		<h3>CUSTOMER BILLING CONTACT</h3>
 	</section>
 
 	<?php if (isset($message)) print $message; ?>

@@ -251,7 +251,7 @@ if (isset($_POST['save_submit'])) {
 		#loader {display:none;}
 	</style>
 	<script>
-		function models_of_vehicle(make) {
+		function populateModelsOfVehicle(make) {
 			
 			document.getElementById("model").innerHTML = "";
 			if (make.length != 0) {
@@ -330,7 +330,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='make'>Make</label><br>
              <?php if(isset($msg_make)) print $msg_make; ?>
-             <select id='make' name='make' onchange='models_of_vehicle(this.value);'>
+             <select id='make' name='make' onchange='populateModelsOfVehicle(this.value);'>
 				 <option></option>
                  <?php 
                  $options = '';
@@ -349,7 +349,7 @@ if (isset($_POST['save_submit'])) {
          <div>
              <label for='model'>Model</label><br>
              <?php if(isset($msg_model)) print $msg_model; ?>
-			 <progress id="loader"></progress>
+			 <progress id='loader'></progress>
              <select id='model' name='model'>
                  <?php 
                  $options = '';
@@ -395,7 +395,7 @@ if (isset($_POST['save_submit'])) {
 			 <label for='insurance_company'>Insurance company</label>
 			 <small>
 					 <a href='vehicles_select_settings_insurance_company_values.php' target='overlay-iframe2' onclick='overlayOpen2();'>Select</a> &nbsp;
-					 <a href='#' onclick='unselectKeyValue("key_settings_insurance_company_values","insurance_company");return false;'>?</a>
+					 <a href='#' onclick='unselectKeyValue("key_settings_insurance_company_values","insurance_company");return false;'>x</a>
 			 </small><br>
 			 <?php if(isset($msg_insurance_company)) print $msg_insurance_company; ?>
 			 <input id='insurance_company' name='insurance_company' type='text' value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>' readonly><br>

@@ -75,7 +75,7 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM customer_passengers $sql_where $sql_where_alt ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_customer_passengers, first_name, last_name, address1, address2, city, state, country, zip_code, image_url, company_name, package_name, billing_contact_name, active_status 
+$results = mysqli_query($dbcon, "SELECT key_customer_passengers, first_name, last_name, address1, city, state, country, zip_code, image_url, company_name, package_name, billing_contact_name, image_url, active_status 
 					FROM customer_passengers 
 					$sql_where $sql_where_alt 
 					ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
@@ -83,17 +83,22 @@ if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_customer_passengers'];
+		$image_url = $row['image_url'];
+		if (!empty($image_url)) {
+			$image_url = "<a href='$image_url' target='_blank'><img src='$image_url' valign='middle'></a>";
+		} else {
+			$image_url = "<img src='images/icons/lis_passengers.png' valign='middle'>";
+		}		
 		$table_rows = $table_rows . "
 		<tr>
 		<td>" . $row['first_name'] . "</td>
 		<td>" . $row['last_name'] . "</td>
 		<td>" . $row['address1'] . "</td>
-		<td>" . $row['address2'] . "</td>
 		<td>" . $row['city'] . "</td>
 		<td>" . $row['state'] . "</td>
 		<td>" . $row['country'] . "</td>
 		<td>" . $row['zip_code'] . "</td>
-		<td><a href='" . $row['image_url'] . "'><img src='" . $row['image_url'] . "'></a></td>
+		<td>$image_url</td>
 		<td>" . $row['company_name'] . "</td>
 		<td>" . $row['package_name'] . "</td>
 		<td>" . $row['billing_contact_name'] . "</td>
@@ -117,7 +122,6 @@ if ($results) {
 				<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>First&nbsp;Name</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=last_name&sort_seq=$sql_order_by_seq'>Last&nbsp;Name</a>" . (($sql_order_by == 'last_name') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=address1&sort_seq=$sql_order_by_seq'>Address&nbsp;1</a>" . (($sql_order_by == 'address1') ? $order_icon : '') . "</th>
-				<th><a href='$url" . $query_symbol . "sort_by=address2&sort_seq=$sql_order_by_seq'>Address&nbsp;2</a>" . (($sql_order_by == 'address2') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=city&sort_seq=$sql_order_by_seq'>City</a>" . (($sql_order_by == 'city') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=state&sort_seq=$sql_order_by_seq'>State</a>" . (($sql_order_by == 'state') ? $order_icon : '') . "</th>
 				<th><a href='$url" . $query_symbol . "sort_by=country&sort_seq=$sql_order_by_seq'>Country</a>" . (($sql_order_by == 'country') ? $order_icon : '') . "</th>

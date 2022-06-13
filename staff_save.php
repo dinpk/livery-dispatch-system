@@ -286,6 +286,7 @@ if (isset($_POST['save_submit'])) {
 			annual_paid_days,
 			house_rent_allowance,
 			conveyance_allowance,
+			permission_items,
 			active_status
 			) 
 			VALUES (
@@ -316,6 +317,7 @@ if (isset($_POST['save_submit'])) {
 			'" . sd($dbcon, $annual_paid_days) . "',
 			'" . sd($dbcon, $house_rent_allowance) . "',
 			'" . sd($dbcon, $conveyance_allowance) . "',
+			'[]',
 			'" . sd($dbcon, $active_status) . "'
 			)");
 			if ($results) {
@@ -480,6 +482,10 @@ if (isset($_POST['save_submit'])) {
                         type='password' value='<?php if (isset($password)) {print $password;} else { print '';} ?>'
                         required><br>
                 </div>
+				 
+				<div>
+				 	<a href='staff_permissions.php?staffid=<?php print $record_id; ?>' target='overlay-iframe2' onclick='overlayOpen2();'>Permissions</a>
+				</div>
 
                 <div>
                     <label for='image_url'>Image url</label>

@@ -22,9 +22,8 @@
 		if (isset($focus_field) && !empty($focus_field)) {
 			print "
 			<script>
-				let element = document.getElementById('$focus_field');
-				if (element) {
-					element.focus()
+				if (document.getElementById('$focus_field')) {
+					document.getElementById('$focus_field').focus()
 				}
 			</script>";
 		}

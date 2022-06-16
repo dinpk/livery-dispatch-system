@@ -3,12 +3,10 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'company_name';
 // id passed for update
-if (isset($_GET['customer_companiesid'])) {
-	$record_id = trim($_GET['customer_companiesid']);
+if (isset($_GET['customercompanyid'])) {
+	$record_id = trim($_GET['customercompanyid']);
 	if (!is_numeric($record_id)) exit;
-	if (!isset($_POST['save_submit'])) {
-		
-		$results = mysqli_query($dbcon, "SELECT * FROM customer_companies WHERE key_customer_companies = $record_id");
+	if (!isset($_POST['save_submit'])) {		$results = mysqli_query($dbcon, "SELECT * FROM customer_companies WHERE key_customer_companies = $record_id");
 		if ($row = mysqli_fetch_assoc($results)) {
 			$company_name = $row['company_name'];
 			$image_url = $row['image_url'];
@@ -30,7 +28,7 @@ if (isset($_GET['customer_companiesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$active_status = trim($_POST['active_status']);
@@ -192,65 +190,52 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>CUSTOMER COMPANY</title>
     <?php include('php/_head.php'); ?>
 </head>
-
-<body id='page-save' class='page_save page_customer_companies_save'>
-
+<body id='page-save'>
     <section id='sub-menu'>
         <div class='left-block'>customer company</div>
         <div class='right-block'>
 
         </div>
     </section>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
-
         <?php if (isset($show_form) && $show_form) { ?>
         <form method='post'>
             <fieldset>
-
                 <div>
                     <label for='company_name'>Company name</label> <span class='red'> *</span>
                     <?php if(isset($msg_company_name)) print $msg_company_name; ?>
-                    <input id='company_name'
-                        name='company_name' type='text'
+                    <input id='company_name' name='company_name' type='text'
                         value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>'
                         required><br>
                 </div>
-
                 <div>
                     <label for='address1'>Address 1</label>
                     <?php if(isset($msg_address1)) print $msg_address1; ?>
-                    <input id='address1' name='address1'
-                        type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+                    <input id='address1' name='address1' type='text'
+                        value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='address2'>Address 2</label>
                     <?php if(isset($msg_address2)) print $msg_address2; ?>
-                    <input id='address2' name='address2'
-                        type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+                    <input id='address2' name='address2' type='text'
+                        value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='city'>City</label>
                     <?php if(isset($msg_city)) print $msg_city; ?>
                     <input id='city' name='city' type='text'
                         value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
                 </div>
-
-
                 <div>
                     <label for='country'>Country</label><br>
                     <?php if(isset($msg_country)) print $msg_country; ?>
                     <select id='country' name='country' onchange='populateStatesOfCountry(this.value);'>
-					<option></option>
+                        <option></option>
                         <?php 
 						$options = '';
 						
@@ -264,7 +249,6 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='state'>State</label><br>
                     <?php if(isset($msg_state)) print $msg_state; ?>
@@ -282,78 +266,60 @@ if (isset($_POST['save_submit'])) {
 					?>
                     </select>
                 </div>
-
                 <div>
                     <label for='zip_code'>Zip code</label>
                     <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-                    <input id='zip_code' name='zip_code'
-                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                    <input id='zip_code' name='zip_code' type='text'
+                        value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
                 </div>
-
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='phone1'>Phone 1</label>
                     <?php if(isset($msg_phone1)) print $msg_phone1; ?>
-                    <input id='phone1' name='phone1'
-                        type='tel' value='<?php if (isset($phone1)) {print $phone1;} else { print '';} ?>'><br>
+                    <input id='phone1' name='phone1' type='tel'
+                        value='<?php if (isset($phone1)) {print $phone1;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='phone2'>Phone 2</label>
                     <?php if(isset($msg_phone2)) print $msg_phone2; ?>
-                    <input id='phone2' name='phone2'
-                        type='tel' value='<?php if (isset($phone2)) {print $phone2;} else { print '';} ?>'><br>
+                    <input id='phone2' name='phone2' type='tel'
+                        value='<?php if (isset($phone2)) {print $phone2;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='email'>Email</label>
                     <?php if(isset($msg_email)) print $msg_email; ?>
                     <input id='email' name='email' type='email'
                         value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='website'>Website</label>
                     <?php if(isset($msg_website)) print $msg_website; ?>
-                    <input id='website' name='website'
-                        type='url' value='<?php if (isset($website)) {print $website;} else { print '';} ?>'><br>
+                    <input id='website' name='website' type='url'
+                        value='<?php if (isset($website)) {print $website;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='image_url'>Image url</label>
                     <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-                    <input id='image_url' name='image_url'
-                        type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+                    <input id='image_url' name='image_url' type='text'
+                        value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='notes'>Notes</label>
                     <?php if(isset($msg_notes)) print $msg_notes; ?>
-                    <textarea id='notes'
-                        name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
                 </div>
-
                 <div>
                     <?php if(isset($msg_active_status)) print $msg_active_status; ?>
                     <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='active_status' name='active_status'> <label
                         for='active_status'>Status</label><br>
                 </div>
-
             </fieldset>
-            
-                <input id='save_submit' name='save_submit' type='submit' value='Save'>
-            
-
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
         </form>
         <?php } ?>
-
     </main>
     <?php include('php/_footer.php'); ?>
-
 </body>
-
 </html>

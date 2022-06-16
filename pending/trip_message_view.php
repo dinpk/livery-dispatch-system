@@ -25,9 +25,7 @@ if (isset($_GET['trips_messagesid'])) {
 
 	<?php if (isset($message)) print $message; ?>
 	
-	<main>
-		
-     <table class='record-table'>
+	<main>     <table class='record-table'>
          <tr>
          <td class='label-cell'>Date time</td>
          <td class='value-cell'><?php if (isset($date_time)) print $date_time; ?></td>

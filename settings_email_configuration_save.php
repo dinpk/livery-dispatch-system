@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'sender_email';
 // id passed for update
-if (isset($_GET['settings_email_configurationid'])) {
-	$record_id = trim($_GET['settings_email_configurationid']);
+if (isset($_GET['settingsemailconfigurationid'])) {
+	$record_id = trim($_GET['settingsemailconfigurationid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_email_configuration WHERE key_settings_email_configuration = $record_id");
@@ -20,7 +20,7 @@ if (isset($_GET['settings_email_configurationid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$smtp_address = trim($_POST['smtp_address']);
@@ -101,66 +101,71 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>SETTINGS - EMAIL CONFIGURATION</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - EMAIL CONFIGURATION</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_email_configuration_save'>
 
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/set_email_configuration.png"> settings - email configuration</div>
-		<div class='right-block'> </div>
-	</section>
+<body id='page-save'>
 
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/set_email_configuration.png"> settings - email configuration
+        </div>
+        <div class='right-block'> </div>
+    </section>
 
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
+    <?php if (isset($message)) print $message; ?>
+
+    <main>
+
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
 
 
-         <div>
-             <label for='sender_email'>Sender email</label>
-			 <?php if(isset($msg_sender_email)) print $msg_sender_email; ?>
-             <input id='sender_email' name='sender_email' type='email' value='<?php if (isset($sender_email)) {print $sender_email;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='sender_email'>Sender email</label>
+                    <?php if(isset($msg_sender_email)) print $msg_sender_email; ?>
+                    <input id='sender_email' name='sender_email' type='email'
+                        value='<?php if (isset($sender_email)) {print $sender_email;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='sender_password'>Sender password</label>
-			 <?php if(isset($msg_sender_password)) print $msg_sender_password; ?>
-             <input id='sender_password' name='sender_password' type='password' value='<?php if (isset($sender_password)) {print $sender_password;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='sender_password'>Sender password</label>
+                    <?php if(isset($msg_sender_password)) print $msg_sender_password; ?>
+                    <input id='sender_password' name='sender_password' type='password'
+                        value='<?php if (isset($sender_password)) {print $sender_password;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='reply_to_email'>Reply to email</label>
-			 <?php if(isset($msg_reply_to_email)) print $msg_reply_to_email; ?>
-             <input id='reply_to_email' name='reply_to_email' type='email' value='<?php if (isset($reply_to_email)) {print $reply_to_email;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='reply_to_email'>Reply to email</label>
+                    <?php if(isset($msg_reply_to_email)) print $msg_reply_to_email; ?>
+                    <input id='reply_to_email' name='reply_to_email' type='email'
+                        value='<?php if (isset($reply_to_email)) {print $reply_to_email;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='copy_to_email'>Copy to email</label>
-			 <?php if(isset($msg_copy_to_email)) print $msg_copy_to_email; ?>
-             <input id='copy_to_email' name='copy_to_email' type='email' value='<?php if (isset($copy_to_email)) {print $copy_to_email;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='copy_to_email'>Copy to email</label>
+                    <?php if(isset($msg_copy_to_email)) print $msg_copy_to_email; ?>
+                    <input id='copy_to_email' name='copy_to_email' type='email'
+                        value='<?php if (isset($copy_to_email)) {print $copy_to_email;} else { print '';} ?>'><br>
+                </div>
 
-         <div>
-             <label for='smtp_address'>Smtp</label>
-			 <?php if(isset($msg_smtp_address)) print $msg_smtp_address; ?>
-             <input id='smtp_address' name='smtp_address' type='text' value='<?php if (isset($smtp_address)) {print $smtp_address;} else { print '';} ?>'><br>
-         </div>
+                <div>
+                    <label for='smtp_address'>Smtp</label>
+                    <?php if(isset($msg_smtp_address)) print $msg_smtp_address; ?>
+                    <input id='smtp_address' name='smtp_address' type='text'
+                        value='<?php if (isset($smtp_address)) {print $smtp_address;} else { print '';} ?>'><br>
+                </div>
 
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
+            </fieldset> <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
 
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 
 </body>
+
 </html>

@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['tripsid'])) {
-	$record_id = trim($_GET['tripsid']);
+if (isset($_GET['tripid'])) {
+	$record_id = trim($_GET['tripid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM trips WHERE key_trips = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -89,249 +89,203 @@ if (isset($_GET['tripsid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TRIPS</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIPS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_trips_view'>
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Trip #</td>
+                <td class='value-cell'><?php if (isset($key_trips)) print $key_trips; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Reference #</td>
+                <td class='value-cell'><?php if (isset($reference_number)) print $reference_number; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Passenger name</td>
+                <td class='value-cell'><?php if (isset($passenger_name)) print $passenger_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Total passengers</td>
+                <td class='value-cell'><?php if (isset($total_passengers)) print $total_passengers; ?></td>
+            </tr>
 
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-		
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Trip #</td>
-         <td class='value-cell'><?php if (isset($key_trips)) print $key_trips; ?></td>
-         </tr>
+            <tr>
+                <td class='label-cell'>Reserved by</td>
+                <td class='value-cell'><?php if (isset($reserved_by)) print $reserved_by; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Pickup date time</td>
+                <td class='value-cell'><?php if (isset($pickup_datetime)) print $pickup_datetime; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Dropoff date time</td>
+                <td class='value-cell'><?php if (isset($dropoff_datetime)) print $dropoff_datetime; ?></td>
+            </tr>
 
-         <tr>
-         <td class='label-cell'>Reference #</td>
-         <td class='value-cell'><?php if (isset($reference_number)) print $reference_number; ?></td>
-         </tr>
+            <tr>
+                <td class='label-cell'>Trip type</td>
+                <td class='value-cell'><?php if (isset($trip_type)) print $trip_type; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Trip status</td>
+                <td class='value-cell'><?php if (isset($trip_status)) print $trip_status; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Driver name</td>
+                <td class='value-cell'><?php if (isset($driver_name)) print $driver_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Vehicle</td>
+                <td class='value-cell'><?php if (isset($vehicle)) print $vehicle; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Airline</td>
+                <td class='value-cell'><?php if (isset($airline)) print $airline; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Flight #</td>
+                <td class='value-cell'><?php if (isset($flight_number)) print $flight_number; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Zone from</td>
+                <td class='value-cell'><?php if (isset($zone_from)) print $zone_from; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Zone to</td>
+                <td class='value-cell'><?php if (isset($zone_to)) print $zone_to; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Routing from</td>
+                <td class='value-cell'><?php if (isset($routing_from)) print $routing_from; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Routing to</td>
+                <td class='value-cell'><?php if (isset($routing_to)) print $routing_to; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Routing notes</td>
+                <td class='value-cell'><?php if (isset($routing_notes)) print $routing_notes; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Rate type</td>
+                <td class='value-cell'><?php if (isset($rate_type)) print $rate_type; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Hourly rate</td>
+                <td class='value-cell'><?php if (isset($hourly_rate)) print $hourly_rate; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Regular hours</td>
+                <td class='value-cell'><?php if (isset($regular_hours)) print $regular_hours; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Regular minutes</td>
+                <td class='value-cell'><?php if (isset($regular_minutes)) print $regular_minutes; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Regular hourly amount</td>
+                <td class='value-cell'><?php if (isset($regular_hourly_amount)) print $regular_hourly_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Wait hours</td>
+                <td class='value-cell'><?php if (isset($wait_hours)) print $wait_hours; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Wait minutes</td>
+                <td class='value-cell'><?php if (isset($wait_minutes)) print $wait_minutes; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Wait hourly amount</td>
+                <td class='value-cell'><?php if (isset($wait_hourly_amount)) print $wait_hourly_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Zone rate</td>
+                <td class='value-cell'><?php if (isset($zone_rate)) print $zone_rate; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Base amount</td>
+                <td class='value-cell'><?php if (isset($base_amount)) print $base_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Offtime type</td>
+                <td class='value-cell'><?php if (isset($offtime_type)) print $offtime_type; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Offtime amount</td>
+                <td class='value-cell'><?php if (isset($offtime_amount)) print $offtime_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Extra stops</td>
+                <td class='value-cell'><?php if (isset($extra_stops)) print $extra_stops; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Extra stops amount</td>
+                <td class='value-cell'><?php if (isset($extra_stops_amount)) print $extra_stops_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Toll type</td>
+                <td class='value-cell'><?php if (isset($toll_type)) print $toll_type; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Tolls amount</td>
+                <td class='value-cell'><?php if (isset($tolls_amount)) print $tolls_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Parking amount</td>
+                <td class='value-cell'><?php if (isset($parking_amount)) print $parking_amount; ?></td>
+            </tr>
 
-         <tr>
-         <td class='label-cell'>Passenger name</td>
-         <td class='value-cell'><?php if (isset($passenger_name)) print $passenger_name; ?></td>
-         </tr>
+            <tr>
+                <td class='label-cell'>Gratuity %</td>
+                <td class='value-cell'><?php if (isset($gratuity_percent)) print $gratuity_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Gratuity amount</td>
+                <td class='value-cell'><?php if (isset($gratuity_amount)) print $gratuity_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Gas surcharge %</td>
+                <td class='value-cell'><?php if (isset($gas_surcharge_percent)) print $gas_surcharge_percent; ?></td>
+            </tr>
 
-         <tr>
-         <td class='label-cell'>Total passengers</td>
-         <td class='value-cell'><?php if (isset($total_passengers)) print $total_passengers; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Reserved by</td>
-         <td class='value-cell'><?php if (isset($reserved_by)) print $reserved_by; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Pickup date time</td>
-         <td class='value-cell'><?php if (isset($pickup_datetime)) print $pickup_datetime; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Dropoff date time</td>
-         <td class='value-cell'><?php if (isset($dropoff_datetime)) print $dropoff_datetime; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Trip type</td>
-         <td class='value-cell'><?php if (isset($trip_type)) print $trip_type; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Trip status</td>
-         <td class='value-cell'><?php if (isset($trip_status)) print $trip_status; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Driver name</td>
-         <td class='value-cell'><?php if (isset($driver_name)) print $driver_name; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Vehicle</td>
-         <td class='value-cell'><?php if (isset($vehicle)) print $vehicle; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Airline</td>
-         <td class='value-cell'><?php if (isset($airline)) print $airline; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Flight #</td>
-         <td class='value-cell'><?php if (isset($flight_number)) print $flight_number; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Zone from</td>
-         <td class='value-cell'><?php if (isset($zone_from)) print $zone_from; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Zone to</td>
-         <td class='value-cell'><?php if (isset($zone_to)) print $zone_to; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Routing from</td>
-         <td class='value-cell'><?php if (isset($routing_from)) print $routing_from; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Routing to</td>
-         <td class='value-cell'><?php if (isset($routing_to)) print $routing_to; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Routing notes</td>
-         <td class='value-cell'><?php if (isset($routing_notes)) print $routing_notes; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Rate type</td>
-         <td class='value-cell'><?php if (isset($rate_type)) print $rate_type; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Hourly rate</td>
-         <td class='value-cell'><?php if (isset($hourly_rate)) print $hourly_rate; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Regular hours</td>
-         <td class='value-cell'><?php if (isset($regular_hours)) print $regular_hours; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Regular minutes</td>
-         <td class='value-cell'><?php if (isset($regular_minutes)) print $regular_minutes; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Regular hourly amount</td>
-         <td class='value-cell'><?php if (isset($regular_hourly_amount)) print $regular_hourly_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Wait hours</td>
-         <td class='value-cell'><?php if (isset($wait_hours)) print $wait_hours; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Wait minutes</td>
-         <td class='value-cell'><?php if (isset($wait_minutes)) print $wait_minutes; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Wait hourly amount</td>
-         <td class='value-cell'><?php if (isset($wait_hourly_amount)) print $wait_hourly_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Zone rate</td>
-         <td class='value-cell'><?php if (isset($zone_rate)) print $zone_rate; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Base amount</td>
-         <td class='value-cell'><?php if (isset($base_amount)) print $base_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Offtime type</td>
-         <td class='value-cell'><?php if (isset($offtime_type)) print $offtime_type; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Offtime amount</td>
-         <td class='value-cell'><?php if (isset($offtime_amount)) print $offtime_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Extra stops</td>
-         <td class='value-cell'><?php if (isset($extra_stops)) print $extra_stops; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Extra stops amount</td>
-         <td class='value-cell'><?php if (isset($extra_stops_amount)) print $extra_stops_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Toll type</td>
-         <td class='value-cell'><?php if (isset($toll_type)) print $toll_type; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Tolls amount</td>
-         <td class='value-cell'><?php if (isset($tolls_amount)) print $tolls_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Parking amount</td>
-         <td class='value-cell'><?php if (isset($parking_amount)) print $parking_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Gratuity %</td>
-         <td class='value-cell'><?php if (isset($gratuity_percent)) print $gratuity_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Gratuity amount</td>
-         <td class='value-cell'><?php if (isset($gratuity_amount)) print $gratuity_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Gas surcharge %</td>
-         <td class='value-cell'><?php if (isset($gas_surcharge_percent)) print $gas_surcharge_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Gas surcharge amount</td>
-         <td class='value-cell'><?php if (isset($gas_surcharge_amount)) print $gas_surcharge_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Admin fee %</td>
-         <td class='value-cell'><?php if (isset($admin_fee_percent)) print $admin_fee_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Admin fee amount</td>
-         <td class='value-cell'><?php if (isset($admin_fee_amount)) print $admin_fee_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Discount %</td>
-         <td class='value-cell'><?php if (isset($discount_percent)) print $discount_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Discount amount</td>
-         <td class='value-cell'><?php if (isset($discount_amount)) print $discount_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Tax %</td>
-         <td class='value-cell'><?php if (isset($tax_percent)) print $tax_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Tax amount</td>
-         <td class='value-cell'><?php if (isset($tax_amount)) print $tax_amount; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Total trip amount</td>
-         <td class='value-cell'><?php if (isset($total_trip_amount)) print $total_trip_amount; ?></td>
-         </tr>
-
-     </table>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+            <tr>
+                <td class='label-cell'>Gas surcharge amount</td>
+                <td class='value-cell'><?php if (isset($gas_surcharge_amount)) print $gas_surcharge_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Admin fee %</td>
+                <td class='value-cell'><?php if (isset($admin_fee_percent)) print $admin_fee_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Admin fee amount</td>
+                <td class='value-cell'><?php if (isset($admin_fee_amount)) print $admin_fee_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Discount %</td>
+                <td class='value-cell'><?php if (isset($discount_percent)) print $discount_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Discount amount</td>
+                <td class='value-cell'><?php if (isset($discount_amount)) print $discount_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Tax %</td>
+                <td class='value-cell'><?php if (isset($tax_percent)) print $tax_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Tax amount</td>
+                <td class='value-cell'><?php if (isset($tax_amount)) print $tax_amount; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Total trip amount</td>
+                <td class='value-cell'><?php if (isset($total_trip_amount)) print $total_trip_amount; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

@@ -124,13 +124,11 @@ if ($results) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>STAFF</title>
     <?php include('php/_head.php'); ?>
 </head>
-
-<body id='page-listing' class='page_listing page_staff_listing'>
+<body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
         <div class='left-block'><img src="images/icons/nav_staff.png"> staff</div>
@@ -138,11 +136,8 @@ if ($results) {
             ✢ <a href='staff_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Staff Account</a>
         </div>
     </section>
-
     <div class='page-image' style='background-image:url(images/page-staff.jpg);'></div>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
         <section id='listing-forms'>
             <form id='dates_form' method='get'>
@@ -177,9 +172,7 @@ if ($results) {
         <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-
     </main>
     <?php include('php/_footer.php'); ?>
 </body>
-
 </html>

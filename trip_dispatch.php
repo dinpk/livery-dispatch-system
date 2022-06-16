@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['tripsid'])) {
-	$record_id = trim($_GET['tripsid']);
+if (isset($_GET['tripid'])) {
+	$record_id = trim($_GET['tripid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM trips WHERE key_trips = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -26,7 +26,6 @@ if (isset($_GET['tripsid'])) {
 		$driver_email = $row['email'];
 	}
 	if (isset($_POST['view_submit'])) {
-
 		$subject = "Dispatch trip # " . $key_trips;
 		$email_body = "
 			<div class='center' style='line-height:80%'>
@@ -49,7 +48,6 @@ if (isset($_GET['tripsid'])) {
 					<div>$routing_notes</div>
 			</div>
 		";
-		
 		if (send_email($driver_email, $subject, $email_body)) {
 			$message = "<div class='success-result'>Email has been sent.</div>";
 		} else {
@@ -61,17 +59,14 @@ if (isset($_GET['tripsid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TRIP DISPATCH</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIP - DISPATCH</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_trips_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-	<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php 
 		print "
-		
 		<form class='center' method='post'>
 			<h1>Dispatch trip # $key_trips</h1>
 			<h2>$driver_name</h2>
@@ -80,57 +75,46 @@ if (isset($_GET['tripsid'])) {
 		</form>
 		<br>
 		";
-	?>
-
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Trip #</td>
-         <td class='value-cell'><?php print $key_trips; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Passenger name</td>
-         <td class='value-cell'><?php print $passenger_name; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Total passengers</td>
-         <td class='value-cell'><?php print $total_passengers; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Date Time</td>
-         <td class='value-cell'><?php print $pickup_datetime; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Flight</td>
-         <td class='value-cell'><?php print $airline . ' ' . $flight_number; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Zone</td>
-         <td class='value-cell'><?php print $zone_from . ' > ' . $zone_to; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>From</td>
-         <td class='value-cell'><?php print $routing_from; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>To</td>
-         <td class='value-cell'><?php print $routing_to; ?></td>
-         </tr>
-		 
-         <tr>
-         <td class='label-cell'>Notes</td>
-         <td class='value-cell'><?php print $routing_notes; ?></td>
-         </tr>
-
-     </table>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+		?>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Trip #</td>
+                <td class='value-cell'><?php print $key_trips; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Passenger name</td>
+                <td class='value-cell'><?php print $passenger_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Total passengers</td>
+                <td class='value-cell'><?php print $total_passengers; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Date Time</td>
+                <td class='value-cell'><?php print $pickup_datetime; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Flight</td>
+                <td class='value-cell'><?php print $airline . ' ' . $flight_number; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Zone</td>
+                <td class='value-cell'><?php print $zone_from . ' > ' . $zone_to; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>From</td>
+                <td class='value-cell'><?php print $routing_from; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>To</td>
+                <td class='value-cell'><?php print $routing_to; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Notes</td>
+                <td class='value-cell'><?php print $routing_notes; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

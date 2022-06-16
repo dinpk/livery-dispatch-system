@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'zone_rate';
 // id passed for update
-if (isset($_GET['tripsid'])) {
-	$record_id = trim($_GET['tripsid']);
+if (isset($_GET['tripid'])) {
+	$record_id = trim($_GET['tripid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM trips WHERE key_trips = $record_id");
@@ -68,12 +68,12 @@ if (isset($_GET['tripsid'])) {
 			$extra_charges_rows .= "<tr>
 				<td>" . $row['category'] . "</td>
 				<td class='right'>" . $row['amount'] . "</td>
-				<td><a href='trip_extra_charge_save.php?trip_extra_chargesid=$key_trip_extra_charges&tripsid=$record_id' target='overlay-iframe2' onclick='overlayOpen2();'>✎</a></td>
+				<td><a href='trip_extra_charge_save.php?tripextrachargeid=$key_trip_extra_charges&tripid=$record_id' target='overlay-iframe2' onclick='overlayOpen2();'>✎</a></td>
 				</tr>";
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$concluded_checkbox = trim($_POST['concluded_checkbox']);
@@ -347,313 +347,363 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TRIP</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIP - CONCLUDE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_trips_conclude_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'>trip # <?php print $key_trips; ?></div>
-		<div class='right-block'>
-
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		
-		<fieldset>
-
-			<table cellpadding='5' cellspacing='0'>
-			 <tr>
-				 <td><h4>Trip #</h4></td>
-				 <td><?php print $key_trips; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Reference #</h4></td>
-				 <td><?php print $reference_number; ?></td>
-			 </tr>
-
-			 <tr>
-				<td><h4>Passenger name</h4></td>
-				 <td><?php print $passenger_name; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Total passengers</h4></td>
-				 <td><?php print $total_passengers; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Reserved by</h4></td>
-				 <td><?php print $reserved_by; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Pickup date time</h4></td>
-				 <td><?php print $pickup_datetime; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Trip status</h4></td>
-				 <td><?php print $trip_status; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Driver name</h4></td>
-				 <td><?php print $driver_name; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Vehicle</h4></td>
-				 <td><?php print $vehicle; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>From</h4></td>
-				 <td><?php print $zone_from; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>To</h4></td>
-				 <td><?php print $zone_to; ?></td>
-			 </tr>
-
-			 <tr>
-				 <td><h4>Dispatcher notes</h4></td>
-				 <td></td>
-			 </tr>			 
-			 <tr>
-				 <td colspan='2'><?php print $dispatcher_notes; ?></td>
-			 </tr>
-			 </table>
-
-		</fieldset>
-		
-		<fieldset>
-			<div>
-				<a href='trip_extra_charge_save.php?tripsid=<?php print $record_id; ?>' target='overlay-iframe2' onclick='overlayOpen2();'> Add</a> 
-			</div>
-			<?php 
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'>trip # <?php print $key_trips; ?></div>
+        <div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <table cellpadding='5' cellspacing='0'>
+                    <tr>
+                        <td>
+                            <h4>Trip #</h4>
+                        </td>
+                        <td><?php print $key_trips; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Reference #</h4>
+                        </td>
+                        <td><?php print $reference_number; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Passenger name</h4>
+                        </td>
+                        <td><?php print $passenger_name; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Total passengers</h4>
+                        </td>
+                        <td><?php print $total_passengers; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Reserved by</h4>
+                        </td>
+                        <td><?php print $reserved_by; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Pickup date time</h4>
+                        </td>
+                        <td><?php print $pickup_datetime; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Trip status</h4>
+                        </td>
+                        <td><?php print $trip_status; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Driver name</h4>
+                        </td>
+                        <td><?php print $driver_name; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Vehicle</h4>
+                        </td>
+                        <td><?php print $vehicle; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>From</h4>
+                        </td>
+                        <td><?php print $zone_from; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>To</h4>
+                        </td>
+                        <td><?php print $zone_to; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Dispatcher notes</h4>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'><?php print $dispatcher_notes; ?></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <a href='trip_extra_charge_save.php?tripid=<?php print $record_id; ?>' target='overlay-iframe2'
+                        onclick='overlayOpen2();'> Add</a>
+                </div>
+                <?php 
 				$extra_charges_rows = "<table cellspacing='0' cellpadding='5' border='1' width='100%'><tr><th>Category</th><th>Amount</th><th></th>" . $extra_charges_rows . "</table>";
 				print $extra_charges_rows;
 	 		?>
-		
-		
-		</fieldset>
-		
-		<fieldset>
-
-			 <div>
-				 <label for='rate_type'>Rate type</label><br>
-				 <?php if(isset($msg_rate_type)) print $msg_rate_type; ?>
-				 <select id='rate_type' name='rate_type' onchange='calc();'>
-					 <?php
-					 if (!isset($rate_type)) $rate_type = '';
-					 print "
-					 <option" . (($rate_type == 'Zone') ? " selected='selected'" : '') .  ">Zone</option>
-					 <option" . (($rate_type == 'Hourly') ? " selected='selected'" : '') .  ">Hourly</option>
-					 <option" . (($rate_type == 'Flat') ? " selected='selected'" : '') .  ">Flat</option>
-					 ";
-					 ?>
-				 </select>
-			 </div>
-
-			 <div>
-				 <label for='zone_rate'>Zone rate</label> <?php if(isset($msg_zone_rate)) print $msg_zone_rate; ?>
-				 <input class='input_number_small' id='zone_rate' name='zone_rate' type='number' step='any' onchange='calc();' value='<?php if (isset($zone_rate)) {print $zone_rate;} else { print '0';} ?>' readonly><br>
-			 </div>
-
-			 <div>
-				 <div><label for='regular_hours'>Regular (rate,hours,minutes,amount)</label></div>
-				 <?php if(isset($msg_regular_hours)) print $msg_regular_hours; ?>
-				 <?php if(isset($msg_regular_minutes)) print $msg_regular_minutes; ?>
-				 <?php if(isset($msg_hourly_regular_amount)) print $msg_hourly_regular_amount; ?>
-				 <input class='input_number_small' id='hourly_regular_rate' name='hourly_regular_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='regular_hours' name='regular_hours' type='number' onchange='calc();' value='<?php if (isset($regular_hours)) {print $regular_hours;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='regular_minutes' name='regular_minutes' type='number' onchange='calc();' value='<?php if (isset($regular_minutes)) {print $regular_minutes;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='hourly_regular_amount' name='hourly_regular_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_regular_amount)) {print $hourly_regular_amount;} else { print '0';} ?>' readonly>
-			 </div>
-
-			 <div>
-				 <div><label for='wait_hours'>Wait (rate,hours,minutes,amount)</label></div>
-				 <?php if(isset($msg_wait_hours)) print $msg_wait_hours; ?>
-				 <?php if(isset($msg_wait_minutes)) print $msg_wait_minutes; ?>
-				 <?php if(isset($msg_hourly_wait_amount)) print $msg_hourly_wait_amount; ?>
-				 <input class='input_number_small' id='hourly_wait_rate' name='hourly_wait_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='wait_hours' name='wait_hours' type='number' onchange='calc();' value='<?php if (isset($wait_hours)) {print $wait_hours;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='wait_minutes' name='wait_minutes' type='number' onchange='calc();' value='<?php if (isset($wait_minutes)) {print $wait_minutes;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='hourly_wait_amount' name='hourly_wait_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_wait_amount)) {print $hourly_wait_amount;} else { print '0';} ?>' readonly> 
-			 </div>
-
-			 <div>
-				 <div><label for='overtime_hours'>Overtime (rate,hours,minutes,amount)</label></div>
-				 <?php if(isset($msg_overtime_hours)) print $msg_overtime_hours; ?>
-				 <?php if(isset($msg_overtime_minutes)) print $msg_overtime_minutes; ?>
-				 <?php if(isset($msg_hourly_overtime_amount)) print $msg_hourly_overtime_amount; ?>
-				 <input class='input_number_small' id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' onchange='calc();' value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='overtime_hours' name='overtime_hours' type='number' onchange='calc();' value='<?php if (isset($overtime_hours)) {print $overtime_hours;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='overtime_minutes' name='overtime_minutes' type='number' onchange='calc();' value='<?php if (isset($overtime_minutes)) {print $overtime_minutes;} else { print '0';} ?>'> 
-				 <input class='input_number_small' id='hourly_overtime_amount' name='hourly_overtime_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($hourly_overtime_amount)) {print $hourly_overtime_amount;} else { print '0';} ?>' readonly> 
-			 </div>
-
-			 <div>
-				 <div><label for='base_amount'>Base amount</label></div>
-				 <?php if(isset($msg_base_amount)) print $msg_base_amount; ?>
-				 <input id='base_amount' name='base_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($base_amount)) {print $base_amount;} else { print '0';} ?>' readonly><br>
-			 </div>
-
-
-			<?php 
-			if(isset($msg_offtime_type)) print $msg_offtime_type; 
-			if(isset($msg_offtime_amount)) print $msg_offtime_amount;
-			if(isset($msg_extra_stops)) print $msg_extra_stops;
-			if(isset($msg_extra_stops_amount)) print $msg_extra_stops_amount;
-			if(isset($msg_toll_type)) print $msg_toll_type;
-			if(isset($msg_tolls_amount)) print $msg_tolls_amount;
-			if(isset($msg_parking_amount)) print $msg_parking_amount;
-			if(isset($msg_gratuity_percent)) print $msg_gratuity_percent;
-			if(isset($msg_gratuity_amount)) print $msg_gratuity_amount;
-			if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent;
-			if(isset($msg_gas_surcharge_amount)) print $msg_gas_surcharge_amount;
-			if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; 
-			if(isset($msg_admin_fee_amount)) print $msg_admin_fee_amount; 
-			if(isset($msg_discount_percent)) print $msg_discount_percent; 
-			if(isset($msg_discount_amount)) print $msg_discount_amount;
-			if(isset($msg_tax_percent)) print $msg_tax_percent;
-			if(isset($msg_tax_amount)) print $msg_tax_amount;
-			?>
-
-			<table>
-			<tr>
-				<td><label for='offtime_type'>Off-time</label> </td>
-				<td>
-					&nbsp;&nbsp;<select class='select_small' id='offtime_type' name='offtime_type'>
-						 <?php 
-						 $options = '';
-						 $results = mysqli_query($dbcon, 'SELECT offtime_type FROM settings_offtime_type_values');
-						 while ($row = mysqli_fetch_assoc($results)) {
-							 $selection = '';
-							 if ($row['offtime_type'] == $offtime_type) $selection = "selected='selected'";
-								 $options .= "<option $selection>" . $row['offtime_type'] . "</option>";
-						 }
-						 print $options; 
-						 ?>
-					 </select> 
-					<input class='input_number_small' id='offtime_amount' name='offtime_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($offtime_amount)) {print $offtime_amount;} else { print '0';} ?>'><br>
-				</td>
-			</tr>
-			<tr>
-				<td><label for='extra_stops'>Extra stops &nbsp; </label></td>
-				<td>
-					 #<input class='input_number_small' id='extra_stops' name='extra_stops' type='number' onchange='calc();' value='<?php if (isset($extra_stops)) {print $extra_stops;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' id='extra_stops_amount' name='extra_stops_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($extra_stops_amount)) {print $extra_stops_amount;} else { print '0';} ?>'>
-				</td>
-			</tr>
-			<tr>
-				<td><label for='toll_type'>Tolls</label></td>
-				<td>
-					&nbsp;&nbsp;<select class='select_small' id='toll_type' name='toll_type'>
-						 <?php 
-						 $options = '';
-						 $results = mysqli_query($dbcon, 'SELECT toll_type FROM settings_toll_type_values');
-						 while ($row = mysqli_fetch_assoc($results)) {
-							 $selection = '';
-							 if ($row['toll_type'] == $toll_type) $selection = "selected='selected'";
-								 $options .= "<option $selection>" . $row['toll_type'] . "</option>";
-						 }
-						 print $options; 
-						 ?>
-					 </select> 
-					 <input class='input_number_small' id='tolls_amount' name='tolls_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($tolls_amount)) {print $tolls_amount;} else { print '0';} ?>'><br>
-				</td>
-			</tr>
-			<tr>
-				<td><label for='parking_amount'>Parking</label></td>
-				<td>
-					&nbsp;&nbsp;&nbsp;<input class='input_number_small' id='parking_amount' name='parking_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($parking_amount)) {print $parking_amount;} else { print '0';} ?>'><br>
-				</td>
-			</tr>
-			<tr>
-				<td><label for='gratuity_percent'>Gratuity &nbsp;</label></td>
-				<td>
-					 %<input class='input_number_small' id='gratuity_percent' name='gratuity_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' id='gratuity_amount' name='gratuity_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($gratuity_amount)) {print $gratuity_amount;} else { print '0';} ?>'> 
-				</td>
-			</tr>
-			<tr>
-				<td><label for='gas_surcharge_percent'>Gas surcharge &nbsp;</label></td>
-				<td>
-					 %<input class='input_number_small' id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' id='gas_surcharge_amount' name='gas_surcharge_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($gas_surcharge_amount)) {print $gas_surcharge_amount;} else { print '0';} ?>'>
-				</td>
-			</tr>
-			<tr>
-				<td><label for='admin_fee_percent'>Admin fee &nbsp;</label></td>
-				<td>
-					 %<input class='input_number_small' id='admin_fee_percent' name='admin_fee_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' id='admin_fee_amount' name='admin_fee_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($admin_fee_amount)) {print $admin_fee_amount;} else { print '0';} ?>'> 
-				</td>
-			</tr>
-			<tr>
-				<td><label for='discount_percent'>Discount</label></td>
-				<td>
-					 %<input class='input_number_small' id='discount_percent' name='discount_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' id='discount_amount' name='discount_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($discount_amount)) {print $discount_amount;} else { print '0';} ?>'>
-				</td>
-			</tr>
-			<tr>
-				<td><label for='tax_percent'>Tax</label></td>
-				<td>
-					 %<input class='input_number_small' id='tax_percent' name='tax_percent' type='number' step='any' onchange='calc();' value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'> 
-					 $<input class='input_number_small' id='tax_amount' name='tax_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($tax_amount)) {print $tax_amount;} else { print '0';} ?>'> 
-				</td>
-			</tr>
-			</table>
-
-			<div>
-				<div><label for='extra_charges'>Extra charges</label></div>
-				<input id='trip_extra_charges' name='trip_extra_charges' type='number' onchange='calc();' value='<?php if (isset($trip_extra_charges)) {print $trip_extra_charges;} else { print '0';} ?>' readonly><br>
-			</div>
-
-			 <div>
-				 <div><label for='flat_amount'>Flat amount</label></div>
-				 <?php if(isset($msg_flat_amount)) print $msg_flat_amount; ?>
-				 <input id='flat_amount' name='flat_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($flat_amount)) {print $flat_amount;} else { print '0';} ?>'><br>
-			 </div>
-
-			 <div>
-				 <div><label for='total_trip_amount'>Total trip amount</label></div>
-				 <?php if(isset($msg_total_trip_amount)) print $msg_total_trip_amount; ?>
-				 <input id='total_trip_amount' name='total_trip_amount' type='number' step='any' onchange='calc();' value='<?php if (isset($total_trip_amount)) {print $total_trip_amount;} else { print '0';} ?>' readonly><br>
-			 </div>
-
-		</fieldset>
-
-		<fieldset>
-			 <div>
-				 <?php if(isset($msg_concluded_checkbox)) print $msg_concluded_checkbox; ?>
-				 <input <?php if (!isset($concluded_checkbox) || $concluded_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='concluded_checkbox' name='concluded_checkbox'> <label for='concluded_checkbox'>Concluded</label><br>
-			 </div>
-		</fieldset>
-
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		</form>
-
-
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
-	<script>calc();</script>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='rate_type'>Rate type</label><br>
+                    <?php if(isset($msg_rate_type)) print $msg_rate_type; ?>
+                    <select id='rate_type' name='rate_type' onchange='calc();'>
+                        <?php
+						if (!isset($rate_type)) $rate_type = '';
+						print "
+						<option" . (($rate_type == 'Zone') ? " selected='selected'" : '') .  ">Zone</option>
+						<option" . (($rate_type == 'Hourly') ? " selected='selected'" : '') .  ">Hourly</option>
+						<option" . (($rate_type == 'Flat') ? " selected='selected'" : '') .  ">Flat</option>
+						";
+						?>
+                    </select>
+                </div>
+                <div>
+                    <label for='zone_rate'>Zone rate</label> <?php if(isset($msg_zone_rate)) print $msg_zone_rate; ?>
+                    <input class='input_number_small' id='zone_rate' name='zone_rate' type='number' step='any'
+                        onchange='calc();'
+                        value='<?php if (isset($zone_rate)) {print $zone_rate;} else { print '0';} ?>' readonly><br>
+                </div>
+                <div>
+                    <div><label for='regular_hours'>Regular (rate,hours,minutes,amount)</label></div>
+                    <?php if(isset($msg_regular_hours)) print $msg_regular_hours; ?>
+                    <?php if(isset($msg_regular_minutes)) print $msg_regular_minutes; ?>
+                    <?php if(isset($msg_hourly_regular_amount)) print $msg_hourly_regular_amount; ?>
+                    <input class='input_number_small' id='hourly_regular_rate' name='hourly_regular_rate' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='regular_hours' name='regular_hours' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($regular_hours)) {print $regular_hours;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='regular_minutes' name='regular_minutes' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($regular_minutes)) {print $regular_minutes;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='hourly_regular_amount' name='hourly_regular_amount'
+                        type='number' step='any' onchange='calc();'
+                        value='<?php if (isset($hourly_regular_amount)) {print $hourly_regular_amount;} else { print '0';} ?>'
+                        readonly>
+                </div>
+                <div>
+                    <div><label for='wait_hours'>Wait (rate,hours,minutes,amount)</label></div>
+                    <?php if(isset($msg_wait_hours)) print $msg_wait_hours; ?>
+                    <?php if(isset($msg_wait_minutes)) print $msg_wait_minutes; ?>
+                    <?php if(isset($msg_hourly_wait_amount)) print $msg_hourly_wait_amount; ?>
+                    <input class='input_number_small' id='hourly_wait_rate' name='hourly_wait_rate' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='wait_hours' name='wait_hours' type='number' onchange='calc();'
+                        value='<?php if (isset($wait_hours)) {print $wait_hours;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='wait_minutes' name='wait_minutes' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($wait_minutes)) {print $wait_minutes;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='hourly_wait_amount' name='hourly_wait_amount' type='number'
+                        step='any' onchange='calc();'
+                        value='<?php if (isset($hourly_wait_amount)) {print $hourly_wait_amount;} else { print '0';} ?>'
+                        readonly>
+                </div>
+                <div>
+                    <div><label for='overtime_hours'>Overtime (rate,hours,minutes,amount)</label></div>
+                    <?php if(isset($msg_overtime_hours)) print $msg_overtime_hours; ?>
+                    <?php if(isset($msg_overtime_minutes)) print $msg_overtime_minutes; ?>
+                    <?php if(isset($msg_hourly_overtime_amount)) print $msg_hourly_overtime_amount; ?>
+                    <input class='input_number_small' id='hourly_overtime_rate' name='hourly_overtime_rate'
+                        type='number' onchange='calc();'
+                        value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='overtime_hours' name='overtime_hours' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($overtime_hours)) {print $overtime_hours;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='overtime_minutes' name='overtime_minutes' type='number'
+                        onchange='calc();'
+                        value='<?php if (isset($overtime_minutes)) {print $overtime_minutes;} else { print '0';} ?>'>
+                    <input class='input_number_small' id='hourly_overtime_amount' name='hourly_overtime_amount'
+                        type='number' step='any' onchange='calc();'
+                        value='<?php if (isset($hourly_overtime_amount)) {print $hourly_overtime_amount;} else { print '0';} ?>'
+                        readonly>
+                </div>
+                <div>
+                    <div><label for='base_amount'>Base amount</label></div>
+                    <?php if(isset($msg_base_amount)) print $msg_base_amount; ?>
+                    <input id='base_amount' name='base_amount' type='number' step='any' onchange='calc();'
+                        value='<?php if (isset($base_amount)) {print $base_amount;} else { print '0';} ?>' readonly><br>
+                </div>
+				<?php 
+				if(isset($msg_offtime_type)) print $msg_offtime_type; 
+				if(isset($msg_offtime_amount)) print $msg_offtime_amount;
+				if(isset($msg_extra_stops)) print $msg_extra_stops;
+				if(isset($msg_extra_stops_amount)) print $msg_extra_stops_amount;
+				if(isset($msg_toll_type)) print $msg_toll_type;
+				if(isset($msg_tolls_amount)) print $msg_tolls_amount;
+				if(isset($msg_parking_amount)) print $msg_parking_amount;
+				if(isset($msg_gratuity_percent)) print $msg_gratuity_percent;
+				if(isset($msg_gratuity_amount)) print $msg_gratuity_amount;
+				if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent;
+				if(isset($msg_gas_surcharge_amount)) print $msg_gas_surcharge_amount;
+				if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; 
+				if(isset($msg_admin_fee_amount)) print $msg_admin_fee_amount; 
+				if(isset($msg_discount_percent)) print $msg_discount_percent; 
+				if(isset($msg_discount_amount)) print $msg_discount_amount;
+				if(isset($msg_tax_percent)) print $msg_tax_percent;
+				if(isset($msg_tax_amount)) print $msg_tax_amount;
+				?>
+				<table>
+                    <tr>
+                        <td><label for='offtime_type'>Off-time</label> </td>
+                        <td>
+                            &nbsp;&nbsp;
+							<select class='select_small' id='offtime_type' name='offtime_type'>
+                                <?php 
+								$options = '';
+								$results = mysqli_query($dbcon, 'SELECT offtime_type FROM settings_offtime_type_values');
+								while ($row = mysqli_fetch_assoc($results)) {
+									$selection = '';
+									if ($row['offtime_type'] == $offtime_type) $selection = "selected='selected'";
+										$options .= "<option $selection>" . $row['offtime_type'] . "</option>";
+								}
+								print $options; 
+								 ?>
+                            </select>
+                            <input class='input_number_small' id='offtime_amount' name='offtime_amount' type='number'
+                                step='any' onchange='calc();'
+                                value='<?php if (isset($offtime_amount)) {print $offtime_amount;} else { print '0';} ?>'><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='extra_stops'>Extra stops &nbsp; </label></td>
+                        <td>
+                            #<input class='input_number_small' id='extra_stops' name='extra_stops' type='number'
+                                onchange='calc();'
+                                value='<?php if (isset($extra_stops)) {print $extra_stops;} else { print '0';} ?>'>
+                            $<input class='input_number_small' id='extra_stops_amount' name='extra_stops_amount'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($extra_stops_amount)) {print $extra_stops_amount;} else { print '0';} ?>'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='toll_type'>Tolls</label></td>
+                        <td>
+                            &nbsp;&nbsp;
+							<select class='select_small' id='toll_type' name='toll_type'>
+                                <?php 
+								$options = '';
+								$results = mysqli_query($dbcon, 'SELECT toll_type FROM settings_toll_type_values');
+								while ($row = mysqli_fetch_assoc($results)) {
+									$selection = '';
+									if ($row['toll_type'] == $toll_type) $selection = "selected='selected'";
+										$options .= "<option $selection>" . $row['toll_type'] . "</option>";
+								}
+								print $options; 
+								?>
+                            </select>
+                            <input class='input_number_small' id='tolls_amount' name='tolls_amount' type='number'
+                                step='any' onchange='calc();'
+                                value='<?php if (isset($tolls_amount)) {print $tolls_amount;} else { print '0';} ?>'><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='parking_amount'>Parking</label></td>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;<input class='input_number_small' id='parking_amount'
+                                name='parking_amount' type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($parking_amount)) {print $parking_amount;} else { print '0';} ?>'><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='gratuity_percent'>Gratuity &nbsp;</label></td>
+                        <td>
+                            %<input class='input_number_small' id='gratuity_percent' name='gratuity_percent'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'>
+                            $<input class='input_number_small' id='gratuity_amount' name='gratuity_amount' type='number'
+                                step='any' onchange='calc();'
+                                value='<?php if (isset($gratuity_amount)) {print $gratuity_amount;} else { print '0';} ?>'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='gas_surcharge_percent'>Gas surcharge &nbsp;</label></td>
+                        <td>
+                            %<input class='input_number_small' id='gas_surcharge_percent' name='gas_surcharge_percent'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'>
+                            $<input class='input_number_small' id='gas_surcharge_amount' name='gas_surcharge_amount'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($gas_surcharge_amount)) {print $gas_surcharge_amount;} else { print '0';} ?>'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='admin_fee_percent'>Admin fee &nbsp;</label></td>
+                        <td>
+                            %<input class='input_number_small' id='admin_fee_percent' name='admin_fee_percent'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'>
+                            $<input class='input_number_small' id='admin_fee_amount' name='admin_fee_amount'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($admin_fee_amount)) {print $admin_fee_amount;} else { print '0';} ?>'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='discount_percent'>Discount</label></td>
+                        <td>
+                            %<input class='input_number_small' id='discount_percent' name='discount_percent'
+                                type='number' step='any' onchange='calc();'
+                                value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'>
+                            $<input class='input_number_small' id='discount_amount' name='discount_amount' type='number'
+                                step='any' onchange='calc();'
+                                value='<?php if (isset($discount_amount)) {print $discount_amount;} else { print '0';} ?>'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for='tax_percent'>Tax</label></td>
+                        <td>
+                            %<input class='input_number_small' id='tax_percent' name='tax_percent' type='number'
+                                step='any' onchange='calc();'
+                                value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'>
+                            $<input class='input_number_small' id='tax_amount' name='tax_amount' type='number'
+                                step='any' onchange='calc();'
+                                value='<?php if (isset($tax_amount)) {print $tax_amount;} else { print '0';} ?>'>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <div><label for='extra_charges'>Extra charges</label></div>
+                    <input id='trip_extra_charges' name='trip_extra_charges' type='number' onchange='calc();'
+                        value='<?php if (isset($trip_extra_charges)) {print $trip_extra_charges;} else { print '0';} ?>'
+                        readonly><br>
+                </div>
+                <div>
+                    <div><label for='flat_amount'>Flat amount</label></div>
+                    <?php if(isset($msg_flat_amount)) print $msg_flat_amount; ?>
+                    <input id='flat_amount' name='flat_amount' type='number' step='any' onchange='calc();'
+                        value='<?php if (isset($flat_amount)) {print $flat_amount;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <div><label for='total_trip_amount'>Total trip amount</label></div>
+                    <?php if(isset($msg_total_trip_amount)) print $msg_total_trip_amount; ?>
+                    <input id='total_trip_amount' name='total_trip_amount' type='number' step='any' onchange='calc();'
+                        value='<?php if (isset($total_trip_amount)) {print $total_trip_amount;} else { print '0';} ?>'
+                        readonly><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <?php if(isset($msg_concluded_checkbox)) print $msg_concluded_checkbox; ?>
+                    <input <?php if (!isset($concluded_checkbox) || $concluded_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='concluded_checkbox' name='concluded_checkbox'> 
+						<label for='concluded_checkbox'>Concluded</label><br>
+                </div>
+            </fieldset>
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
+    <script>
+    calc();
+    </script>
 </body>
 </html>

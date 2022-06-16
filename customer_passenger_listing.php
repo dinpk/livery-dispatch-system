@@ -1,6 +1,6 @@
 <?php 
 include('php/_code.php'); 
-$base_file_name = 'customer_passengers_listing';
+$base_file_name = 'customer_passenger_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -23,15 +23,15 @@ $items_per_page = '50';
 $total_items = '0';
 $sql_where_alt = '';
 $reset_url = $base_file_name . '.php';
-if (isset($_GET['customer_billing_contactsid']) && is_numeric($_GET['customer_billing_contactsid'])) {
-	$key_customer_billing_contacts = $_GET['customer_billing_contactsid'];
-	$sql_where_alt = ' WHERE key_customer_billing_contacts = ' . $_GET['customer_billing_contactsid'];
-	$reset_url = "$base_file_name.php?customer_billing_contactsid=$key_customer_billing_contacts";
+if (isset($_GET['customerbillingcontactid']) && is_numeric($_GET['customerbillingcontactid'])) {
+	$key_customer_billing_contacts = $_GET['customerbillingcontactid'];
+	$sql_where_alt = ' WHERE key_customer_billing_contacts = ' . $_GET['customerbillingcontactid'];
+	$reset_url = "$base_file_name.php?customerbillingcontactid=$key_customer_billing_contacts";
 }
-if (isset($_GET['customer_companiesid']) && is_numeric($_GET['customer_companiesid'])) {
-	$key_customer_companies = $_GET['customer_companiesid'];
-	$sql_where_alt = ' WHERE key_customer_companies = ' . $_GET['customer_companiesid'];
-	$reset_url = "$base_file_name.php?customer_companiesid=$key_customer_companies";
+if (isset($_GET['customercompanyid']) && is_numeric($_GET['customercompanyid'])) {
+	$key_customer_companies = $_GET['customercompanyid'];
+	$sql_where_alt = ' WHERE key_customer_companies = ' . $_GET['customercompanyid'];
+	$reset_url = "$base_file_name.php?customercompanyid=$key_customer_companies";
 }
 if (isset($_GET['search']) || isset($_GET['date_from'])) $sql_where_alt = str_replace('WHERE', 'AND', $sql_where_alt);
 if (isset($_POST['items_per_page'])) {
@@ -106,12 +106,12 @@ if ($results) {
 		<td class='record-menus'>
 			<a href='#' class='toggle' onclick='record_menu(\"menu$record_id\", this);return false;'>ooo</a>
 			<ul id='menu$record_id'>
-			<li><a href='customer_passenger_save.php?customer_passengersid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>َEdit</a></li>
-			<li><a href='customer_passenger_view.php?customer_passengersid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>View</a></li>
-			<li><a href='customer_address_book_listing.php?customer_passengersid=$record_id' target='_blank' onclick='hide_record_menus();'>Address book</a></li>
+			<li><a href='customer_passenger_save.php?customerpassengerid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>َEdit</a></li>
+			<li><a href='customer_passenger_view.php?customerpassengerid=$record_id' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>View</a></li>
+			<li><a href='customer_address_book_listing.php?customerpassengerid=$record_id' target='_blank' onclick='hide_record_menus();'>Address book</a></li>
 			<li><a href='trip_save.php?id=$record_id&passenger=" . $row['first_name'] . " " . $row['last_name'] . "' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>New trip</a></li>
-			<li><a href='trip_listing.php?customer_passengersid=$record_id' target='_blank' onclick='hide_record_menus();'>Trips</a></li>
-			<li><a href='customer_invoice_listing.php?customer_passengersid=$record_id' target='_blank' onclick='hide_record_menus();'>Invoices</a></li>
+			<li><a href='trip_listing.php?customerpassengerid=$record_id' target='_blank' onclick='hide_record_menus();'>Trips</a></li>
+			<li><a href='customer_invoice_listing.php?customerpassengerid=$record_id' target='_blank' onclick='hide_record_menus();'>Invoices</a></li>
 			</ul>		 
 		</td>
 		</tr>";
@@ -153,49 +153,48 @@ if ($results) {
 	die('Unable to get records, please contact your system administrator.');
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER PASSENGERS</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER PASSENGERS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_customer_passengers_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_passengers.png"> customer passengers</div>
-		<div class='right-block'>
-			👤 <a href='customer_passenger_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Passenger</a>
-		</div>
-	</section>
-
-	<div class='page-image' style='background-image:url(images/page-passengers.jpg);'></div>
-	
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<?php
-					if (isset($key_customer_billing_contacts)) print "<input name='customer_billing_contactsid' type='hidden' value='$key_customer_billing_contacts'>";
-					if (isset($key_customer_companies)) print "<input name='customer_companiesid' type='hidden' value='$key_customer_companies'>";
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_passengers.png"> customer passengers</div>
+        <div class='right-block'>
+            👤 <a href='customer_passenger_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Passenger</a>
+        </div>
+    </section>
+    <div class='page-image' style='background-image:url(images/page-passengers.jpg);'></div>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <?php
+					if (isset($key_customer_billing_contacts)) print "<input name='customerbillingcontactid' type='hidden' value='$key_customer_billing_contacts'>";
+					if (isset($key_customer_companies)) print "<input name='customercompanyid' type='hidden' value='$key_customer_companies'>";
 					?>
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<?php
-					if (isset($key_customer_billing_contacts)) print "<input name='customer_billing_contactsid' type='hidden' value='$key_customer_billing_contacts'>";
-					if (isset($key_customer_companies)) print "<input name='customer_companiesid' type='hidden' value='$key_customer_companies'>";
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <?php
+					if (isset($key_customer_billing_contacts)) print "<input name='customerbillingcontactid' type='hidden' value='$key_customer_billing_contacts'>";
+					if (isset($key_customer_companies)) print "<input name='customercompanyid' type='hidden' value='$key_customer_companies'>";
 					?>
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -205,14 +204,14 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
+            </form>
+        </section>
+        <?php 
 			if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

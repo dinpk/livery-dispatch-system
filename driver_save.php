@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'first_name';
 // id passed for update
-if (isset($_GET['driversid'])) {
-	$record_id = trim($_GET['driversid']);
+if (isset($_GET['driverid'])) {
+	$record_id = trim($_GET['driverid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM drivers WHERE key_drivers = $record_id");
@@ -57,7 +57,7 @@ if (isset($_GET['driversid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$active_status = trim($_POST['active_status']);
@@ -478,291 +478,299 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DRIVER</title>
-	<?php include('php/_head.php'); ?>
+    <title>DRIVER</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_drivers_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'>driver</div>
-		<div class='right-block'>
-
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='first_name'>First name</label>
-			 <?php if(isset($msg_first_name)) print $msg_first_name; ?>
-             <input id='first_name' name='first_name' type='text' value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='last_name'>Last name</label>
-			 <?php if(isset($msg_last_name)) print $msg_last_name; ?>
-             <input id='last_name' name='last_name' type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='contract_type'>Contract type</label><br>
-             <?php if(isset($msg_contract_type)) print $msg_contract_type; ?>
-             <select id='contract_type' name='contract_type'>
-                 <?php
-                 if (!isset($contract_type)) $contract_type = '';
-                 print "
-                 <option" . (($contract_type == 'Employee') ? ' selected' : '') .  ">Employee</option>
-                 <option" . (($contract_type == 'Contractor') ? ' selected' : '') .  ">Contractor</option>
-                 <option" . (($contract_type == 'Affiliate') ? ' selected' : '') .  ">Affiliate</option>
-                 ";
-                 ?>
-             </select>
-         </div>
-
-         <div>
-             <label for='address1'>Address 1</label>
-			 <?php if(isset($msg_address1)) print $msg_address1; ?>
-             <input id='address1' name='address1' type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='address2'>Address 2</label>
-			 <?php if(isset($msg_address2)) print $msg_address2; ?>
-             <input id='address2' name='address2' type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='city'>City</label>
-			 <?php if(isset($msg_city)) print $msg_city; ?>
-             <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='state'>State</label><br>
-             <?php if(isset($msg_state)) print $msg_state; ?>
-             <select id='state' name='state'>
-                 <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['state'] == $state) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['state'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
-
-         <div>
-             <label for='zip_code'>Zip code</label>
-			 <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-             <input id='zip_code' name='zip_code' type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='work_phone'>Work phone</label>
-			 <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
-             <input id='work_phone' name='work_phone' type='tel' value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='work_phone_extension'>Work phone ext.</label>
-			 <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
-             <input id='work_phone_extension' name='work_phone_extension' type='tel' value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='mobile_phone'>Mobile phone</label>
-			 <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
-             <input id='mobile_phone' name='mobile_phone' type='tel' value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='email'>Email</label>
-			 <?php if(isset($msg_email)) print $msg_email; ?>
-             <input id='email' name='email' type='email' value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
-         </div>
-
-		</fieldset>
-		<fieldset>
-
-         <div>
-             <label for='date_of_birth'>Date of birth</label><br>
-             <?php if(isset($msg_date_of_birth)) print $msg_date_of_birth; ?>
-             <input id='date_of_birth' name='date_of_birth' type='date' placeholder='yyyy-mm-dd' value='<?php if (isset($date_of_birth)) {print $date_of_birth;} ?>'><br>
-         </div>
-
-         <div>
-             <label for='license_number'>License #</label>
-			 <?php if(isset($msg_license_number)) print $msg_license_number; ?>
-             <input id='license_number' name='license_number' type='text' value='<?php if (isset($license_number)) {print $license_number;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='license_expiry_date'>License expiry date</label><br>
-             <?php if(isset($msg_license_expiry_date)) print $msg_license_expiry_date; ?>
-             <input id='license_expiry_date' name='license_expiry_date' type='date' placeholder='yyyy-mm-dd' value='<?php if (isset($license_expiry_date)) {print $license_expiry_date;} ?>'><br>
-         </div>
-
-         <div>
-             <label for='social_security_number'>Ssn</label>
-			 <?php if(isset($msg_social_security_number)) print $msg_social_security_number; ?>
-             <input id='social_security_number' name='social_security_number' type='text' value='<?php if (isset($social_security_number)) {print $social_security_number;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='hire_date'>Hire date</label><br>
-             <?php if(isset($msg_hire_date)) print $msg_hire_date; ?>
-             <input id='hire_date' name='hire_date' type='date' placeholder='yyyy-mm-dd' value='<?php if (isset($hire_date)) {print $hire_date;} ?>'><br>
-         </div>
-
-         <div>
-             <label for='fleet_number'>Fleet #</label>
-             <small>
-					 <a href='driver_select_vehicle.php' target='overlay-iframe2' onclick='overlayOpen2();'>Select</a> &nbsp;
-					 <a href='#' onclick='unselectKeyValue("key_vehicles","fleet_number");return false;'>x</a>
-             </small><br>
-             <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
-             <input id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>' readonly><br>
-         </div>
-
-         <input id='key_vehicles' name='key_vehicles' type='hidden' value='<?php if (isset($key_vehicles)) {print $key_vehicles;} else {print '0';} ?>'>
-
-
-         <div>
-             <label for='notes'>Notes</label>
-			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
-         </div>
-
-		</fieldset>
-		<fieldset>
-
-
-         <div>
-             <label for='username'>User name</label> <span class='red'> *</span>             <?php if(isset($msg_username)) print $msg_username; ?>
-             <input id='username' name='username' type='text' value='<?php if (isset($username)) {print $username;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='password'>Password</label> <span class='red'> *</span>             <?php if(isset($msg_password)) print $msg_password; ?>
-             <input id='password' name='password' type='password' value='<?php if (isset($password)) {print $password;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='image_url'>Image url</label>
-			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
-         </div>
-		</fieldset>
-		<fieldset>
-
-
-         <div>
-             <label for='payment_method'>Payment method</label><br>
-             <?php if(isset($msg_payment_method)) print $msg_payment_method; ?>
-             <select id='payment_method' name='payment_method'>
-                 <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT payment_method FROM settings_payment_method_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['payment_method'] == $payment_method) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['payment_method'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
-
-         <div>
-             <?php if(isset($msg_base_amount_percent)) print $msg_base_amount_percent; ?>
-             <input class="input_number_small" id='base_amount_percent' name='base_amount_percent' type='number' step='0.5' value='<?php if (isset($base_amount_percent)) {print $base_amount_percent;} else { print '100';} ?>'>% 
-             <label for='base_amount_percent'>Base amount</label>
-         </div>
-
-        <div>
-             <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
-             <input class="input_number_small" id='gratuity_percent' name='gratuity_percent' type='number' step='0.5' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_gratuity_checkbox) || $pay_gratuity_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_gratuity_checkbox' name='pay_gratuity_checkbox'> 
-			 <label for='gratuity_percent'>Gratuity </label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_commission_percent)) print $msg_commission_percent; ?>
-             <input class="input_number_small" id='commission_percent' name='commission_percent' type='number' step='0.5' value='<?php if (isset($commission_percent)) {print $commission_percent;} else { print '0';} ?>'>% 
-             <input <?php if (!isset($pay_commission_checkbox) || $pay_commission_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_commission_checkbox' name='pay_commission_checkbox'> 
-			 <label for='commission_percent'>Commission</label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_extra_stops_percent)) print $msg_extra_stops_percent; ?>
-             <input class="input_number_small" id='extra_stops_percent' name='extra_stops_percent' type='number' step='0.5' value='<?php if (isset($extra_stops_percent)) {print $extra_stops_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_extra_stops_checkbox) || $pay_extra_stops_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_extra_stops_checkbox' name='pay_extra_stops_checkbox'> 
-			 <label for='extra_stops_percent'>Extra stops</label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_offtime_percent)) print $msg_offtime_percent; ?>
-             <input class="input_number_small" id='offtime_percent' name='offtime_percent' type='number' step='0.5' value='<?php if (isset($offtime_percent)) {print $offtime_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_offtime_checkbox) || $pay_offtime_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_offtime_checkbox' name='pay_offtime_checkbox'> 
-			 <label for='offtime_percent'>Off-time</label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_tolls_percent)) print $msg_tolls_percent; ?>
-             <input class="input_number_small" id='tolls_percent' name='tolls_percent' type='number' step='0.5' value='<?php if (isset($tolls_percent)) {print $tolls_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_tolls_checkbox) || $pay_tolls_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_tolls_checkbox' name='pay_tolls_checkbox'> 
-             <label for='tolls_percent'>Tolls</label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_parking_percent)) print $msg_parking_percent; ?>
-             <input class="input_number_small" id='parking_percent' name='parking_percent' type='number' step='0.5' value='<?php if (isset($parking_percent)) {print $parking_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_parking_checkbox) || $pay_parking_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_parking_checkbox' name='pay_parking_checkbox'> 
-             <label for='parking_percent'>Parking</label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
-             <input class="input_number_small" id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.5' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_gas_surcharge_checkbox) || $pay_gas_surcharge_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_gas_surcharge_checkbox' name='pay_gas_surcharge_checkbox'> 
-             <label for='gas_surcharge_percent'>Gas surcharge</label>
-         </div>
-
-         <div>
-             <?php if(isset($msg_extra_charges_percent)) print $msg_extra_charges_percent; ?>
-             <input class="input_number_small" id='extra_charges_percent' name='extra_charges_percent' type='number' step='0.5' value='<?php if (isset($extra_charges_percent)) {print $extra_charges_percent;} else { print '100';} ?>'>% 
-             <input <?php if (!isset($pay_extra_charges_checkbox) || $pay_extra_charges_checkbox=='on') {print "checked='checked'";} ?> type='checkbox' id='pay_extra_charges_checkbox' name='pay_extra_charges_checkbox'> 
-             <label for='extra_charges_percent'>Extra charges</label>
-         </div>
-
-		<br><br>
-		
-         <div>
-             <?php if(isset($msg_active_status)) print $msg_active_status; ?>
-             <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?> type='checkbox' id='active_status' name='active_status'> <label for='active_status'>Status</label><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'>driver</div>
+        <div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='first_name'>First name</label>
+                    <?php if(isset($msg_first_name)) print $msg_first_name; ?>
+                    <input id='first_name' name='first_name' type='text'
+                        value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='last_name'>Last name</label>
+                    <?php if(isset($msg_last_name)) print $msg_last_name; ?>
+                    <input id='last_name' name='last_name' type='text'
+                        value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='contract_type'>Contract type</label><br>
+                    <?php if(isset($msg_contract_type)) print $msg_contract_type; ?>
+                    <select id='contract_type' name='contract_type'>
+                        <?php
+						if (!isset($contract_type)) $contract_type = '';
+						print "
+						<option" . (($contract_type == 'Employee') ? ' selected' : '') .  ">Employee</option>
+						<option" . (($contract_type == 'Contractor') ? ' selected' : '') .  ">Contractor</option>
+						<option" . (($contract_type == 'Affiliate') ? ' selected' : '') .  ">Affiliate</option>
+						";
+						?>
+                    </select>
+                </div>
+                <div>
+                    <label for='address1'>Address 1</label>
+                    <?php if(isset($msg_address1)) print $msg_address1; ?>
+                    <input id='address1' name='address1' type='text'
+                        value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='address2'>Address 2</label>
+                    <?php if(isset($msg_address2)) print $msg_address2; ?>
+                    <input id='address2' name='address2' type='text'
+                        value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='city'>City</label>
+                    <?php if(isset($msg_city)) print $msg_city; ?>
+                    <input id='city' name='city' type='text'
+                        value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='state'>State</label><br>
+                    <?php if(isset($msg_state)) print $msg_state; ?>
+                    <select id='state' name='state'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $state) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+                <div>
+                    <label for='zip_code'>Zip code</label>
+                    <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
+                    <input id='zip_code' name='zip_code' type='text'
+                        value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='work_phone'>Work phone</label>
+                    <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
+                    <input id='work_phone' name='work_phone' type='tel'
+                        value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='work_phone_extension'>Work phone ext.</label>
+                    <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
+                    <input id='work_phone_extension' name='work_phone_extension' type='tel'
+                        value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='mobile_phone'>Mobile phone</label>
+                    <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
+                    <input id='mobile_phone' name='mobile_phone' type='tel'
+                        value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='email'>Email</label>
+                    <?php if(isset($msg_email)) print $msg_email; ?>
+                    <input id='email' name='email' type='email'
+                        value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='date_of_birth'>Date of birth</label><br>
+                    <?php if(isset($msg_date_of_birth)) print $msg_date_of_birth; ?>
+                    <input id='date_of_birth' name='date_of_birth' type='date' placeholder='yyyy-mm-dd'
+                        value='<?php if (isset($date_of_birth)) {print $date_of_birth;} ?>'><br>
+                </div>
+                <div>
+                    <label for='license_number'>License #</label>
+                    <?php if(isset($msg_license_number)) print $msg_license_number; ?>
+                    <input id='license_number' name='license_number' type='text'
+                        value='<?php if (isset($license_number)) {print $license_number;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='license_expiry_date'>License expiry date</label><br>
+                    <?php if(isset($msg_license_expiry_date)) print $msg_license_expiry_date; ?>
+                    <input id='license_expiry_date' name='license_expiry_date' type='date' placeholder='yyyy-mm-dd'
+                        value='<?php if (isset($license_expiry_date)) {print $license_expiry_date;} ?>'><br>
+                </div>
+                <div>
+                    <label for='social_security_number'>Ssn</label>
+                    <?php if(isset($msg_social_security_number)) print $msg_social_security_number; ?>
+                    <input id='social_security_number' name='social_security_number' type='text'
+                        value='<?php if (isset($social_security_number)) {print $social_security_number;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='hire_date'>Hire date</label><br>
+                    <?php if(isset($msg_hire_date)) print $msg_hire_date; ?>
+                    <input id='hire_date' name='hire_date' type='date' placeholder='yyyy-mm-dd'
+                        value='<?php if (isset($hire_date)) {print $hire_date;} ?>'><br>
+                </div>
+                <div>
+                    <label for='fleet_number'>Fleet #</label>
+                    <small>
+                        <a href='driver_select_vehicle.php' target='overlay-iframe2'
+                            onclick='overlayOpen2();'>Select</a> &nbsp;
+                        <a href='#' onclick='unselectKeyValue("key_vehicles","fleet_number");return false;'>x</a>
+                    </small><br>
+                    <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
+                    <input id='fleet_number' name='fleet_number' type='text'
+                        value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>'
+                        readonly><br>
+                </div>
+                <input id='key_vehicles' name='key_vehicles' type='hidden'
+                    value='<?php if (isset($key_vehicles)) {print $key_vehicles;} else {print '0';} ?>'>
+                <div>
+                    <label for='notes'>Notes</label>
+                    <?php if(isset($msg_notes)) print $msg_notes; ?>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='username'>User name</label> <span class='red'> *</span>
+                    <?php if(isset($msg_username)) print $msg_username; ?>
+                    <input id='username' name='username' type='text'
+                        value='<?php if (isset($username)) {print $username;} else { print '';} ?>' required><br>
+                </div>
+                <div>
+                    <label for='password'>Password</label> <span class='red'> *</span>
+                    <?php if(isset($msg_password)) print $msg_password; ?>
+                    <input id='password' name='password' type='password'
+                        value='<?php if (isset($password)) {print $password;} else { print '';} ?>' required><br>
+                </div>
+                <div>
+                    <label for='image_url'>Image url</label>
+                    <?php if(isset($msg_image_url)) print $msg_image_url; ?>
+                    <input id='image_url' name='image_url' type='text'
+                        value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='payment_method'>Payment method</label><br>
+                    <?php if(isset($msg_payment_method)) print $msg_payment_method; ?>
+                    <select id='payment_method' name='payment_method'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT payment_method FROM settings_payment_method_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['payment_method'] == $payment_method) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['payment_method'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+                <div>
+                    <?php if(isset($msg_base_amount_percent)) print $msg_base_amount_percent; ?>
+                    <input class="input_number_small" id='base_amount_percent' name='base_amount_percent' type='number'
+                        step='0.5'
+                        value='<?php if (isset($base_amount_percent)) {print $base_amount_percent;} else { print '100';} ?>'>%
+                    <label for='base_amount_percent'>Base amount</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
+                    <input class="input_number_small" id='gratuity_percent' name='gratuity_percent' type='number'
+                        step='0.5'
+                        value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_gratuity_checkbox) || $pay_gratuity_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_gratuity_checkbox' name='pay_gratuity_checkbox'>
+                    <label for='gratuity_percent'>Gratuity </label>
+                </div>
+                <div>
+                    <?php if(isset($msg_commission_percent)) print $msg_commission_percent; ?>
+                    <input class="input_number_small" id='commission_percent' name='commission_percent' type='number'
+                        step='0.5'
+                        value='<?php if (isset($commission_percent)) {print $commission_percent;} else { print '0';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_commission_checkbox) || $pay_commission_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_commission_checkbox' name='pay_commission_checkbox'>
+                    <label for='commission_percent'>Commission</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_extra_stops_percent)) print $msg_extra_stops_percent; ?>
+                    <input class="input_number_small" id='extra_stops_percent' name='extra_stops_percent' type='number'
+                        step='0.5'
+                        value='<?php if (isset($extra_stops_percent)) {print $extra_stops_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_extra_stops_checkbox) || $pay_extra_stops_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_extra_stops_checkbox' name='pay_extra_stops_checkbox'>
+                    <label for='extra_stops_percent'>Extra stops</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_offtime_percent)) print $msg_offtime_percent; ?>
+                    <input class="input_number_small" id='offtime_percent' name='offtime_percent' type='number'
+                        step='0.5'
+                        value='<?php if (isset($offtime_percent)) {print $offtime_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_offtime_checkbox) || $pay_offtime_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_offtime_checkbox' name='pay_offtime_checkbox'>
+                    <label for='offtime_percent'>Off-time</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_tolls_percent)) print $msg_tolls_percent; ?>
+                    <input class="input_number_small" id='tolls_percent' name='tolls_percent' type='number' step='0.5'
+                        value='<?php if (isset($tolls_percent)) {print $tolls_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_tolls_checkbox) || $pay_tolls_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_tolls_checkbox' name='pay_tolls_checkbox'>
+                    <label for='tolls_percent'>Tolls</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_parking_percent)) print $msg_parking_percent; ?>
+                    <input class="input_number_small" id='parking_percent' name='parking_percent' type='number'
+                        step='0.5'
+                        value='<?php if (isset($parking_percent)) {print $parking_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_parking_checkbox) || $pay_parking_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_parking_checkbox' name='pay_parking_checkbox'>
+                    <label for='parking_percent'>Parking</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
+                    <input class="input_number_small" id='gas_surcharge_percent' name='gas_surcharge_percent'
+                        type='number' step='0.5'
+                        value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_gas_surcharge_checkbox) || $pay_gas_surcharge_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_gas_surcharge_checkbox' name='pay_gas_surcharge_checkbox'>
+                    <label for='gas_surcharge_percent'>Gas surcharge</label>
+                </div>
+                <div>
+                    <?php if(isset($msg_extra_charges_percent)) print $msg_extra_charges_percent; ?>
+                    <input class="input_number_small" id='extra_charges_percent' name='extra_charges_percent'
+                        type='number' step='0.5'
+                        value='<?php if (isset($extra_charges_percent)) {print $extra_charges_percent;} else { print '100';} ?>'>%
+                    <input
+                        <?php if (!isset($pay_extra_charges_checkbox) || $pay_extra_charges_checkbox=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='pay_extra_charges_checkbox' name='pay_extra_charges_checkbox'>
+                    <label for='extra_charges_percent'>Extra charges</label>
+                </div>
+                <br><br>
+                <div>
+                    <?php if(isset($msg_active_status)) print $msg_active_status; ?>
+                    <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='active_status' name='active_status'> <label
+                        for='active_status'>Status</label><br>
+                </div>
+            </fieldset>
+			<input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

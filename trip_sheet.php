@@ -3,9 +3,7 @@ include('php/_code.php');
 $report_title = 'Trip Sheet';
 $report_data = '';
 $show_email_form = false;
-
 if (isset($_GET['pickup_date'])) {
-	
 	$pickup_date = sd($dbcon, $_GET['pickup_date']);
 	$full_report = '';
 	$results_data = mysqli_query($dbcon, "SELECT * FROM trips WHERE DATE(pickup_datetime) = '$pickup_date' ORDER BY pickup_datetime");
@@ -26,9 +24,7 @@ if (isset($_GET['pickup_date'])) {
 		if (!empty($row_data['airline'])) $single_trip .= "<div><b>Flight: </b>" . $row_data['airline'] . " " . $row_data['flight_number'] . "</div>";
 		$single_trip .= "<div><b>Driver:</b> " . $row_data['driver_name'] . "</div>";
 		$single_trip .= "<div><b>Vehicle:</b> " . $row_data['vehicle'] . "</div>";
-		$single_trip .= "</div>";
-		
-		$single_trip .= "<div style='margin:0 0 0 auto;'>";
+		$single_trip .= "</div>";		$single_trip .= "<div style='margin:0 0 0 auto;'>";
 		$single_trip .= "<table>";
 		if ($row_data['rate_type'] == 'Flat') {
 			$single_trip .= "<tr><td><b>Flat charges</b>&nbsp;</td><td style='text-align:right;border:1px solid #000;'>" . $row_data['total_trip_amount'] . "</td></tr>";
@@ -59,26 +55,18 @@ if (isset($_GET['pickup_date'])) {
 		}
 		$single_trip .= "</table>";
 		$single_trip .= "</div>";
-
 		$single_trip = "
 		<div style='margin-top:10px;padding:5px;border:1px solid #000;display:flex;justify-content:space-between;'>
 			$single_trip
 			<p>$description</p>
 		</div>
-		";			
-		
+		";
 		$full_report .= $single_trip;
 	}
 	
-	
 	if (!empty($full_report)) $show_email_form = true;
-
 	$full_report = "<h1 class='to-center'>Trip Sheet</h1><h3 class='to-center'>" . date("M d, Y - h:ia") .  "</h3>" . $full_report;
-
-
 }
-
-
 if (isset($_POST['email'])) {
 	$email = (isset($_POST['email']) ? trim($_POST['email']) : '');
 	$subject = "Trip Sheet " . date("M d, Y - h:ia");
@@ -93,26 +81,23 @@ if (isset($_POST['email'])) {
 		}		
 	}
 }
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php print $report_title; ?></title>
-	<link rel='stylesheet' href='css/styles_report.css'>
-	<meta charset='utf-8'>
+    <title><?php print $report_title; ?></title>
+    <link rel='stylesheet' href='css/styles_report.css'>
+    <meta charset='utf-8'>
 </head>
 <body id='page-report' class='customer_invoices_print'>
-
-	<form class='to-center'>
-		<input id='pickup_date' name='pickup_date' type='date' value='<?php if (isset($pickup_date)) {print $pickup_date;} else {print date('Y-m-d');} ?>'> 
-		<input type='submit' value='Get'>
-	</form>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-		<?php
+    <form class='to-center'>
+        <input id='pickup_date' name='pickup_date' type='date'
+            value='<?php if (isset($pickup_date)) {print $pickup_date;} else {print date('Y-m-d');} ?>'>
+        <input type='submit' value='Get'>
+    </form>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php
 			if ($show_email_form) {
 				print "
 				<form method='post' class='to-center'>
@@ -125,6 +110,6 @@ if (isset($_POST['email'])) {
 			}
 			print $full_report;
 		?>
-	</main>
+    </main>
 </body>
 </html>

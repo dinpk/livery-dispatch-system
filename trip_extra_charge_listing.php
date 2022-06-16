@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php'); 
 // parent id passed
-if (isset($_GET['tripsid'])) {
-	$parent_id = trim($_GET['tripsid']);
+if (isset($_GET['tripid'])) {
+	$parent_id = trim($_GET['tripid']);
 	if (!is_numeric($parent_id)) die('Parent table id is invalid');
 	$results = mysqli_query($dbcon, "SELECT key_trips, passenger_name FROM trips WHERE key_trips = $parent_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -19,7 +19,7 @@ if ($row = mysqli_fetch_assoc($results)) {
 	$trip_extra_charges = $row['trip_extra_charges'];
 }
 if (empty($trip_extra_charges)) $trip_extra_charges = 0;
-$base_file_name = 'trip_extra_charges_listing';
+$base_file_name = 'trip_extra_charge_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -86,8 +86,8 @@ if ($results) {
 		<td class='right'>" . $row['amount'] . "</td>
 		<td class='record-icons'>
 		<small>
-		<a href='trip_extra_charge_save.php?trip_extra_chargesid=$record_id&tripsid=$parent_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-		<a href='trip_extra_charge_view.php?trip_extra_chargesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
+		<a href='trip_extra_charge_save.php?tripextrachargeid=$record_id&tripid=$parent_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+		<a href='trip_extra_charge_view.php?tripextrachargeid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</small>
 		</td>
 		</tr>
@@ -124,44 +124,46 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TRIP EXTRA CHARGES</title>
-	<?php include('php/_head.php'); ?>
-	<script>
-		if (parent.document.getElementById("trip_extra_charges")) {
-			let trip_extra_charges = <?php print $trip_extra_charges; ?>;
-			parent.document.getElementById("trip_extra_charges").value = trip_extra_charges.toFixed(2);
-			parent.calc();
-		}
-	</script>
+    <title>TRIP - EXTRA CHARGES</title>
+    <?php include('php/_head.php'); ?>
+    <script>
+    if (parent.document.getElementById("trip_extra_charges")) {
+        let trip_extra_charges = <?php print $trip_extra_charges; ?>;
+        parent.document.getElementById("trip_extra_charges").value = trip_extra_charges.toFixed(2);
+        parent.calc();
+    }
+    </script>
 </head>
 <body id='page-listing' class='foreign'>
-	<?php if (isset($parent_record_label)) print '<h2>' . $parent_record_label . '</h2>'; ?>
-	<section id='sub-menu'>
-		<div class='left-block'>Extra charges </div>
-		<div class='right-block'>
-			✎ <a href='trip_extra_charge_save.php?tripsid=<?php print $parent_id; ?>' target='overlay-iframe' onclick='overlayOpen();'> New</a> 
-		</div>
-	</section>
-
-	<?php //if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms' style='display:none;'>
-			<form id='dates_form' method='get'>
-					<input type='hidden' name='tripsid' value='<?php print $parent_id; ?>'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-					<input type='hidden' name='tripsid' value='<?php print $parent_id; ?>'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+    <?php if (isset($parent_record_label)) print '<h2>' . $parent_record_label . '</h2>'; ?>
+    <section id='sub-menu'>
+        <div class='left-block'>Extra charges </div>
+        <div class='right-block'>
+            ✎ <a href='trip_extra_charge_save.php?tripid=<?php print $parent_id; ?>' target='overlay-iframe'
+                onclick='overlayOpen();'> New Extra Charge</a>
+        </div>
+    </section>
+    <?php //if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms' style='display:none;'>
+            <form id='dates_form' method='get'>
+                <input type='hidden' name='tripid' value='<?php print $parent_id; ?>'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input type='hidden' name='tripid' value='<?php print $parent_id; ?>'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '5') ? " selected='selected'" : '') .  ">5</option>
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
@@ -170,15 +172,15 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
+            </form>
+        </section>
+        <?php 
 			if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
-</html>
 
+</html>

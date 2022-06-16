@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'log_type';
 // id passed for update
-if (isset($_GET['logsid'])) {
-	$record_id = trim($_GET['logsid']);
+if (isset($_GET['logid'])) {
+	$record_id = trim($_GET['logid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM logs WHERE key_logs = $record_id");
@@ -18,7 +18,7 @@ if (isset($_GET['logsid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$action_performed = trim($_POST['action_performed']);
@@ -42,9 +42,7 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	// no validation error
-	if ($error == 0) {
-		
-		if (isset($record_id) && $error != 1) { // update
+	if ($error == 0) {		if (isset($record_id) && $error != 1) { // update
 			$results = mysqli_query($dbcon, "UPDATE logs SET 
 			log_type = '" . sd($dbcon, $log_type) . "',
 			log_datetime = '" . sd($dbcon, $log_datetime) . "',
@@ -131,11 +129,7 @@ if (isset($_POST['save_submit'])) {
              </select>
          </div>
 
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
+		</fieldset>		<input id='save_submit' name='save_submit' type='submit' value='Save'>		
 	</form>
 	<?php } ?>
 

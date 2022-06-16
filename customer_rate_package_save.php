@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'package_name';
 // id passed for update
-if (isset($_GET['customer_rate_packagesid'])) {
-	$record_id = trim($_GET['customer_rate_packagesid']);
+if (isset($_GET['customerratepackageid'])) {
+	$record_id = trim($_GET['customerratepackageid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM customer_rate_packages WHERE key_customer_rate_packages = $record_id");
@@ -20,7 +20,7 @@ if (isset($_GET['customer_rate_packagesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$discount_percent = trim($_POST['discount_percent']);
@@ -99,69 +99,60 @@ if (isset($_POST['save_submit'])) {
 	if ($error == 0) $show_form = false;
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER RATE PACKAGE</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER RATE PACKAGE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_customer_rate_packages_save'>
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'>customer rate package</div>
+        <div class='right-block'>
 
-	<section id='sub-menu'>
-		<div class='left-block'>customer rate package</div>
-		<div class='right-block'>
-
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='package_name'>Package name</label> <span class='red'> *</span>             <?php if(isset($msg_package_name)) print $msg_package_name; ?>
-             <input id='package_name' name='package_name' type='text' value='<?php if (isset($package_name)) {print $package_name;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='gratuity_percent'>Gratuity %</label>
-			 <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
-             <input id='gratuity_percent' name='gratuity_percent' type='number' step='0.10' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='gas_surcharge_percent'>Gas surcharge %</label>
-			 <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
-             <input id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='admin_fee_percent'>Admin fee %</label>
-			 <?php if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; ?>
-             <input id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='discount_percent'>Discount %</label>
-			 <?php if(isset($msg_discount_percent)) print $msg_discount_percent; ?>
-             <input id='discount_percent' name='discount_percent' type='number' step='0.10' value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='package_name'>Package name</label> <span class='red'> *</span>
+                    <?php if(isset($msg_package_name)) print $msg_package_name; ?>
+                    <input id='package_name' name='package_name' type='text'
+                        value='<?php if (isset($package_name)) {print $package_name;} else { print '';} ?>'
+                        required><br>
+                </div>
+                <div>
+                    <label for='gratuity_percent'>Gratuity %</label>
+                    <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
+                    <input id='gratuity_percent' name='gratuity_percent' type='number' step='0.10'
+                        value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='gas_surcharge_percent'>Gas surcharge %</label>
+                    <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
+                    <input id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10'
+                        value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='admin_fee_percent'>Admin fee %</label>
+                    <?php if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; ?>
+                    <input id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10'
+                        value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='discount_percent'>Discount %</label>
+                    <?php if(isset($msg_discount_percent)) print $msg_discount_percent; ?>
+                    <input id='discount_percent' name='discount_percent' type='number' step='0.10'
+                        value='<?php if (isset($discount_percent)) {print $discount_percent;} else { print '0';} ?>'><br>
+                </div>
+            </fieldset> 
+			<input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

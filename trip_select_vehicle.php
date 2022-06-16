@@ -14,8 +14,8 @@ if (isset($_GET['search'])) {
 if ($run_query) {
 	// get zone rate
 	$zone_rate = '0';
-	if (isset($_GET['rates_zonesid']) && is_numeric($_GET['rates_zonesid'])) {
-		$key_rates_zones = $_GET['rates_zonesid'];
+	if (isset($_GET['ratezoneid']) && is_numeric($_GET['ratezoneid'])) {
+		$key_rates_zones = $_GET['ratezoneid'];
 		$results = mysqli_query($dbcon, "SELECT rate FROM rates_zones WHERE key_rates_zones =  $key_rates_zones");
 		if ($row = mysqli_fetch_assoc($results)) {
 			$zone_rate = $row['rate'];
@@ -44,7 +44,7 @@ if ($run_query) {
 					parent.document.getElementById(\"hourly_overtime_rate\").value = \"" . $row['hourly_overtime_rate']  . "\";
 					parent.calc();
 					closeOverlay2(\"fromiframe\");'>Select</a>
-				<a href='vehicle_view.php?vehiclesid=" . $row['key_vehicles'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
+				<a href='vehicle_view.php?vehicleid=" . $row['key_vehicles'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
 			</td>
 			</tr>
 			";
@@ -65,29 +65,26 @@ if ($run_query) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VEHICLES</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIP - VEHICLE</title>
+    <?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
-	
-	<section id='sub-menu'>
-		<h3>VEHICLE</h3>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='search-forms'>
-			<form method='get'>
-					<input id='search' name='search' type='text' autofocus required> 
-					<input type='submit' value='Search'> &nbsp; <a href='vehicle_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
-			</form>
-		</section>
-		<?php 
+    <section id='sub-menu'>
+        <h3>SELECT VEHICLE</h3>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='search-forms'>
+            <form method='get'>
+                <input id='search' name='search' type='text' autofocus required>
+                <input type='submit' value='Search'> &nbsp; 
+				<a href='vehicle_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

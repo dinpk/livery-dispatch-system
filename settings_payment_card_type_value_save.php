@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'payment_card_type';
 // id passed for update
-if (isset($_GET['settings_payment_card_type_valuesid'])) {
-	$record_id = trim($_GET['settings_payment_card_type_valuesid']);
+if (isset($_GET['settingspaymentcardtypeid'])) {
+	$record_id = trim($_GET['settingspaymentcardtypeid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_payment_card_type_values WHERE key_settings_payment_card_type_values = $record_id");
@@ -16,7 +16,7 @@ if (isset($_GET['settings_payment_card_type_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$payment_card_type = trim($_POST['payment_card_type']);
@@ -57,39 +57,30 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS PAYMENT CARD TYPE VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - PAYMENT CARD TYPE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_payment_card_type_values_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'> </div>
-		<div class='right-block'> </div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='payment_card_type'>Payment card type</label> <span class='red'> *</span>             <?php if(isset($msg_payment_card_type)) print $msg_payment_card_type; ?>
-             <input id='payment_card_type' name='payment_card_type' type='text' value='<?php if (isset($payment_card_type)) {print $payment_card_type;} else { print '';} ?>' required><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'> </div>
+        <div class='right-block'> </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='payment_card_type'>Payment card type</label> <span class='red'> *</span>
+                    <?php if(isset($msg_payment_card_type)) print $msg_payment_card_type; ?>
+                    <input id='payment_card_type' name='payment_card_type' type='text'
+                        value='<?php if (isset($payment_card_type)) {print $payment_card_type;} else { print '';} ?>'
+                        required><br>
+                </div>
+            </fieldset> <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

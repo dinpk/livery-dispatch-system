@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['vehiclesid'])) {
-	$record_id = trim($_GET['vehiclesid']);
+if (isset($_GET['vehicleid'])) {
+	$record_id = trim($_GET['vehicleid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM vehicles WHERE key_vehicles = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -31,27 +31,22 @@ if (isset($_GET['vehiclesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VEHICLES</title>
-	<?php include('php/_head.php'); ?>
+    <title>VEHICLE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_vehicles_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-		
-		<div class='flex'>
-			<section>
-				<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <div class='flex'>
+            <section>
+                <?php 
 					$active_symbol = (($active_status == "on") ? "<p class='green'>&#10003;</p>" : "<p class='red'>x</p>");
 					if (empty($image_url)) {
 						print "<div class='profile-avatar' style='background-image:url(images/icons/avatar_vehicle.png);'></div> ";
 					} else {
 						print "<div class='profile-image'><a href='$image_url' target='_blank'><img src='$image_url'></a></div> ";
 					}
-					
 					print "
-						
 						<h1>
 							$vehicle_type
 							<p>$year_made</p>
@@ -59,10 +54,10 @@ if (isset($_GET['vehiclesid'])) {
 						</h1>
 					";
 				?>
-			</section>
-			<section>
-				<table>
-				<?php 
+            </section>
+            <section>
+                <table>
+                    <?php 
 					if (!empty($fleet_number)) print "<tr><td>Fleet #</td><td>$fleet_number</td></tr>";
 					if (!empty($tag)) print "<tr><td>Tag</td><td>$tag</td></tr>";
 					if (!empty($vin_number)) print "<tr><td>Vin #</td><td>$vin_number</td></tr>";
@@ -82,16 +77,15 @@ if (isset($_GET['vehiclesid'])) {
 					if ($hourly_wait_rate != "0") print "<tr><td>Hourly wait rate</td><td>$hourly_wait_rate</td></tr>";
 					if ($hourly_overtime_rate != "0") print "<tr><td>Hourly overtime rate</td><td>$hourly_overtime_rate</td></tr>";
 				?>
-				</table>
-			</section>
-			<section>
-				<?php
+                </table>
+            </section>
+            <section>
+                <?php
 					if (!empty($notes)) print "<h3>Notes</h3><p>$notes</p>";
 				?>
-			</section>
-		</div>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+            </section>
+        </div>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

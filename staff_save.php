@@ -43,7 +43,7 @@ if (isset($_GET['staffid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$active_status = trim($_POST['active_status']);
@@ -338,300 +338,238 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>STAFF</title>
     <?php include('php/_head.php'); ?>
 </head>
-
-<body id='page-save' class='page_save page_staff_save'>
-
+<body id='page-save'>
     <section id='sub-menu'>
         <div class='left-block'>staff</div>
         <div class='right-block'>
 
         </div>
     </section>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
-
         <?php if (isset($show_form) && $show_form) { ?>
         <form method='post'>
-
             <fieldset>
-
                 <div>
                     <label for='first_name'>First name</label>
                     <?php if(isset($msg_first_name)) print $msg_first_name; ?>
-                    <input id='first_name'
-                        name='first_name' type='text'
+                    <input id='first_name' name='first_name' type='text'
                         value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='last_name'>Last name</label>
                     <?php if(isset($msg_last_name)) print $msg_last_name; ?>
-                    <input id='last_name' name='last_name'
-                        type='text' value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'><br>
+                    <input id='last_name' name='last_name' type='text'
+                        value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='address1'>Address 1</label>
                     <?php if(isset($msg_address1)) print $msg_address1; ?>
-                    <input id='address1' name='address1'
-                        type='text' value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
+                    <input id='address1' name='address1' type='text'
+                        value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='address2'>Address 2</label>
                     <?php if(isset($msg_address2)) print $msg_address2; ?>
-                    <input id='address2' name='address2'
-                        type='text' value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
+                    <input id='address2' name='address2' type='text'
+                        value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='city'>City</label>
                     <?php if(isset($msg_city)) print $msg_city; ?>
                     <input id='city' name='city' type='text'
                         value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='state'>State</label><br>
                     <?php if(isset($msg_state)) print $msg_state; ?>
                     <select id='state' name='state'>
                         <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['state'] == $state) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['state'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $state) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
+						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='zip_code'>Zip code</label>
                     <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-                    <input id='zip_code' name='zip_code'
-                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
+                    <input id='zip_code' name='zip_code' type='text'
+                        value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='work_phone'>Work phone</label>
                     <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
-                    <input id='work_phone'
-                        name='work_phone' type='tel'
+                    <input id='work_phone' name='work_phone' type='tel'
                         value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='work_phone_extension'>Work phone ext.</label>
                     <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
-                    <input 
-                        id='work_phone_extension' name='work_phone_extension' type='text'
+                    <input id='work_phone_extension' name='work_phone_extension' type='text'
                         value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='mobile_phone'>Mobile phone</label>
                     <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
-                    <input id='mobile_phone'
-                        name='mobile_phone' type='tel'
+                    <input id='mobile_phone' name='mobile_phone' type='tel'
                         value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='email'>Email</label>
                     <?php if(isset($msg_email)) print $msg_email; ?>
                     <input id='email' name='email' type='email'
                         value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='date_of_birth'>Date of birth</label><br>
                     <?php if(isset($msg_date_of_birth)) print $msg_date_of_birth; ?>
                     <input id='date_of_birth' name='date_of_birth' type='date' placeholder='yyyy-mm-dd'
                         value='<?php if (isset($date_of_birth)) {print $date_of_birth;} ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='username'>User name</label> <span class='red'> *</span>
                     <?php if(isset($msg_username)) print $msg_username; ?>
-                    <input id='username' name='username'
-                        type='text' value='<?php if (isset($username)) {print $username;} else { print '';} ?>'
-                        required><br>
+                    <input id='username' name='username' type='text'
+                        value='<?php if (isset($username)) {print $username;} else { print '';} ?>' required><br>
                 </div>
-
                 <div>
                     <label for='password'>Password</label> <span class='red'> *</span>
                     <?php if(isset($msg_password)) print $msg_password; ?>
-                    <input id='password' name='password'
-                        type='password' value='<?php if (isset($password)) {print $password;} else { print '';} ?>'
-                        required><br>
+                    <input id='password' name='password' type='password'
+                        value='<?php if (isset($password)) {print $password;} else { print '';} ?>' required><br>
                 </div>
-				 
-				<div>
-				 	<a href='staff_permissions.php?staffid=<?php print $record_id; ?>' target='overlay-iframe2' onclick='overlayOpen2();'>Permissions</a>
-				</div>
-
+                <div>
+                    <a href='staff_permissions.php?staffid=<?php print $record_id; ?>' target='overlay-iframe2'
+                        onclick='overlayOpen2();'>Permissions</a>
+                </div>
                 <div>
                     <label for='image_url'>Image url</label>
                     <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-                    <input id='image_url' name='image_url'
-                        type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+                    <input id='image_url' name='image_url' type='text'
+                        value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='designation'>Designation</label><br>
                     <?php if(isset($msg_designation)) print $msg_designation; ?>
                     <select id='designation' name='designation'>
                         <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT designation FROM settings_staff_designation_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['designation'] == $designation) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['designation'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
+						$options = '';
+						$results = mysqli_query($dbcon, 'SELECT designation FROM settings_staff_designation_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['designation'] == $designation) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['designation'] . "</option>";
+						}
+						print $options; 
+						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='hire_date'>Hire date</label><br>
                     <?php if(isset($msg_hire_date)) print $msg_hire_date; ?>
                     <input id='hire_date' name='hire_date' type='date' placeholder='yyyy-mm-dd'
                         value='<?php if (isset($hire_date)) {print $hire_date;} ?>'><br>
                 </div>
-
                 <div>
                     <label for='social_security_number'>Ssn</label>
                     <?php if(isset($msg_social_security_number)) print $msg_social_security_number; ?>
-                    <input 
-                        id='social_security_number' name='social_security_number' type='text'
+                    <input id='social_security_number' name='social_security_number' type='text'
                         value='<?php if (isset($social_security_number)) {print $social_security_number;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='notes'>Notes</label>
                     <?php if(isset($msg_notes)) print $msg_notes; ?>
-                    <textarea id='notes'
-                        name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='payroll_period'>Salary period</label><br>
                     <?php if(isset($msg_payroll_period)) print $msg_payroll_period; ?>
                     <select id='payroll_period' name='payroll_period'>
                         <?php
-                 if (!isset($payroll_period)) $payroll_period = '';
-                 print "
-                 <option" . (($payroll_period == 'Weekly') ? ' selected' : '') .  ">Weekly</option>
-                 <option" . (($payroll_period == 'Bi-weekly') ? ' selected' : '') .  ">Bi-weekly</option>
-                 <option" . (($payroll_period == 'Semi-monthly') ? ' selected' : '') .  ">Semi-monthly</option>
-                 <option" . (($payroll_period == 'Monthly') ? ' selected' : '') .  ">Monthly</option>
-                 ";
-                 ?>
+						if (!isset($payroll_period)) $payroll_period = '';
+						print "
+						<option" . (($payroll_period == 'Weekly') ? ' selected' : '') .  ">Weekly</option>
+						<option" . (($payroll_period == 'Bi-weekly') ? ' selected' : '') .  ">Bi-weekly</option>
+						<option" . (($payroll_period == 'Semi-monthly') ? ' selected' : '') .  ">Semi-monthly</option>
+						<option" . (($payroll_period == 'Monthly') ? ' selected' : '') .  ">Monthly</option>
+						";
+						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='salary_amount'>Salary amount</label>
                     <?php if(isset($msg_salary_amount)) print $msg_salary_amount; ?>
-                    <input id='salary_amount'
-                        name='salary_amount' type='number' step='0.10'
+                    <input id='salary_amount' name='salary_amount' type='number' step='0.10'
                         value='<?php if (isset($salary_amount)) {print $salary_amount;} else { print '0';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='hours_per_week'>Hours per week</label>
                     <?php if(isset($msg_hours_per_week)) print $msg_hours_per_week; ?>
-                    <input id='hours_per_week'
-                        name='hours_per_week' type='number'
+                    <input id='hours_per_week' name='hours_per_week' type='number'
                         value='<?php if (isset($hours_per_week)) {print $hours_per_week;} else { print '0';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='hourly_regular_rate'>Hourly regular rate</label>
                     <?php if(isset($msg_hourly_regular_rate)) print $msg_hourly_regular_rate; ?>
-                    <input 
-                        id='hourly_regular_rate' name='hourly_regular_rate' type='number' step='0.10'
+                    <input id='hourly_regular_rate' name='hourly_regular_rate' type='number' step='0.10'
                         value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='hourly_overtime_rate'>Hourly overtime rate</label>
                     <?php if(isset($msg_hourly_overtime_rate)) print $msg_hourly_overtime_rate; ?>
-                    <input 
-                        id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' step='0.10'
+                    <input id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' step='0.10'
                         value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='annual_paid_days'>Annual pay days</label>
                     <?php if(isset($msg_annual_paid_days)) print $msg_annual_paid_days; ?>
-                    <input id='annual_paid_days'
-                        name='annual_paid_days' type='number'
-                        value='<?php if (isset($annual_paid_days)) {print $annual_paid_days;} else { print '0';} ?>' required><br>
+                    <input id='annual_paid_days' name='annual_paid_days' type='number'
+                        value='<?php if (isset($annual_paid_days)) {print $annual_paid_days;} else { print '0';} ?>'
+                        required><br>
                 </div>
-
                 <div>
                     <label for='house_rent_allowance'>House rent allowance %</label>
                     <?php if(isset($msg_house_rent_allowance)) print $msg_house_rent_allowance; ?>
-                    <input 
-                        id='house_rent_allowance' name='house_rent_allowance' type='number' step='0.01'
+                    <input id='house_rent_allowance' name='house_rent_allowance' type='number' step='0.01'
                         value='<?php if (isset($house_rent_allowance)) {print $house_rent_allowance;} else { print '0';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='conveyance_allowance'>Conveyance allowance %</label>
                     <?php if(isset($msg_conveyance_allowance)) print $msg_conveyance_allowance; ?>
-                    <input 
-                        id='conveyance_allowance' name='conveyance_allowance' type='number' step='0.01'
+                    <input id='conveyance_allowance' name='conveyance_allowance' type='number' step='0.01'
                         value='<?php if (isset($conveyance_allowance)) {print $conveyance_allowance;} else { print '0';} ?>'><br>
                 </div>
-
                 <br><br><br>
-
                 <div>
                     <?php if(isset($msg_active_status)) print $msg_active_status; ?>
                     <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='active_status' name='active_status'> <label
                         for='active_status'>Status</label><br>
                 </div>
-
             </fieldset>
-            
-                <input id='save_submit' name='save_submit' type='submit' value='Save'>
-            
-
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
         </form>
         <?php } ?>
-
     </main>
     <?php include('php/_footer.php'); ?>
-
 </body>
-
 </html>

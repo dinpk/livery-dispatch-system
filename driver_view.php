@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['driversid'])) {
-	$record_id = trim($_GET['driversid']);
+if (isset($_GET['driverid'])) {
+	$record_id = trim($_GET['driverid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM drivers WHERE key_drivers = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -58,25 +58,21 @@ if (isset($_GET['driversid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DRIVERS</title>
-	<?php include('php/_head.php'); ?>
+    <title>DRIVERS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_drivers_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-		<div class='flex'>
-			<section>
-				<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <div class='flex'>
+            <section>
+                <?php 
 					$active_symbol = (($active_status == "on") ? "<p class='green'>&#10003;</p>" : "<p class='red'>x</p>");
 					if (empty($image_url)) {
 						print "<div class='profile-avatar' style='background-image:url(images/icons/avatar_driver.png);'></div> ";
 					} else {
 						print "<div class='profile-image'><a href='$image_url' target='_blank'><img src='$image_url'></a></div> ";
 					}
-					
 					print "
 						<h1>$first_name $last_name</h1>
 						<h2>$fleet_number</h2>
@@ -84,10 +80,10 @@ if (isset($_GET['driversid'])) {
 						<h1>$active_symbol</h1>
 					";
 				?>
-			</section>
-			<section>
-				<table>
-				<?php 
+            </section>
+            <section>
+                <table>
+                    <?php 
 					if (!empty($username)) print "<tr><td>Username</td><td>$username</td></tr>";
 					if (!empty($email)) print "<tr><td>Email</td><td>$email</td></tr>";
 					if (!empty($work_phone)) print "<tr><td>Work phone</td><td>$work_phone  " . (!empty($work_phone_extension) ? "($work_phone_extension)" : "") . "</td></tr>";
@@ -105,12 +101,12 @@ if (isset($_GET['driversid'])) {
 					if (!empty($city)) print "<tr><td></td><td>$city, $state $zip_code</td></tr>";
 					print "<tr><td>&nbsp;</td><td></td></tr>";
 					if (!empty($notes)) print "<tr><td>Notes</td><td>$notes</td></tr>";
-				?>
-				</table>
-			</section>
-			<section>
-				<table>
-				<?php 
+					?>
+                </table>
+            </section>
+            <section>
+                <table>
+                    <?php 
 					if (!empty($payment_method)) print "<tr><td>Payment method</td><td>$payment_method</td><td></td></tr>";
 					print "<tr><td>&nbsp;</td><td></td></tr>";
 					if ($base_amount_percent != '0') print "<tr><td>Base Amount %</td><td>$base_amount_percent</td><td></td></tr>";
@@ -122,12 +118,11 @@ if (isset($_GET['driversid'])) {
 					if ($parking_percent != '0') print "<tr><td>Parking %</td><td>$parking_percent</td><td>" . (($pay_parking_checkbox == "on") ? "&#10003;" : "") . "</td></tr>";
 					if ($gas_surcharge_percent != '0') print "<tr><td>Gas surcharge %</td><td>$gas_surcharge_percent</td><td>" . (($pay_gas_surcharge_checkbox == "on") ? "&#10003;" : "") . "</td></tr>";
 					if ($extra_charges_percent != '0') print "<tr><td>Extra charge %</td><td>$extra_charges_percent</td><td>" . (($pay_extra_charges_checkbox == "on") ? "&#10003;" : "") . "</td></tr>";
-				?>
-				</table>
-			</section>
-		</div>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+					?>
+                </table>
+            </section>
+        </div>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

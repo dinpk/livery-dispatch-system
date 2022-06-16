@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['customer_passengersid'])) {
-	$record_id = trim($_GET['customer_passengersid']);
+if (isset($_GET['customerpassengerid'])) {
+	$record_id = trim($_GET['customerpassengerid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM customer_passengers WHERE key_customer_passengers = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -38,22 +38,18 @@ if (isset($_GET['customer_passengersid'])) {
 	}
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER PASSENGERS</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER PASSENGERS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_customer_passengers_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-		<div class='flex'>
-			<section>
-				<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <div class='flex'>
+            <section>
+                <?php 
 					$active_symbol = (($active_status == "on") ? "<p class='green'>&#10003;</p>" : "<p class='red'>x</p>");
 					if (empty($image_url)) {
 						print "<div class='profile-avatar' style='background-image:url(images/icons/avatar_passenger.png);'></div> ";
@@ -65,10 +61,10 @@ if (isset($_GET['customer_passengersid'])) {
 					if (!empty($company_name)) print "<h2>$company_name</h2>";
 					if (!empty($city)) print "<h3>$city, $state</h3>";
 				?>
-			</section>
-			<section>
-				<table>
-				<?php
+            </section>
+            <section>
+                <table>
+                    <?php
 					if (!empty($address1)) print "<tr><td>Address</td><td>$address1</td></tr>";
 					if (!empty($address2)) print "<tr><td>Address 2</td><td>$address2</td></tr>";
 					if (!empty($city)) print "<tr><td></td><td>$city, $state $zip_code</td></tr>";
@@ -91,21 +87,19 @@ if (isset($_GET['customer_passengersid'])) {
 						
 					}
 					if (!empty($ad_source)) print "<tr><td>Ad source</td><td>$ad_source</td></tr>";
-					
-				?>
-				</table>
-			</section>
-			<section>
-				<table>
-				<?php
+					?>
+                </table>
+            </section>
+            <section>
+                <table>
+                    <?php
 					if (!empty($notes)) print "<tr><td>Notes</td><td>$notes</td></tr>";
 					if (!empty($trip_ticket_notes)) print "<tr><td>Trip ticket notes</td><td>$trip_ticket_notes</td></tr>";
-				?>
-				</table>
-			</section>
-		</div>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+					?>
+                </table>
+            </section>
+        </div>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

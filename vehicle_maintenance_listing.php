@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php'); 
 // parent id passed
-if (isset($_GET['vehiclesid'])) {
-	$parent_id = trim($_GET['vehiclesid']);
+if (isset($_GET['vehicleid'])) {
+	$parent_id = trim($_GET['vehicleid']);
 	if (!is_numeric($parent_id)) die('Parent table id is invalid');
 	$results = mysqli_query($dbcon, "SELECT fleet_number FROM vehicles WHERE key_vehicles = $parent_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -13,7 +13,7 @@ if (isset($_GET['vehiclesid'])) {
 } else {
 	die('Parent id is not set');
 }
-$base_file_name = 'vehicles_maintenance' . '_listing';
+$base_file_name = 'vehicle_maintenance_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -83,8 +83,8 @@ if ($results) {
 		<td class='center'>" . date("F d, Y", strtotime($row['warranty_expiration'])) . "</td>
 		<td class='record-icons'>
 			<small>
-			<a href='vehicle_maintenance_save.php?vehicles_maintenanceid=$record_id&vehiclesid=$parent_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-			<a href='vehicle_maintenance_view.php?vehicles_maintenanceid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
+			<a href='vehicle_maintenance_save.php?vehiclemaintenanceid=$record_id&vehicleid=$parent_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+			<a href='vehicle_maintenance_view.php?vehiclemaintenanceid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 			</small>
 		</td>
 		</tr>
@@ -124,37 +124,37 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VEHICLES MAINTENANCE</title>
-	<?php include('php/_head.php'); ?>
+    <title>VEHICLE - MAINTENANCE</title>
+    <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing' class='foreign'>
-	
-	<section id='sub-menu'>
-		<div class='left-block'><?php if (isset($parent_record_label)) print $parent_record_label; ?></div>
-		<div class='right-block'>
-			✢ <a href='vehicle_maintenance_save.php?vehiclesid=<?php print $parent_id; ?>' target='overlay-iframe' onclick='overlayOpen();'> New</a> 
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-					<input type='hidden' name='vehiclesid' value='<?php print $parent_id; ?>'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get' style='display:none;'>
-					<input type='hidden' name='vehiclesid' value='<?php print $parent_id; ?>'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+    <section id='sub-menu'>
+        <div class='left-block'><?php if (isset($parent_record_label)) print $parent_record_label; ?></div>
+        <div class='right-block'>
+            ✢ <a href='vehicle_maintenance_save.php?vehicleid=<?php print $parent_id; ?>' target='overlay-iframe' onclick='overlayOpen();'> New Maintenance</a>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input type='hidden' name='vehicleid' value='<?php print $parent_id; ?>'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get' style='display:none;'>
+                <input type='hidden' name='vehicleid' value='<?php print $parent_id; ?>'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '5') ? " selected='selected'" : '') .  ">5</option>
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
@@ -163,16 +163,14 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>
-

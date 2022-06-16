@@ -82,7 +82,7 @@ if ($results) {
 		<td class='center'>" . (($row['settled_checkbox'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='center'>" . (($row['invoiced_checkbox'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-icons'>
-		<a href='trip_payroll_settlement_save.php?tripsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+		<a href='trip_payroll_settlement_save.php?tripid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
 		</td>
 		</tr>
 		";
@@ -128,35 +128,35 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTLE TRIPS</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIPS - PAYROLL SETTLEMENT</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_trips_payroll_settlement_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_settle.png"> settle trips</div>
-		<div class='right-block'></div>
-	</section>
-
-	<div class='page-image' style='background-image:url(images/page-settle.jpg);'></div>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_settle.png"> settle trips</div>
+        <div class='right-block'></div>
+    </section>
+    <div class='page-image' style='background-image:url(images/page-settle.jpg);'></div>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -166,15 +166,14 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

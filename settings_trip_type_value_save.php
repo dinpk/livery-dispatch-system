@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'trip_type';
 // id passed for update
-if (isset($_GET['settings_trip_type_valuesid'])) {
-	$record_id = trim($_GET['settings_trip_type_valuesid']);
+if (isset($_GET['settingstriptypeid'])) {
+	$record_id = trim($_GET['settingstriptypeid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_trip_type_values WHERE key_settings_trip_type_values = $record_id");
@@ -16,7 +16,7 @@ if (isset($_GET['settings_trip_type_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$trip_type = trim($_POST['trip_type']);
@@ -57,39 +57,29 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS TRIP TYPE VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - TRIP TYPE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_trip_type_values_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'> </div>
-		<div class='right-block'> </div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='trip_type'>Trip type</label> <span class='red'> *</span>             <?php if(isset($msg_trip_type)) print $msg_trip_type; ?>
-             <input id='trip_type' name='trip_type' type='text' value='<?php if (isset($trip_type)) {print $trip_type;} else { print '';} ?>' required><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'> </div>
+        <div class='right-block'> </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='trip_type'>Trip type</label> <span class='red'> *</span>
+                    <?php if(isset($msg_trip_type)) print $msg_trip_type; ?>
+                    <input id='trip_type' name='trip_type' type='text'
+                        value='<?php if (isset($trip_type)) {print $trip_type;} else { print '';} ?>' required><br>
+                </div>
+            </fieldset> <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

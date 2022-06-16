@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'from_city';
 // id passed for update
-if (isset($_GET['rates_zonesid'])) {
-	$record_id = trim($_GET['rates_zonesid']);
+if (isset($_GET['ratezoneid'])) {
+	$record_id = trim($_GET['ratezoneid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM rates_zones WHERE key_rates_zones = $record_id");
@@ -81,7 +81,6 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'from_city';
 		$error = 1;
 	}
-
 	// no validation error
 	if ($error == 0) {
 		if (isset($record_id)) { // update
@@ -110,9 +109,7 @@ if (isset($_POST['save_submit'])) {
 					die('Unable to update, please contact your system administrator.');
 				}
 			}
-
 		} else { // insert
-
 			$duplicate_result = mysqli_query($dbcon, "SELECT key_rates_zones 
 				FROM rates_zones 
 				WHERE from_city = '$from_city' AND from_state = '$from_state' AND to_city = '$to_city' AND to_state = '$to_state'
@@ -167,16 +164,12 @@ if (isset($_POST['save_submit'])) {
 									)");					
 					}
 					$message = "<script>parent.location.reload(false);</script>";
-
 				} else {
 					//print mysqli_error($dbcon);
 					die('Unable to add, please contact your system administrator.');
 				}
-			
 			} // duplicate
-		
 		} // insert
-	
 	} // no error
 	if ($error == 0) $show_form = false;
 }
@@ -184,122 +177,115 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ZONE RATe</title>
-	<?php include('php/_head.php'); ?>
+    <title>ZONE RATe</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_rates_zones_save'>
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'>zone rate</div>
+        <div class='right-block'>
 
-	<section id='sub-menu'>
-		<div class='left-block'>zone rate</div>
-		<div class='right-block'>
-
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='from_city'>From city</label> <span class='red'> *</span>             
-			 <?php if(isset($msg_from_city)) print $msg_from_city; ?>
-             <input id='from_city' name='from_city' type='text' value='<?php if (isset($from_city)) {print $from_city;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='from_state'>From state</label><br>
-             <?php if(isset($msg_from_state)) print $msg_from_state; ?>
-             <select id='from_state' name='from_state'>
-                 <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['state'] == $from_state) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['state'] . "</option>";
-                 }
-                 print $options; 
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='from_city'>From city</label> <span class='red'> *</span>
+                    <?php if(isset($msg_from_city)) print $msg_from_city; ?>
+                    <input <?php if ($focus_field == 'from_city') print 'autofocus'; ?> id='from_city' name='from_city'
+                        type='text' value='<?php if (isset($from_city)) {print $from_city;} else { print '';} ?>'
+                        required><br>
+                </div>
+                <div>
+                    <label for='from_state'>From state</label><br>
+                    <?php if(isset($msg_from_state)) print $msg_from_state; ?>
+                    <select id='from_state' name='from_state'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $from_state) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
                  ?>
-             </select>
-         </div>
-
-		</fieldset>
-		<fieldset>
-
-         <div>
-             <label for='to_city'>To city</label> <span class='red'> *</span>             
-			 <?php if(isset($msg_to_city)) print $msg_to_city; ?>
-             <input id='to_city' name='to_city' type='text' value='<?php if (isset($to_city)) {print $to_city;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='to_state'>To state</label><br>
-             <?php if(isset($msg_to_state)) print $msg_to_state; ?>
-             <select id='to_state' name='to_state'>
-                 <?php 
-                 $options = '';
-                 
-                 $results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['state'] == $to_state) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['state'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
-
-		</fieldset>
-		<fieldset>
-		
-         <div>
-             <label for='rate'>Rate</label>
-			 <?php if(isset($msg_rate)) print $msg_rate; ?>
-             <input id='rate' name='rate' type='number' step='0.10' value='<?php if (isset($rate)) {print $rate;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='tolls'>Tolls</label>             
-			 <?php if(isset($msg_tolls)) print $msg_tolls; ?>
-             <input id='tolls' name='tolls' type='number' step='0.10' value='<?php if (isset($tolls)) {print $tolls;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='miles'>Miles</label>             
-			 <?php if(isset($msg_miles)) print $msg_miles; ?>
-             <input id='miles' name='miles' type='number' step='0.10' value='<?php if (isset($miles)) {print $miles;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <?php if(isset($msg_active_status)) print $msg_active_status; ?>
-             <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?> type='checkbox' id='active_status' name='active_status'> <label for='active_status'>Status</label><br>
-         </div>
-
-		</fieldset>
-
-		<?php if (!isset($record_id))  {?>
-		<fieldset>
-         <div>
-             <input <?php if (!isset($reverse_record) || $reverse_record=='on') {print "checked='checked'";} ?> type='checkbox' id='reverse_record' name='reverse_record'> <label for='reverse_record'>Create Reverse</label><br>
-         </div>
-		</fieldset>
-		<?php } ?>
-
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='to_city'>To city</label> <span class='red'> *</span>
+                    <?php if(isset($msg_to_city)) print $msg_to_city; ?>
+                    <input <?php if ($focus_field == 'to_city') print 'autofocus'; ?> id='to_city' name='to_city'
+                        type='text' value='<?php if (isset($to_city)) {print $to_city;} else { print '';} ?>'
+                        required><br>
+                </div>
+                <div>
+                    <label for='to_state'>To state</label><br>
+                    <?php if(isset($msg_to_state)) print $msg_to_state; ?>
+                    <select id='to_state' name='to_state'>
+                        <?php 
+						$options = '';
+						
+						$results = mysqli_query($dbcon, 'SELECT state FROM settings_state_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['state'] == $to_state) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['state'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='rate'>Rate</label>
+                    <?php if(isset($msg_rate)) print $msg_rate; ?>
+                    <input <?php if ($focus_field == 'rate') print 'autofocus'; ?> id='rate' name='rate' type='number'
+                        step='0.10' value='<?php if (isset($rate)) {print $rate;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='tolls'>Tolls</label>
+                    <?php if(isset($msg_tolls)) print $msg_tolls; ?>
+                    <input <?php if ($focus_field == 'tolls') print 'autofocus'; ?> id='tolls' name='tolls'
+                        type='number' step='0.10'
+                        value='<?php if (isset($tolls)) {print $tolls;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='miles'>Miles</label>
+                    <?php if(isset($msg_miles)) print $msg_miles; ?>
+                    <input <?php if ($focus_field == 'miles') print 'autofocus'; ?> id='miles' name='miles'
+                        type='number' step='0.10'
+                        value='<?php if (isset($miles)) {print $miles;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <?php if(isset($msg_active_status)) print $msg_active_status; ?>
+                    <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='active_status' name='active_status'> <label
+                        for='active_status'>Status</label><br>
+                </div>
+            </fieldset>
+            <?php if (!isset($record_id))  {?>
+            <fieldset>
+                <div>
+                    <input <?php if (!isset($reverse_record) || $reverse_record=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='reverse_record' name='reverse_record'> <label for='reverse_record'>Create
+                        Reverse</label><br>
+                </div>
+            </fieldset>
+            <?php } ?>
+            <div class='clear-fix'>
+                <input id='save_submit' name='save_submit' type='submit' value='Save'>
+            </div>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

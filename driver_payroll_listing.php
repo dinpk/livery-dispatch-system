@@ -23,10 +23,10 @@ $items_per_page = '50';
 $total_items = '0';
 $sql_where_alt = '';
 $reset_url = $base_file_name . '.php';
-if (isset($_GET['driversid']) && is_numeric($_GET['driversid'])) {
-	$key_drivers = $_GET['driversid'];
-	$sql_where_alt = ' AND driver_payroll.key_drivers = ' . $_GET['driversid'];
-	$reset_url = "$base_file_name.php?driversid=$key_drivers";
+if (isset($_GET['driverid']) && is_numeric($_GET['driverid'])) {
+	$key_drivers = $_GET['driverid'];
+	$sql_where_alt = ' AND driver_payroll.key_drivers = ' . $_GET['driverid'];
+	$reset_url = "$base_file_name.php?driverid=$key_drivers";
 }
 if (isset($_POST['items_per_page'])) {
 	$items_per_page = $_POST['items_per_page'];
@@ -96,8 +96,8 @@ if ($results) {
 		<td class='right'>" . $paid_amount . "</td>
 		<td class='right'><h4>" . $balance . "</h4></td>
 		<td class='record-icons'>
-			<a href='driver_payroll_save.php?driver_payrollid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-			<a href='driver_payroll_print.php?driver_payrollid=$record_id' target='_blank'>☷</a> 
+			<a href='driver_payroll_save.php?driverpayrollid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+			<a href='driver_payroll_print.php?driverpayrollid=$record_id' target='_blank'>☷</a> 
 		</td>
 		</tr>";
 	}
@@ -138,46 +138,46 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DRIVER PAYROLL</title>
-	<?php include('php/_head.php'); ?>
+    <title>DRIVER PAYROLL</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_driver_payroll_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_drivers_payroll.png"> driver payroll</div>
-		<div class='right-block'>
-			☢ <a href='driver_payroll_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Payrolls</a> 
-			&nbsp;
-			☷ <a href='driver_payroll_print.php' target='_blank'>Print</a>
-		</div>
-	</section>
-
-	<div class='page-image' style='background-image:url(images/page-driver-payroll.jpg);'></div>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-				Ending between 
-				<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> and  
-				<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-				<?php
-				if (isset($key_drivers)) print "<input name='driversid' type='hidden' value='$key_drivers'>";
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_drivers_payroll.png"> driver payroll</div>
+        <div class='right-block'>
+            ☢ <a href='driver_payroll_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Payrolls</a>
+            &nbsp;
+            ☷ <a href='driver_payroll_print.php' target='_blank'>Print</a>
+        </div>
+    </section>
+    <div class='page-image' style='background-image:url(images/page-driver-payroll.jpg);'></div>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                Ending between
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> and
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <?php
+				if (isset($key_drivers)) print "<input name='driverid' type='hidden' value='$key_drivers'>";
 				?>
-				<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-				<input name='search' type='text' placeholder='Payroll #' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-				<?php
-				if (isset($key_drivers)) print "<input name='driversid' type='hidden' value='$key_drivers'>";
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' placeholder='Payroll #'
+                    <?php if (isset($search)) print "value='$search' autofocus"; ?> required>
+                <?php
+				if (isset($key_drivers)) print "<input name='driverid' type='hidden' value='$key_drivers'>";
 				?>
-				<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -187,14 +187,14 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
+            </form>
+        </section>
+        <?php 
 			if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php');
 $show_record = true;
-if (isset($_GET['settings_insurance_company_valuesid'])) {
-	$record_id = trim($_GET['settings_insurance_company_valuesid']);
+if (isset($_GET['settingsinsurancecompanyid'])) {
+	$record_id = trim($_GET['settingsinsurancecompanyid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	if (isset($_GET['delete'])) {
 		$results = mysqli_query($dbcon, "DELETE FROM settings_insurance_company_values WHERE key_settings_insurance_company_values = $record_id");
@@ -27,40 +27,31 @@ if (isset($_GET['settings_insurance_company_valuesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
- <title>SETTINGS INSURANCE COMPANY VALUES</title>
- <?php include('php/_head.php'); ?>
+    <title>SETTINGS INSURANCE COMPANY</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-delete' class='page_delete page_settings_insurance_company_values_delete'>
-
- <?php if (isset($message)) print $message; ?>
-
- <?php if ($show_record) { ?>
-
- <main>
-
-     <div class='center'>
-         <p class='red'><b>Do you really want to delete this record?</b></p>
-         <p>
-             <br>
-             <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp 
-             <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
-         </p>
-         <br><hr><br>
-     </div>
-
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Insurance company</td>
-         <td class='value-cell'><?php if (isset($insurance_company)) print $insurance_company; ?></td>
-         </tr>
-
-     </table>
-
- </main>
-
- <?php } // show_record ?>
-
-
- <?php include('php/_footer.php'); ?>
+<body id='page-delete'>
+    <?php if (isset($message)) print $message; ?>
+    <?php if ($show_record) { ?>
+    <main>
+        <div class='center'>
+            <p class='red'><b>Do you really want to delete this record?</b></p>
+            <p>
+                <br>
+                <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp
+                <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
+            </p>
+            <br>
+            <hr><br>
+        </div>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Insurance company</td>
+                <td class='value-cell'><?php if (isset($insurance_company)) print $insurance_company; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php } // show_record ?>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

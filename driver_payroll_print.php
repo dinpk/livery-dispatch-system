@@ -20,8 +20,8 @@ if (isset($_POST['get_button'])) {
 	}
 	$results = mysqli_query($dbcon, "SELECT * FROM driver_payroll WHERE (end_date BETWEEN '$date_from' AND '$date_to') $sql_where");
 	$process_results = true;
-} else if (isset($_GET['driver_payrollid'])) {
-	$record_id = trim($_GET['driver_payrollid']);
+} else if (isset($_GET['driverpayrollid'])) {
+	$record_id = trim($_GET['driverpayrollid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM driver_payroll WHERE key_driver_payroll = $record_id");
 	$show_form = false;
@@ -139,22 +139,22 @@ if ($process_results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php print $report_title; ?></title>
-	<link rel='stylesheet' href='css/styles_report.css'>
-	<meta charset='utf-8'>
+    <title><?php print $report_title; ?></title>
+    <link rel='stylesheet' href='css/styles_report.css'>
+    <meta charset='utf-8'>
 </head>
 <body id='page-report' class='driver_payroll_print'>
-
-	<?php if ($show_form) { ?>
-
-	<form method='post'>
-		<p class='to-center'>
-			Ending between 
-			<input id='date_from' name='date_from' type='date' value='<?php if (isset($date_from)) {print $date_from;} else {print date('Y-m-d');} ?>'> 
-			and 
-			<input id='date_to' name='date_to' type='date' value='<?php if (isset($date_to)) {print $date_to;} else {print date('Y-m-d');} ?>'> 
-			<select id='status' name='status'>
-					<?php
+    <?php if ($show_form) { ?>
+    <form method='post'>
+        <p class='to-center'>
+            Ending between
+            <input id='date_from' name='date_from' type='date'
+                value='<?php if (isset($date_from)) {print $date_from;} else {print date('Y-m-d');} ?>'>
+            and
+            <input id='date_to' name='date_to' type='date'
+                value='<?php if (isset($date_to)) {print $date_to;} else {print date('Y-m-d');} ?>'>
+            <select id='status' name='status'>
+                <?php
 					print "
 						<option" . (($status == 'All') ? " selected='selected'" : '') .  ">All</option>
 						<option" . (($status == 'Unpaid') ? " selected='selected'" : '') .  ">Unpaid</option>
@@ -163,21 +163,14 @@ if ($process_results) {
 						<option" . (($status == 'Over paid') ? " selected='selected'" : '') .  ">Over paid</option>
 					";
 					?>
-			</select>
-			<input name='get_button' type='submit' value='Get'>
-		</p>
-	</form>
-
-	<?php
-			if (isset($message)) print $message; 
-		
-		} // show form
-	?>
-	
-	<main>
-		<?php
-			print $report_data;
-		?>
-	</main>
+            </select>
+            <input name='get_button' type='submit' value='Get'>
+        </p>
+    </form>
+    <?php if (isset($message)) print $message; ?>
+    <?php	} // show form ?>
+    <main>
+        <?php print $report_data; ?>
+    </main>
 </body>
 </html>

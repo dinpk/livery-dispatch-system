@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['customer_billing_contactsid'])) {
-	$record_id = trim($_GET['customer_billing_contactsid']);
+if (isset($_GET['customerbillingcontactid'])) {
+	$record_id = trim($_GET['customerbillingcontactid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM customer_billing_contacts WHERE key_customer_billing_contacts = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -29,18 +29,15 @@ if (isset($_GET['customer_billing_contactsid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER BILLING CONTACTS</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER BILLING CONTACTS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_customer_billing_contacts_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-		<div class='flex'>
-			<section>
-				<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <div class='flex'>
+            <section>
+                <?php 
 					$active_symbol = (($active_status == "on") ? "<p class='green'>&#10003;</p>" : "<p class='red'>x</p>");
 					if (empty($image_url)) {
 						print "<div class='profile-avatar' style='background-image:url(images/icons/avatar_billing_contact.png);'></div> ";
@@ -51,10 +48,10 @@ if (isset($_GET['customer_billing_contactsid'])) {
 					print "<h1>$contact_name</h1>";
 					if (!empty($card_type)) print "<h2>$card_type</h2>";
 				?>
-			</section>
-			<section>
-				<table>
-				<?php
+            </section>
+            <section>
+                <table>
+                    <?php
 					if (!empty($card_number)) print "<tr><td>Card #</td><td>$card_number</td></tr>";
 					if (!empty($card_expiration)) print "<tr><td>Expiration</td><td>$card_expiration</td></tr>";
 					if (!empty($card_security_code)) print "<tr><td>Security code</td><td>$card_security_code</td></tr>";
@@ -68,18 +65,17 @@ if (isset($_GET['customer_billing_contactsid'])) {
 					if (!empty($city)) print "<tr><td></td><td>$city, $state $zip_code</td></tr>";
 					if (!empty($country)) print "<tr><td>Address 2</td><td>$country</td></tr>";
 				?>
-				</table>
-			</section>
-			<section>
-				<table>
-				<?php
+                </table>
+            </section>
+            <section>
+                <table>
+                    <?php
 					if (!empty($notes)) print "<tr><td>Notes</td><td>$notes</td></tr>";
-				?>
-				</table>
-			</section>
-		</div>
-	
-	</main>
-	<?php include('php/_footer.php'); ?>
+					?>
+                </table>
+            </section>
+        </div>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

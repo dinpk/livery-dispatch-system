@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php'); 
 // parent id passed
-if (isset($_GET['customer_passengersid'])) {
-	$parent_id = trim($_GET['customer_passengersid']);
+if (isset($_GET['customerpassengerid'])) {
+	$parent_id = trim($_GET['customerpassengerid']);
 	if (!is_numeric($parent_id)) die('Parent table id is invalid');
 	
 	$results = mysqli_query($dbcon, "SELECT first_name, last_name FROM customer_passengers WHERE key_customer_passengers = $parent_id");
@@ -14,7 +14,7 @@ if (isset($_GET['customer_passengersid'])) {
 } else {
 	die('Parent id is not set');
 }
-$base_file_name = 'customer_address_book' . '_listing';
+$base_file_name = 'customer_address_book_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -83,7 +83,7 @@ if ($results) {
 		<td>" . $row['state'] . "</td>
 		<td class='record-icons'>
 		<small>
-		<a href='customer_address_book_save.php?customer_address_bookid=$record_id&customer_passengersid=$parent_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+		<a href='customer_address_book_save.php?customer_address_bookid=$record_id&customerpassengerid=$parent_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
 		<a href='customer_address_book_view.php?customer_address_bookid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</small>
 		</td>
@@ -120,31 +120,25 @@ if ($results) {
 	die('Unable to get records, please contact your system administrator.');
 }
 ?>
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>CUSTOMER ADDRESS BOOK</title>
     <?php include('php/_head.php'); ?>
 </head>
-
 <body id='page-listing' class='foreign'>
-
     <section id='sub-menu'>
         <div class='left-block'><?php if (isset($parent_record_label)) print $parent_record_label; ?></div>
         <div class='right-block'>
-            ✢ <a href='customer_address_book_save.php?customer_passengersid=<?php print $parent_id; ?>'
+            ✢ <a href='customer_address_book_save.php?customerpassengerid=<?php print $parent_id; ?>'
                 target='overlay-iframe' onclick='overlayOpen();'> New Address</a>
         </div>
     </section>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
         <section id='listing-forms'>
             <form id='dates_form' method='get'>
-                <input type='hidden' name='customer_passengersid' value='<?php print $parent_id; ?>'>
+                <input type='hidden' name='customerpassengerid' value='<?php print $parent_id; ?>'>
                 <input name='date_from' type='date'
                     value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
                 <input name='date_to' type='date'
@@ -152,7 +146,7 @@ if ($results) {
                 <input type='submit' value='Get'>
             </form>
             <form id='search_form' method='get'>
-                <input type='hidden' name='customer_passengersid' value='<?php print $parent_id; ?>'>
+                <input type='hidden' name='customerpassengerid' value='<?php print $parent_id; ?>'>
                 <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
                     required>
                 <input type='submit' value='Search'>

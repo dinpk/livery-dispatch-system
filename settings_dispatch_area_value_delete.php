@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php');
 $show_record = true;
-if (isset($_GET['settings_dispatch_area_valuesid'])) {
-	$record_id = trim($_GET['settings_dispatch_area_valuesid']);
+if (isset($_GET['settingsdispatchareaid'])) {
+	$record_id = trim($_GET['settingsdispatchareaid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	if (isset($_GET['delete'])) {
 		$results = mysqli_query($dbcon, "DELETE FROM settings_dispatch_area_values WHERE key_settings_dispatch_area_values = $record_id");
@@ -26,40 +26,31 @@ if (isset($_GET['settings_dispatch_area_valuesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
- <title>SETTINGS DISPATCH AREA VALUES</title>
- <?php include('php/_head.php'); ?>
+    <title>SETTINGS DISPATCH AREA</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-delete' class='page_delete page_settings_dispatch_area_values_delete'>
-
- <?php if (isset($message)) print $message; ?>
-
- <?php if ($show_record) { ?>
-
- <main>
-
-     <div class='center'>
-         <p class='red'><b>Do you really want to delete this record?</b></p>
-         <p>
-             <br>
-             <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp 
-             <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
-         </p>
-         <br><hr><br>
-     </div>
-
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Dispatch area</td>
-         <td class='value-cell'><?php if (isset($dispatch_area)) print $dispatch_area; ?></td>
-         </tr>
-
-     </table>
-
- </main>
-
- <?php } // show_record ?>
-
-
- <?php include('php/_footer.php'); ?>
+<body id='page-delete'>
+    <?php if (isset($message)) print $message; ?>
+    <?php if ($show_record) { ?>
+    <main>
+        <div class='center'>
+            <p class='red'><b>Do you really want to delete this record?</b></p>
+            <p>
+                <br>
+                <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp
+                <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
+            </p>
+            <br>
+            <hr><br>
+        </div>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Dispatch area</td>
+                <td class='value-cell'><?php if (isset($dispatch_area)) print $dispatch_area; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php } // show_record ?>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

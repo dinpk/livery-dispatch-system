@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'vehicle_model';
 // id passed for update
-if (isset($_GET['settings_vehicle_model_valuesid'])) {
-	$record_id = trim($_GET['settings_vehicle_model_valuesid']);
+if (isset($_GET['settingsvehiclemodelid'])) {
+	$record_id = trim($_GET['settingsvehiclemodelid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_vehicle_model_values WHERE key_settings_vehicle_model_values = $record_id");
@@ -17,7 +17,7 @@ if (isset($_GET['settings_vehicle_model_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$vehicle_make = trim($_POST['vehicle_make']);
@@ -66,57 +66,47 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS VEHICLE MODEL VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS VEHICLE MODEL</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_vehicle_model_values_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'> </div>
-		<div class='right-block'> </div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='vehicle_model'>Model</label> <span class='red'> *</span>             
-			 <?php if(isset($msg_vehicle_model)) print $msg_vehicle_model; ?>
-             <input id='vehicle_model' name='vehicle_model' type='text' value='<?php if (isset($vehicle_model)) {print $vehicle_model;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='vehicle_make'>Make</label><br>
-             <?php if(isset($msg_vehicle_make)) print $msg_vehicle_make; ?>
-             <select id='vehicle_make' name='vehicle_make'>
-                 <?php 
-                 $options = '';
-                 $results = mysqli_query($dbcon, 'SELECT vehicle_make FROM settings_vehicle_make_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['vehicle_make'] == $vehicle_make) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['vehicle_make'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'> </div>
+        <div class='right-block'> </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='vehicle_model'>Model</label> <span class='red'> *</span>
+                    <?php if(isset($msg_vehicle_model)) print $msg_vehicle_model; ?>
+                    <input id='vehicle_model' name='vehicle_model' type='text'
+                        value='<?php if (isset($vehicle_model)) {print $vehicle_model;} else { print '';} ?>'
+                        required><br>
+                </div>
+                <div>
+                    <label for='vehicle_make'>Make</label><br>
+                    <?php if(isset($msg_vehicle_make)) print $msg_vehicle_make; ?>
+                    <select id='vehicle_make' name='vehicle_make'>
+                        <?php 
+						$options = '';
+						$results = mysqli_query($dbcon, 'SELECT vehicle_make FROM settings_vehicle_make_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['vehicle_make'] == $vehicle_make) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['vehicle_make'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+            </fieldset>
+			<input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

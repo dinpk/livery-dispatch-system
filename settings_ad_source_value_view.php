@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['settings_ad_source_valuesid'])) {
-	$record_id = trim($_GET['settings_ad_source_valuesid']);
+if (isset($_GET['settingsadsourceid'])) {
+	$record_id = trim($_GET['settingsadsourceid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM settings_ad_source_values WHERE key_settings_ad_source_values = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -14,24 +14,20 @@ if (isset($_GET['settings_ad_source_valuesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS AD SOURCE VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS AD SOURCE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_settings_ad_source_values_view'>
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Ad source</td>
+                <td class='value-cell'><?php if (isset($ad_source)) print $ad_source; ?></td>
+            </tr>
 
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-		
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Ad source</td>
-         <td class='value-cell'><?php if (isset($ad_source)) print $ad_source; ?></td>
-         </tr>
-
-     </table>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+        </table>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

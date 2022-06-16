@@ -73,8 +73,8 @@ if ($results) {
 		<td class='center'>" . date("F d, Y", strtotime($row['log_datetime'])) . "</td>
 		<td>" . $row['action_performed'] . "</td>
 		<td class='record-icons'>
-		<a href='logs_save.php?logsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-		<a href='logs_view.php?logsid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
+		<a href='logs_save.php?logid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+		<a href='logs_view.php?logid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</td>
 		</tr>
 		";
@@ -155,9 +155,7 @@ if ($results) {
 		</section>
 		<?php 
 		if (isset($listing_html)) print $listing_html;
-		?>
-		
-	</main>
+		?>	</main>
 	<?php include('php/_footer.php'); ?>
 </body>
 </html>

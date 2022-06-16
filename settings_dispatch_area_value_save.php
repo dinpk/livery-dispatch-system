@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'dispatch_area';
 // id passed for update
-if (isset($_GET['settings_dispatch_area_valuesid'])) {
-	$record_id = trim($_GET['settings_dispatch_area_valuesid']);
+if (isset($_GET['settingsdispatchareaid'])) {
+	$record_id = trim($_GET['settingsdispatchareaid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_dispatch_area_values WHERE key_settings_dispatch_area_values = $record_id");
@@ -16,7 +16,7 @@ if (isset($_GET['settings_dispatch_area_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$dispatch_area = trim($_POST['dispatch_area']);
@@ -49,49 +49,37 @@ if (isset($_POST['save_submit'])) {
 					die('Unable to add, please contact your system administrator.');
 				}
 			}
-		}	
-		
-	}
+		}		}
 	if ($error == 0) $show_form = false;
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS DISPATCH AREA VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS DISPATCH AREA</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_dispatch_area_values_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'> </div>
-		<div class='right-block'> </div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-
-         <div>
-             <label for='dispatch_area'>Dispatch area</label> <span class='red'> *</span>             <?php if(isset($msg_dispatch_area)) print $msg_dispatch_area; ?>
-             <input id='dispatch_area' name='dispatch_area' type='text' value='<?php if (isset($dispatch_area)) {print $dispatch_area;} else { print '';} ?>' required><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'> </div>
+        <div class='right-block'> </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='dispatch_area'>Dispatch area</label> <span class='red'> *</span>
+                    <?php if(isset($msg_dispatch_area)) print $msg_dispatch_area; ?>
+                    <input id='dispatch_area' name='dispatch_area' type='text'
+                        value='<?php if (isset($dispatch_area)) {print $dispatch_area;} else { print '';} ?>'
+                        required><br>
+                </div>
+            </fieldset> <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

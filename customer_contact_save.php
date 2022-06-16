@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'first_name';
 // id passed for update
-if (isset($_GET['customer_contactsid'])) {
-	$record_id = trim($_GET['customer_contactsid']);
+if (isset($_GET['customercontactid'])) {
+	$record_id = trim($_GET['customercontactid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM customer_contacts WHERE key_customer_contacts = $record_id");
@@ -31,7 +31,7 @@ if (isset($_GET['customer_contactsid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$active_status = trim($_POST['active_status']);
@@ -211,66 +211,51 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>CUSTOMER CONTACT</title>
     <?php include('php/_head.php'); ?>
 </head>
-
-<body id='page-save' class='page_save page_customer_contacts_save'>
-
+<body id='page-save'>
     <section id='sub-menu'>
         <div class='left-block'>customer contact</div>
         <div class='right-block'>
-
         </div>
     </section>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
-
         <?php if (isset($show_form) && $show_form) { ?>
         <form method='post'>
-
             <fieldset>
-
                 <div>
                     <label for='first_name'>First name</label> <span class='red'> *</span>
                     <?php if(isset($msg_first_name)) print $msg_first_name; ?>
                     <input id='first_name' name='first_name' type='text'
                         value='<?php if (isset($first_name)) {print $first_name;} else { print '';} ?>' required><br>
                 </div>
-
                 <div>
                     <label for='last_name'>Last name</label> <span class='red'> *</span>
                     <?php if(isset($msg_last_name)) print $msg_last_name; ?>
                     <input id='last_name' name='last_name' type='text'
                         value='<?php if (isset($last_name)) {print $last_name;} else { print '';} ?>' required><br>
                 </div>
-
                 <div>
                     <label for='address1'>Address 1</label>
                     <?php if(isset($msg_address1)) print $msg_address1; ?>
                     <input id='address1' name='address1' type='text'
                         value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='address2'>Address 2</label>
                     <?php if(isset($msg_address2)) print $msg_address2; ?>
                     <input id='address2' name='address2' type='text'
                         value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='city'>City</label>
                     <?php if(isset($msg_city)) print $msg_city; ?>
                     <input id='city' name='city' type='text'
                         value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
                 </div>
-
-
                 <div>
                     <label for='country'>Country</label><br>
                     <?php if(isset($msg_country)) print $msg_country; ?>
@@ -278,7 +263,6 @@ if (isset($_POST['save_submit'])) {
                         <option></option>
                         <?php 
 						$options = '';
-						
 						$results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
 						while ($row = mysqli_fetch_assoc($results)) {
 							$selection = '';
@@ -289,7 +273,6 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='state'>State</label><br>
                     <?php if(isset($msg_state)) print $msg_state; ?>
@@ -307,48 +290,40 @@ if (isset($_POST['save_submit'])) {
 					?>
                     </select>
                 </div>
-
                 <div>
                     <label for='zip_code'>Zip code</label>
                     <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
                     <input id='zip_code' name='zip_code' type='text'
                         value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='work_phone'>Work phone</label>
                     <?php if(isset($msg_work_phone)) print $msg_work_phone; ?>
                     <input id='work_phone' name='work_phone' type='tel'
                         value='<?php if (isset($work_phone)) {print $work_phone;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='work_phone_extension'>Work phone ext.</label>
                     <?php if(isset($msg_work_phone_extension)) print $msg_work_phone_extension; ?>
                     <input id='work_phone_extension' name='work_phone_extension' type='number'
                         value='<?php if (isset($work_phone_extension)) {print $work_phone_extension;} else { print '0';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='mobile_phone'>Mobile phone</label>
                     <?php if(isset($msg_mobile_phone)) print $msg_mobile_phone; ?>
                     <input id='mobile_phone' name='mobile_phone' type='tel'
                         value='<?php if (isset($mobile_phone)) {print $mobile_phone;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='email'>Email</label>
                     <?php if(isset($msg_email)) print $msg_email; ?>
                     <input id='email' name='email' type='email'
                         value='<?php if (isset($email)) {print $email;} else { print '';} ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='company_name'>Company name</label>
                     <small>
@@ -362,39 +337,26 @@ if (isset($_POST['save_submit'])) {
                         value='<?php if (isset($company_name)) {print $company_name;} else { print '';} ?>'
                         readonly><br>
                 </div>
-
                 <input id='key_customer_companies' name='key_customer_companies' type='hidden'
                     value='<?php if (isset($key_customer_companies)) {print $key_customer_companies;} else {print '0';} ?>'>
-
-
                 <div>
                     <label for='image_url'>Image url</label>
                     <?php if(isset($msg_image_url)) print $msg_image_url; ?>
                     <input id='image_url' name='image_url' type='text'
                         value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
                 </div>
-
                 <br><br>
-
                 <div>
                     <?php if(isset($msg_active_status)) print $msg_active_status; ?>
                     <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='active_status' name='active_status'> <label
                         for='active_status'>Status</label><br>
                 </div>
-
             </fieldset>
-
-
             <input id='save_submit' name='save_submit' type='submit' value='Save'>
-
-
         </form>
         <?php } ?>
-
     </main>
     <?php include('php/_footer.php'); ?>
-
 </body>
-
 </html>

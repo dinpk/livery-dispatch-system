@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'fleet_number';
 // id passed for update
-if (isset($_GET['vehiclesid'])) {
-	$record_id = trim($_GET['vehiclesid']);
+if (isset($_GET['vehicleid'])) {
+	$record_id = trim($_GET['vehicleid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM vehicles WHERE key_vehicles = $record_id");
@@ -34,7 +34,7 @@ if (isset($_GET['vehiclesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$active_status = trim($_POST['active_status']);
@@ -236,7 +236,8 @@ if (isset($_POST['save_submit'])) {
 					$error = 1;
 				} else {
 					die('Unable to add, please contact your system administrator.');
-				}         }
+				}
+	        }
 		}	
 	}
 	if ($error == 0) $show_form = false;
@@ -245,94 +246,88 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VEHICLE</title>
-	<?php include('php/_head.php'); ?>
-	<style>
-		#loader {display:none;}
-	</style>
-	<script>
-		function populateModelsOfVehicle(make) {
-			
-			document.getElementById("model").innerHTML = "";
-			if (make.length != 0) {
-				document.getElementById("loader").style.display = "block";
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("model").innerHTML = this.responseText;
-						document.getElementById("loader").style.display = "none";
-					}
-				};
-				xmlhttp.open("GET", "vehicle_select_options_make_model.php?make=" + make, true);
-				xmlhttp.send();
-			}
-		}
-	</script>
+    <title>VEHICLE</title>
+    <?php include('php/_head.php'); ?>
+    <style>
+    #loader {
+        display: none;
+    }
+    </style>
+    <script>
+    function populateModelsOfVehicle(make) {
+        document.getElementById("model").innerHTML = "";
+        if (make.length != 0) {
+            document.getElementById("loader").style.display = "block";
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("model").innerHTML = this.responseText;
+                    document.getElementById("loader").style.display = "none";
+                }
+            };
+            xmlhttp.open("GET", "vehicle_select_options_make_model.php?make=" + make, true);
+            xmlhttp.send();
+        }
+    }
+    </script>
 </head>
-<body id='page-save' class='page_save page_vehicle_save.php'>
-
-	<section id='sub-menu'>
-		<div class='left-block'>vehicle</div>
-		<div class='right-block'>
-
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='fleet_number'>Fleet #</label>             
-			 <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
-             <input id='fleet_number' name='fleet_number' type='text' value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='vehicle_type'>Vehicle type</label> <span class='red'> *</span><br>
-             <?php if(isset($msg_vehicle_type)) print $msg_vehicle_type; ?>
-             <select id='vehicle_type' name='vehicle_type' required>
-                 <?php 
-                 $options = '';
-                 $results = mysqli_query($dbcon, 'SELECT vehicle_type FROM settings_vehicle_type_values');
-                 while ($row = mysqli_fetch_assoc($results)) {
-                     $selection = '';
-                     if ($row['vehicle_type'] == $vehicle_type) $selection = "selected='selected'";
-                         $options .= "<option $selection>" . $row['vehicle_type'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
-
-         <div>
-             <label for='tag'>Tag <span class='red'> *</span></label>
-			 <?php if(isset($msg_tag)) print $msg_tag; ?>
-             <input id='tag' name='tag' type='text' value='<?php if (isset($tag)) {print $tag;} else { print '';} ?>' required><br>
-         </div>
-
-         <div>
-             <label for='vin_number'>Vin #</label>             
-			 <?php if(isset($msg_vin_number)) print $msg_vin_number; ?>
-             <input id='vin_number' name='vin_number' type='text' value='<?php if (isset($vin_number)) {print $vin_number;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='year_made'>Year</label>             
-			 <?php if(isset($msg_year_made)) print $msg_year_made; ?>
-             <input id='year_made' name='year_made' type='text' value='<?php if (isset($year_made)) {print $year_made;} else { print '';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='make'>Make</label><br>
-             <?php if(isset($msg_make)) print $msg_make; ?>
-             <select id='make' name='make' onchange='populateModelsOfVehicle(this.value);'>
-				 <option></option>
-                 <?php 
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'>vehicle</div>
+        <div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='fleet_number'>Fleet #</label>
+                    <?php if(isset($msg_fleet_number)) print $msg_fleet_number; ?>
+                    <input id='fleet_number' name='fleet_number' type='text'
+                        value='<?php if (isset($fleet_number)) {print $fleet_number;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='vehicle_type'>Vehicle type</label> <span class='red'> *</span><br>
+                    <?php if(isset($msg_vehicle_type)) print $msg_vehicle_type; ?>
+                    <select id='vehicle_type' name='vehicle_type' required>
+                        <?php 
+						$options = '';
+						$results = mysqli_query($dbcon, 'SELECT vehicle_type FROM settings_vehicle_type_values');
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['vehicle_type'] == $vehicle_type) $selection = "selected='selected'";
+								$options .= "<option $selection>" . $row['vehicle_type'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+                <div>
+                    <label for='tag'>Tag <span class='red'> *</span></label>
+                    <?php if(isset($msg_tag)) print $msg_tag; ?>
+                    <input id='tag' name='tag' type='text'
+                        value='<?php if (isset($tag)) {print $tag;} else { print '';} ?>' required><br>
+                </div>
+                <div>
+                    <label for='vin_number'>Vin #</label>
+                    <?php if(isset($msg_vin_number)) print $msg_vin_number; ?>
+                    <input id='vin_number' name='vin_number' type='text'
+                        value='<?php if (isset($vin_number)) {print $vin_number;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='year_made'>Year</label>
+                    <?php if(isset($msg_year_made)) print $msg_year_made; ?>
+                    <input id='year_made' name='year_made' type='text'
+                        value='<?php if (isset($year_made)) {print $year_made;} else { print '';} ?>'><br>
+                </div>
+                <div>
+                    <label for='make'>Make</label><br>
+                    <?php if(isset($msg_make)) print $msg_make; ?>
+                    <select id='make' name='make' onchange='populateModelsOfVehicle(this.value);'>
+                        <option></option>
+                        <?php 
                  $options = '';
                  $results = mysqli_query($dbcon, 'SELECT vehicle_make FROM settings_vehicle_make_values');
                  while ($row = mysqli_fetch_assoc($results)) {
@@ -342,127 +337,120 @@ if (isset($_POST['save_submit'])) {
                  }
                  print $options; 
                  ?>
-             </select>
-         </div>
-
-
-         <div>
-             <label for='model'>Model</label><br>
-             <?php if(isset($msg_model)) print $msg_model; ?>
-			 <progress id='loader'></progress>
-             <select id='model' name='model'>
-                 <?php 
-                 $options = '';
-                 $results = mysqli_query($dbcon, "SELECT vehicle_model FROM settings_vehicle_model_values WHERE vehicle_make = '$make'");
-                 while ($row = mysqli_fetch_assoc($results)) {
-					$selection = '';
-					if ($row['vehicle_model'] == $model) $selection = "selected='selected'";
-					$options .= "<option $selection>" . $row['vehicle_model'] . "</option>";
-                 }
-                 print $options; 
-                 ?>
-             </select>
-         </div>
-
-         <div>
-             <label for='max_seats'>Max seats</label>             
-			 <?php if(isset($msg_max_seats)) print $msg_max_seats; ?>
-             <input id='max_seats' name='max_seats' type='number' value='<?php if (isset($max_seats)) {print $max_seats;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='color'>Color</label><br>
-             <?php if(isset($msg_color)) print $msg_color; ?>
-             <select id='color' name='color'>
-                 <?php
-                 if (!isset($color)) $color = '';
-                 print "
-                 <option" . (($color == 'Black') ? " selected='selected'" : '') .  ">Black</option>
-                 <option" . (($color == 'White') ? " selected='selected'" : '') .  ">White</option>
-				 <option" . (($color == 'Off-white') ? " selected='selected'" : '') .  ">Off-white</option>
-				 <option" . (($color == 'Silver') ? " selected='selected'" : '') .  ">Silver</option>
-                 ";
-                 ?>
-             </select>
-         </div>
-
-         <input id='key_settings_insurance_company_values' name='key_settings_insurance_company_values' type='hidden' value='<?php if (isset($key_settings_insurance_company_values)) {print $key_settings_insurance_company_values;} else {print '0';} ?>'>
-
-		</fieldset>
-		<fieldset>
-
-		 <div>
-			 <label for='insurance_company'>Insurance company</label>
-			 <small>
-					 <a href='vehicle_select_insurance_company.php' target='overlay-iframe2' onclick='overlayOpen2();'>Select</a> &nbsp;
-					 <a href='#' onclick='unselectKeyValue("key_settings_insurance_company_values","insurance_company");return false;'>x</a>
-			 </small><br>
-			 <?php if(isset($msg_insurance_company)) print $msg_insurance_company; ?>
-			 <input id='insurance_company' name='insurance_company' type='text' value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>' readonly><br>
-		 </div>
-
-         <div>
-             <label for='insurance_expiry_date'>Insurance expiration</label><br>
-             <?php if(isset($msg_insurance_expiry_date)) print $msg_insurance_expiry_date; ?>
-             <input id='insurance_expiry_date' name='insurance_expiry_date' type='date' placeholder='yyyy-mm-dd' value='<?php if (isset($insurance_expiry_date)) {print $insurance_expiry_date;} ?>'><br>
-         </div>
-		 
-         <div>
-             <label for='notes'>Notes</label>             
-			 <?php if(isset($msg_notes)) print $msg_notes; ?>
-             <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
-         </div>
-		 
-         <div>
-             <label for='image_url'>Image url</label>             
-			 <?php if(isset($msg_image_url)) print $msg_image_url; ?>
-             <input id='image_url' name='image_url' type='text' value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
-         </div>
-
-		 </fieldset>
-		 <fieldset>
-
-         <div>
-             <label for='zone_rate_percent'>Zone rate %</label>
-             <?php if(isset($msg_zone_rate_percent)) print $msg_zone_rate_percent; ?>
-             <input id='zone_rate_percent' name='zone_rate_percent' type='number' step='any' value='<?php if (isset($zone_rate_percent)) {print $zone_rate_percent;} else { print '100';} ?>' required><br>
-         </div>
-		 
-         <div>
-             <label for='hourly_regular_rate'>Hourly regular rate</label>
-             <?php if(isset($msg_hourly_regular_rate)) print $msg_hourly_regular_rate; ?>
-             <input id='hourly_regular_rate' name='hourly_regular_rate' type='number' step='0.10' value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='hourly_wait_rate'>Hourly wait rate</label>
-             <?php if(isset($msg_hourly_wait_rate)) print $msg_hourly_wait_rate; ?>
-             <input id='hourly_wait_rate' name='hourly_wait_rate' type='number' step='0.10' value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='hourly_overtime_rate'>Hourly overtime rate</label>
-             <?php if(isset($msg_hourly_overtime_rate)) print $msg_hourly_overtime_rate; ?>
-             <input id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' step='0.10' value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'><br>
-         </div>
-
-		<br><br>
-
-         <div>
-             <?php if(isset($msg_active_status)) print $msg_active_status; ?>
-             <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?> type='checkbox' id='active_status' name='active_status'> <label for='active_status'>Status</label><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+                    </select>
+                </div>
+                <div>
+                    <label for='model'>Model</label><br>
+                    <?php if(isset($msg_model)) print $msg_model; ?>
+                    <progress id='loader'></progress>
+                    <select id='model' name='model'>
+                        <?php 
+						$options = '';
+						$results = mysqli_query($dbcon, "SELECT vehicle_model FROM settings_vehicle_model_values WHERE vehicle_make = '$make'");
+						while ($row = mysqli_fetch_assoc($results)) {
+							$selection = '';
+							if ($row['vehicle_model'] == $model) $selection = "selected='selected'";
+							$options .= "<option $selection>" . $row['vehicle_model'] . "</option>";
+						}
+						print $options; 
+						?>
+                    </select>
+                </div>
+                <div>
+                    <label for='max_seats'>Max seats</label>
+                    <?php if(isset($msg_max_seats)) print $msg_max_seats; ?>
+                    <input id='max_seats' name='max_seats' type='number'
+                        value='<?php if (isset($max_seats)) {print $max_seats;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='color'>Color</label><br>
+                    <?php if(isset($msg_color)) print $msg_color; ?>
+                    <select id='color' name='color'>
+                        <?php
+						if (!isset($color)) $color = '';
+						print "
+						<option" . (($color == 'Black') ? " selected='selected'" : '') .  ">Black</option>
+						<option" . (($color == 'White') ? " selected='selected'" : '') .  ">White</option>
+						<option" . (($color == 'Off-white') ? " selected='selected'" : '') .  ">Off-white</option>
+						<option" . (($color == 'Silver') ? " selected='selected'" : '') .  ">Silver</option>
+						";
+						?>
+                    </select>
+                </div>
+                <input id='key_settings_insurance_company_values' name='key_settings_insurance_company_values'
+                    type='hidden'
+                    value='<?php if (isset($key_settings_insurance_company_values)) {print $key_settings_insurance_company_values;} else {print '0';} ?>'>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='insurance_company'>Insurance company</label>
+                    <small>
+                        <a href='vehicle_select_insurance_company.php' target='overlay-iframe2'
+                            onclick='overlayOpen2();'>Select</a> &nbsp;
+                        <a href='#'
+                            onclick='unselectKeyValue("key_settings_insurance_company_values","insurance_company");return false;'>x</a>
+                    </small><br>
+                    <?php if(isset($msg_insurance_company)) print $msg_insurance_company; ?>
+                    <input id='insurance_company' name='insurance_company' type='text'
+                        value='<?php if (isset($insurance_company)) {print $insurance_company;} else { print '';} ?>'
+                        readonly><br>
+                </div>
+                <div>
+                    <label for='insurance_expiry_date'>Insurance expiration</label><br>
+                    <?php if(isset($msg_insurance_expiry_date)) print $msg_insurance_expiry_date; ?>
+                    <input id='insurance_expiry_date' name='insurance_expiry_date' type='date' placeholder='yyyy-mm-dd'
+                        value='<?php if (isset($insurance_expiry_date)) {print $insurance_expiry_date;} ?>'><br>
+                </div>
+                <div>
+                    <label for='notes'>Notes</label>
+                    <?php if(isset($msg_notes)) print $msg_notes; ?>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                </div>
+                <div>
+                    <label for='image_url'>Image url</label>
+                    <?php if(isset($msg_image_url)) print $msg_image_url; ?>
+                    <input id='image_url' name='image_url' type='text'
+                        value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for='zone_rate_percent'>Zone rate %</label>
+                    <?php if(isset($msg_zone_rate_percent)) print $msg_zone_rate_percent; ?>
+                    <input id='zone_rate_percent' name='zone_rate_percent' type='number' step='any'
+                        value='<?php if (isset($zone_rate_percent)) {print $zone_rate_percent;} else { print '100';} ?>'
+                        required><br>
+                </div>
+                <div>
+                    <label for='hourly_regular_rate'>Hourly regular rate</label>
+                    <?php if(isset($msg_hourly_regular_rate)) print $msg_hourly_regular_rate; ?>
+                    <input id='hourly_regular_rate' name='hourly_regular_rate' type='number' step='0.10'
+                        value='<?php if (isset($hourly_regular_rate)) {print $hourly_regular_rate;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='hourly_wait_rate'>Hourly wait rate</label>
+                    <?php if(isset($msg_hourly_wait_rate)) print $msg_hourly_wait_rate; ?>
+                    <input id='hourly_wait_rate' name='hourly_wait_rate' type='number' step='0.10'
+                        value='<?php if (isset($hourly_wait_rate)) {print $hourly_wait_rate;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='hourly_overtime_rate'>Hourly overtime rate</label>
+                    <?php if(isset($msg_hourly_overtime_rate)) print $msg_hourly_overtime_rate; ?>
+                    <input id='hourly_overtime_rate' name='hourly_overtime_rate' type='number' step='0.10'
+                        value='<?php if (isset($hourly_overtime_rate)) {print $hourly_overtime_rate;} else { print '0';} ?>'><br>
+                </div>
+                <br><br>
+                <div>
+                    <?php if(isset($msg_active_status)) print $msg_active_status; ?>
+                    <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
+                        type='checkbox' id='active_status' name='active_status'> <label
+                        for='active_status'>Status</label><br>
+                </div>
+            </fieldset>
+			<input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

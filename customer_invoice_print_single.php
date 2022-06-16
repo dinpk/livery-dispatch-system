@@ -2,9 +2,8 @@
 include('php/_code.php');
 $report_title = 'Customer invoice';
 $report_data = '';
-
-if (isset($_GET['customer_invoicesid'])) {
-	$record_id = trim($_GET['customer_invoicesid']);
+if (isset($_GET['customerinvoiceid'])) {
+	$record_id = trim($_GET['customerinvoiceid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM customer_invoices WHERE key_customer_invoices = $record_id");
 	if ($results) {
@@ -27,8 +26,6 @@ if (isset($_GET['customer_invoicesid'])) {
 				$group_info .= $row_group['email'] . '<br>';
 			}
 			$amount_total = 0;
-			
-			
 			$single_report = '';
 			$results_data = mysqli_query($dbcon, "SELECT * FROM trips WHERE key_customer_invoices = $report_key ORDER BY pickup_datetime");
 			while ($row_data = mysqli_fetch_assoc($results_data)) {
@@ -88,8 +85,7 @@ if (isset($_GET['customer_invoicesid'])) {
 				$single_report
 				<p>$description</p>
 			</div>
-			";			
-			
+			";
 			if ($total_amount == 0 || $total_amount == $paid_amount) {
 				$balance_amount = "<td class='paid to-right'>$balance_amount</td>";
 			} else if ($paid_amount == 0) {
@@ -137,7 +133,6 @@ if (isset($_GET['customer_invoicesid'])) {
 				</tr>
 				</table>
 			";
-
 			$report_data .= $single_report;
 		}
 		if (mysqli_num_rows($results) == 0) {
@@ -152,15 +147,15 @@ if (isset($_GET['customer_invoicesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php print $report_title; ?></title>
-	<link rel='stylesheet' href='css/styles_report.css'>
-	<meta charset='utf-8'>
+    <title><?php print $report_title; ?></title>
+    <link rel='stylesheet' href='css/styles_report.css'>
+    <meta charset='utf-8'>
 </head>
 <body id='page-report' class='customer_invoices_print'>
-	<main>
-		<?php
+    <main>
+        <?php
 			print $report_data;
 		?>
-	</main>
+    </main>
 </body>
 </html>

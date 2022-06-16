@@ -26,7 +26,7 @@ if ($run_query) {
 				parent.document.getElementById(\"vehicle\").value = \"" . $row['fleet_number'] . "\";
 				parent.document.getElementById(\"key_vehicles\").value = \"" . $row['key_vehicles'] . "\";
 				closeOverlay2(\"fromiframe\");'>Select</a> &nbsp; 
-			<a href='driver_view.php?driversid=" . $row['key_drivers'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
+			<a href='driver_view.php?driverid=" . $row['key_drivers'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
 			</td>
 			</tr>
 			";
@@ -45,34 +45,29 @@ if ($run_query) {
 	}
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DRIVERS</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIP - DRIVER</title>
+    <?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
-	
-	<section id='sub-menu'>
-		<h3>DRIVERS</h3>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='search-forms'>
-			<form method='get'>
-					<input id='search' name='search' type='text' autofocus required> 
-					<input type='submit' value='Search'> &nbsp; <a href='driver_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
-			</form>
-		</section>
-		<?php 
+    <section id='sub-menu'>
+        <h3>SELECT DRIVER</h3>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='search-forms'>
+            <form method='get'>
+                <input id='search' name='search' type='text' autofocus required>
+                <input type='submit' value='Search'> &nbsp; 
+				<a href='driver_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>
-

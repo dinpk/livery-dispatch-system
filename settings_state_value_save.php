@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'state';
 // id passed for update
-if (isset($_GET['settings_state_valuesid'])) {
-	$record_id = trim($_GET['settings_state_valuesid']);
+if (isset($_GET['settingsstateid'])) {
+	$record_id = trim($_GET['settingsstateid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_state_values WHERE key_settings_state_values = $record_id");
@@ -18,7 +18,7 @@ if (isset($_GET['settings_state_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$country = trim($_POST['country']);
@@ -81,48 +81,38 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>SETTINGS - STATE</title>
     <?php include('php/_head.php'); ?>
 </head>
-
-<body id='page-save' class='page_save page_settings_state_values_save'>
-
+<body id='page-save'>
     <section id='sub-menu'>
         <div class='left-block'> </div>
         <div class='right-block'> </div>
     </section>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
-
         <?php if (isset($show_form) && $show_form) { ?>
         <form method='post'>
             <fieldset>
-
                 <div>
                     <label for='state'>State</label>
                     <?php if(isset($msg_state)) print $msg_state; ?>
                     <input id='state' name='state' type='text'
                         value='<?php if (isset($state)) {print $state;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='state_code'>State code</label>
                     <?php if(isset($msg_state_code)) print $msg_state_code; ?>
                     <input id='state_code' name='state_code' type='text'
                         value='<?php if (isset($state_code)) {print $state_code;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='country'>Country</label><br>
                     <?php if(isset($msg_country)) print $msg_country; ?>
                     <select id='country' name='country'>
                         <?php 
 						$options = '';
-						
 						$results = mysqli_query($dbcon, 'SELECT country FROM settings_country_values');
 						while ($row = mysqli_fetch_assoc($results)) {
 							$selection = '';
@@ -133,18 +123,11 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
-
             </fieldset>
-
             <input id='save_submit' name='save_submit' type='submit' value='Save'>
-
-
         </form>
         <?php } ?>
-
     </main>
     <?php include('php/_footer.php'); ?>
-
 </body>
-
 </html>

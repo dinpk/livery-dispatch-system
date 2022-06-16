@@ -1,8 +1,6 @@
 <?php 
-
 include('php/_code.php'); 
-
-$base_file_name = 'settings_staff_designation_values_listing';
+$base_file_name = 'settings_staff_designation_value_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -17,7 +15,6 @@ $order_icon = '&nbsp;▲';
 $page_offset = '0';
 $items_per_page = '10';
 $total_items = '0';
-
 if (isset($_POST['items_per_page'])) {
 	$items_per_page = $_POST['items_per_page'];
 	setcookie($base_file_name . '_items_per_page', $items_per_page, time() + (86400 * 30 * 12), '/');
@@ -25,7 +22,6 @@ if (isset($_POST['items_per_page'])) {
 } else if (isset($_COOKIE[$base_file_name . '_items_per_page'])) {
 	$items_per_page = $_COOKIE[$base_file_name . '_items_per_page'];
 }
-
 if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 	$date_from = $_GET['date_from'];
 	$date_to = $_GET['date_to'];
@@ -39,7 +35,6 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 		$sql_where = "WHERE (`entry_date_time` BETWEEN '$period_from' AND '$period_to') ";
 	}
 }
-
 if (isset($_GET['search'])) {
 	$search = trim($_GET['search']);
 	if (empty($search)) {
@@ -48,10 +43,7 @@ if (isset($_GET['search'])) {
 		$sql_where = "WHERE MATCH(`designation`) AGAINST('$search')";
 	}
 }
-
-
 $dbcon = db_connection();
-
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
 	$sql_order_by = sd($dbcon, $_GET['sort_by']);
 	$sql_order_by_seq = ($_GET['sort_seq'] == 'asc') ? 'desc' : 'asc';
@@ -62,40 +54,33 @@ if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
 	$sql_order_by_seq = $_COOKIE[$base_file_name . '_sort_seq'];
 }
 $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
-
-
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM `settings_staff_designation_values` $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
-	
-$page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
 
+$page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
 $results = mysqli_query($dbcon, "SELECT `key_settings_staff_designation_values`, `designation` FROM `settings_staff_designation_values` $sql_where ORDER BY $sql_order_by $sql_order_by_seq LIMIT $page_offset, $items_per_page");
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
-			$record_id = $row['key_settings_staff_designation_values'];
-			$table_rows = $table_rows . '<tr>';
-         $table_rows .= '<td>' . $row['designation'] . '</td>';
-         $table_rows = $table_rows . "
-         <td class='record-icons'>
-         <a href='settings_staff_designation_value_save.php?settings_staff_designation_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-         <a href='settings_staff_designation_value_view.php?settings_staff_designation_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
-         <a href='settings_staff_designation_value_delete.php?settings_staff_designation_valuesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✕</a> 
-         </td>";
-			$table_rows = $table_rows . '</tr>';
+		$record_id = $row['key_settings_staff_designation_values'];
+		$table_rows = $table_rows . '<tr>';
+        $table_rows .= '<td>' . $row['designation'] . '</td>';
+        $table_rows = $table_rows . "
+        <td class='record-icons'>
+        <a href='settings_staff_designation_value_save.php?settingsstaffdesignationid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+        <a href='settings_staff_designation_value_view.php?settingsstaffdesignationid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
+        <a href='settings_staff_designation_value_delete.php?settingsstaffdesignationid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✕</a> 
+        </td>";
+		$table_rows = $table_rows . '</tr>';
 	}
 	$listing_html = "
 			<table class='listing-table'>
 				<tr>
-                     <th>
-                         <a href='$url" . $query_symbol . "sort_by=designation&sort_seq=$sql_order_by_seq'>Designation</a>" . (($sql_order_by == 'designation') ? $order_icon : '') . "
-                     </th>
-
+				<th><a href='$url" . $query_symbol . "sort_by=designation&sort_seq=$sql_order_by_seq'>Designation</a>" . (($sql_order_by == 'designation') ? $order_icon : '') . "</th>
 				<th class='icon-cell'></th>
 				</tr>
 				$table_rows
 			</table>";
-			
 			if ($total_items > $page_offset) {
 				$prev_page_offset = $page_offset - $items_per_page;
 				$next_page_offset = $page_offset + $items_per_page;
@@ -106,51 +91,47 @@ if ($results) {
 				$pager = "<table id='pager'><tr>$pager</tr></table>";
 				$listing_html .= $pager;
 			}
-
 	if (mysqli_num_rows($results) == 0) {
 		$message = "<div class='failure-result'>No record found</div>";
 	}
-
 } else {
 	//print mysqli_error($dbcon);
 	die('Unable to get records, please contact your system administrator.');
 }
 
-mysqli_close($dbcon);
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS - STAFF DESIGNATION VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - STAFF DESIGNATION</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_settings_staff_designation_values_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'>settings - staff designations</div>
-		<div class='right-block'>
-			&#9998;<a href='settings_staff_designation_value_save.php' target='overlay-iframe' onclick='overlayOpen();'>New</a>
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'>settings - staff designations</div>
+        <div class='right-block'>
+            &#9998;<a href='settings_staff_designation_value_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Designation</a>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -159,14 +140,14 @@ mysqli_close($dbcon);
 						<option" . (($items_per_page == '50') ? " selected='selected'" : '') .  ">50</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
+            </form>
+        </section>
+        <?php 
 			if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

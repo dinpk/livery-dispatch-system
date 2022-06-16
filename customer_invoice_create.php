@@ -9,7 +9,6 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 	$date_to = $_GET['date_to'];
 	$issue_date = date("Y-m-d");
 	$due_date = $_POST['due_date'];
-	
 	if (!is_date($date_from) || !is_date($date_to)) {
 		$message = "<div class='failure-result'>Invalid date</div>";
 		$error = 1;
@@ -20,7 +19,7 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 		$sql_where_date = "WHERE (pickup_datetime BETWEEN '$date_from' AND '$date_to') ";
 	}
 	if ($error == 0) {
-		$dates_display = date('F d, Y', strtotime($date_from)) . " — " . date('F d, Y', strtotime($date_to));
+		$dates_display = date('F d, Y', strtotime($date_from)) . " to " . date('F d, Y', strtotime($date_to));
 		
 		if (isset($_POST['confirm_create'])) {
 			$results = mysqli_query($dbcon, "SELECT key_customer_passengers, sum(total_trip_amount) as service_charges FROM trips $sql_where_date AND key_customer_passengers != 0 AND key_customer_invoices = 0 GROUP BY key_customer_passengers");
@@ -102,23 +101,18 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER INVOICES</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER INVOICES</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_create page_customer_invoices_create'>
-
-	<section id='sub-menu'>
-		<div class='left-block'>customer invoices</div>
-		<div class='right-block'>
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		
-		<?php 
-
+<body id='page-listing'>
+    <section id='sub-menu'>
+        <div class='left-block'>customer invoices</div>
+        <div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php 
 		if ($show_dates_form) {
 			print "
 				<form id='dates_form' method='get' class='center'>
@@ -132,7 +126,6 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 				</form>
 			";
 		}
-		
 		if (isset($total_useable_records)) {
 			print "
 				<h3 class='center'>$dates_display</h3>
@@ -150,10 +143,9 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 					</form>";
 			}
 		}
-		
 		if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

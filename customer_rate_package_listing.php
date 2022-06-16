@@ -1,6 +1,6 @@
 <?php 
 include('php/_code.php'); 
-$base_file_name = 'customer_rate_packages_listing';
+$base_file_name = 'customer_rate_package_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -75,8 +75,8 @@ if ($results) {
 		<td class='right'>" . $row['admin_fee_percent'] . "</td>
 		<td class='right'>" . $row['discount_percent'] . "</td>
 		<td class='record-icons'>
-		<a href='customer_rate_package_save.php?customer_rate_packagesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-		<a href='customer_rate_package_view.php?customer_rate_packagesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
+		<a href='customer_rate_package_save.php?customerratepackageid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+		<a href='customer_rate_package_view.php?customerratepackageid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>☷</a> 
 		</td>
 		</tr>
 		";
@@ -112,41 +112,40 @@ if ($results) {
 	die('Unable to get records, please contact your system administrator.');
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER RATE PACKAGES</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER RATE PACKAGES</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_customer_rate_packages_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_rate_packages.png"> customer rate packages</div>
-		<div class='right-block'>
-			✢ <a href='customer_rate_package_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Rate Package</a>
-		</div>
-	</section>
-
-	<div class='page-image' style='background-image:url(images/page-rate-packages.jpg);'></div>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-					<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-					<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-					<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-					<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-					<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_rate_packages.png"> customer rate packages</div>
+        <div class='right-block'>
+            ✢ <a href='customer_rate_package_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Rate Package</a>
+        </div>
+    </section>
+    <div class='page-image' style='background-image:url(images/page-rate-packages.jpg);'></div>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -156,15 +155,14 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $base_file_name . ".php"; ?>'">
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

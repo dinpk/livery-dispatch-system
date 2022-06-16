@@ -3,9 +3,9 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'airline';
 // id passed for update
-if (isset($_GET['settings_airline_valuesid'])) {
+if (isset($_GET['settingsairlineid'])) {
 	
-	$record_id = trim($_GET['settings_airline_valuesid']);
+	$record_id = trim($_GET['settingsairlineid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$dbcon = db_connection();
@@ -15,12 +15,10 @@ if (isset($_GET['settings_airline_valuesid'])) {
 		} else {
 			$message = "<div class='failure-result'>Record not found</div>";
 			$show_form = false;
-		}
-		
-		mysqli_close($dbcon);
+		}		
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	
 	$error = 0;
@@ -55,7 +53,7 @@ if (isset($_POST['save_submit'])) {
 					die('Unable to add, please contact your system administrator.');
 				}         }
 		}	
-		mysqli_close($dbcon);
+		
 	}
 	if ($error == 0) $show_form = false;
 }
@@ -63,41 +61,33 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS AIRLINE VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS AIRLINE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_airline_values_save'>
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'></div>
+        <div class='right-block'>
 
-	<section id='sub-menu'>
-		<div class='left-block'></div>
-		<div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='airline'>Airline</label> <span class='red'> *</span>
+                    <?php if(isset($msg_airline)) print $msg_airline; ?>
+                    <input id='airline' name='airline' type='text'
+                        value='<?php if (isset($airline)) {print $airline;} else { print '';} ?>' required><br>
+                </div>
 
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='airline'>Airline</label> <span class='red'> *</span>             <?php if(isset($msg_airline)) print $msg_airline; ?>
-             <input id='airline' name='airline' type='text' value='<?php if (isset($airline)) {print $airline;} else { print '';} ?>' required><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+            </fieldset>
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['logsid'])) {
-	$record_id = trim($_GET['logsid']);
+if (isset($_GET['logid'])) {
+	$record_id = trim($_GET['logid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM logs WHERE key_logs = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -23,9 +23,7 @@ if (isset($_GET['logsid'])) {
 
 	<?php if (isset($message)) print $message; ?>
 	
-	<main>
-		
-     <table class='record-table'>
+	<main>     <table class='record-table'>
          <tr>
          <td class='label-cell'>Log type</td>
          <td class='value-cell'><?php if (isset($log_type)) print $log_type; ?></td>

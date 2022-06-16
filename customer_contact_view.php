@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['customer_contactsid'])) {
-	$record_id = trim($_GET['customer_contactsid']);
+if (isset($_GET['customercontactid'])) {
+	$record_id = trim($_GET['customercontactid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM customer_contacts WHERE key_customer_contacts = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -29,18 +29,15 @@ if (isset($_GET['customer_contactsid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER CONTACTS</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER CONTACTS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_customer_contacts_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-		
-		<div class='flex'>
-			<section>
-				<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <div class='flex'>
+            <section>
+                <?php 
 					$active_symbol = (($active_status == "on") ? "<p class='green'>&#10003;</p>" : "<p class='red'>x</p>");
 					if (empty($image_url)) {
 						print "<div class='profile-avatar' style='background-image:url(images/icons/avatar_contact.png);'></div> ";
@@ -52,10 +49,10 @@ if (isset($_GET['customer_contactsid'])) {
 					if (!empty($company_name)) print "<h2>$company_name</h2>";
 					if (!empty($city)) print "<h3>$city, $state</h3>";
 				?>
-			</section>
-			<section>
-				<table>
-				<?php
+            </section>
+            <section>
+                <table>
+                    <?php
 					if (!empty($address1)) print "<tr><td>Address</td><td>$address1</td></tr>";
 					if (!empty($address2)) print "<tr><td>Address 2</td><td>$address2</td></tr>";
 					if (!empty($city)) print "<tr><td></td><td>$city, $state $zip_code</td></tr>";
@@ -65,12 +62,10 @@ if (isset($_GET['customer_contactsid'])) {
 					if (!empty($work_phone)) print "<tr><td>Work phone</td><td>$work_phone " . (!empty($work_phone_extension) ? "($work_phone_extension)" : "") . "</td></tr>";
 					if (!empty($mobile_phone)) print "<tr><td>Mobile phone</td><td>$mobile_phone</td></tr>";
 				?>
-				</table>
-			</section>
-		</div>
-		
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+                </table>
+            </section>
+        </div>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

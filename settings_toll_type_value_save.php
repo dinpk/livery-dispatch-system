@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'toll_type';
 // id passed for update
-if (isset($_GET['settings_toll_type_valuesid'])) {
-	$record_id = trim($_GET['settings_toll_type_valuesid']);
+if (isset($_GET['settingstolltypeid'])) {
+	$record_id = trim($_GET['settingstolltypeid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_toll_type_values WHERE key_settings_toll_type_values = $record_id");
@@ -16,7 +16,7 @@ if (isset($_GET['settings_toll_type_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$toll_type = trim($_POST['toll_type']);
@@ -57,39 +57,30 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS TOLL TYPE VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - TOLL TYPE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_toll_type_values_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'> </div>
-		<div class='right-block'> </div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='toll_type'>Toll type</label> <span class='red'> *</span>             <?php if(isset($msg_toll_type)) print $msg_toll_type; ?>
-             <input id='toll_type' name='toll_type' type='text' value='<?php if (isset($toll_type)) {print $toll_type;} else { print '';} ?>' required><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'> </div>
+        <div class='right-block'> </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='toll_type'>Toll type</label> <span class='red'> *</span>
+                    <?php if(isset($msg_toll_type)) print $msg_toll_type; ?>
+                    <input id='toll_type' name='toll_type' type='text'
+                        value='<?php if (isset($toll_type)) {print $toll_type;} else { print '';} ?>' required><br>
+                </div>
+            </fieldset>
+			<input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['tripsid'])) {
-	$record_id = trim($_GET['tripsid']);
+if (isset($_GET['tripid'])) {
+	$record_id = trim($_GET['tripid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM trips WHERE key_trips = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -30,7 +30,7 @@ if (isset($_GET['tripsid'])) {
 	if ($row = mysqli_fetch_assoc($results)) {
 		$passenger_email = $row['email'];
 	}
-	/* ----------------- CREAT INVOICE ------------------- */
+	// create invoice
 	if (isset($_POST['create_invoice'])) {
 		$error = 0;
 		$due_date = (isset($_POST['due_date']) ? trim($_POST['due_date']) : '');
@@ -48,9 +48,8 @@ if (isset($_GET['tripsid'])) {
 			$message = "<div class='success-result'>Invoice created successfully.</div>";
 		}
 	}
-	/* ----------------- SEND INVOICE ------------------- */
+	// send invoice
 	if (isset($_POST['send_invoice'])) {
-		
 		$results = mysqli_query($dbcon, "SELECT * FROM customer_invoices WHERE key_customer_invoices = $key_customer_invoices");
 		if ($row = mysqli_fetch_assoc($results)) {
 			$key_customer_passengers = $row['key_customer_passengers'];
@@ -63,7 +62,6 @@ if (isset($_GET['tripsid'])) {
 			$due_date = date('M d, Y', strtotime($row['due_date']));
 			$issue_date = date('M d, Y', strtotime($row['issue_date']));
 		}
-
 		$subject = "Invoice # " . $key_customer_invoices;
 		$email_body = "
 			<div class='center' style='line-height:80%'>
@@ -80,41 +78,35 @@ if (isset($_GET['tripsid'])) {
 				</table>
 			</div>
 		";
-
 		$sent = send_email($passenger_email, $subject, $email_body);
-
 		if ($sent) {
 			$message = "<div class='success-result'>Email has been sent.</div>";
 		} else {
 			$message = "<div class='failure-result'>Could not send email, please try again later.</div>";
 		}		
-	} // send_invoice
+	}
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TRIP INVOICE</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIP - INVOICE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_trips_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-	<?php 
-
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php 
 		print "
 			<div class='center'>
 			<h1>Invoice</h1>
 			<h2>$passenger_name</h2>
 			<p>$passenger_email</p>
 			</div>";
-
 		if ($concluded_checkbox != 'on') {
-			print "<h3 class='center'><a href='trip_conclude_save.php?tripsid=$key_trips' target='overlay-iframe2' onclick='overlayOpen2();'>Conclude trip # $key_trips</a></h3>";
+			print "<h3 class='center'><a href='trip_conclude_save.php?tripid=$key_trips' target='overlay-iframe2' onclick='overlayOpen2();'>Conclude trip # $key_trips</a></h3>";
 		} else if ($settled_checkbox != 'on') {
-			print "<h3 class='center'><a href='trip_payroll_settlement_save.php?tripsid=$key_trips' target='overlay-iframe2' onclick='overlayOpen2();'>Settle trip # $key_trips</a></h3>";
+			print "<h3 class='center'><a href='trip_payroll_settlement_save.php?tripid=$key_trips' target='overlay-iframe2' onclick='overlayOpen2();'>Settle trip # $key_trips</a></h3>";
 		} else if ($key_customer_invoices == '0') {
 			print "
 			<form class='center' method='post'>
@@ -125,62 +117,51 @@ if (isset($_GET['tripsid'])) {
 		} else {
 			print "
 			<form class='center' method='post'>
-				<p><a href='customer_invoice_print_single.php?customer_invoicesid=$key_customer_invoices' target='_blank'>View Invoice # $key_customer_invoices</a></p>
+				<p><a href='customer_invoice_print_single.php?customerinvoiceid=$key_customer_invoices' target='_blank'>View Invoice # $key_customer_invoices</a></p>
 				<p><input type='submit' name='send_invoice' id='view_submit' value='Send invoice'></p>
 			</form>
 			<br>";
 		}
-	?>
-
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Trip #</td>
-         <td class='value-cell'><?php print $key_trips; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Passenger name</td>
-         <td class='value-cell'><?php print $passenger_name; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Total passengers</td>
-         <td class='value-cell'><?php print $total_passengers; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Reserved by</td>
-         <td class='value-cell'><?php print $reserved_by; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Date Time</td>
-         <td class='value-cell'><?php print $pickup_datetime; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Flight</td>
-         <td class='value-cell'><?php print $airline . ' ' . $flight_number; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>From</td>
-         <td class='value-cell'><?php print $routing_from; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>To</td>
-         <td class='value-cell'><?php print $routing_to; ?></td>
-         </tr>
-		 
-         <tr>
-         <td class='label-cell'>Charges</td>
-         <td class='value-cell'><?php print $total_trip_amount; ?></td>
-         </tr>
-
-     </table>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+		?>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Trip #</td>
+                <td class='value-cell'><?php print $key_trips; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Passenger name</td>
+                <td class='value-cell'><?php print $passenger_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Total passengers</td>
+                <td class='value-cell'><?php print $total_passengers; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Reserved by</td>
+                <td class='value-cell'><?php print $reserved_by; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Date Time</td>
+                <td class='value-cell'><?php print $pickup_datetime; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Flight</td>
+                <td class='value-cell'><?php print $airline . ' ' . $flight_number; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>From</td>
+                <td class='value-cell'><?php print $routing_from; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>To</td>
+                <td class='value-cell'><?php print $routing_to; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Charges</td>
+                <td class='value-cell'><?php print $total_trip_amount; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

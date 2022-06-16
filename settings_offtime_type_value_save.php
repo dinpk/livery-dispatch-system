@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'offtime_type';
 // id passed for update
-if (isset($_GET['settings_offtime_type_valuesid'])) {
-	$record_id = trim($_GET['settings_offtime_type_valuesid']);
+if (isset($_GET['settingsofftimetypeid'])) {
+	$record_id = trim($_GET['settingsofftimetypeid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_offtime_type_values WHERE key_settings_offtime_type_values = $record_id");
@@ -16,7 +16,7 @@ if (isset($_GET['settings_offtime_type_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$offtime_type = trim($_POST['offtime_type']);
@@ -57,39 +57,31 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS OFFTIME TYPE VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - OFFTIME TYPE</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_offtime_type_values_save'>
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'> </div>
+        <div class='right-block'> </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='offtime_type'>Off-time type</label> <span class='red'> *</span>
+                    <?php if(isset($msg_offtime_type)) print $msg_offtime_type; ?>
+                    <input id='offtime_type' name='offtime_type' type='text'
+                        value='<?php if (isset($offtime_type)) {print $offtime_type;} else { print '';} ?>'
+                        required><br>
+                </div>
 
-	<section id='sub-menu'>
-		<div class='left-block'> </div>
-		<div class='right-block'> </div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='offtime_type'>Off-time type</label> <span class='red'> *</span>             <?php if(isset($msg_offtime_type)) print $msg_offtime_type; ?>
-             <input id='offtime_type' name='offtime_type' type='text' value='<?php if (isset($offtime_type)) {print $offtime_type;} else { print '';} ?>' required><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+            </fieldset> <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

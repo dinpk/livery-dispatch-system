@@ -5,14 +5,13 @@ $results = mysqli_query($dbcon, "SELECT * FROM settings_trip_status_values WHERE
 while ($row = mysqli_fetch_assoc($results)) {
 	$status_array[$row['trip_status']] = $row['text_color'] . "|" . $row['back_color'];
 }
-$base_file_name = 'trips_listing';
+$base_file_name = 'trip_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
 if (strpos($url, '&sort_by')) $url = substr($url, 0, strpos($url, '&sort_by'));
 if (strpos($url, '?page')) $url = substr($url, 0, strpos($url, '?page'));
 if (strpos($url, '&page')) $url = substr($url, 0, strpos($url, '&page'));
-
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq']) && (sizeof($_GET) == 2)) {
 	$query_symbol = '?';
 } else if (sizeof($_GET) > 1) {
@@ -20,7 +19,6 @@ if (isset($_GET['sort_by']) && isset($_GET['sort_seq']) && (sizeof($_GET) == 2))
 } else {
 	$query_symbol = '?';
 }
-
 $sql_where = '';
 $sql_order_by = 'pickup_datetime';
 $sql_order_by_seq = 'desc';
@@ -29,36 +27,36 @@ $page_offset = '0';
 $items_per_page = '50';
 $total_items = '0';
 $list_type = 'flex';
-// ----------------- SQL PART BASED ON ID PASSED
+// ----------------- sql part based on id passed
 $sql_where_alt = '';
 $reset_url = $base_file_name . '.php';
-if (isset($_GET['customer_passengersid']) && is_numeric($_GET['customer_passengersid'])) {
-	$key_customer_passengers = $_GET['customer_passengersid'];
-	$sql_where_alt = ' WHERE key_customer_passengers = ' . $_GET['customer_passengersid'];
-	$reset_url = "$base_file_name.php?customer_passengersid=$key_customer_passengers";
+if (isset($_GET['customerpassengerid']) && is_numeric($_GET['customerpassengerid'])) {
+	$key_customer_passengers = $_GET['customerpassengerid'];
+	$sql_where_alt = ' WHERE key_customer_passengers = ' . $_GET['customerpassengerid'];
+	$reset_url = "$base_file_name.php?customerpassengerid=$key_customer_passengers";
 }
-if (isset($_GET['customer_contactsid']) && is_numeric($_GET['customer_contactsid'])) {
-	$key_customer_contacts = $_GET['customer_contactsid'];
-	$sql_where_alt = ' WHERE key_customer_contacts = ' . $_GET['customer_contactsid'];
-	$reset_url = "$base_file_name.php?customer_contactsid=$key_customer_contacts";
+if (isset($_GET['customercontactid']) && is_numeric($_GET['customercontactid'])) {
+	$key_customer_contacts = $_GET['customercontactid'];
+	$sql_where_alt = ' WHERE key_customer_contacts = ' . $_GET['customercontactid'];
+	$reset_url = "$base_file_name.php?customercontactid=$key_customer_contacts";
 }
-if (isset($_GET['driversid']) && is_numeric($_GET['driversid'])) {
-	$key_drivers = $_GET['driversid'];
-	$sql_where_alt = ' WHERE key_drivers = ' . $_GET['driversid'];
-	$reset_url = "$base_file_name.php?driversid=$key_drivers";
+if (isset($_GET['driverid']) && is_numeric($_GET['driverid'])) {
+	$key_drivers = $_GET['driverid'];
+	$sql_where_alt = ' WHERE key_drivers = ' . $_GET['driverid'];
+	$reset_url = "$base_file_name.php?driverid=$key_drivers";
 }
-if (isset($_GET['vehiclesid']) && is_numeric($_GET['vehiclesid'])) {
-	$key_vehicles = $_GET['vehiclesid'];
-	$sql_where_alt = ' WHERE key_vehicles = ' . $_GET['vehiclesid'];
-	$reset_url = "$base_file_name.php?vehiclesid=$key_vehicles";
+if (isset($_GET['vehicleid']) && is_numeric($_GET['vehicleid'])) {
+	$key_vehicles = $_GET['vehicleid'];
+	$sql_where_alt = ' WHERE key_vehicles = ' . $_GET['vehicleid'];
+	$reset_url = "$base_file_name.php?vehicleid=$key_vehicles";
 }
-if (isset($_GET['rates_zonesid']) && is_numeric($_GET['rates_zonesid'])) {
-	$key_rates_zones = $_GET['rates_zonesid'];
-	$sql_where_alt = ' WHERE key_rates_zones = ' . $_GET['rates_zonesid'];
-	$reset_url = "$base_file_name.php?rates_zonesid=$key_rates_zones";
+if (isset($_GET['ratezoneid']) && is_numeric($_GET['ratezoneid'])) {
+	$key_rates_zones = $_GET['ratezoneid'];
+	$sql_where_alt = ' WHERE key_rates_zones = ' . $_GET['ratezoneid'];
+	$reset_url = "$base_file_name.php?ratezoneid=$key_rates_zones";
 }
 if (isset($_GET['search']) || isset($_GET['date_from'])) $sql_where_alt = str_replace('WHERE', 'AND', $sql_where_alt);
-// ----------------- ITEMS PER PAGE
+// ----------------- items per page
 if (isset($_POST['items_per_page'])) {
 	$items_per_page = $_POST['items_per_page'];
 	setcookie($base_file_name . '_items_per_page', $items_per_page, time() + (86400 * 30 * 12), '/');
@@ -66,7 +64,7 @@ if (isset($_POST['items_per_page'])) {
 } else if (isset($_COOKIE[$base_file_name . '_items_per_page'])) {
 	$items_per_page = $_COOKIE[$base_file_name . '_items_per_page'];
 }
-// ----------------- DATES SEARCH
+// ----------------- search by dates
 if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 	$date_from = $_GET['date_from'];
 	$date_to = $_GET['date_to'];
@@ -80,7 +78,7 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 		$sql_where = "WHERE (pickup_datetime BETWEEN '" . cd($dbcon, $period_from) . "' AND '" . cd($dbcon, $period_to) . "') ";
 	}
 }
-// ----------------- KEYWORD SEARCH
+// ----------------- search by keywords
 if (isset($_GET['search'])) {
 	$search = trim($_GET['search']);
 	if (empty($search)) {
@@ -89,7 +87,7 @@ if (isset($_GET['search'])) {
 		$sql_where = "WHERE key_trips = '" . cd($dbcon, $search) . "' OR MATCH(reference_number, passenger_name, reserved_by, trip_type, driver_name, vehicle, airline, flight_number, zone_from, zone_to) AGAINST('" . cd($dbcon, $search) . "')";
 	}
 }
-// ----------------- SORTING
+// ----------------- sorting
 if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
 	$sql_order_by = sd($dbcon, $_GET['sort_by']);
 	$sql_order_by_seq = ($_GET['sort_seq'] == 'asc') ? 'desc' : 'asc';
@@ -100,11 +98,11 @@ if (isset($_GET['sort_by']) && isset($_GET['sort_seq'])) {
 	$sql_order_by_seq = $_COOKIE[$base_file_name . '_sort_seq'];
 }
 $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
-// ----------------- COUNT FOR PAGER
+// ----------------- count for pager
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM trips $sql_where $sql_where_alt ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-// ----------------- SELECT QUERY
+// ----------------- select query
 $results = mysqli_query($dbcon, "SELECT key_trips, key_customer_passengers, key_customer_contacts, key_drivers, key_vehicles, key_rates_zones, reference_number,  passenger_name, total_passengers, reserved_by, pickup_datetime, trip_status, driver_name, vehicle, airline, flight_number, zone_from, zone_to, routing_from, routing_to, total_trip_amount 
 									FROM trips 
 									$sql_where $sql_where_alt 
@@ -120,27 +118,27 @@ if ($results) {
 			$sheet .= "
 			<section>
 				<div>
-					<h2><a href='trip_view.php?tripsid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . "<span>Trip #</span> " . $row['key_trips'] . "</a></h2>
+					<h2><a href='trip_view.php?tripid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . "<span>Trip #</span> " . $row['key_trips'] . "</a></h2>
 					<p>" . date("M d, Y - h:ia", strtotime($row['pickup_datetime'])) . "</p>
 					<p> $ " . round($row['total_trip_amount'], 2) . "</p>
 				</div>
 				<div>
-					<h4><a href='rate_zone_view.php?rates_zonesid=" . $row['key_rates_zones'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['zone_from'] . "</h4>
+					<h4><a href='rate_zone_view.php?ratezoneid=" . $row['key_rates_zones'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['zone_from'] . "</h4>
 					<h4>" . $row['zone_to'] . "</a></h4>
 					<p>" . $row['airline'] . " " . $row['flight_number'] . "</p>
 				</div>
 				<div>
-					<h3><a href='customer_passenger_view.php?customer_passengersid=" . $row['key_customer_passengers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['passenger_name'] . "</a> <span>(" . $row['total_passengers'] . ")</span></h3>
+					<h3><a href='customer_passenger_view.php?customerpassengerid=" . $row['key_customer_passengers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['passenger_name'] . "</a> <span>(" . $row['total_passengers'] . ")</span></h3>
 					<p>" . $row['reference_number'] . "</p>
 					<p><a href='customer_contact_view.php?contactsid=" . $row['key_contacts'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['reserved_by'] . "</p>
 				</div>
 				<div>
-					<h3><a href='driver_view.php?driversid=" . $row['key_drivers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['driver_name'] . "</a></h3>
-					<p><a href='vehicle_view.php?vehiclesid=" . $row['key_vehicles'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['vehicle'] . "</a></p>
+					<h3><a href='driver_view.php?driverid=" . $row['key_drivers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['driver_name'] . "</a></h3>
+					<p><a href='vehicle_view.php?vehicleid=" . $row['key_vehicles'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['vehicle'] . "</a></p>
 				</div>
 				<div>
-					<p><a class='status-button' " . $status_style . " href='trip_dispatch.php?tripsid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['trip_status'] . "</a></p>
-					<p><a href='trip_save.php?tripsid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>Edit trip</a></p>
+					<p><a class='status-button' " . $status_style . " href='trip_dispatch.php?tripid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['trip_status'] . "</a></p>
+					<p><a href='trip_save.php?tripid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>Edit trip</a></p>
 				</div>
 			</section>";
 		}
@@ -154,28 +152,28 @@ if ($results) {
 			$status_style = "style='color:$front_color;background:$back_color;'";
 			$table_rows .= "
 			<tr>
-			<td class='center'><a href='trip_view.php?tripsid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['key_trips'] . "</a></td>
+			<td class='center'><a href='trip_view.php?tripid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['key_trips'] . "</a></td>
 			<td class='center'>" . date("M d, Y - h:ia", strtotime($row['pickup_datetime'])) . "</td>
-			<td><a href='rate_zone_view.php?rates_zonesid=" . $row['key_rates_zones'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['zone_from'] . " > " . $row['zone_to'] . "</a></td>
+			<td><a href='rate_zone_view.php?ratezoneid=" . $row['key_rates_zones'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['zone_from'] . " > " . $row['zone_to'] . "</a></td>
 			<td><a href='https://www.google.com/search?q=" . $row['airline'] . " " . $row['flight_number'] . "' target='_blank'>" . $row['airline'] . ' ' . $row['flight_number'] . "</a></td>
 			<td class='right'>" . $row['reference_number'] . "</td>
-			<td><a href='customer_passenger_view.php?customer_passengersid=" . $row['key_customer_passengers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['passenger_name'] . "</a></td>
+			<td><a href='customer_passenger_view.php?customerpassengerid=" . $row['key_customer_passengers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['passenger_name'] . "</a></td>
 			<td class='center'>" . $row['total_passengers'] . "</td>
-			<td><a href='customer_contact_view.php?customer_contactsid=" . $row['key_customer_contacts'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['reserved_by'] . "</a></td>
-			<td><a href='driver_view.php?driversid=" . $row['key_drivers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['driver_name'] . "</a></td>
-			<td><a href='vehicle_view.php?vehiclesid=" . $row['key_vehicles'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['vehicle'] . "</a></td>
+			<td><a href='customer_contact_view.php?customercontactid=" . $row['key_customer_contacts'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['reserved_by'] . "</a></td>
+			<td><a href='driver_view.php?driverid=" . $row['key_drivers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['driver_name'] . "</a></td>
+			<td><a href='vehicle_view.php?vehicleid=" . $row['key_vehicles'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['vehicle'] . "</a></td>
 			<td class='right'>" . $row['total_trip_amount'] . "</td>
-			<td class='status-button' " . $status_style . "><a " . $status_style . " href='trip_trip_status_update.php?tripsid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['trip_status'] . "</a></td>
+			<td class='status-button' " . $status_style . "><a " . $status_style . " href='trip_trip_status_update.php?tripid=" . $row['key_trips'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['trip_status'] . "</a></td>
 			<td class='record-menus'>
 				<a href='#' class='toggle' onclick='record_menu(\"menu$key_trips\", this);return false;'>ooo</a>
 				<ul id='menu$key_trips'>
-				<li><a href='trip_save.php?tripsid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Edit</a></li>
-				<li><a href='trip_save.php?tripsid=$key_trips&duplicate=1' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Duplicate</a></li>
+				<li><a href='trip_save.php?tripid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Edit</a></li>
+				<li><a href='trip_save.php?tripid=$key_trips&duplicate=1' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Duplicate</a></li>
 				<li><a href='https://www.google.com/maps/dir/" . $row['routing_from'] . "/" . $row['routing_to'] . "' target='_blank' onclick='hide_record_menus();'>Direction</a></li>
-				<li><a href='trip_quote.php?tripsid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Quote</a></li>
-				<li><a href='trip_confirmation.php?tripsid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Confirmation</a></li>
-				<li><a href='trip_dispatch.php?tripsid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Dispatch</a></li>
-				<li><a href='trip_invoice.php?tripsid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Invoice</a></li>
+				<li><a href='trip_quote.php?tripid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Quote</a></li>
+				<li><a href='trip_confirmation.php?tripid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Confirmation</a></li>
+				<li><a href='trip_dispatch.php?tripid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Dispatch</a></li>
+				<li><a href='trip_invoice.php?tripid=$key_trips' target='overlay-iframe' onclick='overlayOpen();hide_record_menus();'>Invoice</a></li>
 				</ul>
 			</td>
 			</tr>";
@@ -200,7 +198,7 @@ if ($results) {
 			$table_rows
 		</table>";		
 	}
-	// ----------------- PAGER
+	// ----------------- pager
 	if ($total_items > $page_offset) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
@@ -220,52 +218,53 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TRIPS</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIPS</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_trips_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_trips.png"> trips</div>
-		<div class='right-block'>
-			☷ <a href='trip_sheet.php' target='_blank'>Trip Sheet</a>
-			&nbsp;
-			❖ <a href='trip_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Trip</a>
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-				<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to 
-				<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-				<?php
-				if (isset($key_customer_passengers)) print "<input name='customer_passengersid' type='hidden' value='$key_customer_passengers'>";
-				if (isset($key_customer_contacts)) print "<input name='customer_contactsid' type='hidden' value='$key_customer_contacts'>";
-				if (isset($key_drivers)) print "<input name='driversid' type='hidden' value='$key_drivers'>";
-				if (isset($key_vehicles)) print "<input name='vehiclesid' type='hidden' value='$key_vehicles'>";
-				if (isset($key_rates_zones)) print "<input name='rates_zonesid' type='hidden' value='$key_rates_zones'>";
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_trips.png"> trips</div>
+        <div class='right-block'>
+            ☷ <a href='trip_sheet.php' target='_blank'>Trip Sheet</a>
+            &nbsp;
+            ❖ <a href='trip_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Trip</a>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> to
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <?php
+				if (isset($key_customer_passengers)) print "<input name='customerpassengerid' type='hidden' value='$key_customer_passengers'>";
+				if (isset($key_customer_contacts)) print "<input name='customercontactid' type='hidden' value='$key_customer_contacts'>";
+				if (isset($key_drivers)) print "<input name='driverid' type='hidden' value='$key_drivers'>";
+				if (isset($key_vehicles)) print "<input name='vehicleid' type='hidden' value='$key_vehicles'>";
+				if (isset($key_rates_zones)) print "<input name='ratezoneid' type='hidden' value='$key_rates_zones'>";
 				?>
-				<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-				<input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-				<?php
-				if (isset($key_customer_passengers)) print "<input name='customer_passengersid' type='hidden' value='$key_customer_passengers'>";
-				if (isset($key_customer_contacts)) print "<input name='customer_contactsid' type='hidden' value='$key_customer_contacts'>";
-				if (isset($key_drivers)) print "<input name='driversid' type='hidden' value='$key_drivers'>";
-				if (isset($key_vehicles)) print "<input name='vehiclesid' type='hidden' value='$key_vehicles'>";
-				if (isset($key_rates_zones)) print "<input name='rates_zonesid' type='hidden' value='$key_rates_zones'>";
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' <?php if (isset($search)) print "value='$search' autofocus"; ?>
+                    required>
+                <?php
+				if (isset($key_customer_passengers)) print "<input name='customerpassengerid' type='hidden' value='$key_customer_passengers'>";
+				if (isset($key_customer_contacts)) print "<input name='customercontactid' type='hidden' value='$key_customer_contacts'>";
+				if (isset($key_drivers)) print "<input name='driverid' type='hidden' value='$key_drivers'>";
+				if (isset($key_vehicles)) print "<input name='vehicleid' type='hidden' value='$key_vehicles'>";
+				if (isset($key_rates_zones)) print "<input name='ratezoneid' type='hidden' value='$key_rates_zones'>";
 				?>
-				<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 					<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 					<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -275,14 +274,14 @@ if ($results) {
 					<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
+            </form>
+        </section>
+        <?php 
 			if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

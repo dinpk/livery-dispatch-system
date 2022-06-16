@@ -24,7 +24,7 @@ if ($run_query) {
 					parent.document.getElementById(\"insurance_company\").value = \"" . $row['insurance_company']  . "\";
 					parent.document.getElementById(\"key_settings_insurance_company_values\").value = \"" . $row['key_settings_insurance_company_values']  . "\";
 					closeOverlay2(\"fromiframe\");'>Select</a>
-				<a href='settings_insurance_company_value_view.php?settings_insurance_company_valuesid=" . $row['key_settings_insurance_company_values'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
+				<a href='settings_insurance_company_value_view.php?settingsinsurancecompanyid=" . $row['key_settings_insurance_company_values'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
 			</td>
 			</tr>
 				";
@@ -46,30 +46,26 @@ if ($run_query) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS - INSURANCE COMPANY VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>VEHILCE - INSURANCE COMPANY</title>
+    <?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
-	
-	<section id='sub-menu'>
-		<h3>INSURANCE COMPANIES</h3>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='search-forms'>
-			<form method='get'>
-				<input id='search' name='search' type='text' autofocus required> 
-				<input type='submit' value='Search'> &nbsp; <a href='settings_insurance_company_value_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
-			</form>
-		</section>
-		<?php 
+    <section id='sub-menu'>
+        <h3>SELECT INSURANCE COMPANY</h3>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='search-forms'>
+            <form method='get'>
+                <input id='search' name='search' type='text' autofocus required>
+                <input type='submit' value='Search'> &nbsp; <a href='settings_insurance_company_value_save.php'
+                    target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>
-

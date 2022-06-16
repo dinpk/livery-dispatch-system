@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'title';
 // id passed for update
-if (isset($_GET['landmarksid'])) {
-	$record_id = trim($_GET['landmarksid']);
+if (isset($_GET['landmarkid'])) {
+	$record_id = trim($_GET['landmarkid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM landmarks WHERE key_landmarks = $record_id");
@@ -26,7 +26,7 @@ if (isset($_GET['landmarksid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$active_status = trim($_POST['active_status']);
@@ -160,37 +160,27 @@ if (isset($_POST['save_submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>LANDMARK</title>
     <?php include('php/_head.php'); ?>
 </head>
-
-<body id='page-save' class='page_save page_landmarks_save'>
-
+<body id='page-save'>
     <section id='sub-menu'>
         <div class='left-block'>landmark</div>
         <div class='right-block'>
-
         </div>
     </section>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
-
         <?php if (isset($show_form) && $show_form) { ?>
         <form method='post'>
-
             <fieldset>
-
                 <div>
                     <label for='title'>Title</label> <span class='red'> *</span>
                     <?php if(isset($msg_title)) print $msg_title; ?>
                     <input id='title' name='title' type='text'
                         value='<?php if (isset($title)) {print $title;} else { print '';} ?>' required><br>
                 </div>
-
                 <div>
                     <label for='category'>Category</label><br>
                     <?php if(isset($msg_category)) print $msg_category; ?>
@@ -207,29 +197,24 @@ if (isset($_POST['save_submit'])) {
                  ?>
                     </select>
                 </div>
-
                 <div>
                     <label for='address1'>Address 1</label>
                     <?php if(isset($msg_address1)) print $msg_address1; ?>
                     <input id='address1' name='address1' type='text'
                         value='<?php if (isset($address1)) {print $address1;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='address2'>Address 2</label>
                     <?php if(isset($msg_address2)) print $msg_address2; ?>
                     <input id='address2' name='address2' type='text'
                         value='<?php if (isset($address2)) {print $address2;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='city'>City</label>
                     <?php if(isset($msg_city)) print $msg_city; ?>
                     <input id='city' name='city' type='text'
                         value='<?php if (isset($city)) {print $city;} else { print '';} ?>'><br>
                 </div>
-
-
                 <div>
                     <label for='country'>Country</label><br>
                     <?php if(isset($msg_country)) print $msg_country; ?>
@@ -248,7 +233,6 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='state'>State</label><br>
                     <?php if(isset($msg_state)) print $msg_state; ?>
@@ -266,51 +250,37 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='zip_code'>Zip code</label>
                     <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
                     <input id='zip_code' name='zip_code' type='text'
                         value='<?php if (isset($zip_code)) {print $zip_code;} else { print '';} ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='image_url'>Image url</label>
                     <?php if(isset($msg_image_url)) print $msg_image_url; ?>
                     <input id='image_url' name='image_url' type='text'
                         value='<?php if (isset($image_url)) {print $image_url;} else { print '';} ?>'><br>
                 </div>
-
                 <div>
                     <label for='notes'>Notes</label>
                     <?php if(isset($msg_notes)) print $msg_notes; ?>
                     <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
                 </div>
-
                 <br><br>
-
                 <div>
                     <?php if(isset($msg_active_status)) print $msg_active_status; ?>
                     <input <?php if (!isset($active_status) || $active_status=='on') {print "checked='checked'";} ?>
                         type='checkbox' id='active_status' name='active_status'> <label
                         for='active_status'>Status</label><br>
                 </div>
-
             </fieldset>
-
-
             <input id='save_submit' name='save_submit' type='submit' value='Save'>
-
-
         </form>
         <?php } ?>
-
     </main>
     <?php include('php/_footer.php'); ?>
-
 </body>
-
 </html>

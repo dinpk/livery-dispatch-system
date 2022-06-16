@@ -24,7 +24,7 @@ if ($run_query) {
 				parent.document.getElementById(\"package_name\").value = \"" . $row['package_name']  . "\";
 				parent.document.getElementById(\"key_customer_rate_packages\").value = \"" . $row['key_customer_rate_packages']  . "\";
 				closeOverlay2(\"fromiframe\");'>Select</a> &nbsp; 
-			<a href='customer_rate_package_view.php?customer_rate_packagesid=" . $row['key_customer_rate_packages'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
+			<a href='customer_rate_package_view.php?customerratepackageid=" . $row['key_customer_rate_packages'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
 			</td>
 			</tr>
 			";
@@ -46,30 +46,26 @@ if ($run_query) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER RATE PACKAGES</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER RATE PACKAGES</title>
+    <?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
-	
-	<section id='sub-menu'>
-		<h3>CUSTOMER RATE PACKAGES</h3>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='search-forms'>
-			<form method='get'>
-					<input id='search' name='search' type='text' autofocus required> 
-					<input type='submit' value='Search'> &nbsp; <a href='customer_rate_package_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
-			</form>
-		</section>
-		<?php 
+    <section id='sub-menu'>
+        <h3>CUSTOMER RATE PACKAGES</h3>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='search-forms'>
+            <form method='get'>
+                <input id='search' name='search' type='text' autofocus required>
+                <input type='submit' value='Search'> &nbsp; <a href='customer_rate_package_save.php'
+                    target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>
-

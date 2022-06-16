@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php');
 $show_record = true;
-if (isset($_GET['settings_workshop_name_valuesid'])) {
-	$record_id = trim($_GET['settings_workshop_name_valuesid']);
+if (isset($_GET['settingsworkshopnameid'])) {
+	$record_id = trim($_GET['settingsworkshopnameid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	if (isset($_GET['delete'])) {
 		$results = mysqli_query($dbcon, "DELETE FROM settings_workshop_name_values WHERE key_settings_workshop_name_values = $record_id");
@@ -34,80 +34,63 @@ if (isset($_GET['settings_workshop_name_valuesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
- <title>SETTINGS WORKSHOP NAME VALUES</title>
- <?php include('php/_head.php'); ?>
+    <title>SETTINGS - WORKSHOP NAME</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-delete' class='page_delete page_settings_workshop_name_values_delete'>
-
- <?php if (isset($message)) print $message; ?>
-
- <?php if ($show_record) { ?>
-
- <main>
-
-     <div class='center'>
-         <p class='red'><b>Do you really want to delete this record?</b></p>
-         <p>
-             <br>
-             <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp 
-             <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
-         </p>
-         <br><hr><br>
-     </div>
-
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Workshop name</td>
-         <td class='value-cell'><?php if (isset($workshop_name)) print $workshop_name; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Contact person</td>
-         <td class='value-cell'><?php if (isset($contact_name)) print $contact_name; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Address 1</td>
-         <td class='value-cell'><?php if (isset($address1)) print $address1; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Address 2</td>
-         <td class='value-cell'><?php if (isset($address2)) print $address2; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Phone</td>
-         <td class='value-cell'><?php if (isset($phone)) print $phone; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Email</td>
-         <td class='value-cell'><?php if (isset($email)) print $email; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>City</td>
-         <td class='value-cell'><?php if (isset($city)) print $city; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>State</td>
-         <td class='value-cell'><?php if (isset($state)) print $state; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Zip code</td>
-         <td class='value-cell'><?php if (isset($zip_code)) print $zip_code; ?></td>
-         </tr>
-
-     </table>
-
- </main>
-
- <?php } // show_record ?>
-
-
- <?php include('php/_footer.php'); ?>
+<body id='page-delete'>
+    <?php if (isset($message)) print $message; ?>
+    <?php if ($show_record) { ?>
+    <main>
+        <div class='center'>
+            <p class='red'><b>Do you really want to delete this record?</b></p>
+            <p>
+                <br>
+                <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp
+                <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
+            </p>
+            <br>
+            <hr><br>
+        </div>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Workshop name</td>
+                <td class='value-cell'><?php if (isset($workshop_name)) print $workshop_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Contact person</td>
+                <td class='value-cell'><?php if (isset($contact_name)) print $contact_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Address 1</td>
+                <td class='value-cell'><?php if (isset($address1)) print $address1; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Address 2</td>
+                <td class='value-cell'><?php if (isset($address2)) print $address2; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Phone</td>
+                <td class='value-cell'><?php if (isset($phone)) print $phone; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Email</td>
+                <td class='value-cell'><?php if (isset($email)) print $email; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>City</td>
+                <td class='value-cell'><?php if (isset($city)) print $city; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>State</td>
+                <td class='value-cell'><?php if (isset($state)) print $state; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Zip code</td>
+                <td class='value-cell'><?php if (isset($zip_code)) print $zip_code; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php } // show_record ?>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

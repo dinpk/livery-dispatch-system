@@ -851,7 +851,7 @@ main ul {
     display: none !important;
 }
 
-.page_trips_listing #dates_form,
+.page_trip_listing #dates_form,
 .page_trips_conclude_listing #dates_form,
 .page_customer_invoices_listing #dates_form,
 .page_trips_payroll_settlement_listing #dates_form,

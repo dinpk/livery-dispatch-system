@@ -6,30 +6,6 @@ $focus_field = 'contact_name';
 if (isset($_GET['customerbillingcontactid'])) {
 	$record_id = trim($_GET['customerbillingcontactid']);
 	if (!is_numeric($record_id)) exit;
-	if (!isset($_POST['save_submit'])) {
-		$results = mysqli_query($dbcon, "SELECT * FROM customer_billing_contacts WHERE key_customer_billing_contacts = $record_id");
-		if ($row = mysqli_fetch_assoc($results)) {
-			$contact_name = $row['contact_name'];
-			$card_type = $row['card_type'];
-			$card_number = $row['card_number'];
-			$card_expiration = $row['card_expiration'];
-			$card_security_code = $row['card_security_code'];
-			$name_on_card = $row['name_on_card'];
-			$address1 = $row['address1'];
-			$address2 = $row['address2'];
-			$city = $row['city'];
-			$state = $row['state'];
-			$country = $row['country'];
-			$zip_code = $row['zip_code'];
-			$confirmation_email = $row['confirmation_email'];
-			$phone = $row['phone'];
-			$notes = $row['notes'];
-			$active_status = $row['active_status'];
-		} else {
-			$message = "<div class='failure-result'>Record not found</div>";
-			$show_form = false;
-		}
-	}
 }
 // save button clicked
 if (isset($_POST['save_submit'])) {
@@ -132,32 +108,7 @@ if (isset($_POST['save_submit'])) {
 	}
 	// no validation error
 	if ($error == 0) {
-		if (isset($record_id) && $error != 1) { // update
-			$results = mysqli_query($dbcon, "UPDATE customer_billing_contacts SET 
-			contact_name = '" . sd($dbcon, $contact_name) . "',
-			card_type = '" . sd($dbcon, $card_type) . "',
-			card_number = '" . sd($dbcon, $card_number) . "',
-			card_expiration = '" . sd($dbcon, $card_expiration) . "',
-			card_security_code = '" . sd($dbcon, $card_security_code) . "',
-			name_on_card = '" . sd($dbcon, $name_on_card) . "',
-			address1 = '" . sd($dbcon, $address1) . "',
-			address2 = '" . sd($dbcon, $address2) . "',
-			city = '" . sd($dbcon, $city) . "',
-			state = '" . sd($dbcon, $state) . "',
-			country = '" . sd($dbcon, $country) . "',
-			zip_code = '" . sd($dbcon, $zip_code) . "',
-			confirmation_email = '" . sd($dbcon, $confirmation_email) . "',
-			phone = '" . sd($dbcon, $phone) . "',
-			notes = '" . sd($dbcon, $notes) . "',
-			active_status = '" . sd($dbcon, $active_status) . "'
-				WHERE key_customer_billing_contacts = $record_id");
-			if ($results) {
-				$message = "<script>parent.location.reload(false);</script>";
-			} else {
-				//print mysqli_error($dbcon);
-				die('Unable to update, please contact your system administrator.');
-			}
-		} else if ($error != 1) { // insert
+		if ($error != 1) {
 			$results = mysqli_query($dbcon, "INSERT INTO customer_billing_contacts (
 			contact_name,
 			card_type,
@@ -226,9 +177,28 @@ if (isset($_POST['save_submit'])) {
 <head>
     <title>CUSTOMER BILLING CONTACTS</title>
     <?php include('php/_head.php'); ?>
+    <script>
+    async function pullBillingContact() {
+        if ("billing_contact" in localStorage) {
+            let contact = JSON.parse(localStorage.getItem("billing_contact"));
+            document.getElementById("contact_name").value = contact.name;
+            document.getElementById("name_on_card").value = contact.name;
+            document.getElementById("address1").value = contact.address1;
+            document.getElementById("address2").value = contact.address2;
+            document.getElementById("city").value = contact.city;
+            document.getElementById("country").value = contact.country;
+            document.getElementById("zip_code").value = contact.zip_code;
+            document.getElementById("phone").value = contact.phone;
+            document.getElementById("confirmation_email").value = contact.email;
+            document.getElementById("country").onchange();
+            await delay(1000);
+            document.getElementById("state").value = contact.state;
+        }
+    }
+    </script>
 </head>
 
-<body id='page-save'>
+<body id='page-save' onload='pullBillingContact();'>
     <section id='sub-menu'>
         <div class='left-block'>customer billing contacts</div>
         <div class='right-block'>

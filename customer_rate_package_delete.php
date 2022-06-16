@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php');
 $show_record = true;
-if (isset($_GET['customer_rate_packagesid'])) {
-	$record_id = trim($_GET['customer_rate_packagesid']);
+if (isset($_GET['customerratepackageid'])) {
+	$record_id = trim($_GET['customerratepackageid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	if (isset($_GET['delete'])) {
 		$results = mysqli_query($dbcon, "DELETE FROM customer_rate_packages WHERE key_customer_rate_packages = $record_id");
@@ -28,65 +28,51 @@ if (isset($_GET['customer_rate_packagesid'])) {
 	}
 }
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
- <title>CUSTOMER RATE PACKAGES</title>
- <?php include('php/_head.php'); ?>
+    <title>CUSTOMER RATE PACKAGES</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-delete' class='page_delete page_customer_rate_packages_delete'>
 
- <?php if (isset($message)) print $message; ?>
-
- <?php if ($show_record) { ?>
-
- <main>
-
-     <div class='center'>
-         <p class='red'><b>Do you really want to delete this record?</b></p>
-         <p>
-             <br>
-             <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp 
-             <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
-         </p>
-         <br><hr><br>
-     </div>
-
-     <table class='record-table'>
-         <tr>
-         <td class='label-cell'>Package name</td>
-         <td class='value-cell'><?php if (isset($package_name)) print $package_name; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Gratuity %</td>
-         <td class='value-cell'><?php if (isset($gratuity_percent)) print $gratuity_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Gas surcharge %</td>
-         <td class='value-cell'><?php if (isset($gas_surcharge_percent)) print $gas_surcharge_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Admin fee %</td>
-         <td class='value-cell'><?php if (isset($admin_fee_percent)) print $admin_fee_percent; ?></td>
-         </tr>
-
-         <tr>
-         <td class='label-cell'>Discount %</td>
-         <td class='value-cell'><?php if (isset($discount_percent)) print $discount_percent; ?></td>
-         </tr>
-
-     </table>
-
- </main>
-
- <?php } // show_record ?>
-
-
- <?php include('php/_footer.php'); ?>
+<body id='page-delete'>
+    <?php if (isset($message)) print $message; ?>
+    <?php if ($show_record) { ?>
+    <main>
+        <div class='center'>
+            <p class='red'><b>Do you really want to delete this record?</b></p>
+            <p>
+                <br>
+                <a class='button-big' href='<?php print $_SERVER['REQUEST_URI']; ?>&delete=1'>Delete</a> &nbsp
+                <a class='button-big' href='#' onclick='parent.location.reload(false);'>Cancel</a><br>
+            </p>
+            <br>
+            <hr><br>
+        </div>
+        <table class='record-table'>
+            <tr>
+                <td class='label-cell'>Package name</td>
+                <td class='value-cell'><?php if (isset($package_name)) print $package_name; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Gratuity %</td>
+                <td class='value-cell'><?php if (isset($gratuity_percent)) print $gratuity_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Gas surcharge %</td>
+                <td class='value-cell'><?php if (isset($gas_surcharge_percent)) print $gas_surcharge_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Admin fee %</td>
+                <td class='value-cell'><?php if (isset($admin_fee_percent)) print $admin_fee_percent; ?></td>
+            </tr>
+            <tr>
+                <td class='label-cell'>Discount %</td>
+                <td class='value-cell'><?php if (isset($discount_percent)) print $discount_percent; ?></td>
+            </tr>
+        </table>
+    </main>
+    <?php } // show_record ?>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

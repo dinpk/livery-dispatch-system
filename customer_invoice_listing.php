@@ -1,6 +1,6 @@
 <?php 
 include('php/_code.php'); 
-$base_file_name = 'customer_invoices_listing';
+$base_file_name = 'customer_invoice_listing';
 $url = $_SERVER['REQUEST_URI'];
 // remove query string
 if (strpos($url, '?sort_by')) $url = substr($url, 0, strpos($url, '?sort_by'));
@@ -23,10 +23,10 @@ $items_per_page = '50';
 $total_items = '0';
 $sql_where_alt = '';
 $reset_url = $base_file_name . '.php';
-if (isset($_GET['customer_passengersid']) && is_numeric($_GET['customer_passengersid'])) {
-	$key_customer_passengers = $_GET['customer_passengersid'];
-	$sql_where_alt = ' AND customer_invoices.key_customer_passengers = ' . $_GET['customer_passengersid'];
-	$reset_url = "$base_file_name.php?customer_passengersid=$key_customer_passengers";
+if (isset($_GET['customerpassengerid']) && is_numeric($_GET['customerpassengerid'])) {
+	$key_customer_passengers = $_GET['customerpassengerid'];
+	$sql_where_alt = ' AND customer_invoices.key_customer_passengers = ' . $_GET['customerpassengerid'];
+	$reset_url = "$base_file_name.php?customerpassengerid=$key_customer_passengers";
 }
 if (isset($_POST['items_per_page'])) {
 	$items_per_page = $_POST['items_per_page'];
@@ -77,9 +77,7 @@ if ($results) {
 		$record_id = $row['key_customer_invoices'];
 		$total_amount = $row['amount'];
 		$paid_amount = $row['amount_paid'];
-		$balance = round($total_amount - $paid_amount, 2);
-		
-		if ($paid_amount < $total_amount) {
+		$balance = round($total_amount - $paid_amount, 2);		if ($paid_amount < $total_amount) {
 			$balance = "<span class='red'>$balance</span>";
 		} else if ($paid_amount > $total_amount) {
 			$balance = "<span class='blue'>$balance</span>";
@@ -97,8 +95,8 @@ if ($results) {
 		<td class='right'>" . $paid_amount . "</td> 
 		<td class='right'><h4>" . $balance . "</h4></td>
 		<td class='record-icons'>
-			<a href='customer_invoice_save.php?customer_invoicesid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
-			<a href='customer_invoice_print.php?customer_invoicesid=$record_id' target='_blank'>☷</a> 
+			<a href='customer_invoice_save.php?customerinvoiceid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 
+			<a href='customer_invoice_print.php?customerinvoiceid=$record_id' target='_blank'>☷</a> 
 		</td>
 		</tr>";
 	}
@@ -140,46 +138,47 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER INVOICES</title>
-	<?php include('php/_head.php'); ?>
+    <title>CUSTOMER INVOICES</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-listing' class='page_listing page_customer_invoices_listing'>
-	<?php include('php/_header.php'); ?>
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/nav_bill.png"> customer invoices</div>
-		<div class='right-block'>
-			☢ <a href='customer_invoice_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Invoices</a> 
-			&nbsp;
-			☷ <a href='customer_invoice_print.php' target='_blank'>Print</a>
-		</div>
-	</section>
+<body id='page-listing'>
+    <?php include('php/_header.php'); ?>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/nav_bill.png"> customer invoices</div>
+        <div class='right-block'>
+            ☢ <a href='customer_invoice_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Invoices</a>
+            &nbsp;
+            ☷ <a href='customer_invoice_print.php' target='_blank'>Print</a>
+        </div>
+    </section>
 
-	<div class='page-image' style='background-image:url(images/page-invoices.jpg);'></div>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='listing-forms'>
-			<form id='dates_form' method='get'>
-				Ending between 
-				<input name='date_from' type='date' value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> and  
-				<input name='date_to' type='date' value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'> 
-				<?php
-				if (isset($key_customer_passengers)) print "<input name='customer_passengersid' type='hidden' value='$key_customer_passengers'>";
+    <div class='page-image' style='background-image:url(images/page-invoices.jpg);'></div>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='listing-forms'>
+            <form id='dates_form' method='get'>
+                Ending between
+                <input name='date_from' type='date'
+                    value='<?php if (isset($date_from)) { print $date_from; } else { print date('Y-m-d'); } ?>'> and
+                <input name='date_to' type='date'
+                    value='<?php if (isset($date_to)) { print $date_to; } else { print date('Y-m-d'); } ?>'>
+                <?php
+				if (isset($key_customer_passengers)) print "<input name='customerpassengerid' type='hidden' value='$key_customer_passengers'>";
 				?>
-				<input type='submit' value='Get'>
-			</form>
-			<form id='search_form' method='get'>
-				<input name='search' type='text' placeholder='Invoice #' <?php if (isset($search)) print "value='$search' autofocus"; ?> required> 
-				<?php
-				if (isset($key_customer_passengers)) print "<input name='customer_passengersid' type='hidden' value='$key_customer_passengers'>";
+                <input type='submit' value='Get'>
+            </form>
+            <form id='search_form' method='get'>
+                <input name='search' type='text' placeholder='Invoice #'
+                    <?php if (isset($search)) print "value='$search' autofocus"; ?> required>
+                <?php
+				if (isset($key_customer_passengers)) print "<input name='customerpassengerid' type='hidden' value='$key_customer_passengers'>";
 				?>
-				<input type='submit' value='Search'>
-			</form>
-			<form id='items_per_page_form' method='post'>
-				<input type='hidden' name='forward_url' value='<?php print $url; ?>'>
-				<select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
-					<?php
+                <input type='submit' value='Search'>
+            </form>
+            <form id='items_per_page_form' method='post'>
+                <input type='hidden' name='forward_url' value='<?php print $url; ?>'>
+                <select name='items_per_page' onchange="document.forms['items_per_page_form'].submit();">
+                    <?php
 					print "
 						<option" . (($items_per_page == '10') ? " selected='selected'" : '') .  ">10</option>
 						<option" . (($items_per_page == '20') ? " selected='selected'" : '') .  ">20</option>
@@ -189,14 +188,14 @@ if ($results) {
 						<option" . (($items_per_page == '200') ? " selected='selected'" : '') .  ">200</option>
 					";
 					?>
-				</select> per page &nbsp; &nbsp; 
-				<input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
-			</form>
-		</section>
-		<?php 
+                </select> per page &nbsp; &nbsp;
+                <input type='button' value='Reset' onclick="window.location='<?php print $reset_url; ?>'">
+            </form>
+        </section>
+        <?php 
 			if (isset($listing_html)) print $listing_html;
 		?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

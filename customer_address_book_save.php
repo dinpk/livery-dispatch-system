@@ -1,10 +1,9 @@
 <?php 
 include('php/_code.php');
 // parent id passed
-if (isset($_GET['customer_passengersid'])) {
-	$parent_id = trim($_GET['customer_passengersid']);
+if (isset($_GET['customerpassengerid'])) {
+	$parent_id = trim($_GET['customerpassengerid']);
 	if (!is_numeric($parent_id)) die('Parent table id is invalid');
-	
 	$results = mysqli_query($dbcon, "SELECT first_name, last_name FROM customer_passengers WHERE key_customer_passengers = $parent_id");
 	if ($row = mysqli_fetch_assoc($results)) {
 		$parent_record_label = "Address — " . $row['first_name'] . " " . $row['last_name'];
@@ -18,15 +17,11 @@ $show_form = true;
 $focus_field = 'title';
 // id passed for update
 if (isset($_GET['customer_address_bookid'])) {
-	
 	$record_id = trim($_GET['customer_address_bookid']);
-	
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
-		
 		$results = mysqli_query($dbcon, "SELECT * FROM customer_address_book WHERE key_customer_address_book = $record_id  AND key_customer_passengers = $parent_id");
 		if ($row = mysqli_fetch_assoc($results)) {
-			
 			$title = $row['title'];
 			$category = $row['category'];
 			$address1 = $row['address1'];
@@ -40,21 +35,17 @@ if (isset($_GET['customer_address_bookid'])) {
 			$message = "<div class='failure-result'>Record not found</div>";
 			$show_form = false;
 		}
-		
-		
 	}
 }
 $form_url_parameter = '';
 if (isset($parent_id) && isset($record_id)) {
-	$form_url_parameter = "?customer_address_bookid=$record_id&customer_passengersid=$parent_id"; // for record update		
+	$form_url_parameter = "?customer_address_bookid=$record_id&customerpassengerid=$parent_id"; // for record update		
 } else if (isset($parent_id)) {
-	$form_url_parameter = "?customer_passengersid=$parent_id"; // for new record
+	$form_url_parameter = "?customerpassengerid=$parent_id"; // for new record
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
-	
 	$error = 0;
-	
 	// validation of input data
 	$notes = trim($_POST['notes']);
 	if (strlen($notes) > 2000) {
@@ -62,68 +53,56 @@ if (isset($_POST['save_submit'])) {
 		$focus_field = 'notes';
 		$error = 1;
 	}
-	
 	$image_url = trim($_POST['image_url']);
 	if (strlen($image_url) > 100) {
 		$msg_image_url = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'image_url';
 		$error = 1;
 	}
-	
 	$zip_code = trim($_POST['zip_code']);
 	if (strlen($zip_code) > 50) {
 		$msg_zip_code = "<div class='message-error'>Provide a valid value up to length 50</div>";
 		$focus_field = 'zip_code';
 		$error = 1;
 	}
-	
 	$state = trim($_POST['state']);
 	if (strlen($state) > 100) {
 		$msg_state = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'state';
 		$error = 1;
 	}
-	
 	$city = trim($_POST['city']);
 	if (strlen($city) > 100) {
 		$msg_city = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'city';
 		$error = 1;
 	}
-	
 	$address2 = trim($_POST['address2']);
 	if (strlen($address2) > 100) {
 		$msg_address2 = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'address2';
 		$error = 1;
 	}
-	
 	$address1 = trim($_POST['address1']);
 	if (strlen($address1) > 100) {
 		$msg_address1 = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'address1';
 		$error = 1;
 	}
-	
 	$category = trim($_POST['category']);
 	if (strlen($category) > 100) {
 		$msg_category = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'category';
 		$error = 1;
 	}
-	
 	$title = trim($_POST['title']);
 	if (strlen($title) > 100) {
 		$msg_title = "<div class='message-error'>Provide a valid value up to length 100</div>";
 		$focus_field = 'title';
 		$error = 1;
 	}
-	
 	// no validation error
 	if ($error == 0) {
-		
-		
-		
 		if (isset($record_id) && $error != 1) { // update
 			$results = mysqli_query($dbcon, "UPDATE customer_address_book SET 
 				title = '" . sd($dbcon, $title) . "', 
@@ -162,49 +141,33 @@ if (isset($_POST['save_submit'])) {
 			}
 			$show_form = false;
 		}	
-		
-		
-		
 	}
-	
 }
 ?>
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>CUSTOMER ADDRESS BOOK</title>
     <?php include('php/_head.php'); ?>
 </head>
-
 <body id='page-save' class='foreign'>
-
     <?php if (isset($parent_record_label)) print '<h2>' . $parent_record_label . '</h2>'; ?>
-
     <?php if (isset($message)) print $message; ?>
-
     <main>
-
         <?php if (isset($show_form) && $show_form) { ?>
         <form method='post' action='customer_address_book_save.php<?php print $form_url_parameter; ?>'>
-
             <fieldset>
-
                 <div>
                     <label for='title'>Title</label><br>
                     <?php if(isset($msg_title)) print $msg_title; ?>
-                    <input id='title' name='title' type='text'
-                        value='<?php if (isset($title)) {print $title;}  ?>'><br>
+                    <input id='title' name='title' type='text' value='<?php if (isset($title)) {print $title;}  ?>'><br>
                 </div>
-
                 <div>
                     <label for='category'>Category</label><br>
                     <?php if(isset($msg_category)) print $msg_category; ?>
                     <select id='category' name='category'>
                         <?php 
 						$options = '';
-						
 						$results = mysqli_query($dbcon, 'SELECT category FROM settings_landmark_values');
 						while ($row = mysqli_fetch_assoc($results)) {
 							$selection = '';
@@ -215,28 +178,23 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </select>
                 </div>
-
                 <div>
                     <label for='address1'>Address 1</label><br>
                     <?php if(isset($msg_address1)) print $msg_address1; ?>
-                    <input id='address1' name='address1'
-                        type='text' value='<?php if (isset($address1)) {print $address1;}  ?>'><br>
+                    <input id='address1' name='address1' type='text'
+                        value='<?php if (isset($address1)) {print $address1;}  ?>'><br>
                 </div>
-
                 <div>
                     <label for='address2'>Address 2</label><br>
                     <?php if(isset($msg_address2)) print $msg_address2; ?>
-                    <input id='address2' name='address2'
-                        type='text' value='<?php if (isset($address2)) {print $address2;}  ?>'><br>
+                    <input id='address2' name='address2' type='text'
+                        value='<?php if (isset($address2)) {print $address2;}  ?>'><br>
                 </div>
-
                 <div>
                     <label for='city'>City</label><br>
                     <?php if(isset($msg_city)) print $msg_city; ?>
-                    <input id='city' name='city' type='text'
-                        value='<?php if (isset($city)) {print $city;}  ?>'><br>
+                    <input id='city' name='city' type='text' value='<?php if (isset($city)) {print $city;}  ?>'><br>
                 </div>
-
                 <div>
                     <label for='state'>State</label><br>
                     <?php if(isset($msg_state)) print $msg_state; ?>
@@ -254,43 +212,30 @@ if (isset($_POST['save_submit'])) {
 						?>
                     </datalist>
                 </div>
-
                 <div>
                     <label for='zip_code'>Zip code</label><br>
                     <?php if(isset($msg_zip_code)) print $msg_zip_code; ?>
-                    <input id='zip_code' name='zip_code'
-                        type='text' value='<?php if (isset($zip_code)) {print $zip_code;}  ?>'><br>
+                    <input id='zip_code' name='zip_code' type='text'
+                        value='<?php if (isset($zip_code)) {print $zip_code;}  ?>'><br>
                 </div>
-
             </fieldset>
             <fieldset>
-
                 <div>
                     <label for='image_url'>Image URL</label><br>
                     <?php if(isset($msg_image_url)) print $msg_image_url; ?>
                     <input id='image_url' name='image_url' type='image url'
                         value='<?php if (isset($image_url)) {print $image_url;}  ?>'><br>
                 </div>
-
                 <div>
                     <label for='notes'>Notes</label><br>
                     <?php if(isset($msg_notes)) print $msg_notes; ?>
-                    <textarea id='notes'
-                        name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
+                    <textarea id='notes' name='notes'><?php if (isset($notes)) print $notes; ?></textarea><br>
                 </div>
-
             </fieldset>
-
-            
-                <input id='save_submit' name='save_submit' type='submit' value='Save'>
-            
-
+            <input id='save_submit' name='save_submit' type='submit' value='Save'>
         </form>
         <?php } ?>
-
     </main>
     <?php include('php/_footer.php'); ?>
-
 </body>
-
 </html>

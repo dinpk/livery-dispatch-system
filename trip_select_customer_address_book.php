@@ -54,30 +54,26 @@ if ($run_query) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CUSTOMER PASSENGERS</title>
-	<?php include('php/_head.php'); ?>
+    <title>TRIP - CUSTOMER ADDRESS</title>
+    <?php include('php/_head.php'); ?>
 </head>
 <body id='page-select' onload="document.getElementById('search').focus();">
-	
-	<section id='sub-menu'>
-		<h3>CUSTOMER PASSENGERS</h3>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-
-	<main>
-		<section id='search-forms'>
-			<form method='post'>
-					<input id='search' name='search' type='text' autofocus required> 
-					<input type='submit' value='Search'> &nbsp; <a href='customer_passenger_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
-			</form>
-		</section>
-		<?php 
+    <section id='sub-menu'>
+        <h3>SELECT CUSTOMER ADDRESS</h3>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <section id='search-forms'>
+            <form method='post'>
+                <input id='search' name='search' type='text' autofocus required>
+                <input type='submit' value='Search'> &nbsp; 
+				<a href='customer_passenger_save.php' target='overlay-iframe3' onclick='overlayOpen3();'>Add new</a>
+            </form>
+        </section>
+        <?php 
 		if (isset($listing_html)) print $listing_html;
 		?>
-		
-	</main>
-	<?php include('php/_footer.php'); ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>
-

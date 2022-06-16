@@ -1,8 +1,8 @@
 <?php 
 include('php/_code.php');
 $show_record = true;
-if (isset($_GET['logsid'])) {
-	$record_id = trim($_GET['logsid']);
+if (isset($_GET['logid'])) {
+	$record_id = trim($_GET['logid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	if (isset($_GET['delete'])) {
 		$results = mysqli_query($dbcon, "DELETE FROM logs WHERE key_logs = $record_id");

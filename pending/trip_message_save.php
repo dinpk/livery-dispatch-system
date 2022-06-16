@@ -20,7 +20,7 @@ if (isset($_GET['trips_messagesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$message = trim($_POST['message']);
@@ -145,11 +145,7 @@ if (isset($_POST['save_submit'])) {
              <textarea id='message' name='message'><?php if (isset($message)) print $message; ?></textarea><br>
          </div>
 
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
+		</fieldset>		<input id='save_submit' name='save_submit' type='submit' value='Save'>		
 	</form>
 	<?php } ?>
 

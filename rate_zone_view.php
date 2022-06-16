@@ -1,7 +1,7 @@
 <?php 
 include('php/_code.php');
-if (isset($_GET['rates_zonesid'])) {
-	$record_id = trim($_GET['rates_zonesid']);
+if (isset($_GET['ratezoneid'])) {
+	$record_id = trim($_GET['ratezoneid']);
 	if (!is_numeric($record_id)) die('Invalid record id.');
 	$results = mysqli_query($dbcon, "SELECT * FROM rates_zones WHERE key_rates_zones = $record_id");
 	if ($row = mysqli_fetch_assoc($results)) {
@@ -21,23 +21,19 @@ if (isset($_GET['rates_zonesid'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>RATES ZONES</title>
-	<?php include('php/_head.php'); ?>
+    <title>RATES ZONES</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-view' class='page_view page_rates_zones_view'>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-		
-		<div class='flex'>
-			<section>
-				<?php 
+<body id='page-view'>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <div class='flex'>
+            <section>
+                <?php 
 					$active_symbol = (($active_status == "on") ? "<p class='green'>&#10003;</p>" : "<p class='red'>x</p>");
 					if (empty($image_url)) {
 						print "<div class='profile-avatar' style='background-image:url(images/icons/avatar_zone.png);'></div> ";
 					}
-					
 					print "
 						<h2>$from_city, $from_state</h2>
 						<div class='font-size-200 center'>⇩</div>
@@ -45,10 +41,9 @@ if (isset($_GET['rates_zonesid'])) {
 						<h1>$active_symbol</h1>
 					";
 				?>
-			</section>
-			<section>
-				
-				<?php 
+            </section>
+            <section>
+                <?php 
 					print "
 						<table>
 						<tr><td>From</td><td>$from_city, $from_state</td></tr>
@@ -60,11 +55,9 @@ if (isset($_GET['rates_zonesid'])) {
 						</table>
 					";
 				?>
-				
-			</section>
-		</div>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
+            </section>
+        </div>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

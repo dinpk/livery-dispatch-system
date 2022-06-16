@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'gratuity_percent';
 // id passed for update
-if (isset($_GET['settings_tripsid'])) {
-	$record_id = trim($_GET['settings_tripsid']);
+if (isset($_GET['settingstripid'])) {
+	$record_id = trim($_GET['settingstripid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_trips WHERE key_settings_trips = $record_id");
@@ -19,7 +19,7 @@ if (isset($_GET['settings_tripsid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$tax_percent = trim($_POST['tax_percent']);
@@ -92,60 +92,49 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS - TRIPS</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS - TRIP</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_trips_save'>
-
-	<section id='sub-menu'>
-		<div class='left-block'><img src="images/icons/set_trip_values.png"> settings - trips</div>
-		<div class='right-block'>
-
-		</div>
-	</section>
-
-	<?php if (isset($message)) print $message; ?>
-	
-	<main>
-
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-
-         <div>
-             <label for='gratuity_percent'>Gratuity %</label>
-             <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
-             <input id='gratuity_percent' name='gratuity_percent' type='number' step='0.10' value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='gas_surcharge_percent'>Gas surcharge %</label>
-             <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
-             <input id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10' value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='admin_fee_percent'>Admin fee %</label>
-             <?php if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; ?>
-             <input id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10' value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
-         </div>
-
-         <div>
-             <label for='tax_percent'>Tax %</label>
-             <?php if(isset($msg_tax_percent)) print $msg_tax_percent; ?>
-             <input id='tax_percent' name='tax_percent' type='number' step='0.10' value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'><br>
-         </div>
-
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-		
-	</form>
-	<?php } ?>
-
-	</main>
-	<?php include('php/_footer.php'); ?>
-
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'><img src="images/icons/set_trip_values.png"> settings - trips</div>
+        <div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='gratuity_percent'>Gratuity %</label>
+                    <?php if(isset($msg_gratuity_percent)) print $msg_gratuity_percent; ?>
+                    <input id='gratuity_percent' name='gratuity_percent' type='number' step='0.10'
+                        value='<?php if (isset($gratuity_percent)) {print $gratuity_percent;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='gas_surcharge_percent'>Gas surcharge %</label>
+                    <?php if(isset($msg_gas_surcharge_percent)) print $msg_gas_surcharge_percent; ?>
+                    <input id='gas_surcharge_percent' name='gas_surcharge_percent' type='number' step='0.10'
+                        value='<?php if (isset($gas_surcharge_percent)) {print $gas_surcharge_percent;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='admin_fee_percent'>Admin fee %</label>
+                    <?php if(isset($msg_admin_fee_percent)) print $msg_admin_fee_percent; ?>
+                    <input id='admin_fee_percent' name='admin_fee_percent' type='number' step='0.10'
+                        value='<?php if (isset($admin_fee_percent)) {print $admin_fee_percent;} else { print '0';} ?>'><br>
+                </div>
+                <div>
+                    <label for='tax_percent'>Tax %</label>
+                    <?php if(isset($msg_tax_percent)) print $msg_tax_percent; ?>
+                    <input id='tax_percent' name='tax_percent' type='number' step='0.10'
+                        value='<?php if (isset($tax_percent)) {print $tax_percent;} else { print '0';} ?>'><br>
+                </div>
+            </fieldset>
+			<input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

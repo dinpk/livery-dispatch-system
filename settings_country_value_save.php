@@ -3,8 +3,8 @@ include('php/_code.php');
 $show_form = true;
 $focus_field = 'country';
 // id passed for update
-if (isset($_GET['settings_country_valuesid'])) {
-	$record_id = trim($_GET['settings_country_valuesid']);
+if (isset($_GET['settingscountryid'])) {
+	$record_id = trim($_GET['settingscountryid']);
 	if (!is_numeric($record_id)) exit;
 	if (!isset($_POST['save_submit'])) {
 		$results = mysqli_query($dbcon, "SELECT * FROM settings_country_values WHERE key_settings_country_values = $record_id");
@@ -17,7 +17,7 @@ if (isset($_GET['settings_country_valuesid'])) {
 		}
 	}
 }
-// 'Save' button clicked
+// save button clicked
 if (isset($_POST['save_submit'])) {
 	$error = 0;
 	$country_code = trim($_POST['country_code']);
@@ -72,36 +72,36 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SETTINGS COUNTRY VALUES</title>
-	<?php include('php/_head.php'); ?>
+    <title>SETTINGS COUNTRY</title>
+    <?php include('php/_head.php'); ?>
 </head>
-<body id='page-save' class='page_save page_settings_country_values_save'>
-	<section id='sub-menu'>
-		<div class='left-block'></div>
-		<div class='right-block'>
-		</div>
-	</section>
-	<?php if (isset($message)) print $message; ?>
-	<main>
-	<?php if (isset($show_form) && $show_form) { ?>
-	<form method='post'>
-		<fieldset>
-         <div>
-             <label for='country'>Country</label> <span class='red'> *</span>             <?php if(isset($msg_country)) print $msg_country; ?>
-             <input id='country' name='country' type='text' value='<?php if (isset($country)) {print $country;} else { print '';} ?>' required><br>
-         </div>
-         <div>
-             <label for='country_code'>Country code</label>
-			 <?php if(isset($msg_country_code)) print $msg_country_code; ?>
-             <input id='country_code' name='country_code' type='text' value='<?php if (isset($country_code)) {print $country_code;} else { print '';} ?>'><br>
-         </div>
-		</fieldset>
-		
-		<input id='save_submit' name='save_submit' type='submit' value='Save'>
-		
-	</form>
-	<?php } ?>
-	</main>
-	<?php include('php/_footer.php'); ?>
+<body id='page-save'>
+    <section id='sub-menu'>
+        <div class='left-block'></div>
+        <div class='right-block'>
+        </div>
+    </section>
+    <?php if (isset($message)) print $message; ?>
+    <main>
+        <?php if (isset($show_form) && $show_form) { ?>
+        <form method='post'>
+            <fieldset>
+                <div>
+                    <label for='country'>Country</label> <span class='red'> *</span>
+                    <?php if(isset($msg_country)) print $msg_country; ?>
+                    <input id='country' name='country' type='text'
+                        value='<?php if (isset($country)) {print $country;} else { print '';} ?>' required><br>
+                </div>
+                <div>
+                    <label for='country_code'>Country code</label>
+                    <?php if(isset($msg_country_code)) print $msg_country_code; ?>
+                    <input id='country_code' name='country_code' type='text'
+                        value='<?php if (isset($country_code)) {print $country_code;} else { print '';} ?>'><br>
+                </div>
+            </fieldset> <input id='save_submit' name='save_submit' type='submit' value='Save'>
+        </form>
+        <?php } ?>
+    </main>
+    <?php include('php/_footer.php'); ?>
 </body>
 </html>

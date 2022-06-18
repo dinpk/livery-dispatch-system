@@ -107,7 +107,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - VEHICLE TYPE</title>
+    <title>SETTINGS - VEHICLE TYPES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

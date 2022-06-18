@@ -109,7 +109,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - AIRLINE</title>
+    <title>SETTINGS - AIRLINES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

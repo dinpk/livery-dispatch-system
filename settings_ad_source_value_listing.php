@@ -107,7 +107,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - AD SOURCE</title>
+    <title>SETTINGS - AD SOURCES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

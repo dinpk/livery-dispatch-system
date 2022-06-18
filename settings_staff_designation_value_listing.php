@@ -103,7 +103,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - STAFF DESIGNATION</title>
+    <title>SETTINGS - STAFF DESIGNATIONS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

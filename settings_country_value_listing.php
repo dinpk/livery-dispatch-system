@@ -109,7 +109,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - COUNTRY</title>
+    <title>SETTINGS - COUNTRIES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

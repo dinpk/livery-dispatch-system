@@ -111,7 +111,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - TRIP STATUS</title>
+    <title>SETTINGS - TRIP STATUSES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

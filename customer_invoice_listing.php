@@ -138,13 +138,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER INVOICES</title>
+    <title>CUSTOMER - INVOICES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_bill.png"> customer invoices</div>
+        <div class='left-block'><img src="images/icons/nav_bill.png"> customer - invoices</div>
         <div class='right-block'>
             ☢ <a href='customer_invoice_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Invoices</a>
             &nbsp;

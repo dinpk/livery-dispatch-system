@@ -136,13 +136,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER CONTACTS</title>
+    <title>CUSTOMER - CONTACTS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_contacts.png"> customer contacts</div>
+        <div class='left-block'><img src="images/icons/nav_contacts.png"> customer - contacts</div>
         <div class='right-block'>
             ✢ <a href='customer_contact_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Contact</a>
         </div>

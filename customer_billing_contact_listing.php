@@ -123,13 +123,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER BILLING CONTACTS</title>
+    <title>CUSTOMER - BILLING CONTACTS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_billing_contacts.png"> customer billing contacts</div>
+        <div class='left-block'><img src="images/icons/nav_billing_contacts.png"> customer - billing contacts</div>
         <div class='right-block'>
             ✢ <a href='customer_billing_contact_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Billing Contact</a>
         </div>

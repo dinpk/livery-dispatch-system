@@ -134,7 +134,7 @@ if ($results) {
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_settle.png"> settle trips</div>
+        <div class='left-block'><img src="images/icons/nav_settle.png"> trips - payroll settlement</div>
         <div class='right-block'></div>
     </section>
     <div class='page-image' style='background-image:url(images/page-settle.jpg);'></div>

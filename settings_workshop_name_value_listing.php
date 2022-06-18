@@ -123,7 +123,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - WORKSHOP NAME</title>
+    <title>SETTINGS - WORKSHOPS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

@@ -109,7 +109,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - VEHICLE MODEL</title>
+    <title>SETTINGS - VEHICLE MODELS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

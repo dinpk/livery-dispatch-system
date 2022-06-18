@@ -107,7 +107,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - PAYMENT CARD TYPE</title>
+    <title>SETTINGS - PAYMENT CARD TYPES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

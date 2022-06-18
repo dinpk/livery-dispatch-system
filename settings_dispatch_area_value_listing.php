@@ -107,7 +107,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - DISPATCH AREA</title>
+    <title>SETTINGS - DISPATCH AREAS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

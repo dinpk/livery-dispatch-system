@@ -107,7 +107,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - INSURANCE COMPANY</title>
+    <title>SETTINGS - INSURANCE COMPANIES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

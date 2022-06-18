@@ -6,7 +6,7 @@ if (isset($_GET['tripid'])) {
 	if (!is_numeric($parent_id)) die('Parent table id is invalid');
 	$results = mysqli_query($dbcon, "SELECT key_trips, passenger_name FROM trips WHERE key_trips = $parent_id");
 	if ($row = mysqli_fetch_assoc($results)) {
-		$parent_record_label = "Trip # " . $row['key_trips'] . " - " . $row['passenger_name'];
+		$parent_record_label = "trip # - extra charges - " . $row['key_trips'] . " - " . $row['passenger_name'];
 	} else {
 		die('Parent id does not exist');
 	}

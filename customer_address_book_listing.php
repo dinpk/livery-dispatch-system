@@ -123,7 +123,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER ADDRESS BOOK</title>
+    <title>CUSTOMER - ADDRESS BOOK</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing' class='foreign'>

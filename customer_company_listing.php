@@ -127,13 +127,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER COMPANIES</title>
+    <title>CUSTOMER - COMPANIES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_companies.png"> customer companies</div>
+        <div class='left-block'><img src="images/icons/nav_companies.png"> customer - companies</div>
         <div class='right-block'>
             ✢ <a href='customer_company_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Company</a>
         </div>

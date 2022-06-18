@@ -107,7 +107,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - TRIP TYPE</title>
+    <title>SETTINGS - TRIP TYPES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

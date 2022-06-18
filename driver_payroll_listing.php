@@ -138,13 +138,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DRIVER PAYROLL</title>
+    <title>DRIVER - PAYROLL</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_drivers_payroll.png"> driver payroll</div>
+        <div class='left-block'><img src="images/icons/nav_drivers_payroll.png"> driver - payroll</div>
         <div class='right-block'>
             ☢ <a href='driver_payroll_create.php' target='overlay-iframe' onclick='overlayOpen();'>Create Payrolls</a>
             &nbsp;

@@ -115,13 +115,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER RATE PACKAGES</title>
+    <title>CUSTOMER - RATE PACKAGES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_rate_packages.png"> customer rate packages</div>
+        <div class='left-block'><img src="images/icons/nav_rate_packages.png"> customer - rate packages</div>
         <div class='right-block'>
             ✢ <a href='customer_rate_package_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Rate Package</a>
         </div>

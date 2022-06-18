@@ -111,7 +111,7 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - STATE</title>
+    <title>SETTINGS - STATES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>

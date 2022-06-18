@@ -156,13 +156,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CUSTOMER PASSENGERS</title>
+    <title>CUSTOMER - PASSENGERS</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/nav_passengers.png"> customer passengers</div>
+        <div class='left-block'><img src="images/icons/nav_passengers.png"> customer - passengers</div>
         <div class='right-block'>
             👤 <a href='customer_passenger_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Passenger</a>
         </div>

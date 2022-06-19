@@ -130,7 +130,7 @@ if ($results) {
     if (parent.document.getElementById("trip_extra_charges")) {
         let trip_extra_charges = <?php print $trip_extra_charges; ?>;
         parent.document.getElementById("trip_extra_charges").value = trip_extra_charges.toFixed(2);
-        parent.calc();
+        parent.calculateTripRate();
     }
     </script>
 </head>

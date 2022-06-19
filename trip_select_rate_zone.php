@@ -34,7 +34,7 @@ if ($run_query) {
 					parent.document.getElementById(\"key_rates_zones\").value = \"" . $row['key_rates_zones']  . "\";
 					parent.document.getElementById(\"tolls_amount\").value = \"" . $row['tolls']  . "\";
 					parent.document.getElementById(\"zone_rate\").value = \"" . $row['rate']  . "\";
-					parent.calc();
+					parent.calculateTripRate();
 					closeOverlay2(\"fromiframe\");'>Select</a> &nbsp; 
 				<a href='rate_zone_view.php?ratezoneid=" . $row['key_rates_zones'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
 			</td>

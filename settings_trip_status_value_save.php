@@ -135,7 +135,7 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='sort'>Sort</label>
                     <?php if(isset($msg_sort)) print $msg_sort; ?>
-                    <input id='sort' name='sort' type='number' step='0.10'
+                    <input id='sort' name='sort' type='number' step='1'
                         value='<?php if (isset($sort)) {print $sort;} else { print '0';} ?>'><br>
                 </div>
                 <div>

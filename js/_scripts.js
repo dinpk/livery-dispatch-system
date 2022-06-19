@@ -88,7 +88,7 @@ function unselectKeyValue(key_element, value_element) {
 }
 
 
-function calc() {
+function calculateTripRate() {
 
     let rate_type = document.getElementById("rate_type").value;
     let hourly_regular_rate = parseFloat(document.getElementById("hourly_regular_rate").value);
@@ -109,14 +109,20 @@ function calc() {
     if (overtime_minutes > 0) overtime_hours += 1;
     let hourly_overtime_amount = hourly_overtime_rate * overtime_hours;
     document.getElementById("hourly_overtime_amount").value = hourly_overtime_amount.toFixed(2);
-
     let hourly_total_amount = hourly_regular_amount + hourly_wait_amount + hourly_overtime_amount;
+
+    let mileage_rate = parseFloat(document.getElementById("mileage_rate").value);
+    let total_miles = parseFloat(document.getElementById("total_miles").value);
+    let mileage_amount = mileage_rate * total_miles;
+    document.getElementById("mileage_amount").value = mileage_amount.toFixed(2);
 
     let zone_rate = parseFloat(document.getElementById("zone_rate").value);
 
     let base_amount = 0;
     if (rate_type == "Zone") {
         base_amount = zone_rate;
+    } else if (rate_type == "Mileage") {
+        base_amount = mileage_amount;
     } else if (rate_type == "Hourly") {
         base_amount = hourly_total_amount;
     }

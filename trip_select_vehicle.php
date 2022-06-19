@@ -42,7 +42,7 @@ if ($run_query) {
 					parent.document.getElementById(\"hourly_regular_rate\").value = \"" . $row['hourly_regular_rate']  . "\";
 					parent.document.getElementById(\"hourly_wait_rate\").value = \"" . $row['hourly_wait_rate']  . "\";
 					parent.document.getElementById(\"hourly_overtime_rate\").value = \"" . $row['hourly_overtime_rate']  . "\";
-					parent.calc();
+					parent.calculateTripRate();
 					closeOverlay2(\"fromiframe\");'>Select</a>
 				<a href='vehicle_view.php?vehicleid=" . $row['key_vehicles'] . "' target='overlay-iframe3' onclick='overlayOpen3();'>View</a> 
 			</td>

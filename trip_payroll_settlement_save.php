@@ -259,7 +259,7 @@ if (isset($_POST['save_submit'])) {
     <title>TRIP SETTLE</title>
     <?php include('php/_head.php'); ?>
     <script>
-    function calc() {
+    function calculateTripRate {
         let pay_flat_amount = parseFloat(document.getElementById("pay_flat_amount").value);
         if (pay_flat_amount > 0) {
             document.getElementById("pay_total_driver_amount").value = pay_flat_amount.toFixed(2);
@@ -526,7 +526,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_base_amount_percent'>Base amount </label></td>
                         <td>
                             %<input class='input_number_small' id='pay_base_amount_percent'
-                                name='pay_base_amount_percent' type='number' step='0.1' onchange='calc();'
+                                name='pay_base_amount_percent' type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_base_amount_percent)) {print $pay_base_amount_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_driver_base_amount' name='pay_driver_base_amount'
@@ -539,7 +539,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_offtime_percent'>Off-time</label> </td>
                         <td>
                             %<input class='input_number_small' id='pay_offtime_percent' name='pay_offtime_percent'
-                                type='number' step='0.1' onchange='calc();'
+                                type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_offtime_percent)) {print $pay_offtime_percent;} else {print '0';} ?>'
                                 required> $<input class='input_number_small' id='pay_offtime_amount'
                                 name='pay_offtime_amount' type='number' step='0.1'
@@ -551,7 +551,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_extra_stops_percent'>Extra stops</label> </td>
                         <td>
                             %<input class='input_number_small' id='pay_extra_stops_percent'
-                                name='pay_extra_stops_percent' type='number' step='0.1' onchange='calc();'
+                                name='pay_extra_stops_percent' type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_extra_stops_percent)) {print $pay_extra_stops_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_extra_stops_amount' name='pay_extra_stops_amount'
@@ -564,7 +564,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_tolls_percent'>Tolls</label></td>
                         <td>
                             %<input class='input_number_small' id='pay_tolls_percent' name='pay_tolls_percent'
-                                type='number' step='0.1' onchange='calc();'
+                                type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_tolls_percent)) {print $pay_tolls_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_tolls_amount' name='pay_tolls_amount'
@@ -577,7 +577,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_parking_percent'>Parking</label></td>
                         <td>
                             %<input class='input_number_small' id='pay_parking_percent' name='pay_parking_percent'
-                                type='number' step='0.1' onchange='calc();'
+                                type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_parking_percent)) {print $pay_parking_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_parking_amount' name='pay_parking_amount'
@@ -590,7 +590,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_gratuity_percent'>Gratuity</label></td>
                         <td>
                             %<input class='input_number_small' id='pay_gratuity_percent' name='pay_gratuity_percent'
-                                type='number' step='0.1' onchange='calc();'
+                                type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_gratuity_percent)) {print $pay_gratuity_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_gratuity_amount' name='pay_gratuity_amount'
@@ -603,7 +603,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_gas_surcharge_percent'>Gas surcharge</label></td>
                         <td>
                             %<input class='input_number_small' id='pay_gas_surcharge_percent'
-                                name='pay_gas_surcharge_percent' type='number' step='0.1' onchange='calc();'
+                                name='pay_gas_surcharge_percent' type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_gas_surcharge_percent)) {print $pay_gas_surcharge_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_gas_surcharge_amount'
@@ -616,7 +616,7 @@ if (isset($_POST['save_submit'])) {
                         <td><label for='pay_commission_percent'>Commission</label></td>
                         <td>
                             %<input class='input_number_small' id='pay_commission_percent' name='pay_commission_percent'
-                                type='number' step='0.1' onchange='calc();'
+                                type='number' step='0.1' onchange='calculateTripRate();'
                                 value='<?php if (isset($pay_commission_percent)) {print $pay_commission_percent;} else {print '0';} ?>'
                                 required>
                             $<input class='input_number_small' id='pay_commission_amount' name='pay_commission_amount'
@@ -630,7 +630,7 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='pay_flat_amount'>Flat amount</label>
                     <?php if(isset($msg_pay_flat_amount)) print $msg_pay_flat_amount; ?>
-                    <input id='pay_flat_amount' name='pay_flat_amount' type='number' step='0.1' onchange='calc();'
+                    <input id='pay_flat_amount' name='pay_flat_amount' type='number' step='0.1' onchange='calculateTripRate();'
                         value='<?php if (isset($pay_flat_amount)) {print $pay_flat_amount;} else {print '0';} ?>'
                         required>
                 </div>
@@ -661,7 +661,7 @@ if (isset($_POST['save_submit'])) {
     </main>
     <?php include('php/_footer.php'); ?>
     <script>
-    calc();
+    calculateTripRate;
     </script>
 </body>
 </html>

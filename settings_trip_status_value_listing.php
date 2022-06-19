@@ -62,15 +62,16 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM settings_trip_status_values $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_settings_trip_status_values, trip_status, sort, active_status FROM settings_trip_status_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT * FROM settings_trip_status_values $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_settings_trip_status_values'];
+		$css = "style='color:" . $row['text_color'] . ";background-color:" . $row['back_color'] . ";'";
 		$table_rows .= "
 		<tr>
-		<td>" . $row['trip_status'] . "</td>
-		<td>" . $row['sort'] . "</td>
+		<td $css>" . $row['trip_status'] . "</td>
+		<td class='right'>" . $row['sort'] . "</td>
 		<td class='center'>" . (($row['active_status'] == "on") ? "&#10003;" : "") . "</td>
 		<td class='record-icons'>
 		<a href='settings_trip_status_value_save.php?settingstripstatusid=$record_id' target='overlay-iframe' onclick='overlayOpen();'>✎</a> 

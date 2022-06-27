@@ -1,4 +1,5 @@
 <?php 
+
 include('php/_code.php');
 $show_form = true;
 $focus_field = 'first_name';
@@ -11,7 +12,7 @@ if (isset($_GET['staffid'])) {
 		if ($row = mysqli_fetch_assoc($results)) {
 			$image_url = $row['image_url'];
 			$username = $row['username'];
-			$password = $row['password'];
+			// $password = $row['password'];
 			$designation = $row['designation'];
 			$first_name = $row['first_name'];
 			$last_name = $row['last_name'];
@@ -201,7 +202,7 @@ if (isset($_POST['save_submit'])) {
 		$error = 1;
 	}
 	$password = trim($_POST['password']);
-	if (strlen($password) < 5 || strlen($password) > 15) {
+	if (!empty($password) && strlen($password) < 5 || strlen($password) > 15) {
 		$msg_password = "<div class='message-error'>Provide a valid value of length 5-15</div>";
 		$focus_field = 'password';
 		$error = 1;
@@ -220,6 +221,11 @@ if (isset($_POST['save_submit'])) {
 	}
 	// no validation error
 	if ($error == 0) {
+		
+		if (!empty($password)) {
+			$password = password_hash($password, PASSWORD_DEFAULT);
+		}
+
 		if (isset($record_id) && $error != 1) { // update
 			$results = mysqli_query($dbcon, "UPDATE staff SET 
 			image_url = '" . sd($dbcon, $image_url) . "',
@@ -450,8 +456,7 @@ if (isset($_POST['save_submit'])) {
                 <div>
                     <label for='password'>Password</label> <span class='red'> *</span>
                     <?php if(isset($msg_password)) print $msg_password; ?>
-                    <input id='password' name='password' type='password'
-                        value='<?php if (isset($password)) {print $password;} else { print '';} ?>' required><br>
+                    <input id='password' name='password' type='password'><br>
                 </div>
                 <div>
                     <a href='staff_permissions.php?staffid=<?php print $record_id; ?>' target='overlay-iframe2'

@@ -1,4 +1,9 @@
 <?php
+
+
+include('php/_authenticate.php');
+
+
 $app_icon = "";
 $sender_email = "";
 $receiver_email = "";

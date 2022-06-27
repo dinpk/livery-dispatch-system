@@ -32,5 +32,7 @@
 			<li><a href='landmark_listing.php'><img src="images/icons/nav_landmarks.png"> Landmarks</a></li>
 			<li><a href='settings.php'><img src="images/icons/nav_settings.png"> Settings</a></li>
 		 </ul>
+		 <hr>
+		 <a href='logout.php'>Logout</a>
 	</nav>
 	

@@ -62,7 +62,7 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM staff $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_staff, designation, first_name, last_name, mobile_phone, email, image_url, active_status FROM staff $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_staff, designation, username, first_name, last_name, mobile_phone, email, image_url, active_status FROM staff $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
@@ -75,6 +75,7 @@ if ($results) {
 		}
 		$table_rows .= "
 		<tr>
+		<td>" . $row['username'] . "</td>
 		<td>" . $row['designation'] . "</td>
 		<td>" . $row['first_name'] . "</td>
 		<td>" . $row['last_name'] . "</td>
@@ -92,6 +93,7 @@ if ($results) {
 	$listing_html = "
 		<table class='listing-table'>
 		<tr>
+		<th><a href='$username" . $query_symbol . "sort_by=username&sort_seq=$sql_order_by_seq'>Username</a>" . (($sql_order_by == 'username') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=designation&sort_seq=$sql_order_by_seq'>Designation</a>" . (($sql_order_by == 'designation') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>First&nbsp;Name</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=last_name&sort_seq=$sql_order_by_seq'>Last&nbsp;Name</a>" . (($sql_order_by == 'last_name') ? $order_icon : '') . "</th>

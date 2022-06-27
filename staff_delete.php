@@ -25,6 +25,11 @@ if (isset($_GET['staffid'])) {
 		} else {
 			$message = "<div class='failure-result'>Record not found</div>";
 		}
+		
+		if ($username == "admin") {
+			print "Can not delete the user 'admin'";
+			exit;
+		}
 	}
 }
 ?>

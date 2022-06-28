@@ -222,15 +222,21 @@ if (isset($_POST['save_submit'])) {
 	// no validation error
 	if ($error == 0) {
 		
+		$password_insert_column = '';
+		$password_insert_value = '';
+		$password_update = '';
 		if (!empty($password)) {
-			$password = password_hash($password, PASSWORD_DEFAULT);
+			$password_hash = password_hash($password, PASSWORD_DEFAULT);
+			$password_update = "password = '$password_hash',";
+			$password_insert_column = "password,";
+			$password_insert_value = "'$password_hash',";
 		}
 
 		if (isset($record_id) && $error != 1) { // update
 			$results = mysqli_query($dbcon, "UPDATE staff SET 
 			image_url = '" . sd($dbcon, $image_url) . "',
 			username = '" . sd($dbcon, $username) . "',
-			password = '" . sd($dbcon, $password) . "',
+			$password_update 
 			designation = '" . sd($dbcon, $designation) . "',
 			first_name = '" . sd($dbcon, $first_name) . "',
 			last_name = '" . sd($dbcon, $last_name) . "',
@@ -267,7 +273,7 @@ if (isset($_POST['save_submit'])) {
 			$results = mysqli_query($dbcon, "INSERT INTO staff (
 			image_url,
 			username,
-			password,
+			$password_insert_column
 			designation,
 			first_name,
 			last_name,
@@ -298,7 +304,7 @@ if (isset($_POST['save_submit'])) {
 			VALUES (
 			'" . sd($dbcon, $image_url) . "',
 			'" . sd($dbcon, $username) . "',
-			'" . sd($dbcon, $password) . "',
+			$password_insert_value
 			'" . sd($dbcon, $designation) . "',
 			'" . sd($dbcon, $first_name) . "',
 			'" . sd($dbcon, $last_name) . "',

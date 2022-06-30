@@ -22,6 +22,7 @@
 			if (in_array("rate_zone_listing", $permission_items)) 
 				print "<a href='rate_zone_listing.php' title='Zone Rates'><img src='images/icons/hed_rates_zones.png'></a>";
 		?>
+		<div id='staff-name'><?php print $_SESSION['staff_name']; ?></div>
 	</header>
 
 	<nav>

@@ -96,6 +96,14 @@ header a:hover {
     color: white;
 }
 
+#staff-name {
+	position:absolute;
+	right:10px;
+	bottom:13px;
+	color:white;
+	font-weight:bold;
+}
+
 #nav-toggle {
     position: fixed;
     bottom: 33px;
@@ -1166,7 +1174,9 @@ main ul {
         border: none;
     }
     header .left-block a,
-    th {
+    th,
+    #staff-name
+         {
         display: none;
     }
     #page-listing tr {

@@ -1,7 +1,7 @@
 <?php
 
-include('php/_db.php');
 include('php/_authenticate.php');
+include('php/_db.php');
 
 $app_icon = "";
 $sender_email = "";

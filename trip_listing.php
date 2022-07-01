@@ -130,7 +130,7 @@ if ($results) {
 				<div>
 					<h3><a href='customer_passenger_view.php?customerpassengerid=" . $row['key_customer_passengers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['passenger_name'] . "</a> <span>(" . $row['total_passengers'] . ")</span></h3>
 					<p>" . $row['reference_number'] . "</p>
-					<p><a href='customer_contact_view.php?contactsid=" . $row['key_contacts'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['reserved_by'] . "</p>
+					<p><a href='customer_contact_view.php?contactsid=" . $row['key_customer_contacts'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['reserved_by'] . "</p>
 				</div>
 				<div>
 					<h3><a href='driver_view.php?driverid=" . $row['key_drivers'] . "' target='overlay-iframe' onclick='overlayOpen();'>" . $row['driver_name'] . "</a></h3>
@@ -199,16 +199,8 @@ if ($results) {
 		</table>";		
 	}
 	// ----------------- pager
-	if ($total_items > $page_offset) {
-		$prev_page_offset = $page_offset - $items_per_page;
-		$next_page_offset = $page_offset + $items_per_page;
-		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ◄ </a></td></td>";
-		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ► </a></td>";
-		$pager = "<table id='pager'><tr>$pager</tr></table>";
-		$listing_html .= $pager;
-	}
+	$listing_html .= pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
+
 	if (mysqli_num_rows($results) == 0) $message = "<div class='failure-result'>No record found</div>";
 } else {
 	print mysqli_error($dbcon);

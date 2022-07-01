@@ -674,7 +674,7 @@ main ul {
 }
 
 .listing-table {
-    margin: 5px auto 50px auto;
+    margin: 5px auto 10px auto;
     border-collapse: collapse;
     border: 10px solid #F5F5F5;
 }
@@ -1149,10 +1149,10 @@ main ul {
 /* ---------------------------------- PAGER ---------- */
 
 #pager {
-    width: 130px;
-    margin: 0 auto;
+    margin:0 auto;
     text-align: center;
-    border: none;
+	border-spacing: 10px;
+    border-collapse: separate;    
 }
 
 #pager tr {
@@ -1164,6 +1164,7 @@ main ul {
     font-size: 150%;
     color: LightSeaGreen;
 }
+
 
 @media(max-width:800px) {
     body {

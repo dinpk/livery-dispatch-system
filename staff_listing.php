@@ -93,7 +93,7 @@ if ($results) {
 	$listing_html = "
 		<table class='listing-table'>
 		<tr>
-		<th><a href='$username" . $query_symbol . "sort_by=username&sort_seq=$sql_order_by_seq'>Username</a>" . (($sql_order_by == 'username') ? $order_icon : '') . "</th>
+		<th><a href='$url" . $query_symbol . "sort_by=username&sort_seq=$sql_order_by_seq'>Username</a>" . (($sql_order_by == 'username') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=designation&sort_seq=$sql_order_by_seq'>Designation</a>" . (($sql_order_by == 'designation') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=first_name&sort_seq=$sql_order_by_seq'>First&nbsp;Name</a>" . (($sql_order_by == 'first_name') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=last_name&sort_seq=$sql_order_by_seq'>Last&nbsp;Name</a>" . (($sql_order_by == 'last_name') ? $order_icon : '') . "</th>
@@ -106,16 +106,8 @@ if ($results) {
 		$table_rows
 		</table>
 		";
-	if ($total_items > $page_offset) {
-		$prev_page_offset = $page_offset - $items_per_page;
-		$next_page_offset = $page_offset + $items_per_page;
-		$pager = '';
-		if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ◄ </a></td></td>";
-		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-		if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ► </a></td>";
-		$pager = "<table id='pager'><tr>$pager</tr></table>";
-		$listing_html .= $pager;
-	}
+	$listing_html .= pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
+
 	if (mysqli_num_rows($results) == 0) {
 		$message = "<div class='failure-result'>No record found</div>";
 	}

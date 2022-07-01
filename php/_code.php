@@ -7,7 +7,7 @@ $app_icon = "";
 $sender_email = "";
 $receiver_email = "";
 $time_zone = "America/New_York";
-$print_errors = false;
+$print_errors = true;
 $email_errors = false;
 
 date_default_timezone_set($time_zone);
@@ -47,6 +47,32 @@ function send_email($email, $subject, $body) {
 	$header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$header .= "From: ". $sender_name . " <" . $sender_email . ">\r\n";
 	return mail($email, $subject, $body, $header);
+}
+
+
+function pager($url, $total_items, $page_offset, $items_per_page) {
+	$pager = "";
+	if ($total_items > $page_offset) {
+		$prev_page_offset = $page_offset - $items_per_page;
+		$next_page_offset = $page_offset + $items_per_page;
+		$last_page_offset = ((int)($total_items / $items_per_page) * $items_per_page);
+		$pager = '';
+		if ($next_page_offset != $items_per_page) {
+			$pager .= "<td class='pager-first'><a href=$url" . "page=0> « </a></td>";
+		}
+		if ($prev_page_offset >= 0) {
+			$pager .= "<td class='pager-prev'><a href=$url" . "page=$prev_page_offset> ◄ </a></td></td>";
+		}
+		$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
+		if ($next_page_offset < $total_items) {
+			$pager .= "<td class='pager-next'><a href=$url" . "page=$next_page_offset> ► </a></td>";
+		}
+		if ($next_page_offset <= $last_page_offset) {
+			$pager .= "<td class='pager-last'><a href=$url" . "page=" . $last_page_offset . "> » </a></td>";
+		}
+		$pager = "<table id='pager'><tr>$pager</tr></table>";
+	}
+	return $pager;
 }
 
 ?>

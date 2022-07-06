@@ -57,7 +57,7 @@ if (isset($_POST['save_submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS LANDMARK</title>
+    <title>SETTINGS LANDMARK CATEGORIES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-save'>

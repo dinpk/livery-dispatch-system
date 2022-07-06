@@ -53,7 +53,7 @@ include('php/_code.php');
         <section>
             <a href='settings_landmark_value_listing.php'>
                 <div><img src="images/icons/set_landmarks.png"></div>
-                <h3>Landmarks</h3>
+                <h3>Landmark Categories</h3>
                 <p>Categories of the places visted frequently. Values are used in landmark profiles along with their
                     addresses.</p>
             </a>

@@ -62,14 +62,21 @@ $order_icon = ($sql_order_by_seq == 'asc') ? '&nbsp;▼' : '&nbsp;▲';
 $count_results = mysqli_query($dbcon, "SELECT count(*) AS total_items FROM landmarks $sql_where ");
 if ($count_results && $count_row = mysqli_fetch_assoc($count_results)) $total_items = $count_row['total_items'];
 $page_offset = (isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : '0');
-$results = mysqli_query($dbcon, "SELECT key_landmarks, title, category, city, state, country, zip_code, active_status FROM landmarks $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
+$results = mysqli_query($dbcon, "SELECT key_landmarks, title, category, city, state, country, zip_code, image_url, active_status FROM landmarks $sql_where ORDER BY " . cd($dbcon, $sql_order_by) . " " . cd($dbcon, $sql_order_by_seq) . " LIMIT " . cd($dbcon, $page_offset) . ", " . cd($dbcon, $items_per_page));
 if ($results) {
 	$table_rows = '';
 	while ($row = mysqli_fetch_assoc($results)) {
 		$record_id = $row['key_landmarks'];
+		$image_url = $row['image_url'];
+		if (!empty($image_url)) {
+			$image_url = "<a href='$image_url' target='_blank'><img src='$image_url' valign='middle'></a>";
+		} else {
+			$image_url = "<img src='images/icons/lis_landmark.png' valign='middle'>";
+		}		
 		$table_rows .= "
 		<tr>
 		<td>" . $row['title'] . "</td>
+		<td class='center'>$image_url</td>
 		<td>" . $row['category'] . "</td>
 		<td>" . $row['city'] . "</td>
 		<td>" . $row['state'] . "</td>
@@ -87,6 +94,7 @@ if ($results) {
 		<table class='listing-table'>
 		<tr>
 		<th><a href='$url" . $query_symbol . "sort_by=title&sort_seq=$sql_order_by_seq'>Title</a>" . (($sql_order_by == 'title') ? $order_icon : '') . "</th>
+		<th>Image</th>
 		<th><a href='$url" . $query_symbol . "sort_by=category&sort_seq=$sql_order_by_seq'>Category</a>" . (($sql_order_by == 'category') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=city&sort_seq=$sql_order_by_seq'>City</a>" . (($sql_order_by == 'city') ? $order_icon : '') . "</th>
 		<th><a href='$url" . $query_symbol . "sort_by=state&sort_seq=$sql_order_by_seq'>State</a>" . (($sql_order_by == 'state') ? $order_icon : '') . "</th>
@@ -98,7 +106,7 @@ if ($results) {
 		$table_rows
 		</table>
 		";
-	$listing_html .= pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
+	$pager = pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
 
 	if (mysqli_num_rows($results) == 0) {
 		$message = "<div class='failure-result'>No record found</div>";
@@ -157,6 +165,7 @@ if ($results) {
         </section>
         <?php 
 		if (isset($listing_html)) print $listing_html;
+			if (isset($pager)) print $pager;
 		?>
     </main>
     <?php include('php/_footer.php'); ?>

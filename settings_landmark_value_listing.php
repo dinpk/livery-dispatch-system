@@ -86,7 +86,7 @@ if ($results) {
 		$table_rows
 		</table>
 		";
-	$listing_html .= pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
+	$pager = pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
 
 	if (mysqli_num_rows($results) == 0) {
 		$message = "<div class='failure-result'>No record found</div>";
@@ -99,13 +99,13 @@ if ($results) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SETTINGS - LANDMARKS</title>
+    <title>SETTINGS - LANDMARK CATEGORIES</title>
     <?php include('php/_head.php'); ?>
 </head>
 <body id='page-listing'>
     <?php include('php/_header.php'); ?>
     <section id='sub-menu'>
-        <div class='left-block'><img src="images/icons/set_landmarks.png"> settings - landmarks</div>
+        <div class='left-block'><img src="images/icons/set_landmarks.png"> settings - landmark categories</div>
         <div class='right-block'>
             ✢ <a href='settings_landmark_value_save.php' target='overlay-iframe' onclick='overlayOpen();'>New Landmark</a>
         </div>
@@ -144,6 +144,7 @@ if ($results) {
         </section>
         <?php 
 		if (isset($listing_html)) print $listing_html;
+			if (isset($pager)) print $pager;
 		?>
     </main>
     <?php include('php/_footer.php'); ?>

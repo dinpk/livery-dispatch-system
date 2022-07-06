@@ -1151,7 +1151,7 @@ main ul {
 #pager {
     margin:0 auto;
     text-align: center;
-	border-spacing: 10px;
+	border-spacing: 3px;
     border-collapse: separate;    
 }
 
@@ -1165,6 +1165,14 @@ main ul {
     color: LightSeaGreen;
 }
 
+#pager .pager-first,
+#pager .pager-last {
+    font-size: 71%;
+    letter-spacing: -4px;
+    padding-right:15px;
+    padding-left:15px;
+    padding-bottom: 2px;
+}
 
 @media(max-width:800px) {
     body {

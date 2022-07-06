@@ -86,7 +86,7 @@ if ($results) {
 		$table_rows
 		</table>
 		";
-	$listing_html .= pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
+	$pager = pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
 
 	if (mysqli_num_rows($results) == 0) {
 		$message = "<div class='failure-result'>No record found</div>";
@@ -146,6 +146,7 @@ if ($results) {
         </section>
         <?php 
 		if (isset($listing_html)) print $listing_html;
+			if (isset($pager)) print $pager;
 		?>
     </main>
     <?php include('php/_footer.php'); ?>

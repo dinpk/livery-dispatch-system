@@ -147,7 +147,7 @@ if ($results) {
 		</section>
 		<?php 
 		if (isset($listing_html)) print $listing_html;
-			if (isset($pager)) print $pager;
+		if (isset($pager)) print $pager;
 		?>	</main>
 	<?php include('php/_footer.php'); ?>
 </body>

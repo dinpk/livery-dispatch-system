@@ -63,7 +63,6 @@ if ($run_query) {
         </section>
         <?php 
 		if (isset($listing_html)) print $listing_html;
-			if (isset($pager)) print $pager;
 		?>
     </main>
     <?php include('php/_footer.php'); ?>

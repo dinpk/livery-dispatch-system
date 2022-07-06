@@ -81,16 +81,8 @@ if ($results) {
 				</tr>
 				$table_rows
 			</table>";
-			if ($total_items > $page_offset) {
-				$prev_page_offset = $page_offset - $items_per_page;
-				$next_page_offset = $page_offset + $items_per_page;
-				$pager = '';
-				if ($prev_page_offset >= 0) $pager = "<td class='pager-prev'><a href=$url" . $query_symbol . "page=$prev_page_offset> ⯇ </a></td>";
-				$pager .= "<td class='pager-info'>" . ($page_offset + 1) . "-" . ($next_page_offset < $total_items ? $next_page_offset : $total_items) . " (" . $total_items . ")</td>";
-				if ($next_page_offset < $total_items) $pager .= "<td class='pager-next'><a href=$url" . $query_symbol . "page=$next_page_offset> ⯈ </a></td>";
-				$pager = "<table id='pager'><tr>$pager</tr></table>";
-				$listing_html .= $pager;
-			}
+	$pager = pager($url . $query_symbol, $total_items, $page_offset, $items_per_page);
+
 	if (mysqli_num_rows($results) == 0) {
 		$message = "<div class='failure-result'>No record found</div>";
 	}
@@ -146,7 +138,7 @@ if ($results) {
         </section>
         <?php 
 			if (isset($listing_html)) print $listing_html;
-			if (isset($pager)) print $pager;
+		if (isset($pager)) print $pager;
 		?>
     </main>
     <?php include('php/_footer.php'); ?>

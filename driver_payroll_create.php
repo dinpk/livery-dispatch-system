@@ -140,7 +140,6 @@ if (isset($_GET['date_from']) && isset($_GET['date_to'])) {
 			}
 		}
 		if (isset($listing_html)) print $listing_html;
-			if (isset($pager)) print $pager;
 		?>
     </main>
     <?php include('php/_footer.php'); ?>

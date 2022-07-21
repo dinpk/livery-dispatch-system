@@ -56,6 +56,9 @@ function pager($url, $total_items, $page_offset, $items_per_page) {
 		$prev_page_offset = $page_offset - $items_per_page;
 		$next_page_offset = $page_offset + $items_per_page;
 		$last_page_offset = ((int)($total_items / $items_per_page) * $items_per_page);
+		if ($last_page_offset / $total_items == 1) { // prevent going to empty page
+			$last_page_offset = $last_page_offset - $items_per_page;
+		}		
 		$pager = '';
 		if ($next_page_offset != $items_per_page) {
 			$pager .= "<td class='pager-first'><a href='$url" . "page=0'> ┃◀ </a></td>";
